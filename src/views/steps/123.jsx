@@ -3,7 +3,6 @@ import Select from "react-select";
 import axiosClient from "../../axios-client";
 import { useForm } from "react-hook-form";
 import { useStateContext } from "../../contexts/ContextProvider";
-import { isDate } from "lodash";
 
 export default function Step123({ steps_id }) {
   const { steps, setSteps } = useStateContext();

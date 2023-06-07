@@ -13,23 +13,23 @@ const MainAuth = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(window.location.href,"ruta")
+  console.log(window.location.href, "ruta")
 
 
 
-  useEffect (()=>{
+  useEffect(() => {
     if (!user) {
       console.log(user)
       navigate("/");
     }
-   },[]
+  }, []
   );
 
   const logoutSession = () => {
     navigate("/");
     setTimeout(() => {
       dispatch(logOut(null));
-    },500)
+    }, 500)
 
   };
 
@@ -38,16 +38,32 @@ const MainAuth = ({ children }) => {
       <div className="h-screen bg-blue-700 w-80 relative">
         <div className="h-full w-80 flex flex-col items-center fixed">
           <div className="relative w-1/2 py-24">
+            <img
+              alt="logo"
+              src="http://lorempixel.com/300/300"
+            />
+            <img
+              alt="user"
+              src="http://lorempixel.com/300/300"
+            />
+            <p>nombre usuario</p>
           </div>
-          <ul className="w-full text-white uppercase font-semibold cursor-pointer">
-            <NavLink to="/modulo" >
-              <li className="text-xl hover:bg-blue-600 py-5 px-10">
+          <ul className="list-menu">
+            <li className="item-list-menu">
+              <NavLink to="/modulo" >
                 Inicio
-              </li>
-            </NavLink>
-            <Link to="/prueba">
-            prueba
-          </Link>
+              </NavLink>
+            </li>
+            <li className="item-list-menu">
+               <p>Fases</p>
+               <ul>
+                <li>
+                <NavLink to="/1" >
+                1
+              </NavLink>
+                </li>
+               </ul>
+            </li>
           </ul>
           <div
             className="py-5 px-10 hover:bg-blue-600 text-xl absolute bottom-0 text-white w-full font-semibold cursor-pointer"
@@ -58,10 +74,10 @@ const MainAuth = ({ children }) => {
         </div>
       </div>
       <div className="flex-1 min-h-full text-white bg-gray-800 flex flex-col overflow-auto">
-       <Header/>
-       <div className="m-6">
-       {children}
-       </div>
+        <Header />
+        <div className="m-6">
+          {children}
+        </div>
       </div>
     </div>
   );

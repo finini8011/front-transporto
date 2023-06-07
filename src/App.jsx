@@ -18,14 +18,19 @@ import MainAuth from "./components/layout/MainAuth";
 // import HomeWork from "./pages/HomeWork";
 
 
+
+
+
 function App() {
   return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>
         <BrowserRouter>
-        <MainAuth>
+        <Routes>
+        <Route exact path="/" element={<Login />} />
+        </Routes>
+        <MainAuth> 
           <Routes>
-            <Route exact path="/" element={<Login />} />
             <Route path="/registro" element={<Register />} />
             <Route path="/modulo" element={<Modulo />} />
             <Route path="/lvc" element={<ListaVerificacionCumplimiento />} />

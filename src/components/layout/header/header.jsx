@@ -10,8 +10,8 @@ import {
   faShareFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
-import InfoCumplimiento from "../InfoCumplimiento/InfoCumplimiento";
-import DirectAccess from "../DirectAccess/DirectAccess";
+import InfoCumplimiento from "../../commons/InfoCumplimiento/InfoCumplimiento";
+import DirectAccess from "../../commons/DirectAccess/DirectAccess";
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);

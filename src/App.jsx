@@ -8,8 +8,10 @@ import { store } from "./api/store";
 const persistor = persistStore(store);
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 // import Modulos from "./pages/admin/Modulos";
 import Modulo from "./pages/admin/Modulo"
+import ListaVerificacionCumplimiento from "./pages/admin/ListaVerificacionCumplimiento"
 import NotFound from "./pages/Notfound"
 import Prueba from "./pages/admin/Prueba"
 // import HomeWork from "./pages/HomeWork";
@@ -22,7 +24,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Login />} />
+            <Route path="/registro" element={<Register />} />
             <Route path="/modulo" element={<Modulo />} />
+            <Route path="/lvc" element={<ListaVerificacionCumplimiento />} />
             <Route path="/notfound" element={<NotFound />} />
             <Route path="/prueba" element={<Prueba />} />
             {/* <Route path="/homework/:id" element={<HomeWork />} /> */}

@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { apiSlice } from "./services/auth/apiSlice";
-import { projectsApiSlice } from "./services/projects/projectsApiSlice";
+// import { projectsApiSlice } from "./services/projects/projectsApiSlice";
 import { quadrantsApiSlice } from "./services/quadrants/quadrantsApiSlice";
 import authReducer from "./features/auth/authSlice";
 
@@ -28,7 +28,7 @@ export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [apiSlice.reducerPath]: apiSlice.reducer,
-    [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
+    // [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
     [quadrantsApiSlice.reducerPath]: quadrantsApiSlice.reducer,
     // auth: authReducer,
     auth: persistedReducer,
@@ -39,7 +39,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({serializableCheck: false, })
       .concat(thunk, apiSlice.middleware)
-      .concat(thunk, projectsApiSlice.middleware)
+      // .concat(thunk, projectsApiSlice.middleware)
       .concat(thunk, quadrantsApiSlice.middleware)
 });
 

@@ -27,14 +27,14 @@ export const apiSlice = createApi({
     //   // providesTags: ["Auth"],
     //   // transformResponse: (response) => response.sort((a, b) => b.id - a.id),
     // }),
-    // createUser: builder.mutation({
-    //   query: (newUser) => ({
-    //     url: `${urlAuth}/test/userCredentials`,
-    //     method: "POST",
-    //     body: newUser,
-    //   }),
-    //   // invalidatesTags: ["Auth"],
-    // }),
+    createUser: builder.mutation({
+      query: (newUser) => ({
+        url: `${urlAuth}/signup`,
+        method: "POST",
+        body: newUser,
+      }),
+      // invalidatesTags: ["Auth"],
+    }),
     loginUser: builder.mutation({
       query: (user) => ({
         url: `${urlAuth}/login`,
@@ -56,5 +56,6 @@ export const apiSlice = createApi({
 
 export const {
   useLoginUserMutation,
+  useCreateUserMutation,
   // useVerifiedCredentialsMutation,
 } = apiSlice;

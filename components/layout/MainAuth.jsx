@@ -34,7 +34,7 @@ const MainAuth = ({ children }) => {
             {/* <Image alt="logo" src={logo} placeholder="empty" /> */}
           </div>
           <ul className="w-full text-white uppercase font-semibold cursor-pointer">
-            <NavLink to="/modulo" passHref>
+            <NavLink to="/modulo" >
               <li className="text-xl hover:bg-blue-600 py-5 px-10">
                 Inicio
               </li>
@@ -61,7 +61,7 @@ const MainAuth = ({ children }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1 min-h-full text-white bg-gray-800 py-16 px-14 flex  overflow-auto">
+      <div className="flex-1 min-h-full bg-white py-16 px-14 flex  overflow-auto">
         {children}
       </div>
     </div>

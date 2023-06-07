@@ -3,13 +3,13 @@ import React from "react";
 const ButtonForm = (props) => {
   const { text, ...inputProps } = props;
   return (
-    <div
-      className={`bg-gradient-to-r from-[#0b2d61] to-[#0e70cc] rounded-md py-2 w-7/12 text-white font-semibold text-base lg:text-lg cursor-pointer z-20 shadow-md  mx-auto text-center`}
+    <button
+      type="button"
+      className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       {...inputProps}
-      role="button"
     >
       {text}
-    </div>
+    </button>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import MainAuth from "../../../components/layout/MainAuth";
+import MainAuth from "../../components/layout/MainAuth";
 import { lvc } from "../../constants";
 
 const ListaVerificacionCumplimiento = () => {

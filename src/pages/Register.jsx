@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 // import Image from "next/image";
 
-import Input from "../../components/commons/input/text/Input";
-import ButtonForm from "../../components/commons/button/ButtonForm";
+import Input from "../components/commons/input/text/Input";
+import ButtonForm from "../components/commons/button/ButtonForm";
 import {
     useCreateUserMutation,
 } from "../api/services/auth/apiSlice";
 import { setToken, setUser } from "../api/features/auth/authSlice";
-import Loading from "../../components/loading/Loading";
+import Loading from "../components/loading/Loading";
 
 // import background from "../public/img/bgModal.png";
 // import logo from "../public/img/view1/logo.png";

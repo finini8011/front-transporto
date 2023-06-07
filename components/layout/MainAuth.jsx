@@ -6,6 +6,7 @@ import {
   selectCurrentUser,
   logOut,
 } from "../../src/api/features/auth/authSlice";
+import Header from "../commons/header/header";
 
 const MainAuth = ({ children }) => {
   const user = useSelector(selectCurrentUser);
@@ -61,7 +62,8 @@ const MainAuth = ({ children }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1 min-h-full text-white bg-gray-800 py-16 px-14 flex  overflow-auto">
+      <div className="flex-1 min-h-full text-white bg-gray-800 flex flex-col overflow-auto">
+       
         {children}
       </div>
     </div>

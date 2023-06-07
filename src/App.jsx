@@ -14,6 +14,7 @@ import Modulo from "./pages/admin/Modulo"
 import ListaVerificacionCumplimiento from "./pages/admin/ListaVerificacionCumplimiento"
 import NotFound from "./pages/Notfound"
 import Prueba from "./pages/admin/Prueba"
+import MainAuth from "./components/layout/MainAuth";
 // import HomeWork from "./pages/HomeWork";
 
 
@@ -22,6 +23,7 @@ function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
         <BrowserRouter>
+        <MainAuth>
           <Routes>
             <Route exact path="/" element={<Login />} />
             <Route path="/registro" element={<Register />} />
@@ -31,6 +33,7 @@ function App() {
             <Route path="/prueba" element={<Prueba />} />
             {/* <Route path="/homework/:id" element={<HomeWork />} /> */}
           </Routes>
+          </MainAuth>
         </BrowserRouter>
          </PersistGate>
       </Provider> 

@@ -1,10 +1,9 @@
 import React from "react";
-import MainAuth from "../../components/layout/MainAuth";
 import { lvc } from "../../constants";
 
 const ListaVerificacionCumplimiento = () => {
   return (
-    <MainAuth>
+    <div>
       <section className="bg-white text-gray-800">
         {/* <ul className="flex bold ">
           <li>#</li>
@@ -76,7 +75,7 @@ const ListaVerificacionCumplimiento = () => {
           </tbody>
         </table>
       </section>
-    </MainAuth>
+    </div>
   );
 };
 

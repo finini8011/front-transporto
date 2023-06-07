@@ -5,8 +5,7 @@ import { useNavigate, NavLink  } from "react-router-dom";
 import {
   selectCurrentUser,
   logOut,
-} from "../../src/api/features/auth/authSlice";
-import Header from "../commons/header/header";
+} from "../../api/features/auth/authSlice";
 
 const MainAuth = ({ children }) => {
   const user = useSelector(selectCurrentUser);

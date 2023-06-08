@@ -62,7 +62,7 @@ const MainAuth = ({ children }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1 min-h-full text-white bg-gray-800 flex flex-col overflow-auto">
+      <div className="flex-1 min-h-full text-white bg-white flex flex-col overflow-auto p-4">
        
         {children}
       </div>

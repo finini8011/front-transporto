@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useLoginUserMutation } from "../api/services/auth/apiSlice";
 import { setToken, setUser } from "../api/features/auth/authSlice";
-// import Image from "next/image";
 
-import InputLogin from "../../components/commons/input/text/InputLogin";
+import Input from "../../components/commons/input/text/Input";
 import ButtonForm from "../../components/commons/button/ButtonForm";
 import ButtonLoading from "../../components/commons/button/ButtonLoading";
 
-import Loading from "../../components/loading/Loading";
 import logo from "/logo.jpg";
 
 const Login = () => {
@@ -61,13 +59,13 @@ const Login = () => {
                 Iniciar sesión
               </h1>
               <form className="space-y-4 md:space-y-6" action="#">
-                <InputLogin
+                <Input
                   type="email"
                   label="Email"
                   placeholder="name@company.com"
                   {...register("email")}
                 />
-                <InputLogin
+                <Input
                   label="Password"
                   type="password"
                   placeholder="°°°°°°°°°"

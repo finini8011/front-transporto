@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Modal from "react-modal";
-import InfoCumplimiento from "../../commons/InfoCumplimiento/InfoCumplimiento";
+import InfoCompliance from "../../commons/InfoCompliance/InfoCompliance";
 import DirectAccess from "../../commons/DirectAccess/DirectAccess";
 
 
@@ -85,7 +85,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
         <button onClick={closeModal} className="modal-close">
           <FontAwesomeIcon icon={faRectangleXmark} />
         </button>
-        <InfoCumplimiento />
+        <InfoCompliance/>
       </Modal>
 
       <Modal

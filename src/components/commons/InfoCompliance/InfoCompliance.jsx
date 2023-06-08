@@ -5,8 +5,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import "./InfoCumplimiento.css";
-const InfoCumplimiento = () => {
+import "./InfoCompliance.css";
+
+const InfoCompliance = () => {
   return (
     <div className="containerModal flex flex-col w-full h-full">
       <div className="bg-black w-full h-2/5">
@@ -41,4 +42,4 @@ const InfoCumplimiento = () => {
   );
 };
 
-export default InfoCumplimiento;
+export default InfoCompliance;

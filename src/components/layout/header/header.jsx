@@ -66,13 +66,6 @@ const Header = ({ openMenu, setOpenMenu }) => {
               <FontAwesomeIcon icon={faBars} size="lg" />
             </button>
           </li>
-
-          <li>
-            <button className="p-2"
-              onClick={logoutSession}>
-              Cerrar Sesión
-            </button>
-          </li>
         </ul>
 
         <ul className="flex flex-row">

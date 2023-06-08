@@ -19,8 +19,14 @@
 
 .menu-close{
   width: 4rem;
-  align-items: center;
+  display: flex;
+  align-items: flex-end;
   padding: 6px;
+}
+
+.button-logout {
+  position: fixed;
+  bottom: 10px;
 }
 
 

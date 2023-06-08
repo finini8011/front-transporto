@@ -23,6 +23,7 @@ import {
   faFile,
   faGrip,
   faLocationPin,
+  faLock,
   faUserCircle,
   faVoteYea,
 } from "@fortawesome/free-solid-svg-icons";
@@ -34,12 +35,17 @@ const MainAuth = ({ children }) => {
   const [openMenu, setOpenMenu] = useState();
   const [openList, setOpenList] = React.useState(true);
 
-  console.log(window.location.href, "ruta")
 
   const handleClick = () => {
     setOpenList(!openList);
   };
+  const logoutSession = () => {
+    navigate("/");
+    setTimeout(() => {
+      dispatch(logOut(null));
+    }, 500)
 
+  };
 
   useEffect(() => {
     if (!user) {
@@ -52,7 +58,7 @@ const MainAuth = ({ children }) => {
   return (
     <div className="min-h-screen flex">
       <div className={`menu-container ${openMenu ? "menu-open" : "menu-close"}`}
-          onMouseLeave={() => setOpenMenu(!openMenu)}>
+        onMouseLeave={() => setOpenMenu(!openMenu)}>
         <div className="menu-info-container">
           <div className="flex p-2 items-center">
             <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
@@ -120,6 +126,13 @@ const MainAuth = ({ children }) => {
             {openMenu && <ListItemText primary="Calendario" />}
           </ListItemButton>
         </List>
+        <div className="button-logout">
+          <FontAwesomeIcon icon={faLock} className="ml-3 w-5 h-5" />
+          <button className="p-2"
+            onClick={logoutSession}>
+            {openMenu && <p>Cerrar Sesión</p>}
+          </button>
+        </div>
       </div>
       <div className="flex-1 min-h-full bg-slate-200 flex flex-col overflow-auto">
         <Header

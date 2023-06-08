@@ -11,19 +11,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 
-import {logOut } from "../../../api/features/auth/authSlice";
+import { logOut } from "../../../api/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
 import InfoCumplimiento from "../../commons/InfoCumplimiento/InfoCumplimiento";
 import DirectAccess from "../../commons/DirectAccess/DirectAccess";
-const Header = () => {
+
+
+const Header = ({ openMenu, setOpenMenu }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
   const navigate = useNavigate();
 
 
-  
+  const handleMenu = () => {
+    setOpenMenu(!openMenu);
+  }
+
   const logoutSession = () => {
     navigate("/");
     setTimeout(() => {
@@ -53,7 +58,11 @@ const Header = () => {
       <nav className="flex items-center justify-between flex-wrap bg-white p-2">
         <ul className="flex flex-row">
           <li>
-            <button className="p-2" data-widget="pushmenu" href="#" role="button">
+            <button
+              className="p-2"
+              data-widget="pushmenu"
+              role="button"
+              onClick={handleMenu}>
               <FontAwesomeIcon icon={faBars} size="lg" />
             </button>
           </li>
@@ -75,7 +84,7 @@ const Header = () => {
 
           <li>
             <button className="p-2 ml-4" onClick={openModalAccess}>
-            <FontAwesomeIcon icon={faShareFromSquare} />
+              <FontAwesomeIcon icon={faShareFromSquare} />
             </button>
           </li>
 

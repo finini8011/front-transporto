@@ -23,6 +23,7 @@ import {
   faFile,
   faGrip,
   faLocationPin,
+  faUserCircle,
   faVoteYea,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
@@ -50,28 +51,22 @@ const MainAuth = ({ children }) => {
 
   return (
     <div className="min-h-screen flex">
-      <div className="menu-container">
+      <div className={`menu-container ${openMenu ? "menu-open":"menu-close"}`}>
         <div className="menu-info-container">
           <div className="flex p-2 items-center">
-          <img
-                className="mr-2"
-                src={faGrip}
-                alt="x"
-              />
+          <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
+            {openMenu &&         
             <h2 className="text-xl">
               Transporto
-            </h2>
+            </h2>}
           </div>
           <div className="divider"></div>
           <div className="flex py-4 p-2 items-center">
-          <img
-                className="mr-2"
-                src={faGrip}
-                alt="x"
-              />
-            <span className="text-lg">
+          <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
+          {openMenu &&             
+          <span className="text-lg">
               {user.name}
-            </span>
+            </span>}
           </div>
           <div className="divider mb-2"></div>
         </div>
@@ -81,12 +76,14 @@ const MainAuth = ({ children }) => {
           aria-labelledby="nested-list-subheader">
           <ListItemButton onClick={() => navigate("/home")}>
             <FontAwesomeIcon icon={faLocationPin} className="mr-3" />
-            <ListItemText primary="Inicio" />
+            {openMenu && <ListItemText primary="Inicio" />}
           </ListItemButton>
           <ListItemButton onClick={handleClick}>
             <FontAwesomeIcon icon={faGrip} className="mr-3" />
-            <ListItemText primary="Fases pve" />
-            {openList ? <ExpandLess /> : <ExpandMore />}
+            {openMenu && <ListItemText primary="Fases pve" />}
+            {!openMenu ? "":
+            openList ? <ExpandLess /> : <ExpandMore />
+             }
           </ListItemButton>
           <Collapse in={openList} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
@@ -114,11 +111,11 @@ const MainAuth = ({ children }) => {
           </Collapse>
           <ListItemButton onClick={() => navigate("/informes")}>
             <FontAwesomeIcon icon={faFile} className="mr-3" />
-            <ListItemText primary="Informes" />
+            {openMenu && <ListItemText primary="Informes" />}
           </ListItemButton>
           <ListItemButton onClick={() => navigate("/calendario")}>
             <FontAwesomeIcon icon={faCalendar} className="mr-3" />
-            <ListItemText primary="Calendario" />
+            {openMenu &&  <ListItemText primary="Calendario" />} 
           </ListItemButton>
         </List>
       </div>

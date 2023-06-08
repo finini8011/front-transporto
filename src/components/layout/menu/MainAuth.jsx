@@ -44,7 +44,6 @@ const MainAuth = ({ children }) => {
     setTimeout(() => {
       dispatch(logOut(null));
     }, 500)
-
   };
 
   useEffect(() => {
@@ -81,7 +80,9 @@ const MainAuth = ({ children }) => {
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'transparent' }}
           component="nav"
           aria-labelledby="nested-list-subheader">
-          <ListItemButton onClick={() => navigate("/home")}>
+          <ListItemButton
+            onClick={() => navigate("/home")}
+            >
             <FontAwesomeIcon icon={faLocationPin} className="mr-3 w-5 h-5" />
             {openMenu && <ListItemText primary="Inicio" />}
           </ListItemButton>
@@ -97,15 +98,15 @@ const MainAuth = ({ children }) => {
               <List component="div" disablePadding>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
                   <FontAwesomeIcon icon={faBuilding} className="mr-3 w-5 h-5" />
-                  <ListItemText primary="Preparacion" />
+                  <ListItemText primary="Preparación" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/planificacion")}>
                   <FontAwesomeIcon icon={faVoteYea} className="mr-3 w-5 h-5" />
-                  <ListItemText primary="Planificacion" />
+                  <ListItemText primary="Planificación" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/implementacion")}>
                   <FontAwesomeIcon icon={faCogs} className="mr-3 w-5 h-5" />
-                  <ListItemText primary="Implementacion" />
+                  <ListItemText primary="Implementación" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/seguimiento")}>
                   <FontAwesomeIcon icon={faEye} className="mr-3 w-5 h-5" />

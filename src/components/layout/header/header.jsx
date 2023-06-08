@@ -9,12 +9,28 @@ import {
   faRectangleXmark,
   faShareFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
+
+
+import {logOut } from "../../../api/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+
 import Modal from "react-modal";
 import InfoCumplimiento from "../../commons/InfoCumplimiento/InfoCumplimiento";
 import DirectAccess from "../../commons/DirectAccess/DirectAccess";
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
+  const navigate = useNavigate();
+
+
+  
+  const logoutSession = () => {
+    navigate("/");
+    setTimeout(() => {
+      dispatch(logOut(null));
+    }, 500)
+
+  };
 
 
   const openModal = () => {
@@ -34,29 +50,25 @@ const Header = () => {
   };
   return (
     <React.Fragment>
-      <nav className="flex items-center justify-between flex-wrap bg-white p-5">
+      <nav className="flex items-center justify-between flex-wrap bg-white p-2">
         <ul className="flex flex-row">
           <li>
-            <a className="p-2" data-widget="pushmenu" href="#" role="button">
+            <button className="p-2" data-widget="pushmenu" href="#" role="button">
               <FontAwesomeIcon icon={faBars} size="lg" />
-            </a>
+            </button>
           </li>
 
           <li>
-            <a
-              className="p-2 ml-4"
-              data-widget="pushmenu"
-              href="#"
-              role="button"
-            >
+            <button className="p-2"
+              onClick={logoutSession}>
               Cerrar Sesión
-            </a>
+            </button>
           </li>
         </ul>
 
         <ul className="flex flex-row">
           <li>
-            <button className="p-2">
+            <button className="p-2" onClick={logoutSession}>
               <FontAwesomeIcon icon={faPencil} />
             </button>
           </li>

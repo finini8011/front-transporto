@@ -14,7 +14,7 @@ import Modulo from "./pages/admin/Modulo"
 import ListaVerificacionCumplimiento from "./pages/admin/ListaVerificacionCumplimiento"
 import NotFound from "./pages/Notfound"
 import Prueba from "./pages/admin/Prueba"
-import MainAuth from "./components/layout/MainAuth";
+import MainAuth from "./components/layout/menu/MainAuth";
 // import HomeWork from "./pages/HomeWork";
 
 

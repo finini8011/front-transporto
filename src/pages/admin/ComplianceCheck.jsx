@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Input from "../../components/commons/input/text/Input";
 import Select from "../../components/commons/input/select/Select";
 
-import { lvc } from "../../constants";
+import { lvc } from "../../constants/listaVerificacion";
 
 const arrResponses = ["Cumple", "Cumple Parcialmente", "No cumple"];
 const arrMisionalidad = ["Empresa de Transporte", "Empresa no Transportadora"];

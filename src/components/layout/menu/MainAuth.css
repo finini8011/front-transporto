@@ -13,12 +13,12 @@
 }
 
 .menu-open{
-   width: 16rem;
+   width: 14rem;
 }
 
 
 .menu-close{
-  width: 4rem;
+  width: 3.8rem;
   display: flex;
   align-items: flex-end;
   padding: 6px;

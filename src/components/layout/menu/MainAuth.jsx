@@ -135,7 +135,7 @@ const MainAuth = ({ children }) => {
           </button>
         </div>
       </div>
-      <div className="flex-1 h-screen  bg-slate-200 flex flex-col overflow-auto">
+      <div className="flex-1 h-screen bg-slate-200 flex flex-col overflow-auto">
         <Header
           openMenu={openMenu}
           setOpenMenu={setOpenMenu} />

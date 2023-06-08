@@ -76,11 +76,11 @@ const MainAuth = ({ children }) => {
           component="nav"
           aria-labelledby="nested-list-subheader">
           <ListItemButton onClick={() => navigate("/home")}>
-            <FontAwesomeIcon icon={faLocationPin} className="mr-3" />
+            <FontAwesomeIcon icon={faLocationPin} className="mr-3 w-5 h-5" />
             {openMenu && <ListItemText primary="Inicio" />}
           </ListItemButton>
           <ListItemButton onClick={handleClick}>
-            <FontAwesomeIcon icon={faGrip} className="mr-3" />
+            <FontAwesomeIcon icon={faGrip} className="mr-3 w-5 h-5" />
             {openMenu && <ListItemText primary="Fases pve" />}
             {!openMenu ? "" :
               openList ? <ExpandLess /> : <ExpandMore />
@@ -90,33 +90,33 @@ const MainAuth = ({ children }) => {
             <Collapse in={openList} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
-                  <FontAwesomeIcon icon={faBuilding} className="mr-3" />
+                  <FontAwesomeIcon icon={faBuilding} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Preparacion" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/planificacion")}>
-                  <FontAwesomeIcon icon={faVoteYea} className="mr-3" />
+                  <FontAwesomeIcon icon={faVoteYea} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Planificacion" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/implementacion")}>
-                  <FontAwesomeIcon icon={faCogs} className="mr-3" />
+                  <FontAwesomeIcon icon={faCogs} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Implementacion" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/seguimiento")}>
-                  <FontAwesomeIcon icon={faEye} className="mr-3" />
+                  <FontAwesomeIcon icon={faEye} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Seguimiento" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/mejora")}>
-                  <FontAwesomeIcon icon={faCheckSquare} className="mr-3" />
+                  <FontAwesomeIcon icon={faCheckSquare} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Mejora" />
                 </ListItemButton>
               </List>
             </Collapse>}
           <ListItemButton onClick={() => navigate("/informes")}>
-            <FontAwesomeIcon icon={faFile} className="mr-3" />
+            <FontAwesomeIcon icon={faFile} className="mr-3 w-5 h-5" />
             {openMenu && <ListItemText primary="Informes" />}
           </ListItemButton>
           <ListItemButton onClick={() => navigate("/calendario")}>
-            <FontAwesomeIcon icon={faCalendar} className="mr-3" />
+            <FontAwesomeIcon icon={faCalendar} className="mr-3 w-5 h-5" />
             {openMenu && <ListItemText primary="Calendario" />}
           </ListItemButton>
         </List>

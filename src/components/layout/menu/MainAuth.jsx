@@ -1,7 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectCurrentUser } from "../../../api/features/auth/authSlice";
+import Header from "../header/header";
 
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -10,11 +12,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 import {
-  selectCurrentUser
-} from "../../../api/features/auth/authSlice";
-import Header from "../header/header";
+  faGrip,
+} from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
 
 const MainAuth = ({ children }) => {
@@ -28,7 +31,7 @@ const MainAuth = ({ children }) => {
   const handleClick = () => {
     setOpenList(!openList);
   };
-  
+
 
   useEffect(() => {
     if (!user) {
@@ -41,56 +44,78 @@ const MainAuth = ({ children }) => {
   return (
     <div className="min-h-screen flex">
       <div className="menu-container">
-        <div className="menu">
+        <div className="menu-info-container">
+          <div className="flex p-2 items-center">
           <img
-            alt="logo"
-            src="http://lorempixel.com/300/300"
-          />
+                className="mr-2"
+                src={faGrip}
+                alt="x"
+              />
+            <h2 className="text-xl">
+              Transporto
+            </h2>
+          </div>
+          <div className="divider"></div>
+          <div className="flex py-3 p-2 items-center">
           <img
-            alt="user"
-            src="http://lorempixel.com/300/300"
-          />
-          <p>nombre usuario</p>
+                className="mr-2"
+                src={faGrip}
+                alt="x"
+              />
+            <span className="text-lg">
+              {user.name}
+            </span>
+          </div>
+          <div className="divider mb-2"></div>
         </div>
         <List
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'transparent' }}
           component="nav"
           aria-labelledby="nested-list-subheader">
-           <ListItemButton onClick={() => navigate("/modulo")}>
+          <ListItemButton onClick={() => navigate("/modulo")}>
+            <FontAwesomeIcon icon={faGrip} className="mr-3" />
             <ListItemText primary="Inicio" />
           </ListItemButton>
           <ListItemButton onClick={handleClick}>
+            <FontAwesomeIcon icon={faGrip} className="mr-3" />
             <ListItemText primary="Fases pve" />
             {openList ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={openList} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
+                <FontAwesomeIcon icon={faGrip} className="mr-3" />
                 <ListItemText primary="Preparacion" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/planificacion")}>
+                <FontAwesomeIcon icon={faGrip} className="mr-3" />
                 <ListItemText primary="Planificacion" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/implementacion")}>
+                <FontAwesomeIcon icon={faGrip} className="mr-3" />
                 <ListItemText primary="Implementacion" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/seguimiento")}>
+                <FontAwesomeIcon icon={faGrip} className="mr-3" />
                 <ListItemText primary="Seguimiento" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/mejora")}>
+                <FontAwesomeIcon icon={faGrip} className="mr-3" />
                 <ListItemText primary="Mejora" />
               </ListItemButton>
             </List>
           </Collapse>
           <ListItemButton onClick={() => navigate("/informes")}>
+            <FontAwesomeIcon icon={faGrip} className="mr-3" />
             <ListItemText primary="Informes" />
           </ListItemButton>
           <ListItemButton onClick={() => navigate("/calendario")}>
+            <FontAwesomeIcon icon={faGrip} className="mr-3" />
             <ListItemText primary="Calendario" />
           </ListItemButton>
         </List>
       </div>
-      <div className="flex-1 min-h-full text-white bg-gray-800 flex flex-col overflow-auto">
+      <div className="flex-1 min-h-full text-white bg-blue-800 flex flex-col overflow-auto">
         <Header
           openMenu={openMenu}
           setOpenMenu={setOpenMenu} />

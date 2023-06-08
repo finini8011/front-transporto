@@ -9,8 +9,7 @@ const persistor = persistStore(store);
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-// import Modulos from "./pages/admin/Modulos";
-import Modulo from "./pages/admin/Modulo"
+import Home from "./pages/admin/Home";
 import ListaVerificacionCumplimiento from "./pages/admin/ListaVerificacionCumplimiento"
 import NotFound from "./pages/Notfound"
 import Prueba from "./pages/admin/Prueba"
@@ -32,7 +31,7 @@ function App() {
         <MainAuth> 
           <Routes>
             <Route path="/registro" element={<Register />} />
-            <Route path="/modulo" element={<Modulo />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/lvc" element={<ListaVerificacionCumplimiento />} />
             <Route path="/notfound" element={<NotFound />} />
             <Route path="/prueba" element={<Prueba />} />

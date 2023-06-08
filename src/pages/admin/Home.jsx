@@ -1,12 +1,12 @@
 import React from "react";
 
-const Modulo = () => {
+const Home = () => {
   return (
     <div>
-      <p>modulos</p>
+      <p>Home</p>
     </div>
 
   );
 };
 
-export default Modulo;
+export default Home;

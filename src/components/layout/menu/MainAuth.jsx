@@ -79,7 +79,7 @@ const MainAuth = ({ children }) => {
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'transparent' }}
           component="nav"
           aria-labelledby="nested-list-subheader">
-          <ListItemButton onClick={() => navigate("/modulo")}>
+          <ListItemButton onClick={() => navigate("/home")}>
             <FontAwesomeIcon icon={faLocationPin} className="mr-3" />
             <ListItemText primary="Inicio" />
           </ListItemButton>

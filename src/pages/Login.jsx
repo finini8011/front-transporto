@@ -7,11 +7,11 @@ import { useLoginUserMutation } from "../api/services/auth/apiSlice";
 import { setToken, setUser } from "../api/features/auth/authSlice";
 // import Image from "next/image";
 
-import InputLogin from "../../components/commons/input/text/InputLogin";
-import ButtonForm from "../../components/commons/button/ButtonForm";
-import ButtonLoading from "../../components/commons/button/ButtonLoading";
+import InputLogin from "../components/commons/input/text/InputLogin";
+import ButtonForm from "../components/commons/button/ButtonForm";
+import ButtonLoading from "../components/commons/button/ButtonLoading";
 
-import Loading from "../../components/loading/Loading";
+import Loading from "../components/loading/Loading";
 import logo from "/logo.jpg";
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
       const { user, token } = await loginUser(data).unwrap();
       dispatch(setToken({ accesstoken: token }));
       dispatch(setUser(user));
-      navigate("/modulo");
+      navigate("/home");
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       // return toast.error("Usuario no encontrado o no autorizado");

@@ -25,5 +25,5 @@ const CardItem = ({ text }) => {
     </div>
   );
 };
-
+ 
 export default CardItem;

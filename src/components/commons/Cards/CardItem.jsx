@@ -9,14 +9,23 @@ const CardItem = ({ text }) => {
 
   const showAlert = () => {
     const String = text.toString();
-    if (String === "1") return navigate("/lvc/");
-    else if (String) return toast.error("la tarea #1 es necesaria.");
-    else return navigate("/lvc/");
+    if (String === "1") {
+      return navigate("/lvc/");
+    } else if (String) {
+      return toast.error("la tarea #1 es necesaria.", {
+        style: {
+          boxShadow: "none",
+          border: "1px solid red",
+        },
+      });
+    } else {
+      return navigate("/lvc/");
+    }
   };
 
   return (
     <div className="w-full">
-      <Toaster position="top-right" reverseOrder={false}/>
+      <Toaster position="top-right" reverseOrder={false} />
       <ButtonForm
         text={`Hacer tarea #${text} `}
         onClick={showAlert}
@@ -25,5 +34,5 @@ const CardItem = ({ text }) => {
     </div>
   );
 };
- 
+
 export default CardItem;

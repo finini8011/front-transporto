@@ -7,7 +7,6 @@ import Header from "../header/header";
 
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -16,7 +15,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 import {
+  faBuilding,
+  faCalendar,
+  faCheckSquare,
+  faCogs,
+  faEye,
+  faFile,
   faGrip,
+  faLocationPin,
+  faVoteYea,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
 
@@ -56,7 +63,7 @@ const MainAuth = ({ children }) => {
             </h2>
           </div>
           <div className="divider"></div>
-          <div className="flex py-3 p-2 items-center">
+          <div className="flex py-4 p-2 items-center">
           <img
                 className="mr-2"
                 src={faGrip}
@@ -73,7 +80,7 @@ const MainAuth = ({ children }) => {
           component="nav"
           aria-labelledby="nested-list-subheader">
           <ListItemButton onClick={() => navigate("/modulo")}>
-            <FontAwesomeIcon icon={faGrip} className="mr-3" />
+            <FontAwesomeIcon icon={faLocationPin} className="mr-3" />
             <ListItemText primary="Inicio" />
           </ListItemButton>
           <ListItemButton onClick={handleClick}>
@@ -84,38 +91,38 @@ const MainAuth = ({ children }) => {
           <Collapse in={openList} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
-                <FontAwesomeIcon icon={faGrip} className="mr-3" />
+                <FontAwesomeIcon icon={faBuilding} className="mr-3" />
                 <ListItemText primary="Preparacion" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/planificacion")}>
-                <FontAwesomeIcon icon={faGrip} className="mr-3" />
+                <FontAwesomeIcon icon={faVoteYea} className="mr-3" />
                 <ListItemText primary="Planificacion" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/implementacion")}>
-                <FontAwesomeIcon icon={faGrip} className="mr-3" />
+                <FontAwesomeIcon icon={faCogs} className="mr-3" />
                 <ListItemText primary="Implementacion" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/seguimiento")}>
-                <FontAwesomeIcon icon={faGrip} className="mr-3" />
+                <FontAwesomeIcon icon={faEye} className="mr-3" />
                 <ListItemText primary="Seguimiento" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/mejora")}>
-                <FontAwesomeIcon icon={faGrip} className="mr-3" />
+                <FontAwesomeIcon icon={faCheckSquare} className="mr-3" />
                 <ListItemText primary="Mejora" />
               </ListItemButton>
             </List>
           </Collapse>
           <ListItemButton onClick={() => navigate("/informes")}>
-            <FontAwesomeIcon icon={faGrip} className="mr-3" />
+            <FontAwesomeIcon icon={faFile} className="mr-3" />
             <ListItemText primary="Informes" />
           </ListItemButton>
           <ListItemButton onClick={() => navigate("/calendario")}>
-            <FontAwesomeIcon icon={faGrip} className="mr-3" />
+            <FontAwesomeIcon icon={faCalendar} className="mr-3" />
             <ListItemText primary="Calendario" />
           </ListItemButton>
         </List>
       </div>
-      <div className="flex-1 min-h-full text-white bg-blue-800 flex flex-col overflow-auto">
+      <div className="flex-1 min-h-full bg-slate-200 flex flex-col overflow-auto">
         <Header
           openMenu={openMenu}
           setOpenMenu={setOpenMenu} />

@@ -3,16 +3,11 @@ import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faMagnifyingGlass,
   faPencil,
   faGrip,
   faRectangleXmark,
   faShareFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
-
-
-import { logOut } from "../../../api/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
 import InfoCumplimiento from "../../commons/InfoCumplimiento/InfoCumplimiento";
@@ -22,20 +17,12 @@ import DirectAccess from "../../commons/DirectAccess/DirectAccess";
 const Header = ({ openMenu, setOpenMenu }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
-  const navigate = useNavigate();
 
 
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   }
 
-  const logoutSession = () => {
-    navigate("/");
-    setTimeout(() => {
-      dispatch(logOut(null));
-    }, 500)
-
-  };
 
 
   const openModal = () => {
@@ -70,7 +57,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
 
         <ul className="flex flex-row">
           <li>
-            <button className="p-2" onClick={logoutSession}>
+            <button className="p-2" >
               <FontAwesomeIcon icon={faPencil} />
             </button>
           </li>

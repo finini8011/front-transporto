@@ -10,7 +10,7 @@ const CardItem = ({ text }) => {
   const showAlert = () => {
     const String = text.toString();
     if (String === "1") {
-      return navigate("/lvc/");
+      return navigate("/step/");
     } else if (String) {
       return toast.error("Diligenciar los datos de la empresa", {
         style: {

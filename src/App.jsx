@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route path="/registro" element={<Register />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/lvc" element={<ComplianceCheck/>} />
+            <Route path="/step" element={<ComplianceCheck/>} />
             <Route path="/notfound" element={<NotFound />} />
             {/* <Route path="/homework/:id" element={<HomeWork />} /> */}
           </Routes>

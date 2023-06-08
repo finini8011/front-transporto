@@ -10,9 +10,8 @@ const persistor = persistStore(store);
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/admin/Home";
-import ListaVerificacionCumplimiento from "./pages/admin/ListaVerificacionCumplimiento"
+import ComplianceCheck from "./pages/admin/ComplianceCheck"
 import NotFound from "./pages/Notfound"
-import Prueba from "./pages/admin/Prueba"
 import MainAuth from "./components/layout/menu/MainAuth";
 // import HomeWork from "./pages/HomeWork";
 
@@ -32,9 +31,8 @@ function App() {
           <Routes>
             <Route path="/registro" element={<Register />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/lvc" element={<ListaVerificacionCumplimiento />} />
+            <Route path="/lvc" element={<ComplianceCheck/>} />
             <Route path="/notfound" element={<NotFound />} />
-            <Route path="/prueba" element={<Prueba />} />
             {/* <Route path="/homework/:id" element={<HomeWork />} /> */}
           </Routes>
           </MainAuth>

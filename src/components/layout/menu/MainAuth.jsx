@@ -51,22 +51,23 @@ const MainAuth = ({ children }) => {
 
   return (
     <div className="min-h-screen flex">
-      <div className={`menu-container ${openMenu ? "menu-open":"menu-close"}`}>
+      <div className={`menu-container ${openMenu ? "menu-open" : "menu-close"}`}
+          onMouseLeave={() => setOpenMenu(!openMenu)}>
         <div className="menu-info-container">
           <div className="flex p-2 items-center">
-          <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
-            {openMenu &&         
-            <h2 className="text-xl">
-              Transporto
-            </h2>}
+            <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
+            {openMenu &&
+              <h2 className="text-xl">
+                Transporto
+              </h2>}
           </div>
           <div className="divider"></div>
           <div className="flex py-4 p-2 items-center">
-          <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
-          {openMenu &&             
-          <span className="text-lg">
-              {user.name}
-            </span>}
+            <FontAwesomeIcon icon={faUserCircle} className="mr-3 w-7 h-7" />
+            {openMenu &&
+              <span className="text-lg">
+                {user.name}
+              </span>}
           </div>
           <div className="divider mb-2"></div>
         </div>
@@ -81,41 +82,42 @@ const MainAuth = ({ children }) => {
           <ListItemButton onClick={handleClick}>
             <FontAwesomeIcon icon={faGrip} className="mr-3" />
             {openMenu && <ListItemText primary="Fases pve" />}
-            {!openMenu ? "":
-            openList ? <ExpandLess /> : <ExpandMore />
-             }
+            {!openMenu ? "" :
+              openList ? <ExpandLess /> : <ExpandMore />
+            }
           </ListItemButton>
-          <Collapse in={openList} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
-                <FontAwesomeIcon icon={faBuilding} className="mr-3" />
-                <ListItemText primary="Preparacion" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/planificacion")}>
-                <FontAwesomeIcon icon={faVoteYea} className="mr-3" />
-                <ListItemText primary="Planificacion" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/implementacion")}>
-                <FontAwesomeIcon icon={faCogs} className="mr-3" />
-                <ListItemText primary="Implementacion" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/seguimiento")}>
-                <FontAwesomeIcon icon={faEye} className="mr-3" />
-                <ListItemText primary="Seguimiento" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/mejora")}>
-                <FontAwesomeIcon icon={faCheckSquare} className="mr-3" />
-                <ListItemText primary="Mejora" />
-              </ListItemButton>
-            </List>
-          </Collapse>
+          {openMenu &&
+            <Collapse in={openList} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
+                  <FontAwesomeIcon icon={faBuilding} className="mr-3" />
+                  <ListItemText primary="Preparacion" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/planificacion")}>
+                  <FontAwesomeIcon icon={faVoteYea} className="mr-3" />
+                  <ListItemText primary="Planificacion" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/implementacion")}>
+                  <FontAwesomeIcon icon={faCogs} className="mr-3" />
+                  <ListItemText primary="Implementacion" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/seguimiento")}>
+                  <FontAwesomeIcon icon={faEye} className="mr-3" />
+                  <ListItemText primary="Seguimiento" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/mejora")}>
+                  <FontAwesomeIcon icon={faCheckSquare} className="mr-3" />
+                  <ListItemText primary="Mejora" />
+                </ListItemButton>
+              </List>
+            </Collapse>}
           <ListItemButton onClick={() => navigate("/informes")}>
             <FontAwesomeIcon icon={faFile} className="mr-3" />
             {openMenu && <ListItemText primary="Informes" />}
           </ListItemButton>
           <ListItemButton onClick={() => navigate("/calendario")}>
             <FontAwesomeIcon icon={faCalendar} className="mr-3" />
-            {openMenu &&  <ListItemText primary="Calendario" />} 
+            {openMenu && <ListItemText primary="Calendario" />}
           </ListItemButton>
         </List>
       </div>

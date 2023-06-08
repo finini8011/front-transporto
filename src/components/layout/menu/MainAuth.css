@@ -15,11 +15,15 @@
 .menu-open{
    width: 16rem;
 }
+
+
 .menu-close{
   width: 4rem;
   align-items: center;
   padding: 6px;
 }
+
+
 
 .text-transition{
   transition: 0.35s linear;

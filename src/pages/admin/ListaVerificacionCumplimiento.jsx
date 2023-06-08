@@ -207,11 +207,51 @@ const ListaVerificacionCumplimiento = () => {
                       )}
                     </td>
                     <td className="border p-2 ">
-                      <textarea
-                        className="border resize-none p-1 border-black"
-                        cols="45"
-                        rows="5"
-                      />
+                      {content.level === "Todos los niveles" ? (
+                        <textarea
+                          className="border resize-none p-1 border-black"
+                          cols="45"
+                          rows="5"
+                        />
+                      ) : watch("misionalidad") === "Empresa de Transporte" ? (
+                        valorMayor >= 2 && valorMayor <= 19 ? (
+                          ""
+                        ) : valorMayor >= 20 &&
+                          valorMayor <= 50 &&
+                          content.level === "Estándar - Avanzado" ? (
+                          <textarea
+                            className="border resize-none p-1 border-black"
+                            cols="45"
+                            rows="5"
+                          />
+                        ) : valorMayor > 50 && content.level === "Avanzado" ? (
+                          <textarea
+                            className="border resize-none p-1 border-black"
+                            cols="45"
+                            rows="5"
+                          />
+                        ) : (
+                          ""
+                        )
+                      ) : valorMayor >= 2 && valorMayor <= 49 ? (
+                        ""
+                      ) : valorMayor >= 50 &&
+                        valorMayor <= 100 &&
+                        content.level === "Estándar - Avanzado" ? (
+                        <textarea
+                          className="border resize-none p-1 border-black"
+                          cols="45"
+                          rows="5"
+                        />
+                      ) : valorMayor > 1000 && content.level === "Avanzado" ? (
+                        <textarea
+                          className="border resize-none p-1 border-black"
+                          cols="45"
+                          rows="5"
+                        />
+                      ) : (
+                        ""
+                      )}
                     </td>
                   </tr>
                 ))}

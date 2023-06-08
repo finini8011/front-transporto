@@ -7,8 +7,8 @@ const Card = ({ data, numberCard }) => {
       <div className="flex items-center flex-col py-2 uppercase text-xs font-semibold">
         <p className="text-blue-950 ">{data.title} </p>
       </div>
-      <div>
-        <p className="min-h-[2rem] px-5 flex items-center flex-col justify-center gap-1">{data.content}</p>
+      <div className="min-h-[4rem] px-5 flex items-center flex-col justify-center gap-1">
+        <p>{data.content}</p>
       </div>
       <div className="min-h-[5rem] px-5 flex items-center flex-col justify-center gap-1">
         <CardItem text={numberCard + 1} />

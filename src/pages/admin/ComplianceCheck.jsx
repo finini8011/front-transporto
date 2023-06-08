@@ -53,11 +53,11 @@ const ListaVerificacionCumplimiento = () => {
           </div>
           <div className="px-2">
             <div className="flex">
-              <p className="text-center p-3 border-b border-r">
+              <p className="text-center p-3 border-b border-r flex-1">
                 METODOLOGIA RESOLUCIÓN N. 40595 DE 2022 DE MINISTERIO DE
                 TRANSPORTE
               </p>
-              <p className="text-center p-3 border-b">
+              <p className="text-center p-3 border-b flex-1">
                 Lista de Chequeo versión 1.0 Fuente: Resolución 40595 de 2022
                 Ministerio de Transporte
               </p>

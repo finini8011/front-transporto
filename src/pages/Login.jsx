@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useLoginUserMutation } from "../api/services/auth/apiSlice";
 import { setToken, setUser } from "../api/features/auth/authSlice";
+// import Image from "next/image";
 
-import Input from "../../components/commons/input/text/Input";
-import ButtonForm from "../../components/commons/button/ButtonForm";
-import ButtonLoading from "../../components/commons/button/ButtonLoading";
+import InputLogin from "../components/commons/input/text/InputLogin";
+import ButtonForm from "../components/commons/button/ButtonForm";
+import ButtonLoading from "../components/commons/button/ButtonLoading";
 
+import Loading from "../components/loading/Loading";
 import logo from "/logo.jpg";
 
 const Login = () => {
@@ -32,7 +34,7 @@ const Login = () => {
       const { user, token } = await loginUser(data).unwrap();
       dispatch(setToken({ accesstoken: token }));
       dispatch(setUser(user));
-      navigate("/modulo");
+      navigate("/home");
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       // return toast.error("Usuario no encontrado o no autorizado");
@@ -59,13 +61,13 @@ const Login = () => {
                 Iniciar sesión
               </h1>
               <form className="space-y-4 md:space-y-6" action="#">
-                <Input
+                <InputLogin
                   type="email"
                   label="Email"
                   placeholder="name@company.com"
                   {...register("email")}
                 />
-                <Input
+                <InputLogin
                   label="Password"
                   type="password"
                   placeholder="°°°°°°°°°"

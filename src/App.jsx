@@ -9,12 +9,15 @@ const persistor = persistStore(store);
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-// import Modulos from "./pages/admin/Modulos";
-import Modulo from "./pages/admin/Modulo"
+import Home from "./pages/admin/Home";
 import ListaVerificacionCumplimiento from "./pages/admin/ListaVerificacionCumplimiento"
 import NotFound from "./pages/Notfound"
 import Prueba from "./pages/admin/Prueba"
+import MainAuth from "./components/layout/menu/MainAuth";
 // import HomeWork from "./pages/HomeWork";
+
+
+
 
 
 function App() {
@@ -22,15 +25,19 @@ function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
         <BrowserRouter>
+        <Routes>
+        <Route exact path="/" element={<Login />} />
+        </Routes>
+        <MainAuth> 
           <Routes>
-            <Route exact path="/" element={<Login />} />
             <Route path="/registro" element={<Register />} />
-            <Route path="/modulo" element={<Modulo />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/lvc" element={<ListaVerificacionCumplimiento />} />
             <Route path="/notfound" element={<NotFound />} />
             <Route path="/prueba" element={<Prueba />} />
             {/* <Route path="/homework/:id" element={<HomeWork />} /> */}
           </Routes>
+          </MainAuth>
         </BrowserRouter>
          </PersistGate>
       </Provider> 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import MainAuth from "../../../components/layout/MainAuth";
-import Input from "../../../components/commons/input/text/Input";
-import Select from "../../../components/commons/input/select/Select";
+import Input from "../../components/commons/input/text/Input";
+import Select from "../../components/commons/input/select/Select";
 
 import { lvc } from "../../constants";
 
@@ -46,7 +45,6 @@ const ListaVerificacionCumplimiento = () => {
   }, [watch("vehiculos"), watch("conductores")]);
 
   return (
-    <MainAuth>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
         <div className="shadow-md rounded-md">
           <div className="text-white bg-red-700 p-3 rounded-t-md text-base font-semibold">
@@ -260,7 +258,6 @@ const ListaVerificacionCumplimiento = () => {
           </tbody>
         </table>
       </section>
-    </MainAuth>
   );
 };
 

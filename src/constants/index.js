@@ -57,7 +57,7 @@ const lvc = [
     body: [
       {
         number: "3.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El nivel directivo designó los miembros del Comité de Seguridad Vial (CSV), este comité está conformado por al menos tres (3) personas con poder de decisión (incluyendo al líder del PESV y se recomienda número impar de participantes)?",
         document:
@@ -66,7 +66,7 @@ const lvc = [
       },
       {
         number: "3.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿Se cuenta con Política de Seguridad Vial documentada con alcance sobre los desplazamientos laborales y los trayectos en itinere para todos los colaboradores de la organización?",
         document:
@@ -81,7 +81,7 @@ const lvc = [
     body: [
       {
         number: "4.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El nivel directivo demuestra liderazgo, compromiso y corresponsabilidad, ¿se cumplen con los requisitos definidos en el paso 4?",
         document:
@@ -90,7 +90,7 @@ const lvc = [
       },
       {
         number: "4.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El nivel directivo demuestra liderazgo, compromiso y corresponsabilidad, ¿se cumplen con los requisitos definidos en el paso 4?",
         document:
@@ -112,7 +112,7 @@ const lvc = [
     body: [
       {
         number: "5.1.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?",
         document:
@@ -121,7 +121,7 @@ const lvc = [
       },
       {
         number: "5.1.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?",
         document: "Documento: Lista de contratistas",
@@ -129,7 +129,7 @@ const lvc = [
       },
       {
         number: "5.1.3",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?",
         document: "Documento: Lista de colaboradores de la organización",
@@ -137,7 +137,7 @@ const lvc = [
       },
       {
         number: "5.1.4",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?",
         document: "Documento: Lista de vehículos automotores o no automotores",
@@ -145,7 +145,7 @@ const lvc = [
       },
       {
         number: "5.1.5",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?",
         document:
@@ -154,7 +154,7 @@ const lvc = [
       },
       {
         number: "5.2.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿La organización definió de la línea base para identificar los problemas de seguridad vial, es conforme con los requisitos definidos en el paso 21 de la guía metodología del PESV?",
         document:
@@ -163,7 +163,7 @@ const lvc = [
       },
       {
         number: "5.2.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿La organización definió de la línea base para identificar los problemas de seguridad vial, es conforme con los requisitos definidos en el paso 21 de la guía metodología del PESV?",
         document:
@@ -172,7 +172,7 @@ const lvc = [
       },
       {
         number: "5.2.3",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿En caso de que aplique, el diagnóstico del PESV se actualiza al menos una vez al año?",
         document: "",
@@ -185,7 +185,7 @@ const lvc = [
     body: [
       {
         number: "6.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿Se tiene definido y aplicado un procedimiento de evaluación y control de riesgos en seguridad vial y al menos contiene los requisitos definidos en el paso 6?",
         document:
@@ -194,7 +194,7 @@ const lvc = [
       },
       {
         number: "6.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿La organización cuenta con una herramienta para la evaluación y control de los riesgos en seguridad vial y se actualiza como mínimo una (1) vez al año y/o cada vez que ocurra un siniestro vial?",
         document:
@@ -208,7 +208,7 @@ const lvc = [
     body: [
       {
         number: "7.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿Están definidos los objetivos y metas del PESV y están enfocados a la prevención en seguridad vial, son claros, medibles y cuantificables?",
         document:
@@ -217,7 +217,7 @@ const lvc = [
       },
       {
         number: "7.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿Los objetivos y metas del PESV son coherentes con la Política de Seguridad Vial, la evaluación y control de riesgos en seguridad vial, el plan de trabajo anual del PESV y los Programas de gestión de riesgos críticos y factores de desempeño en seguridad vial?",
         document: "Documento: Objetivos y metas del PESV",
@@ -225,7 +225,7 @@ const lvc = [
       },
       {
         number: "7.3.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿Los objetivos y metas del PESV fueron comunicados a todos los colaboradores de la organización, así como actualizados, revisados y evaluados mínimo una (1) vez al año? (Registro evidencia de comunicación de objetivos metas a trabajadores)",
         document:
@@ -234,7 +234,7 @@ const lvc = [
       },
       {
         number: "7.3.2",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿Los objetivos y metas del PESV fueron comunicados a todos los colaboradores de la organización, así como actualizados, revisados y evaluados mínimo una (1) vez al año? (Evaluación del cumplimiento de objetivos y metas del PESV)",
         document:
@@ -315,7 +315,7 @@ const lvc = [
     body: [
       {
         number: "9.1",
-        level: "Todos los niveles",
+        level: "	Todos los niveles",
         requirement:
           "¿El plan anual del PESV está documentado, contiene los objetivos, metas, responsabilidades, recursos y cronograma de actividades del año y está articulado con el plan anual de actividades de SG-SST y cumple con los requisitos definidos en el paso 9?",
         document:
@@ -499,260 +499,243 @@ const lvc = [
     ],
   },
   {
-    title: "PASO 16. Inspección de vehículos y equipos",
+    title: "",
     body: [
       {
-        number: "16.1",
+        number: "6.1",
         level: "Todos los niveles",
-        requirement: "¿La organización definió un procedimiento y un formato de registro para la inspección preoperacional diaria de vehículos automotores y no automotores que se utilizan para desplazamientos laborales de la organización teniendo en cuenta el nivel de riesgo vial de la operación?",
-        document: "Documento: Procedimientos y mecanismo para el registro de la inspección preoperacional diaria de vehículos automotores y no automotores",
-        response: false,
-      },
-      {
-        number: "16.2",
-        level: "Todos los niveles",
-        requirement: "¿La inspección preoperacional diaria contiene al menos la disponibilidad de los elementos a inspeccionar , el buen funcionamiento del vehículo , su estado y los niveles aceptables para el funcionamiento y la seguridad del vehículo y de sus ocupantes y demás requisitos mencionados en el Paso 16?",
-        document: "Documento: Lista de chequeo de vehículos -inspección preoperacional",
-        response: false,
-      },
-    ],
-  },
-  {
-    title: "PASO 17. Mantenimiento y control de vehículos seguros y equipos",
-    body: [
-      {
-        number: "17.1",
-        level: "Todos los niveles",
-        requirement: "La organización diseñó e implementó un plan de mantenimiento preventivo para vehículos automotores y no automotores que se utilizan para los desplazamientos laborales al servicio de la organización, contempla los requisitos mencionados en el Paso 17?",
-        document: "Documento: Plan de mantenimiento preventivo para vehículos",
-        response: false,
-      },
-      {
-        number: "17.2.1",
-        level: "Todos los niveles",
-        requirement: "¿La organización documentó y mantiene la hoja de vida de cada vehículo automotor y no automotor que se utilizan para los desplazamientos laborales al servicio de la organización, contempla los requisitos mencionados en el Paso 17?",
-        document: "Documento: Inventario de vehículos propios, contratados, terceros y de trabajadores.",
-        response: false,
-      },
-      {
-        number: "17.2.2",
-        level: "Todos los niveles",
-        requirement: "¿La organización documentó y mantiene la hoja de vida de cada vehículo automotor y no automotor que se utilizan para los desplazamientos laborales al servicio de la organización, contempla los requisitos mencionados en el Paso 17?",
-        document: "Documento: Hoja de vida por cada vehículo automotor y no automotor Registro del mantenimiento.",
-        response: false,
-      },
-      {
-        number: "17.3",
-        level: "Todos los niveles",
-        requirement: "¿La organización documenta el mantenimiento de vehículos de propiedad de los colaboradores puestos al servicio de la organización para el cumplimiento de sus funciones?",
-        document: "Documento: Registro de mantenimiento de vehículos puesto al servicios de la organización y son de propiedad de colaboradores.",
-        response: false,
-      },
-    ],
-  },
-  {
-    title: "PASO 18. Gestión del cambio y gestión de contratistas",
-    body: [
-      {
-        number: "18.1",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización dispone de un procedimiento para evaluar los impactos que puedan generar los cambios externos e internos en la seguridad vial?",
-        document: "Documento: Procedimiento para evaluar los impactos que puedan generan cambios externos e internos en la seguridad vial.",
-        response: false,
-      },
-      {
-        number: "18.2",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización realizó el análisis del impacto de los cambios planeados y no planeados y realizó las gestiones de manera previa para prevenir riesgos y consecuencias en seguridad Vial?",
-        document: "Documento: Análisis de impacto de cambios planeados o no planeados en seguridad vial",
-        response: false,
-      },
-      {
-        number: "18.3",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización verificó que los contratistas que están obligados a diseñar e implementar el plan estratégico de seguridad vial de conformidad con lo dispuesto en el artículo 12 de la ley 1503 del 2011, modificado por el artículo 110 del decreto ley 2106 del 2019 o las normas que lo modifiquen o sustituyan, cumplan con dicha obligación?",
-        document: "Documento: Protocolos o manuales para implementar acciones y medidas PESV y gestión de seguridad vial de los contratistas",
-        response: false,
-      },
-      {
-        number: "18.4",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización estableció las disposiciones que en seguridad vial deben cumplir, los contratistas, subcontratistas y terceros, Incluyendo los conductores y propietarios de vehículos permanentes y ocasionales que no están obligados a diseñar e implementar un plan estratégico seguridad Vial, cumplen con las disposiciones mínimas mencionadas en El Paso 18?",
-        document: "Documento: Las disposiciones que en seguridad vial deben cumplir, los contratistas, subcontratistas y terceros.",
-        response: false,
-      },
-      {
-        number: "18.5",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización definió los responsables de supervisar el cumplimiento de las obligaciones en seguridad vial establecidas a los contratistas que realizan desplazamientos laborales?",
-        document: "Documento: Responsabilidad supervisión de obligaciones de contratistas",
-        response: false,
-      },
-    ],
-  },
-  {
-    title: "PASO 19. Archivo y retención documental",
-    body: [
-      {
-        number: "19.1",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización mantiene disponible debidamente controlada y actualizada la documentación del plan estratégico de seguridad Vial?",
-        document: "Documento: Procedimiento para mantener disponible, debidamente controlada y actualizada la documentación del PESV y la retención documental de registros y evidencias.",
-        response: false,
-      },
-      {
-        number: "19.2",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización realizó la retención documental de registros y evidencias que soportan la implementación del PESV asegurando su identificación ,legibilidad accesibilidad y protección contra daños o perdidas, Los cuáles deben almacenarse en al menos por 5 años salvo norma especial en contrario?",
-        document: "Documentos: Registros y evidencias que soportan la implementación del PESV",
-        response: false,
-      },
-      {
-        number: "19.3",
-        level: "Estándar - Avanzado",
-        requirement: "¿La organización realiza el almacenamiento de los registros de las inspecciones preoperacionales por un año?",
+        requirement: "",
         document: "",
         response: false,
       },
     ],
   },
   {
-    title: "PASO 20. Indicadores y reporte de autogestión PESV",
+    title: "",
     body: [
       {
-        number: "20.1.1",
+        number: "6.1",
         level: "Todos los niveles",
-        requirement: "¿La organización realizó el registro la medición y análisis de los indicadores mínimos de gestión del PESV de acuerdo al nivel aplicable según lo establecido en la tabla 10 del capítulo 1 del presente anexo?",
-        document: "Documento: Protocolo para el manejo de los indicadores",
-        response: false,
-      },
-      {
-        number: "20.1.2",
-        level: "Todos los niveles",
-        requirement: "¿La organización realizó el registro la medición y análisis de los indicadores mínimos de gestión del PESV de acuerdo al nivel aplicable según lo establecido en la tabla 10 del capítulo 1 del presente anexo?",
-        document: "Documento: Indicadores del PESV Trimestral y acumulado (Línea Base)",
-        response: false,
-      },
-      {
-        number: "20.2",
-        level: "Todos los niveles",
-        requirement: "¿La organización definió de indicadores adicionales a los mínimos descritos en la tabla 10 del capítulo 1 del presente anexo, cada indicador adicional fue construido de acuerdo a las características mencionadas en el Paso 20?",
+        requirement: "",
         document: "",
         response: false,
       },
-      {
-        number: "20.3",
-        level: "Todos los niveles",
-        requirement: "¿La organización realizó el reporte de autogestión anual a la entidad verificadora que le corresponda de los resultados de la medición y análisis de los indicadores a los qué hace referencia la tabla 10 del capítulo 1 del presente anexo y la información lista en el Paso 20 con corte a 31 de diciembre de cada año, y teniendo en cuenta que el reporte se debe realizar a más tardar el 31 de enero de cada año?",
-        document: "Documento: Reporte de autogestión anual PESV- Realizado por Líder del PESV",
-        response: false,
-      },
     ],
   },
   {
-    title: "PASO 21. Registro y análisis estadístico de siniestros viales",
+    title: "",
     body: [
       {
-        number: "21.1.1",
-        level: "Avanzado",
-        requirement: "¿La organización definió su línea base de la siniestralidad vial, en la cual se determina la posición actual de la organización con relación a la seguridad vial de acuerdo con su nivel de pérdida?",
-        document: "Documento: línea base de siniestralidad y nivel de perdida",
-        response: false,
-      },
-      {
-        number: "21.1.2",
-        level: "Avanzado",
-        requirement: "¿La organización definió su línea base de la siniestralidad vial, en la cual se determina la posición actual de la organización con relación a la seguridad vial de acuerdo con su nivel de pérdida?",
-        document: "Documento: Registro, estadística con nivel de perdida de siniestros viales",
-        response: false,
-      },
-      {
-        number: "21.2",
-        level: "Avanzado",
-        requirement: "La organización lleva registro estadístico, tendencia, proyección a nivel estadístico y análisis de siniestros viales, diferenciando los siniestros viales de acuerdo con la gravedad del evento según el nivel de pérdida y separando los análisis estadísticos de los desplazamientos laborales y de los desplazamientos cotidianos no laborales",
+        number: "6.1",
+        level: "Todos los niveles",
+        requirement: "",
         document: "",
         response: false,
       },
+    ],
+  },
+  {
+    title: "",
+    body: [
       {
-        number: "21.3",
-        level: "Avanzado",
-        requirement: "El comité de seguridad Vial analiza los resultados de la siniestralidad vial de acuerdo con lo definido en el Paso 21",
-        document: "Documento: Análisis los resultados de la siniestralidad vial",
+        number: "6.1",
+        level: "Todos los niveles",
+        requirement: "",
+        document: "",
         response: false,
       },
     ],
   },
   {
-    title: "PASO 22. Auditoría anual",
+    title: "",
     body: [
       {
-        number: "22.1",
+        number: "6.1",
         level: "Todos los niveles",
-        requirement: "¿La organización realizó al menos una auditoría anual interna para evaluar el cumplimiento y las evidencias de la planificación Implementación, seguimiento y mejora del PESV, de acuerdo con lo establecido en el capítulo 1 del presente anexo? NOTA: La organización puede optar por manejar auditorías integradas y aplicar",
-        document: "Documento: Plan de auditoria - Informe de auditorias al PESV",
-        response: false,
-      },
-      {
-        number: "22.2",
-        level: "Todos los niveles",
-        requirement: "¿La organización documento y aplico un procedimiento para la realización de las auditorías internas al PESV de la organización y contempla lo mencionado en el Paso 22?",
-        document: "Documento: Procedimiento para la realización de las auditorías internas al PESV de la organización",
-        response: false,
-      },
-      {
-        number: "22.3",
-        level: "Todos los niveles",
-        requirement: "La organización definió la competencia de los auditores internos para el PESV siguiendo los requisitos del paso 10 competencia y plan anual de formación.",
-        document: "Documento: Competencia de auditor",
-        response: false,
-      },
-      {
-        number: "22.4",
-        level: "Todos los niveles",
-        requirement: "El o los auditores internos son personas diferentes al líder del diseño de implementación del PESV y las auditorías fueron planificadas con la participación del Comité de Seguridad Vial",
-        document: "Documento: Plan de auditoria",
+        requirement: "",
+        document: "",
         response: false,
       },
     ],
   },
   {
-    title: "PASO 23. Mejora continua, acciones preventivas y correctivas",
+    title: "",
     body: [
       {
-        number: "23.1.1",
+        number: "6.1",
         level: "Todos los niveles",
-        requirement: "¿La organización definió e implementó las acciones preventivas y/o correctivas necesarias con base en los resultados de la medición del análisis de los indicadores y auditorías del PESV?",
-        document: "Documento: Acciones preventivas y/o correctivas en seguridad vial",
-        response: false,
-      },
-      {
-        number: "23.1.2",
-        level: "Todos los niveles",
-        requirement: "¿La organización definió e implementó las acciones preventivas y/o correctivas necesarias con base en los resultados de la medición del análisis de los indicadores y auditorías del PESV?",
-        document: "Documento: Mejoras en seguridad vial en personas, vehículos, infraestructura, velocidad, comportamientos, infraestructura, emergencias",
+        requirement: "",
+        document: "",
         response: false,
       },
     ],
   },
   {
-    title: "PASO 24. Mecanismos de comunicación y participación",
+    title: "",
     body: [
       {
-        number: "24.1.1",
+        number: "6.1",
         level: "Todos los niveles",
-        requirement: "¿La organización definió y puso a disposición los mecanismos de comunicación y participación en relación con la seguridad vial, así como la frecuencia de las comunicaciones que, por lo menos debe ser trimestral y contener la promoción de la seguridad vial, de acuerdo con lo definido en el Paso 24?",
-        document: "Documento: mecanismos de comunicación y participación en relación con la seguridad vial.",
+        requirement: "",
+        document: "",
         response: false,
       },
+    ],
+  },
+  {
+    title: "",
+    body: [
       {
-        number: "24.1.2",
+        number: "6.1",
         level: "Todos los niveles",
-        requirement: "¿La organización definió y puso a disposición los mecanismos de comunicación y participación en relación con la seguridad vial, así como la frecuencia de las comunicaciones que, por lo menos debe ser trimestral y contener la promoción de la seguridad vial, de acuerdo con lo definido en el Paso 24?",
-        document: "Evidencias de comunicación y participación en seguridad vial (boletines, periódicos, videos, campañas, registro fotográfico, concursos). Reporte de condiciones etc.",
+        requirement: "",
+        document: "",
+        response: false,
+      },
+    ],
+  },
+  {
+    title: "",
+    body: [
+      {
+        number: "6.1",
+        level: "Todos los niveles",
+        requirement: "",
+        document: "",
         response: false,
       },
     ],
   },
 ];
 
-export { lvc };
+
+const dataCard = [
+  {
+    title: "Registro de la empresa",
+    step: 1,
+    content: "Datos de la empresa"
+  },
+  {
+    title: "Paso #1",
+    step: 2,
+    content: "Datos de la empresa"
+  },
+  {
+    title: "Paso #2",
+    step: 2,
+    content: "Lider de diseño e implementacion PESV"
+  },
+  {
+    title: "Paso #3",
+    step: 3,
+    content: "Politica de seguridad vial de la Organizacion"
+  },
+  {
+    title: "Paso #4",
+    step: 4,
+    content: "Liderazgo, compromiso y correspondencia del nivel directivo"
+  },
+  {
+    title: "Paso #5",
+    step: 5,
+    content: "Diagnostico"
+  },
+  {
+    title: "Paso #6",
+    step: 6,
+    content: "Caracterización, evaluación y control de riesgos"
+  },
+  {
+    title: "Paso #7",
+    step: 7,
+    content: "Objetivos y metas del PSEV"
+  },
+  {
+    title: "Paso #8",
+    step: 8,
+    content: "Programas de gestión de riesgos críticos y factores de desempeño"
+  },
+  {
+    title: "Paso #9",
+    step: 9,
+    content: "Plan anual de trabajo"
+  },
+  {
+    title: "Paso #10",
+    step: 10,
+    content: "Competencia y plan anual de formación"
+  },
+  {
+    title: "Paso #11",
+    step: 11,
+    content: "Responsabilidades y comportamiento seguro"
+  },
+  {
+    title: "Paso #12",
+    step: 12,
+    content: "Plan de preparación y respuesta ante emergencias vitales"
+  },
+  {
+    title: "Paso #13",
+    step: 13,
+    content: "Investigación interna de siniestros"
+  },
+  {
+    title: "Paso #14",
+    step: 14,
+    content: "Vías seguras administradas por la organización"
+  },
+  {
+    title: "Paso #15",
+    step: 15,
+    content: "Planificación de desplazamientos laborales"
+  },
+  {
+    title: "Paso #16",
+    step: 16,
+    content: "Inspección de vehículos y equipos"
+  },
+  {
+    title: "Paso #17",
+    step: 17,
+    content: "Mantenimiento y control de vehículos"
+  },
+  {
+    title: "Paso #18",
+    step: 18,
+    content: "Gestión de cambios y gestión de contratistas"
+  },
+  {
+    title: "Paso #19",
+    step: 19,
+    content: "Archivos y retención documental"
+  },
+  {
+    title: "Paso #20",
+    step: 20,
+    content: "Definición de indicadores"
+  },
+  {
+    title: "Paso #21",
+    step: 21,
+    content: "Registro y análisis estadístico de accidentes de tránsito"
+  },
+  {
+    title: "Paso #22",
+    step: 22,
+    content: "Auditoria Anual"
+  },
+  {
+    title: "Paso #23",
+    step: 23,
+    content: "Mejora Continua, acciones preventivas y correctivas"
+  },
+  {
+    title: "Paso #24",
+    step: 24,
+    content: "Mecanismos de comunicación"
+  },
+  
+]
+
+export { lvc, dataCard };

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const Select = forwardRef((props, ref) => {
-  const { id, label, data, ...inputProps } = props;
+  const { id, label, data, selection, ...inputProps } = props;
 
   const renderSelect = (info) => (
     <option key={info} value={info} className="text-black">
@@ -26,6 +26,7 @@ const Select = forwardRef((props, ref) => {
         {...inputProps}
         ref={ref}
       >
+        {selection && <option value="" disabled >Seleccionar</option>} 
         {data.map(renderSelect)}
       </select>
     </div>

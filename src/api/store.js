@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { apiSlice } from "./services/auth/apiSlice";
 // import { projectsApiSlice } from "./services/projects/projectsApiSlice";
-import { quadrantsApiSlice } from "./services/quadrants/quadrantsApiSlice";
+import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
 import authReducer from "./features/auth/authSlice";
 
 import storage from "redux-persist/lib/storage";
@@ -29,7 +29,7 @@ export const store = configureStore({
     // Add the generated reducer as a specific top-level slice
     [apiSlice.reducerPath]: apiSlice.reducer,
     // [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
-    [quadrantsApiSlice.reducerPath]: quadrantsApiSlice.reducer,
+    [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
     // auth: authReducer,
     auth: persistedReducer,
   },
@@ -40,7 +40,7 @@ export const store = configureStore({
     getDefaultMiddleware({serializableCheck: false, })
       .concat(thunk, apiSlice.middleware)
       // .concat(thunk, projectsApiSlice.middleware)
-      .concat(thunk, quadrantsApiSlice.middleware)
+      .concat(thunk, listVerificationApiSlice.middleware)
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

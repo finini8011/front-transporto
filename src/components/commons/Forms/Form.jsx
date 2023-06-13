@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import Input from "../input/text/Input";
 import Select from "../input/select/Select";
 import TextArea from "../input/TextArea/TextArea";
-import ButtonForm from "../button/ButtonForm";
 import Button from "../button/Button";
+import ButtonForm from "../button/ButtonForm";
 
-const Form = ({ title, inputs, cols, buttons }) => {
+const Form = ({ title, inputs, cols, buttons, onSubmit }) => {
   const formRef = useRef(null);
 
   const optionsChageState = ["SI", "NO"];
@@ -16,8 +16,10 @@ const Form = ({ title, inputs, cols, buttons }) => {
     const formData = new FormData(formRef.current);
     const formValues = Object.fromEntries(formData.entries());
     console.log(formValues);
+
+    onSubmit(formValues)
   };
-  
+
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="p-2">
       <h2 className="text-center text-xs mb-4">{title}</h2>
@@ -42,7 +44,6 @@ const Form = ({ title, inputs, cols, buttons }) => {
                   onChange={(value) => {
                     input.onchange && input.onchange(input.name, value);
                   }}
-                  /*   {...register(`${input.name}`)}  */
                 />
               );
             case "textArea":
@@ -55,7 +56,6 @@ const Form = ({ title, inputs, cols, buttons }) => {
                   id={input.name}
                   start={input.start}
                   end={input.end}
-                  /*      {...register(`${input.name}`)} */
                 />
               );
 
@@ -75,10 +75,22 @@ const Form = ({ title, inputs, cols, buttons }) => {
               );
             case "button":
               return (
-                <ButtonForm
-                  text="Descargar archivo guía acta de asignación lider del PESV"
-                  icon="faFileArrowDown"
-                />
+                <ButtonForm text={input.text} icon={input.icon} type={input.type} />
+              );
+            case "span":
+              return (
+                <div
+                  className={`col-start-${input.start} col-end-${input.end}`}
+                >
+                  <label
+                    className={`block mb-2 text-sm  font-bold text-gray-900`}
+                  >
+                    {input.label}
+                  </label>
+                  <div className="bg-gray-50 p-2 border rounded-lg">
+                    <span >{input.value}</span>
+                  </div>
+                </div>
               );
 
             case "hr":
@@ -96,9 +108,14 @@ const Form = ({ title, inputs, cols, buttons }) => {
       <div className="mt-2 flex gap-4">
         {buttons.map((button, index) => {
           return (
-            <Button text={button.text} icon={button.icon} type={button.type} onClick={(value) => {
-              button.onClick && button.onClick(value);
-            }}/>
+            <Button
+              text={button.text}
+              icon={button.icon}
+              type={button.type}
+              onClick={(value) => {
+                button.onClick && button.onClick(value);
+              }}
+            />
           );
         })}
       </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import {
   faDownload,
@@ -6,6 +7,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Step3 = () => {
+  const [formValues, setFormValues] = useState({});
+
   const inputs = [
     {
       label: "CREA",
@@ -42,10 +45,9 @@ const Step3 = () => {
       end: 5,
     },
     {
-      label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
-      labelWeight: "bold",
-      name: "observaciones",
       type: "button",
+      text: "Descargar archivo guía acta de asignación lider del PESV",
+      icon: faDownload,
     },
     {
       type: "hr",
@@ -74,23 +76,18 @@ const Step3 = () => {
     },
     {
       label: "Nombre Archivo cargado",
-      labelWeight: "bold",
-      name: "archivoCargado",
-      type: "text",
+      type: "span",
       placeholder: "",
       start: 1,
       end: 4,
-      disabled: true,
+      value: "documento.pdf",
     },
     {
       label: "Estado actual",
-      labelWeight: "bold",
-      name: "estadoActual",
-      type: "text",
-      placeholder: "",
+      type: "span",
       start: 4,
       end: 6,
-      disabled: true,
+      value: "SI",
     },
     {
       type: "hr",
@@ -121,6 +118,10 @@ const Step3 = () => {
   const step = "1.1";
   const nameStep =
     "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?";
+  const handleFormSubmit = (values) => {
+    console.log("Valores del formulario:", values);
+  };
+
   return (
     <FormFlex
       inputs={inputs}
@@ -129,6 +130,7 @@ const Step3 = () => {
       step={step}
       nameStep={nameStep}
       cols={5}
+      onSubmit={handleFormSubmit}
     />
   );
 };

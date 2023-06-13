@@ -1,20 +1,45 @@
 import { forwardRef } from "react";
 
 const Select = forwardRef((props, ref) => {
-  const { id, label, data, ...inputProps } = props;
+  const { id, label, data, labelWeight, start, end, ...inputProps } = props;
 
   const renderSelect = (info) => (
     <option key={info} value={info} className="text-black">
       {info}
     </option>
   );
+  let fontWeight = labelWeight ? labelWeight : "medium";
+  const fontWeightVariants = {
+    bold: "font-bold",
+    medum: "font-medim",
+  };
+
+  const colsVariantsStart = {
+    1: "col-start-1",
+    2: "col-start-2",
+    3: "col-start-3",
+    4: "col-start-4",
+    5: "col-start-5",
+    6: "col-start-6",
+    7: "col-start-7",
+  };
+
+  const colsVariantsEnd = {
+    1: "col-end-",
+    2: "col-end-2",
+    3: "col-end-3",
+    4: "col-end-4",
+    5: "col-end-5",
+    6: "col-end-6",
+    7: "col-end-7",
+  };
 
   return (
-    <div className="">
+    <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}>
       {label && (
         <label
           htmlFor={id}
-          className="block mb-2 text-sm font-semibold text-gray-900"
+          className={`block mb-2 text-sm  ${fontWeightVariants[fontWeight]} text-gray-900`}
         >
           {label}
         </label>

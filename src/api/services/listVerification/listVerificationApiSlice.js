@@ -16,23 +16,54 @@ export const listVerificationApiSlice = createApi({
   // refetchOnFocus:true,
   tagTypes: ["ListVerification"],
   endpoints: (builder) => ({
-    getQuadrant: builder.query({
-      query: ({ userId, projectId }) => {
+    getListVerificationPdf: builder.query({
+      query: () => {
         // Destructuring Object
         return {
           // Returns url with multiple args
-          url: `${urlQuadrant}/test/users/${userId}/projects/${projectId}`,
+          url: `/get_listaverificacion`,
           method: "GET",
+          responseHandler: async (response) => {
+            const blob = await response.blob();
+            const downloadUrl = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = "LISTADEVERIFICACION.pdf";
+            link.dispatchEvent(
+              new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+              })
+            );
+            setTimeout(() => {
+              // For Firefox it is necessary to delay revoking the ObjectURL
+              window.URL.revokeObjectURL(downloadUrl);
+              link.remove();
+            }, 100);
+          },
+          cache: "no-cache",
         };
       },
-      providesTags: ["Quadrants"],
-      invalidatesTags: ["Quadrants"],
+      providesTags: ["ListVerification"],
+      invalidatesTags: ["ListVerification"],
     }),
     saveListVerification: builder.mutation({
       query: (args) => {
         // Destructuring Object
 
-        const { empresa, NIT, misionalidad, objeto_social, representante_legal, cantidad_vehiculos, cantidad_conductores, verificacion_realizada, funcionarios, pasos } = args;
+        const {
+          empresa,
+          NIT,
+          misionalidad,
+          objeto_social,
+          representante_legal,
+          cantidad_vehiculos,
+          cantidad_conductores,
+          verificacion_realizada,
+          funcionarios,
+          pasos,
+        } = args;
 
         const data = {
           payload: {
@@ -45,9 +76,9 @@ export const listVerificationApiSlice = createApi({
             cantidad_conductores,
             verificacion_realizada,
             funcionarios,
-            pasos
-          }
-        }
+            pasos,
+          },
+        };
 
         return {
           // Returns url with multiple args
@@ -62,18 +93,25 @@ export const listVerificationApiSlice = createApi({
     updateQuadrantItem: builder.mutation({
       query: (args) => {
         // Destructuring Object
-        const { quadrantNumber, projectId, userId, url, quadrantItemType, quadrantItemId } = args;
+        const {
+          quadrantNumber,
+          projectId,
+          userId,
+          url,
+          quadrantItemType,
+          quadrantItemId,
+        } = args;
 
         return {
           // Returns url with multiple args
           url: `${urlFiles}/test/users/${userId}/projects/${projectId}`,
           method: "PUT",
           body: {
-            "quadrantNumber": quadrantNumber,
+            quadrantNumber: quadrantNumber,
             quadrantItemType,
-            "url": url,
-            quadrantItemId
-        },
+            url: url,
+            quadrantItemId,
+          },
         };
       },
       providesTags: ["Quadrants"],
@@ -82,4 +120,8 @@ export const listVerificationApiSlice = createApi({
   }),
 });
 
-export const { useGetQuadrantQuery,  useSaveListVerificationMutation, useUpdateQuadrantItemMutation } = listVerificationApiSlice;
+export const {
+  useLazyGetListVerificationPdfQuery,
+  useSaveListVerificationMutation,
+  useUpdateQuadrantItemMutation,
+} = listVerificationApiSlice;

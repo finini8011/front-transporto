@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { useSaveListVerificationMutation } from "../../api/services/listVerification/listVerificationApiSlice";
+import { useSaveListVerificationMutation, useLazyGetListVerificationPdfQuery } from "../../api/services/listVerification/listVerificationApiSlice";
 import { useNavigate } from "react-router-dom";
 
 import Input from "../../components/commons/input/text/Input";
@@ -19,6 +19,8 @@ const ListaVerificacionCumplimiento = () => {
   const [valorMayor, setValorMayor] = useState(0);
   const [saveListVerification, { isLoading, error }] =
     useSaveListVerificationMutation();
+    const [getListVerificationPdf, { isLoading: isGetPdfLoading }] =
+    useLazyGetListVerificationPdfQuery();
   const navigate = useNavigate();
 
   const {
@@ -65,7 +67,8 @@ const ListaVerificacionCumplimiento = () => {
   );
 
   const onSubmit = async (dataForm) => {
-    const pasos = [];
+    const pasos = []; //informacion donde se ingresaran los pasos
+    let validateRegister = false; //informacion para verificar si todos los registros han sido completados
     const {
       NIT,
       cantidad_conductores,
@@ -77,6 +80,7 @@ const ListaVerificacionCumplimiento = () => {
       verificacion_realizada,
       misionalidad,
     } = dataForm;
+
     if (
       NIT === "" ||
       cantidad_conductores === "" ||
@@ -88,10 +92,12 @@ const ListaVerificacionCumplimiento = () => {
       verificacion_realizada === ""
     )
       return toast.error("Llenar todos los campos del formulario");
-    // return toast.success("Todo bien");
+
     lvc.map((data) => {
       data.body.map((content) => {
         const numberFormat = content.number.replace(/\./g, "_");
+        if (dataForm[`respuesta_${numberFormat}`] === "")
+          validateRegister = true;
         pasos.push({
           numero: content.number,
           respuesta: dataForm[`respuesta_${numberFormat}`],
@@ -99,6 +105,10 @@ const ListaVerificacionCumplimiento = () => {
         });
       });
     });
+
+    if (validateRegister)
+      return toast.error("Todos los campo respuesta deben ser completados");
+
     try {
       await saveListVerification({
         empresa,
@@ -113,9 +123,14 @@ const ListaVerificacionCumplimiento = () => {
         pasos,
       }).unwrap();
       toast.success("Se ha registrado correctamente!");
-      setTimeout(() => {
+      try {
+        await getListVerificationPdf()
+      } catch (error) {
+        toast.success("Hubo un problema al descargar el PDF");
+      }
+      // setTimeout(() => {
         navigate("/home");
-      }, 2500);
+      // }, 2500);
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");

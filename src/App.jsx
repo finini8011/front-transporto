@@ -13,7 +13,7 @@ import Home from "./pages/admin/Home";
 import ComplianceCheck from "./pages/admin/ComplianceCheck"
 import NotFound from "./pages/Notfound"
 import MainAuth from "./components/layout/menu/MainAuth";
-import FormFlex from "./components/commons/FormFlex/FormFlex";
+import Step3 from "./pages/steps/step3";
 // import HomeWork from "./pages/HomeWork";
 
 
@@ -34,7 +34,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/step" element={<ComplianceCheck/>} />
             <Route path="/notfound" element={<NotFound />} />
-            <Route path="/document" element={<FormFlex />} />
+            <Route path="/step3" element={<Step3 />} />
 
             {/* <Route path="/homework/:id" element={<HomeWork />} /> */}
           </Routes>

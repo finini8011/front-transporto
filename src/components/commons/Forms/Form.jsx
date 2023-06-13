@@ -96,7 +96,9 @@ const Form = ({ title, inputs, cols, buttons }) => {
       <div className="mt-2 flex gap-4">
         {buttons.map((button, index) => {
           return (
-            <Button text={button.text} icon={button.icon} type={button.type}  onClick={button.onClick}/>
+            <Button text={button.text} icon={button.icon} type={button.type} onClick={(value) => {
+              button.onClick && button.onClick(value);
+            }}/>
           );
         })}
       </div>

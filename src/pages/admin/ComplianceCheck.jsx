@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { useSaveListVerificationMutation } from "../../api/services/listVerification/listVerificationApiSlice";
+import { useNavigate } from "react-router-dom";
+
 import Input from "../../components/commons/input/text/Input";
 import Select from "../../components/commons/input/select/Select";
-
 import { lvc } from "../../constants/listaVerificacion";
+import ButtonPrimary from "../../components/commons/button/ButtonPrimary";
 
 const arrResponses = ["Cumple", "Cumple Parcialmente", "No cumple"];
+const arrNoAplica = ["No Aplica"];
 const arrMisionalidad = ["Empresa de Transporte", "Empresa no Transportadora"];
+const showAllOptions = "showAllOptions";
+const showOneOption = "showOption";
 
 const ListaVerificacionCumplimiento = () => {
   const [valorMayor, setValorMayor] = useState(0);
+  const [saveListVerification, { isLoading, error }] =
+    useSaveListVerificationMutation();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -36,228 +45,291 @@ const ListaVerificacionCumplimiento = () => {
     ); // less performant
   }, []);
 
-  useEffect(() => {
-    if (watch("vehiculos").length > 0 && watch("conductores").length > 0) {
-      watch("vehiculos") > watch("conductores")
-        ? setValorMayor(watch("vehiculos"))
-        : setValorMayor(watch("conductores"));
+  useEffect(
+    () => {
+      if (
+        watch("cantidad_vehiculos").length > 0 &&
+        watch("cantidad_conductores").length > 0
+      ) {
+        parseInt(watch("cantidad_vehiculos")) >
+        parseInt(watch("cantidad_conductores"))
+          ? setValorMayor(watch("cantidad_vehiculos"))
+          : setValorMayor(watch("cantidad_conductores"));
+      } else {
+        setValorMayor(0);
+      }
+      resetOptions();
+    },
+    [watch("cantidad_vehiculos"), watch("cantidad_conductores")],
+    watch("misionalidad")
+  );
+
+  const onSubmit = async (dataForm) => {
+    const pasos = [];
+    const {
+      NIT,
+      cantidad_conductores,
+      cantidad_vehiculos,
+      empresa,
+      funcionarios,
+      objeto_social,
+      representante_legal,
+      verificacion_realizada,
+      misionalidad,
+    } = dataForm;
+    if (
+      NIT === "" ||
+      cantidad_conductores === "" ||
+      cantidad_vehiculos === "" ||
+      empresa === "" ||
+      funcionarios === "" ||
+      objeto_social === "" ||
+      representante_legal === "" ||
+      verificacion_realizada === ""
+    )
+      return toast.error("Llenar todos los campos del formulario");
+    // return toast.success("Todo bien");
+    lvc.map((data) => {
+      data.body.map((content) => {
+        const numberFormat = content.number.replace(/\./g, "_");
+        pasos.push({
+          numero: content.number,
+          respuesta: dataForm[`respuesta_${numberFormat}`],
+          observaciones: dataForm[`observaciones_${numberFormat}`],
+        });
+      });
+    });
+    try {
+      await saveListVerification({
+        empresa,
+        NIT,
+        misionalidad,
+        objeto_social,
+        representante_legal,
+        cantidad_vehiculos: parseInt(cantidad_vehiculos),
+        cantidad_conductores: parseInt(cantidad_conductores),
+        verificacion_realizada,
+        funcionarios,
+        pasos,
+      }).unwrap();
+      toast.success("Se ha registrado correctamente!");
+      setTimeout(() => {
+        navigate("/home");
+      }, 2500);
+    } catch (e) {
+      // if (e.data.message === "User credentials not found or not authorized")
+      return toast.error("Hubo un error, vuelve a intentarlo");
     }
-  }, [watch("vehiculos"), watch("conductores")]);
+  };
+
+  const conditionResponse = (level, misionalidad, value) => {
+    if (level === "Todos los niveles") {
+      return showAllOptions;
+    } else {
+      if (misionalidad === "Empresa de Transporte") {
+        if (value >= 2 && value <= 19) return showOneOption;
+        else if (value >= 20 && value <= 50 && level === "Estándar - Avanzado")
+          return showAllOptions;
+        else if (
+          value > 50 &&
+          (level === "Avanzado" || level === "Estándar - Avanzado")
+        )
+          return showAllOptions;
+        else return showOneOption;
+      } else {
+        if (value >= 2 && value <= 49) return showOneOption;
+        else if (value >= 50 && value <= 100 && level === "Estándar - Avanzado")
+          return showAllOptions;
+        else if (
+          value > 100 &&
+          (level === "Avanzado" || level === "Estándar - Avanzado")
+        )
+          return showAllOptions;
+        else return showOneOption;
+      }
+    }
+  };
+
+  const resetOptions = () => {
+    lvc.map((data) => {
+      data.body.map((content) => {
+        setValue(`respuesta_${content.number.replace(/\./g, "_")}`, "");
+        setValue(`observaciones_${content.number.replace(/\./g, "_")}`, "");
+      });
+    });
+  };
 
   return (
-      <section className="bg-white text-gray-800 flex flex-col gap-4">
-        <div className="shadow-md rounded-md">
-          <div className="text-white bg-red-700 p-3 rounded-t-md text-base font-semibold">
-            LISTA DE VERIFICACION DE CUMPLIMIENTO DE LOS REQUISITOS DEL PLAN
-            ESTRATEGICO DE SEGURIDAD VIAL
+    <section className=" text-gray-800 flex flex-col gap-4">
+      <Toaster />
+      <div className="shadow-md rounded-md bg-white">
+        <div className="text-white bg-red-700 p-3 rounded-t-md text-base font-semibold">
+          LISTA DE VERIFICACION DE CUMPLIMIENTO DE LOS REQUISITOS DEL PLAN
+          ESTRATEGICO DE SEGURIDAD VIAL
+        </div>
+        <div className="px-2">
+          <div className="flex">
+            <p className="text-center p-3 border-b border-r flex-1">
+              METODOLOGIA RESOLUCIÓN N. 40595 DE 2022 DE MINISTERIO DE
+              TRANSPORTE
+            </p>
+            <p className="text-center p-3 border-b flex-1">
+              Lista de Chequeo versión 1.0 Fuente: Resolución 40595 de 2022
+              Ministerio de Transporte
+            </p>
           </div>
-          <div className="px-2">
-            <div className="flex">
-              <p className="text-center p-3 border-b border-r flex-1">
-                METODOLOGIA RESOLUCIÓN N. 40595 DE 2022 DE MINISTERIO DE
-                TRANSPORTE
-              </p>
-              <p className="text-center p-3 border-b flex-1">
-                Lista de Chequeo versión 1.0 Fuente: Resolución 40595 de 2022
-                Ministerio de Transporte
-              </p>
-            </div>
 
-            <div className="py-2 grid grid-cols-3 gap-2">
-              <Input
-                type="text"
-                label="Empresa"
-                placeholder="Empresa"
-                {...register("empresa")}
-              />
-              <Input
-                type="text"
-                label="NIT"
-                placeholder="NIT"
-                {...register("nit")}
-              />
-              <Select
-                type="text"
-                label="Misionalidad"
-                placeholder="Misionalidad"
-                data={arrMisionalidad} //
-                {...register("misionalidad")}
-              />
-              <Input
-                type="text"
-                label="Objeto Social de la Organización"
-                placeholder="Objeto Social de la Organización"
-                {...register("oso")}
-              />
-              <Input
-                type="text"
-                label="Representante de la organización"
-                placeholder=" Representante de la organización"
-                {...register("representante")}
-              />
-              <Input
-                type="number"
-                label="Cantidad de Vehículos"
-                placeholder="Cantidad de Vehículos"
-                {...register("vehiculos")}
-              />
-              <Input
-                type="number"
-                label="Cantidad de Conductores"
-                placeholder="Cantidad de Conductores"
-                {...register("conductores")}
-              />
-              <Input
-                type="text"
-                label="Fecha de Verificación"
-                placeholder="Fecha de Verificación"
-                disabled
-                {...register("fecha")}
-              />
-              <Input
-                type="text"
-                label="Verificación realizada por"
-                placeholder="Verificación realizada por"
-                {...register("verificacion")}
-              />
-              <Input
-                type="text"
-                label="Funcionarios"
-                placeholder="Funcionarios"
-                {...register("funcionarios")}
-              />
-            </div>
+          <div className="py-2 grid grid-cols-3 gap-2">
+            <Input
+              type="text"
+              label="Empresa"
+              placeholder="Empresa"
+              {...register("empresa")}
+            />
+            <Input
+              type="text"
+              label="NIT"
+              placeholder="NIT"
+              {...register("NIT")}
+            />
+            <Select
+              type="text"
+              label="Misionalidad"
+              placeholder="Misionalidad"
+              data={arrMisionalidad} //
+              {...register("misionalidad")}
+            />
+            <Input
+              type="text"
+              label="Objeto Social de la Organización"
+              placeholder="Objeto Social de la Organización"
+              {...register("objeto_social")}
+            />
+            <Input
+              type="text"
+              label="Representante de la organización"
+              placeholder=" Representante de la organización"
+              {...register("representante_legal")}
+            />
+            <Input
+              type="number"
+              label="Cantidad de Vehículos"
+              placeholder="Cantidad de Vehículos"
+              {...register("cantidad_vehiculos")}
+            />
+            <Input
+              type="number"
+              label="Cantidad de Conductores"
+              placeholder="Cantidad de Conductores"
+              {...register("cantidad_conductores")}
+            />
+            <Input
+              type="text"
+              label="Fecha de Verificación"
+              placeholder="Fecha de Verificación"
+              disabled
+              {...register("fecha")}
+            />
+            <Input
+              type="text"
+              label="Verificación realizada por"
+              placeholder="Verificación realizada por"
+              {...register("verificacion_realizada")}
+            />
+            <Input
+              type="text"
+              label="Funcionarios"
+              placeholder="Funcionarios"
+              {...register("funcionarios")}
+            />
           </div>
         </div>
-        <table className="border text-left text-sm shadow-md">
-          <thead className="">
-            <tr>
-              <th className="border p-2">#</th>
-              <th className="border p-2">Nivel PESV</th>
-              <th className="border p-2">Requisito a Verificar</th>
-              <th className="border p-2">
-                Documento sugerido para verificar según Res. 40595 de 2022
-              </th>
-              <th className="border p-2">Respuesta</th>
-              <th className="border p-2">
-                Observaciones sobre los hallazgos o la no aplicabilidad del
-                requisito
-              </th>
-            </tr>
-          </thead>
-          <tbody className="font-normal">
-            {lvc.map((data, key) => (
-              <React.Fragment key={key}>
-                <tr>
-                  <td
-                    className="bg-red-500 text-white text-center p-2 font-semibold"
-                    colSpan="6"
-                  >
-                    {data.title}
+      </div>
+      <table className="border text-left text-sm shadow-md bg-white">
+        <thead className="">
+          <tr>
+            <th className="border p-2">#</th>
+            <th className="border p-2">Nivel PESV</th>
+            <th className="border p-2">Requisito a Verificar</th>
+            <th className="border p-2">
+              Documento sugerido para verificar según Res. 40595 de 2022
+            </th>
+            <th className="border p-2">Respuesta</th>
+            <th className="border p-2">
+              Observaciones sobre los hallazgos o la no aplicabilidad del
+              requisito
+            </th>
+          </tr>
+        </thead>
+        <tbody className="font-normal">
+          {lvc.map((data, key) => (
+            <React.Fragment key={key}>
+              <tr>
+                <td
+                  className="bg-red-500 text-white text-center p-2 font-semibold"
+                  colSpan="6"
+                >
+                  {data.title}
+                </td>
+              </tr>
+              {data.body.map((content, index) => (
+                <tr className="text-start" key={index}>
+                  <td className="border p-2">{content.number} </td>
+                  <td className="border p-2">{content.level}</td>
+                  <td className="border p-2">{content.requirement}</td>
+                  <td className="border p-2">{content.document}</td>
+                  <td className="border p-2 text-center w-36">
+                    {
+                      <Select
+                        data={
+                          conditionResponse(
+                            content.level,
+                            watch("misionalidad"),
+                            valorMayor
+                          ) === showAllOptions
+                            ? arrResponses
+                            : arrNoAplica
+                        } //
+                        selection
+                        {...register(
+                          `respuesta_${content.number.replace(/\./g, "_")}`
+                        )}
+                      />
+                    }
+                  </td>
+                  <td className="border p-2 ">
+                    <textarea
+                      className="border resize-none p-1 border-black"
+                      cols="45"
+                      rows="5"
+                      hidden={
+                        conditionResponse(
+                          content.level,
+                          watch("misionalidad"),
+                          valorMayor
+                        ) === showAllOptions
+                          ? false
+                          : true
+                      }
+                      {...register(
+                        `observaciones_${content.number.replace(/\./g, "_")}`
+                      )}
+                    />
                   </td>
                 </tr>
-                {data.body.map((content, index) => (
-                  <tr className="text-start" key={index}>
-                    <td className="border p-2">{content.number} </td>
-                    <td className="border p-2">{content.level}</td>
-                    <td className="border p-2">{content.requirement}</td>
-                    <td className="border p-2">{content.document}</td>
-                    <td className="border p-2 text-center w-36">
-                      {content.level === "Todos los niveles" ? (
-                        <Select
-                          data={arrResponses} //
-                          {...register("arr")}
-                        />
-                      ) : watch("misionalidad") === "Empresa de Transporte" ? (
-                        valorMayor >= 2 && valorMayor <= 19 ? (
-                          "No aplica"
-                        ) : valorMayor >= 20 &&
-                          valorMayor <= 50 &&
-                          content.level === "Estándar - Avanzado" ? (
-                          <Select
-                            data={arrResponses} //
-                            {...register("arr")}
-                          />
-                        ) : valorMayor > 50 && content.level === "Avanzado" ? (
-                          <Select
-                            data={arrResponses} //
-                            {...register("arr")}
-                          />
-                        ) : (
-                          "No aplica"
-                        )
-                      ) : valorMayor >= 2 && valorMayor <= 49 ? (
-                        "No aplica"
-                      ) : valorMayor >= 50 &&
-                        valorMayor <= 100 &&
-                        content.level === "Estándar - Avanzado" ? (
-                        <Select
-                          data={arrResponses} //
-                          {...register("arr")}
-                        />
-                      ) : valorMayor > 1000 && content.level === "Avanzado" ? (
-                        <Select
-                          data={arrResponses} //
-                          {...register("arr")}
-                        />
-                      ) : (
-                        "No aplica"
-                      )}
-                    </td>
-                    <td className="border p-2 ">
-                      {content.level === "Todos los niveles" ? (
-                        <textarea
-                          className="border resize-none p-1 border-black"
-                          cols="45"
-                          rows="5"
-                        />
-                      ) : watch("misionalidad") === "Empresa de Transporte" ? (
-                        valorMayor >= 2 && valorMayor <= 19 ? (
-                          ""
-                        ) : valorMayor >= 20 &&
-                          valorMayor <= 50 &&
-                          content.level === "Estándar - Avanzado" ? (
-                          <textarea
-                            className="border resize-none p-1 border-black"
-                            cols="45"
-                            rows="5"
-                          />
-                        ) : valorMayor > 50 && content.level === "Avanzado" ? (
-                          <textarea
-                            className="border resize-none p-1 border-black"
-                            cols="45"
-                            rows="5"
-                          />
-                        ) : (
-                          ""
-                        )
-                      ) : valorMayor >= 2 && valorMayor <= 49 ? (
-                        ""
-                      ) : valorMayor >= 50 &&
-                        valorMayor <= 100 &&
-                        content.level === "Estándar - Avanzado" ? (
-                        <textarea
-                          className="border resize-none p-1 border-black"
-                          cols="45"
-                          rows="5"
-                        />
-                      ) : valorMayor > 1000 && content.level === "Avanzado" ? (
-                        <textarea
-                          className="border resize-none p-1 border-black"
-                          cols="45"
-                          rows="5"
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      </section>
+              ))}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+      <div className="flex justify-end ">
+        <ButtonPrimary
+          text="Registro"
+          onClick={handleSubmit(onSubmit)}
+          loading={isLoading}
+        />
+      </div>
+    </section>
   );
 };
 

@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Step3 = () => {
-  const [formValues, setFormValues] = useState({});
 
   const inputs = [
     {

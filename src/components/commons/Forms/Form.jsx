@@ -25,7 +25,8 @@ const Form = ({ title, inputs, cols, buttons, onSubmit }) => {
       <h2 className="text-center text-xs mb-4">{title}</h2>
       <hr />
 
-      <div className={`grid grid-cols-${cols} gap-2`}>
+    {/*   <div className={`grid grid-cols-${cols} gap-2`}> */}
+    <div className={`grid grid-cols-${cols} gap-2`}>
         {inputs.map((input, index) => {
           switch (input.type) {
             case "text":

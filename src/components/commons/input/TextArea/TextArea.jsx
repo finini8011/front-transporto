@@ -28,6 +28,7 @@ const TextArea = forwardRef((props, ref) => {
     6: "col-end-6",
     7: "col-end-7",
   };
+
   return (
     <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}>
       <label

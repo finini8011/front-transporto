@@ -34,10 +34,9 @@ const Input = forwardRef((props, ref) => {
     6: "col-end-6",
     7: "col-end-7",
   };
-
  
   return (
-    <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}>
+     <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}> 
       <label
         htmlFor={id}
         className={`block mb-2 text-sm  ${fontWeightVariants[fontWeight]} text-gray-900`}

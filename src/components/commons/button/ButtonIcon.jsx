@@ -1,7 +1,7 @@
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Button = (props) => {
+const ButtonIcon = (props) => {
   const { text, icon, type, onClick } = props;
   return (
     <div>
@@ -18,4 +18,4 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+export default ButtonIcon;

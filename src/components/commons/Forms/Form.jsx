@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Input from "../input/text/Input";
 import Select from "../input/select/Select";
 import TextArea from "../input/TextArea/TextArea";
-import Button from "../button/Button";
+import ButtonIcon from "../button/ButtonIcon";
 import ButtonForm from "../button/ButtonForm";
 
 const Form = ({ title, inputs, cols, buttons, onSubmit }) => {
@@ -109,7 +109,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit }) => {
       <div className="mt-2 flex gap-4">
         {buttons.map((button, index) => {
           return (
-            <Button
+            <ButtonIcon
               text={button.text}
               icon={button.icon}
               type={button.type}

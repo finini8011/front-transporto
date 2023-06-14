@@ -11,7 +11,7 @@ const Card = ({ data, numberCard }) => {
         <p>{data.content}</p>
       </div>
       <div className="min-h-[5rem] px-5 flex items-center flex-col justify-center gap-1">
-        <CardItem text={numberCard + 1} />
+        <CardItem text={numberCard + 1} stepNumber={data.step} />
       </div>
     </div>
   );

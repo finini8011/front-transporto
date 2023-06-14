@@ -1,7 +1,7 @@
 const dataCard = [
   {
     title: "Paso #1",
-    step: 2,
+    step: 1,
     content: "Datos de la empresa"
   },
   {

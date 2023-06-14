@@ -1,12 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const urlAuth = "https://api-transporto.herokuapp.com/api"
-// const urlGetAuth = "https://d9d8fidf7d.execute-api.us-east-1.amazonaws.com"
-
 export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
+    baseUrl: "https://api-transporto.herokuapp.com/api",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.authState.token; //posiblemente se tenga que cambiar donde se encuentre el token
       // If we have a token set in state, let's assume that we should be passing it.
@@ -29,7 +26,7 @@ export const apiSlice = createApi({
     // }),
     createUser: builder.mutation({
       query: (newUser) => ({
-        url: `${urlAuth}/signup`,
+        url: `/signup`,
         method: "POST",
         body: newUser,
       }),
@@ -37,7 +34,7 @@ export const apiSlice = createApi({
     }),
     loginUser: builder.mutation({
       query: (user) => ({
-        url: `${urlAuth}/login`,
+        url: `/login`,
         method: "POST",
         body: user,
       }),

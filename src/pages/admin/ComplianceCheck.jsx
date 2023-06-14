@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useSaveListVerificationMutation } from "../../api/services/listVerification/listVerificationApiSlice";
 import { useNavigate } from "react-router-dom";
 
-import Input from "../../components/commons/input/text/Input";
+import InputChecklist from "../../components/commons/input/text/InputChecklist ";
 import Select from "../../components/commons/input/select/Select";
 import { lvc } from "../../constants/listaVerificacion";
 import ButtonPrimary from "../../components/commons/button/ButtonPrimary";
@@ -180,13 +180,13 @@ const ListaVerificacionCumplimiento = () => {
           </div>
 
           <div className="py-2 grid grid-cols-3 gap-2">
-            <Input
+            <InputChecklist 
               type="text"
               label="Empresa"
               placeholder="Empresa"
               {...register("empresa")}
             />
-            <Input
+            <InputChecklist 
               type="text"
               label="NIT"
               placeholder="NIT"
@@ -199,44 +199,44 @@ const ListaVerificacionCumplimiento = () => {
               data={arrMisionalidad} //
               {...register("misionalidad")}
             />
-            <Input
+            <InputChecklist 
               type="text"
               label="Objeto Social de la Organización"
               placeholder="Objeto Social de la Organización"
               {...register("objeto_social")}
             />
-            <Input
+            <InputChecklist 
               type="text"
               label="Representante de la organización"
               placeholder=" Representante de la organización"
               {...register("representante_legal")}
             />
-            <Input
+            <InputChecklist 
               type="number"
               label="Cantidad de Vehículos"
               placeholder="Cantidad de Vehículos"
               {...register("cantidad_vehiculos")}
             />
-            <Input
+            <InputChecklist 
               type="number"
               label="Cantidad de Conductores"
               placeholder="Cantidad de Conductores"
               {...register("cantidad_conductores")}
             />
-            <Input
+            <InputChecklist 
               type="text"
               label="Fecha de Verificación"
               placeholder="Fecha de Verificación"
               disabled
               {...register("fecha")}
             />
-            <Input
+            <InputChecklist 
               type="text"
               label="Verificación realizada por"
               placeholder="Verificación realizada por"
               {...register("verificacion_realizada")}
             />
-            <Input
+            <InputChecklist 
               type="text"
               label="Funcionarios"
               placeholder="Funcionarios"

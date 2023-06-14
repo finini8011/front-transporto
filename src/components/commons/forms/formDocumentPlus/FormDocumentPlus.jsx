@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../../input/text/Input";
+import InputChecklist from "../../input/text/InputChecklist";
 import { useForm } from "react-hook-form";
 import Textarea from "../../input/text/Textarea";
 
@@ -29,21 +29,21 @@ const FormDocumentPlus = (
       </div>
       <div className="px-2 mt-2">
         <div className="py-2 grid grid-cols-3 gap-2">
-          <Input
+          <InputChecklist
             type="text"
             label="Crea"
             placeholder="Crea"
             value={crea}
             {...register("Crea")}
           />
-          <Input
+          <InputChecklist
             type="text"
             label="Destinario"
             placeholder="Destinario"
             value={destinario}
             {...register("Destinario")}
           />
-          <Input
+          <InputChecklist
             type="date"
             label="Fecha"
             placeholder="Fecha"
@@ -52,7 +52,7 @@ const FormDocumentPlus = (
           />
         </div>
         <div className="py-2 grid grid-cols-3 gap-2">
-          <Input
+          <InputChecklist
             type="file"
             label="Cargar archivo"
             placeholder="Cargar archivo"

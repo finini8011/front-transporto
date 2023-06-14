@@ -1,6 +1,9 @@
+import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
+import MultiSelectForm from "../../components/commons/Forms/MultiselectForm";
 
 const Step3 = () => {
+
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
@@ -13,6 +16,7 @@ const Step3 = () => {
   };
 
   return (
+    <div>
       <FormFlex
         titleForm={titleForm}
         step={step}
@@ -20,6 +24,23 @@ const Step3 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
       />
+      <div className="pb-10"></div>
+      <MultiSelectForm
+        titleForm={"titulo"}
+        step={1.2}
+        nameStep={"name"}
+        cols={6}
+        onSubmit={handleFormSubmit}
+      />
+      <div className="pb-10"></div>
+      <FormDocumentPlus
+        titleForm={"titulo2"}
+        step={1.3}
+        nameStep={"namess"}
+        cols={6}
+        onSubmit={handleFormSubmit}
+      />
+    </div>
   );
 };
 

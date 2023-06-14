@@ -122,18 +122,15 @@ const Step3 = () => {
   };
 
   return (
-/*     <FormFlex
-      inputs={inputs}
-      buttons={buttons}
-      titleForm={titleForm}
-      step={step}
-      nameStep={nameStep}
-      cols={5}
-      onSubmit={handleFormSubmit}
-    /> */
-    <div>
-      sirve      
-    </div>
+  <FormFlex
+    inputs={inputs}
+    buttons={buttons}
+    titleForm={titleForm}
+    step={step}
+    nameStep={nameStep}
+    cols={5}
+    onSubmit={handleFormSubmit}
+  />
   );
 };
 

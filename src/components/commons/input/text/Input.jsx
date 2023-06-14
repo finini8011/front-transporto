@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 
 const Input = forwardRef((props, ref) => {
-  const { type, id, label, labelWeight, start, end, onChange, ...inputProps } = props;
+  const { type, id, label, labelWeight, start, end, onChange,hidden, ...inputProps } = props;
   const [value, setValue] = useState('');
 
   const handleInputChange = (event) => {

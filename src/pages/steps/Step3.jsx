@@ -13,7 +13,6 @@ const Step3 = () => {
   };
 
   return (
-    <>
       <FormFlex
         titleForm={titleForm}
         step={step}
@@ -21,7 +20,6 @@ const Step3 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
       />
-    </>
   );
 };
 

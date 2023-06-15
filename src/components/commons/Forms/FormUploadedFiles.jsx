@@ -4,10 +4,9 @@ import ButtonPaginationNext from "../button/ButtonPaginationNext";
 import ButtonPaginationPrev from "../button/ButtonPaginationPrev";
 import SelectEntries from "../input/select/SelectEntries";
 import Table from "../Table/Table"
-import { dataTable } from "../../../constants/formUploaded";
 
 
-const FormUploadedFiles = ({ title, stepNumber }) => {
+const FormUploadedFiles = ({ title, stepNumber, data }) => {
 
     const titles = ["Acciones", "Descripción", "Documento", "Creador", "Destinatario", "Fecha de Creación"];
     
@@ -37,7 +36,7 @@ const FormUploadedFiles = ({ title, stepNumber }) => {
                 </div>
                 <div className="relative overflow-x-auto">
 
-                    <Table data={dataTable} titles={titles} />
+                    <Table data={data} titles={titles} />
 
 
                     <div className="grid grid-cols-6 gap-6 mt-2 mb-5">

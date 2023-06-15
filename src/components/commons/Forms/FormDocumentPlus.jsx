@@ -28,7 +28,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       label: "Fecha",
       labelWeight: "bold",
       name: "fecha",
-      type: "text",
+      type: "date",
       start: 5,
       end: 5,
     },

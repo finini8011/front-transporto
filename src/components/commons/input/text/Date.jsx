@@ -1,14 +1,19 @@
 import { forwardRef, useState } from "react";
 
 const Date = forwardRef((props, ref) => {
-  const { type, id, label, labelWeight, start, end, onChange,hidden, ...inputProps } = props;
-  const [value, setValue] = useState('');
+  const {
+    type,
+    id,
+    label,
+    labelWeight,
+    start,
+    end,
+    onChange,
+    error,
+    hidden,
+    ...inputProps
+  } = props;
 
-  const handleInputChange = (event) => {
-    const { value } = event.target;
-    setValue(value);
-    onChange( value);
-  };
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",
@@ -34,9 +39,9 @@ const Date = forwardRef((props, ref) => {
     6: "col-end-6",
     7: "col-end-7",
   };
- 
+
   return (
-     <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}> 
+    <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}>
       <label
         htmlFor={id}
         className={`block mb-2 text-sm  ${fontWeightVariants[fontWeight]} text-gray-900`}
@@ -44,15 +49,16 @@ const Date = forwardRef((props, ref) => {
         {label}
       </label>
       <input
-        className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 w-full p-2.5 disabled:cursor-no-drop disabled:bg-gray-200 ${hidden && "hidden"}`}
+        className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 w-full p-2.5 disabled:cursor-no-drop disabled:bg-gray-200 ${
+          hidden && "hidden"
+        }`}
         type={type}
         name={id}
         id={id}
         {...inputProps}
         ref={ref}
-        value={value}
-        onChange={handleInputChange}
       />
+      {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
     </div>
   );
 });

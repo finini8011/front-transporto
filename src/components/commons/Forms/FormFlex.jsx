@@ -14,6 +14,7 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       placeholder: "Ingrese nombre",
       start: 1,
       end: 3,
+      required: true
     },
     {
       label: "DESTINATARIO",
@@ -23,6 +24,8 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       placeholder: "Ingrese nombre",
       start: 3,
       end: 5,
+      required: true
+
     },
     {
       label: "Fecha",
@@ -31,6 +34,8 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       type: "date",
       start: 5,
       end: 5,
+      required: true
+
     },
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
@@ -39,6 +44,8 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       type: "textArea",
       start: 1,
       end: 5,
+      required: true
+
     },
     {
       type: "button",
@@ -60,6 +67,8 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
         console.log(
           `Función personalizada para campo ${name} - Valor: ${value}`
         ),
+      required: true
+
     },
     {
       label: "Cambiar estado",
@@ -69,6 +78,8 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       placeholder: "",
       start: 4,
       end: 6,
+      required: true
+
     },
     {
       label: "Nombre Archivo cargado",
@@ -77,6 +88,8 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       start: 1,
       end: 4,
       value: "documento.pdf",
+      required: true
+
     },
     {
       label: "Estado actual",

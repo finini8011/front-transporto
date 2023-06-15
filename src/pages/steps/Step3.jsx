@@ -14,7 +14,7 @@ const Step3 = () => {
     console.log(`Valores del formulario: ${id}`, values);
 
   };
-
+  
   return (
     <div>
       <FormFlex

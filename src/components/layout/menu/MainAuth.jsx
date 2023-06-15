@@ -97,7 +97,7 @@ const MainAuth = ({ children }) => {
           {openMenu &&
             <Collapse in={openList} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/step")}>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/register-company")}>
                   <FontAwesomeIcon icon={faPenToSquare} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Registrar Empresa" />
                 </ListItemButton>

@@ -9,7 +9,7 @@ const persistor = persistStore(store);
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/admin/Home";
+import Home from './pages/Home';
 import ComplianceCheck from "./pages/admin/ComplianceCheck"
 import NotFound from "./pages/Notfound"
 import MainAuth from "./components/layout/menu/MainAuth";

@@ -8,7 +8,7 @@ import Date from "../input/text/Date";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
   const formRef = useRef(null);
 
-  const optionsChageState = ["SI", "NO"];
+  const optionsChageState = ["Seleccionar","Cumple", "NO cumple", "Cumple parcialmente"];
 
   const handleSubmit = (event) => {
     event.preventDefault();

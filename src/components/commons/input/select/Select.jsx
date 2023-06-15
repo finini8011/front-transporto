@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 
 const Select = forwardRef((props, ref) => {
   const { id, label, data, labelWeight, selection, start, end, ...inputProps } = props;

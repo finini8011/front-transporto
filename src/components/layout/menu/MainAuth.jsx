@@ -26,6 +26,7 @@ import {
   faLock,
   faUserCircle,
   faVoteYea,
+  faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
 
@@ -96,6 +97,10 @@ const MainAuth = ({ children }) => {
           {openMenu &&
             <Collapse in={openList} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/step")}>
+                  <FontAwesomeIcon icon={faPenToSquare} className="mr-3 w-5 h-5" />
+                  <ListItemText primary="Registrar Empresa" />
+                </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/preparacion")}>
                   <FontAwesomeIcon icon={faBuilding} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Preparación" />

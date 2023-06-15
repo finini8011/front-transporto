@@ -1,12 +1,11 @@
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useRef } from "react";
 import Input from "../input/text/Input";
 import Select from "../input/select/Select";
 import TextArea from "../input/TextArea/TextArea";
 import ButtonIcon from "../button/ButtonIcon";
 import ButtonForm from "../button/ButtonForm";
 
-const Form = ({ title, inputs, cols, buttons, onSubmit }) => {
+const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
   const formRef = useRef(null);
 
   const optionsChageState = ["SI", "NO"];
@@ -15,13 +14,11 @@ const Form = ({ title, inputs, cols, buttons, onSubmit }) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
     const formValues = Object.fromEntries(formData.entries());
-    console.log(formValues);
-
-    onSubmit(formValues)
+    onSubmit(formValues,id)
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="p-2">
+    <form ref={formRef} onSubmit={handleSubmit} className="p-2" id={id}>
       <h2 className="text-center text-xs mb-4">{title}</h2>
       <hr />
 

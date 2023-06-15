@@ -1,10 +1,10 @@
 import Form from "./Form";
 import {
-  faDownload,
-  faEye,
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
-const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
+
+const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
+
   const inputs = [
     {
       label: "CREA",
@@ -33,17 +33,12 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       end: 5,
     },
     {
-      label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
+      label: "Descripcion",
       labelWeight: "bold",
       name: "observaciones",
       type: "textArea",
       start: 1,
       end: 5,
-    },
-    {
-      type: "button",
-      text: "Descargar archivo guía acta de asignación lider del PESV",
-      icon: faDownload,
     },
     {
       type: "hr",
@@ -62,30 +57,6 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
         ),
     },
     {
-      label: "Cambiar estado",
-      labelWeight: "bold",
-      name: "cambiarEstado",
-      type: "select",
-      placeholder: "",
-      start: 4,
-      end: 6,
-    },
-    {
-      label: "Nombre Archivo cargado",
-      type: "span",
-      placeholder: "",
-      start: 1,
-      end: 4,
-      value: "documento.pdf",
-    },
-    {
-      label: "Estado actual",
-      type: "span",
-      start: 4,
-      end: 6,
-      value: "SI",
-    },
-    {
       type: "hr",
     },
   ];
@@ -95,18 +66,9 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
       type: "submit",
       icon: faSquarePlus,
     },
-    {
-      text: "Ver documento",
-      type: "button",
-      icon: faEye,
-    },
-    {
-      text: "Descargar documento",
-      type: "button",
-      icon: faDownload,
-    },
   ];
-    return (
+
+  return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
         <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
@@ -118,4 +80,6 @@ const FormFlex = ({titleForm, step, nameStep, cols, onSubmit}) => {
   );
 };
 
-export default FormFlex;
+export default FormDocumentPlus;
+
+

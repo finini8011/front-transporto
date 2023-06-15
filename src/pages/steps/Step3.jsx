@@ -26,17 +26,17 @@ const Step3 = () => {
       />
       <div className="pb-10"></div>
       <MultiSelectForm
-        titleForm={"titulo"}
+        titleForm={""}
         step={1.2}
-        nameStep={"name"}
-        cols={6}
+        nameStep={"El líder del diseño e implemetación del PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad vial"}
+        cols={4}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
-        titleForm={"titulo2"}
+        titleForm={"Aquí podrá subir documentos adicionales aparte de los considerados obligatorios dentro del PESV. Incluya quien crea el documento y a quien va dirigido, así como una breve descripción. La plataforma incluirá de manera automática la fecha en que se carga el documento para el manejo de la trazabilidad"}
         step={1.3}
-        nameStep={"namess"}
+        nameStep={"DOCUMETOS ADICIONALES"}
         cols={6}
         onSubmit={handleFormSubmit}
       />

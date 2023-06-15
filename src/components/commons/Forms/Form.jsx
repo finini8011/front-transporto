@@ -4,7 +4,7 @@ import Select from "../input/select/Select";
 import TextArea from "../input/TextArea/TextArea";
 import ButtonIcon from "../button/ButtonIcon";
 import ButtonForm from "../button/ButtonForm";
-
+import Date from "../input/text/Date";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
   const formRef = useRef(null);
 
@@ -71,6 +71,18 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   /*   {...register(`${input.name}`)} */
                 />
               );
+              case "date":
+                return (
+                  <Date
+                    type={input.type}
+                    key={index}
+                    label={input.label}
+                    labelWeight={input.labelWeight}
+                    placeholder={input.placeholder}
+                    start={input.start}
+                    end={input.end}
+                  />
+                );
             case "button":
               return (
                 <ButtonForm text={input.text} icon={input.icon} type={input.type} />

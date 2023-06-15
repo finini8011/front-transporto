@@ -4,14 +4,12 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import ButtonForm from "../button/ButtonForm";
 
-const CardItem = ({ text }) => {
+const CardItem = ({ text, stepNumber }) => {
   const navigate = useNavigate();
 
   const showAlert = () => {
-    const String = text.toString();
-    if (String === "1") {
-      return navigate("/step/");
-    } else if (String) {
+   const String = text.toString();
+    if (String) {
       return toast.error("Diligenciar los datos de la empresa", {
         style: {
           boxShadow: "none",
@@ -19,7 +17,7 @@ const CardItem = ({ text }) => {
         },
       });
     } else {
-      return navigate("/lvc/");
+      return navigate(`/step/${stepNumber}`);
     }
   };
 

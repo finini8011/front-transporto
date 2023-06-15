@@ -12,9 +12,12 @@ import {
 import Modal from "react-modal";
 import InfoCompliance from "../../commons/InfoCompliance/InfoCompliance";
 import DirectAccess from "../../commons/DirectAccess/DirectAccess";
+import { useNavigate } from "react-router-dom";
 
 
 const Header = ({ openMenu, setOpenMenu }) => {
+
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
 
@@ -57,7 +60,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
 
         <ul className="flex flex-row">
           <li>
-            <button className="p-2" >
+            <button className="p-2" onClick={() => navigate("/step")} >
               <FontAwesomeIcon icon={faPencil} />
             </button>
           </li>

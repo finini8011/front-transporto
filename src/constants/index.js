@@ -1,12 +1,7 @@
 const dataCard = [
-  // {
-  //   title: "Registro de la empresa",
-  //   step: 1,
-  //   content: "Datos de la empresa"
-  // },
   {
     title: "Paso #1",
-    step: 2,
+    step: 1,
     content: "Datos de la empresa"
   },
   {

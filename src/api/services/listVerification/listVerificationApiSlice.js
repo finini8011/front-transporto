@@ -52,32 +52,8 @@ export const listVerificationApiSlice = createApi({
       query: (args) => {
         // Destructuring Object
 
-        const {
-          empresa,
-          NIT,
-          misionalidad,
-          objeto_social,
-          representante_legal,
-          cantidad_vehiculos,
-          cantidad_conductores,
-          verificacion_realizada,
-          funcionarios,
-          pasos,
-        } = args;
-
         const data = {
-          payload: {
-            empresa,
-            NIT,
-            misionalidad,
-            objeto_social,
-            representante_legal,
-            cantidad_vehiculos,
-            cantidad_conductores,
-            verificacion_realizada,
-            funcionarios,
-            pasos,
-          },
+          payload: args,
         };
 
         return {

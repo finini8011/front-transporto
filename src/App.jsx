@@ -4,14 +4,14 @@ import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import { store } from "./api/store";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Home from './pages/Home';
+import Login from "./pages/authenticated/Login";
+import Register from "./pages/authenticated/Register";
+import Home from './pages/Generalviews/Home';
 import ComplianceCheck from "./pages/admin/ComplianceCheck"
-import NotFound from "./pages/Notfound"
+import NotFound from "./pages/authenticated/Notfound"
 import MainAuth from "./components/layout/menu/MainAuth";
 import Steps from "./pages/steps/Steps";
-import RegisterCompany from "./pages/RegisterCompany";
+import RegisterCompany from "./pages/Generalviews/RegisterCompany";
 
 const persistor = persistStore(store);
 

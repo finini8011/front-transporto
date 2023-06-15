@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "../components/commons/Cards/Card"
-import { dataCard } from "../constants";
+import Card from "../../components/commons/Cards/Card"
+import { dataCard } from "../../constants";
 
 const Home = () => {
 

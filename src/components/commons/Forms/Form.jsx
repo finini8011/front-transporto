@@ -123,16 +123,12 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
               );
             case "button":
               return (
-                <ButtonForm
-                  text={input.text}
-                  icon={input.icon}
-                  type={input.type}
-                />
+                <ButtonForm text={input.text} icon={input.icon} type={input.type} key={index} />
               );
             case "span":
               return (
                 <div
-                  className={`col-start-${input.start} col-end-${input.end}`}
+                  className={`col-start-${input.start} col-end-${input.end}`} key={index}
                 >
                   <label
                     className={`block mb-2 text-sm  font-bold text-gray-900`}
@@ -147,7 +143,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
 
             case "hr":
               return (
-                <div className="col-start-1 col-end-6">
+                <div className="col-start-1 col-end-6" key={index}>
                   <hr />
                 </div>
               );
@@ -161,6 +157,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
         {buttons.map((button, index) => {
           return (
             <ButtonIcon
+              key={index}
               text={button.text}
               icon={button.icon}
               type={button.type}

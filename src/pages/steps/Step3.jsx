@@ -12,7 +12,6 @@ const Step3 = () => {
     "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?";
   const handleFormSubmit = (values, id) => {
     console.log(`Valores del formulario: ${id}`, values);
-
   };
   
   return (

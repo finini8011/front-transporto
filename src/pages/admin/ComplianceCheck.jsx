@@ -284,7 +284,7 @@ const ListaVerificacionCumplimiento = () => {
   };
 
   const resetOptions = () => {
-    lvc.map((data) => {
+    lvc.map((data) => { 
       data.body.map((content) => {
         setValue(`respuesta_${content.number.replace(/\./g, "_")}`, "");
         // resetField(`respuesta_${content.number.replace(/\./g, "_")}`)

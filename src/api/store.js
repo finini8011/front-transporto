@@ -5,6 +5,7 @@ import { apiSlice } from "./services/auth/apiSlice";
 // import { projectsApiSlice } from "./services/projects/projectsApiSlice";
 import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
 import authReducer from "./features/auth/authSlice";
+import reportPESVReducer from "./features/reportPESV/report";
 
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
@@ -14,11 +15,12 @@ import thunk from "redux-thunk";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["authState" ],
+  whitelist: ["authState", "reportPESVState" ],
 };
 
 const rootReducer = combineReducers({
   authState: authReducer,
+  reportPESVState: reportPESVReducer,
   //aqui se pueden agregar mas reducers que quieran persistir
 });
 
@@ -32,6 +34,7 @@ export const store = configureStore({
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
     // auth: authReducer,
     auth: persistedReducer,
+    reportPESV: persistedReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

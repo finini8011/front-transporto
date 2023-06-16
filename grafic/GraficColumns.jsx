@@ -8,7 +8,7 @@ const GraficColumns = () => {
 
   const options = ({
     chart: {
-      renderTo: 'container',
+      renderTo: 'GraficColumns',
       type: 'column',
       options3d: {
           enabled: true,
@@ -41,10 +41,13 @@ const GraficColumns = () => {
       enabled: false
   },
   plotOptions: {
-      column: {
-          depth: 50
-      }
-  },
+    column: {
+        depth: 50,
+        dataLabels: {
+            enabled: true
+        }
+    }
+},
   series: [{
       data: [{
         name: 'Paso 1',

@@ -6,8 +6,8 @@ import { selectCurrentReport } from "../api/features/reportPESV/report";
 import InputRHF from "./../components/commons/input/text/InputRHF";
 import ButtonPrimary from "../components/commons/button/ButtonPrimary";
 import { lvc } from "../constants/listaVerificacion";
-import GraficLine from "./../../grafic/GraficLine";
-import GraficColumns from "./../../grafic/GraficColumns";
+import  GraficLine from "../../grafic/GraficLine";
+import GraficColumns from "../../grafic/GraficColumns";
 
 const Report = () => {
   const { pasos, dataForm } = useSelector(selectCurrentReport);

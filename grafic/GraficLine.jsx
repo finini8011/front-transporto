@@ -1,7 +1,7 @@
 import React from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official';
-import"./GraficLine.css";
+import "./GraficLine.css";
 
 
 const GraficLine = () => {
@@ -75,7 +75,7 @@ const GraficLine = () => {
 
   return (
     <div>
-      <HighchartsReact
+        <HighchartsReact
         highcharts={Highcharts}
         options={options} />
     </div>

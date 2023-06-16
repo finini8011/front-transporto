@@ -1,7 +1,7 @@
 import React from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official';
-import"./GraficLine.css";
+import "./GraficLine.css";
 
 
 const GraficColumns = () => {
@@ -11,44 +11,44 @@ const GraficColumns = () => {
       renderTo: 'GraficColumns',
       type: 'column',
       options3d: {
-          enabled: true,
-          alpha: 15,
-          beta: 15,
-          depth: 50,
-          viewDistance: 25
+        enabled: true,
+        alpha: 15,
+        beta: 15,
+        depth: 50,
+        viewDistance: 25
       }
-  },
-  xAxis: {
+    },
+    xAxis: {
       type: 'category'
-  },
-  yAxis: {
+    },
+    yAxis: {
       title: {
-          enabled: false
+        enabled: false
       }
-  },
-  tooltip: {
+    },
+    tooltip: {
       headerFormat: '<b>{point.key}</b><br>',
       pointFormat: '{point.y}%'
-  },
-  title: {
+    },
+    title: {
       text: '% CUMPLIMIENTO POR PASO',
       align: 'center'
-  },
-  legend: {
+    },
+    legend: {
       enabled: false
-  },
-  credits: {
+    },
+    credits: {
       enabled: false
-  },
-  plotOptions: {
-    column: {
+    },
+    plotOptions: {
+      column: {
         depth: 50,
         dataLabels: {
-            enabled: true
+          enabled: true
         }
-    }
-},
-  series: [{
+      }
+    },
+    series: [{
       data: [{
         name: 'Paso 1',
         y: 100,
@@ -169,15 +169,15 @@ const GraficColumns = () => {
         y: 100,
         color: '#C3C3C3'
       }
+      ]
+    }
     ]
-  }
-]
-});
+  });
 
 
   return (
     <div>
-      <HighchartsReact
+        <HighchartsReact
         highcharts={Highcharts}
         options={options} />
     </div>

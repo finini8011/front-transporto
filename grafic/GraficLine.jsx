@@ -1,11 +1,11 @@
 import React from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official';
-import "./GraficLine.css";
+import"./GraficLine.css";
 
 
-const GraficLine = () => {
-
+const GraficLine = ({data}) => {
+  console.log(data)
   const options = {
     chart: {
       polar: true,
@@ -49,7 +49,7 @@ const GraficLine = () => {
 
     series: [{
       name: 'Total de pasos',
-      data: [68, 57, 50, 50], //datos de los porcentajes
+      data: data, //datos de los porcentajes
       pointPlacement: 'on'
     }],
 
@@ -74,8 +74,8 @@ const GraficLine = () => {
 
 
   return (
-    <div>
-        <HighchartsReact
+    <div className='relative'>
+      <HighchartsReact
         highcharts={Highcharts}
         options={options} />
     </div>

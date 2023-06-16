@@ -1,8 +1,19 @@
+
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import MultiSelectForm from "../../components/commons/Forms/MultiselectForm";
-
+import { useGetDataStepQuery } from "../../api/services/steps/stepsApiSlice";
+import { useEffect } from "react";
 const Step3 = () => {
+
+  const { data, isLoading, isError } = useGetDataStepQuery("3.1");
+  useEffect(() => {
+    
+
+    if (data) {
+    }
+  }, [data]);
+
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
@@ -12,14 +23,16 @@ const Step3 = () => {
   const handleFormSubmit = (values, id) => {
     console.log(`Valores del formulario: ${id}`, values);
     const selectedFile = values.cargaArchivo;
-    const reader = new FileReader();
 
+
+/*     const reader = new FileReader();
+    console.log(selectedFile)
     reader.onload = (event) => {
       const fileContent = event.target.result;
       localStorage.setItem(`document${id}`, fileContent);
     };
 
-    reader.readAsDataURL(selectedFile);
+    reader.readAsDataURL(selectedFile); */
 /* 
     const fileContent = localStorage.getItem(`document${id}`);
     if (fileContent) {
@@ -28,6 +41,8 @@ const Step3 = () => {
       link.download = selectedFile.name;
       link.click();
     } */
+
+
   };
 
   return (

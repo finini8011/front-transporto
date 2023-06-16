@@ -7,6 +7,8 @@ import ButtonForm from "../button/ButtonForm";
 import Date from "../input/text/Date";
 import { useState } from "react";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
+  console.log(id);
+  console.log(inputs);
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
   const optionsChageState = [
@@ -28,15 +30,23 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
         newErrors[input.name] = `Campo requerido`;
       }
 
-      if(input.required && input.name === "cambiarEstado" && formData.get(input.name) === "Seleccionar"){
+      if (
+        input.required &&
+        input.name === "cambiarEstado" &&
+        formData.get(input.name) === "Seleccionar"
+      ) {
         isValid = false;
         newErrors[input.name] = `Campo requerido`;
       }
- 
-      if(input.required && input.name === "cargaArchivo"  && !formData.get(input.name).name ){
-         isValid = false;
-        newErrors[input.name] = `Campo requerido`; 
-      } 
+
+      if (
+        input.required &&
+        input.name === "cargaArchivo" &&
+        !formData.get(input.name).name
+      ) {
+        isValid = false;
+        newErrors[input.name] = `Campo requerido`;
+      }
     });
 
     if (isValid) {
@@ -72,9 +82,9 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   onChange={(value) => {
                     input.onchange && input.onchange(input.name, value);
                   }}
-                  /*  required={input.required} */
                 />
               );
+
             case "textArea":
               return (
                 <TextArea
@@ -85,6 +95,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   id={input.name}
                   start={input.start}
                   end={input.end}
+                  value={input.value}
                   error={errors[input.name]}
                 />
               );
@@ -116,6 +127,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   id={input.name}
                   start={input.start}
                   end={input.end}
+                  value={input.value}
                   error={errors[input.name]}
 
                   /*     required={input.required} */
@@ -123,12 +135,18 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
               );
             case "button":
               return (
-                <ButtonForm text={input.text} icon={input.icon} type={input.type} key={index} />
+                <ButtonForm
+                  text={input.text}
+                  icon={input.icon}
+                  type={input.type}
+                  key={index}
+                />
               );
             case "span":
               return (
                 <div
-                  className={`col-start-${input.start} col-end-${input.end}`} key={index}
+                  className={`col-start-${input.start} col-end-${input.end}`}
+                  key={index}
                 >
                   <label
                     className={`block mb-2 text-sm  font-bold text-gray-900`}

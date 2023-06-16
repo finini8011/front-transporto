@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
 const Date = forwardRef((props, ref) => {
   const {
@@ -13,7 +13,6 @@ const Date = forwardRef((props, ref) => {
     hidden,
     ...inputProps
   } = props;
-
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",

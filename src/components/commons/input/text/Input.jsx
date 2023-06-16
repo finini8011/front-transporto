@@ -11,18 +11,10 @@ const Input = forwardRef((props, ref) => {
     onChange,
     hidden,
     error,
+    value,
     ...inputProps
   } = props;
-  const [value, setValue] = useState("");
-
-  const handleInputChange = (event) => {
-    if (onChange) {
-      const { value } = event.target;
-      setValue(value);
-
-      onChange(value);
-    }
-  };
+  console.log(inputProps)
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",
@@ -64,10 +56,9 @@ const Input = forwardRef((props, ref) => {
         type={type}
         name={id}
         id={id}
+        value={value}
         {...inputProps}
         ref={ref}
-        value={value}
-        onChange={handleInputChange}
       />
         {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
     </div>

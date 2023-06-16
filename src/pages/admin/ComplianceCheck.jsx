@@ -6,11 +6,13 @@ import {
   useLazyGetListVerificationPdfQuery,
 } from "../../api/services/listVerification/listVerificationApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import InputRHF from "../../components/commons/input/text/InputRHF";
 import Select from "../../components/commons/input/select/Select";
 import { lvc } from "../../constants/listaVerificacion";
 import ButtonPrimary from "../../components/commons/button/ButtonPrimary";
+import { setReport } from "./../../api/features/reportPESV/report"
 
 const arrResponses = ["Cumple", "Cumple Parcialmente", "No cumple"];
 const arrNoAplica = ["No Aplica"];
@@ -25,6 +27,7 @@ const ListaVerificacionCumplimiento = () => {
   const [getListVerificationPdf, { isLoading: isGetPdfLoading }] =
     useLazyGetListVerificationPdfQuery();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -127,7 +130,7 @@ const ListaVerificacionCumplimiento = () => {
     watch("conductores_tercerizados"),
     watch("otros_conductores"),
   ]);
-
+  
   const onSubmit = async (dataForm) => {
     // return console.log(dataForm);
     const pasos = []; //informacion donde se ingresaran los pasos
@@ -223,6 +226,30 @@ const ListaVerificacionCumplimiento = () => {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+
+  const onReport = async (dataForm) => {
+    const pasos = []; //informacion donde se ingresaran los pasos
+
+    lvc.map((data) => {
+      data.body.map((content) => {
+        const numberFormat = content.number.replace(/\./g, "_");
+        pasos.push({
+          numero: content.number,
+          respuesta: dataForm[`respuesta_${numberFormat}`],
+          observaciones: dataForm[`observaciones_${numberFormat}`],
+        });
+      });
+    });
+
+    dispatch(setReport({pasos, dataForm: {
+      empresa: watch('empresa'),
+      nit: watch('NIT'),
+      verificacion: watch('verificacion_realizada'),
+      fecha: watch('fecha'),
+    }}));
+    // navigate("/report", "_blank");
+    window.open("/report", "_blank", "noreferrer")
+  }
 
   const conditionResponse = (level, misionalidad, value) => {
     if (level === "Todos los niveles") {
@@ -330,9 +357,8 @@ const ListaVerificacionCumplimiento = () => {
               type="text"
               label="Fecha de Verificación"
               placeholder="Fecha de Verificación"
-              {...register("fecha", {
-                readOnly: true,
-              })}
+              readOnly
+              {...register("fecha")}
             />
           </div>
         </div>
@@ -522,7 +548,11 @@ const ListaVerificacionCumplimiento = () => {
           ))}
         </tbody>
       </table>
-      <div className="flex justify-end ">
+      <div className="flex justify-end gap-2">
+        <ButtonPrimary
+          text="Reporte"
+          onClick={handleSubmit(onReport)}
+        />
         <ButtonPrimary
           text="Registro"
           onClick={handleSubmit(onSubmit)}

@@ -1,182 +1,182 @@
 import React from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official';
-import "./GraficLine.css";
+import"./GraficLine.css";
 
 
-const GraficColumns = () => {
-
+const GraficColumns = ({data}) => {
   const options = ({
     chart: {
       renderTo: 'GraficColumns',
       type: 'column',
       options3d: {
-        enabled: true,
-        alpha: 15,
-        beta: 15,
-        depth: 50,
-        viewDistance: 25
+          enabled: true,
+          alpha: 15,
+          beta: 15,
+          depth: 50,
+          viewDistance: 25
       }
-    },
-    xAxis: {
+  },
+  xAxis: {
       type: 'category'
-    },
-    yAxis: {
+  },
+  yAxis: {
       title: {
-        enabled: false
+          enabled: false
       }
-    },
-    tooltip: {
+  },
+  tooltip: {
       headerFormat: '<b>{point.key}</b><br>',
       pointFormat: '{point.y}%'
-    },
-    title: {
+  },
+  title: {
       text: '% CUMPLIMIENTO POR PASO',
       align: 'center'
-    },
-    legend: {
+  },
+  legend: {
       enabled: false
-    },
-    credits: {
+  },
+  credits: {
       enabled: false
-    },
-    plotOptions: {
-      column: {
+  },
+  plotOptions: {
+    column: {
         depth: 50,
         dataLabels: {
-          enabled: true
+            enabled: true
         }
-      }
-    },
-    series: [{
+    }
+},
+  series: [{
       data: [{
         name: 'Paso 1',
-        y: 100,
+        y: data && data[0],
         color: '#96AEF1'
       },
       {
         name: 'Paso 2',
-        y: 42,
+        y: data && data[1],
         color: '#96AEF1'
       },
       {
         name: 'Paso 3',
-        y: 63,
+        y: data && data[2],
         color: '#96AEF1'
       },
       {
         name: 'Paso 4',
-        y: 100,
+        y: data && data[3],
         color: '#96AEF1'
       },
       {
         name: 'Paso 5',
-        y: 75,
+        y: data && data[4],
         color: '#96AEF1'
       },
       {
         name: 'Paso 6',
-        y: 100,
+        y: data && data[5],
         color: '#96AEF1'
       },
       {
         name: 'Paso 7',
-        y: 67,
+        y: data && data[6],
         color: '#96AEF1'
       },
       {
         name: 'Paso 8',
-        y: 42,
+        y: data && data[7],
         color: '#96AEF1'
       },
       {
         name: 'Paso 9',
-        y: 100,
+        y:data && data[8],
         color: '#FFA500'
       },
       {
         name: 'Paso 10',
-        y: 100,
+        y: data && data[9],
         color: '#FFA500'
       },
       {
         name: 'Paso 11',
-        y: 19,
+        y: data && data[10],
         color: '#FFA500'
       },
       {
         name: 'Paso 12',
-        y: 13,
+        y: data && data[11],
         color: '#FFA500'
       },
       {
         name: 'Paso 13',
-        y: 100,
+        y: data && data[12],
         color: '#FFA500'
       },
       {
         name: 'Paso 14',
-        y: 50,
+        y: data && data[13],
         color: '#FFA500'
       },
       {
         name: 'Paso 15',
-        y: 25,
+        y: data && data[14],
         color: '#FFA500'
       },
       {
         name: 'Paso 16',
-        y: 100,
+        y: data && data[15],
         color: '#FFA500'
       },
       {
         name: 'Paso 17',
-        y: 50,
+        y: data && data[16],
         color: '#FFA500'
       },
       {
         name: 'Paso 18',
-        y: 19,
+        y: data && data[17],
         color: '#FFA500'
       },
       {
         name: 'Paso 19',
-        y: 100,
+        y: data && data[18],
         color: '#FFA500'
       },
       {
         name: 'Paso 20',
-        y: 100,
+        y: data && data[19],
         color: '#60A44A'
       },
       {
         name: 'Paso 21',
-        y: 50,
+        y: data && data[20],
         color: '#60A44A'
       },
       {
         name: 'Paso 22',
-        y: 25,
+        y: data && data[21],
         color: '#60A44A'
       },
       {
         name: 'Paso 23',
-        y: 0,
+        y: data && data[22],
         color: '#C3C3C3'
       },
       {
         name: 'Paso 24',
-        y: 100,
+        y: data && data[23],
         color: '#C3C3C3'
       }
-      ]
-    }
     ]
-  });
+  }
+]
+});
+
 
   return (
-    <div>
-        <HighchartsReact
+    <div className='relative'>
+      <HighchartsReact
         highcharts={Highcharts}
         options={options} />
     </div>

@@ -1,6 +1,6 @@
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
-import MultiSelectForm from "../../components/commons/Forms/MultiSelectForm";
+// import MultiSelectForm from "../../components/commons/Forms/MultiSelectForm";
 
 const Step3 = () => {
 
@@ -24,13 +24,13 @@ const Step3 = () => {
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
-      <MultiSelectForm
+{/*       <MultiSelectForm
         titleForm={"titulo"}
         step={1.2}
         nameStep={"name"}
         cols={6}
         onSubmit={handleFormSubmit}
-      />
+      /> */}
       <div className="pb-10"></div>
       <FormDocumentPlus
         titleForm={"titulo2"}

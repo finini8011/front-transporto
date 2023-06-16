@@ -16,6 +16,7 @@ import RegisterCompany from "./pages/general-views/RegisterCompany";
 const persistor = persistStore(store);
 
 function App() {
+  
   return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>

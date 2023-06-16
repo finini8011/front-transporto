@@ -7,8 +7,6 @@ import ButtonForm from "../button/ButtonForm";
 import Date from "../input/text/Date";
 import { useState } from "react";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
-  console.log(id);
-  console.log(inputs);
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
   const optionsChageState = [

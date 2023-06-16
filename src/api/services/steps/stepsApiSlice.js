@@ -25,6 +25,5 @@ export const stepsApiSlice = createApi({
     }),
   }),
 });
-console.log(stepsApiSlice)
 
 export const { useGetDataStepQuery } = stepsApiSlice;

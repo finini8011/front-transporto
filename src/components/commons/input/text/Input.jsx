@@ -14,7 +14,6 @@ const Input = forwardRef((props, ref) => {
     value,
     ...inputProps
   } = props;
-  console.log(inputProps)
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",

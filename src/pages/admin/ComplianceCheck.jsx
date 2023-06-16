@@ -12,8 +12,7 @@ import InputRHF from "../../components/commons/input/text/InputRHF";
 import Select from "../../components/commons/input/select/Select";
 import { lvc } from "../../constants/listaVerificacion";
 import ButtonPrimary from "../../components/commons/button/ButtonPrimary";
-import { setReport } from "./../../api/features/reportPESV/report";
-
+import { setReport } from "../../api/features/reportPESV/report";
 
 
 
@@ -231,7 +230,6 @@ const ListaVerificacionCumplimiento = () => {
 
   const onReport = async (dataForm) => {
     const pasos = []; //informacion donde se ingresaran los pasos
-
     lvc.map((data) => {
       data.body.map((content) => {
         const numberFormat = content.number.replace(/\./g, "_");

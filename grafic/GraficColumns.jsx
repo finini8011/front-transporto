@@ -174,7 +174,6 @@ const GraficColumns = () => {
     ]
   });
 
-
   return (
     <div>
         <HighchartsReact

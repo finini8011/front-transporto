@@ -12,7 +12,7 @@ import InputRHF from "../../components/commons/input/text/InputRHF";
 import Select from "../../components/commons/input/select/Select";
 import { lvc } from "../../constants/listaVerificacion";
 import ButtonPrimary from "../../components/commons/button/ButtonPrimary";
-import { setReport } from "./../../api/features/reportPESV/report"
+import { setReport } from "./../../api/features/reportPESV/report";
 
 const arrResponses = ["Cumple", "Cumple Parcialmente", "No cumple"];
 const arrNoAplica = ["No Aplica"];
@@ -35,7 +35,7 @@ const ListaVerificacionCumplimiento = () => {
     handleSubmit,
     watch,
     setValue,
-    resetField
+    resetField,
   } = useForm();
 
   useEffect(() => {
@@ -56,13 +56,12 @@ const ListaVerificacionCumplimiento = () => {
 
   useEffect(() => {
     if (
-      watch("cantidad_vehiculos")!== "" &&
-      watch("cantidad_conductores")!=="" 
+      watch("cantidad_vehiculos") !== "" &&
+      watch("cantidad_conductores") !== ""
     ) {
-      watch("cantidad_vehiculos") >
-      watch("cantidad_conductores")
+      watch("cantidad_vehiculos") > watch("cantidad_conductores")
         ? setValorMayor(watch("cantidad_vehiculos"))
-        : setValorMayor(watch("cantidad_conductores"))
+        : setValorMayor(watch("cantidad_conductores"));
     } else {
       setValorMayor(0);
     }
@@ -130,7 +129,7 @@ const ListaVerificacionCumplimiento = () => {
     watch("conductores_tercerizados"),
     watch("otros_conductores"),
   ]);
-  
+
   const onSubmit = async (dataForm) => {
     // return console.log(dataForm);
     const pasos = []; //informacion donde se ingresaran los pasos
@@ -156,7 +155,7 @@ const ListaVerificacionCumplimiento = () => {
       conductores_trabajadores,
       conductores_contratistas,
       conductores_tercerizados,
-      otros_conductores
+      otros_conductores,
     } = dataForm;
 
     if (
@@ -199,18 +198,18 @@ const ListaVerificacionCumplimiento = () => {
         verificacion_realizada,
         funcionarios,
         pasos,
-        vehiculos_propios : parseInt(vehiculos_propios),
-        vehiculos_arrendados : parseInt(vehiculos_arrendados),
-        vehiculos_intermediacion : parseInt(vehiculos_intermediacion),
-        vehiculos_contratistas : parseInt(vehiculos_contratistas),
-        vehiculos_leasing : parseInt(vehiculos_leasing),
-        vehiculos_renting : parseInt(vehiculos_renting),
-        vehiculos_colaboradores : parseInt(vehiculos_colaboradores),
-        conductores_directos : parseInt(conductores_directos),
-        conductores_trabajadores : parseInt(conductores_trabajadores),
-        conductores_contratistas : parseInt(conductores_contratistas),
-        conductores_tercerizados : parseInt(conductores_tercerizados),
-        otros_conductores : parseInt(otros_conductores)
+        vehiculos_propios: parseInt(vehiculos_propios),
+        vehiculos_arrendados: parseInt(vehiculos_arrendados),
+        vehiculos_intermediacion: parseInt(vehiculos_intermediacion),
+        vehiculos_contratistas: parseInt(vehiculos_contratistas),
+        vehiculos_leasing: parseInt(vehiculos_leasing),
+        vehiculos_renting: parseInt(vehiculos_renting),
+        vehiculos_colaboradores: parseInt(vehiculos_colaboradores),
+        conductores_directos: parseInt(conductores_directos),
+        conductores_trabajadores: parseInt(conductores_trabajadores),
+        conductores_contratistas: parseInt(conductores_contratistas),
+        conductores_tercerizados: parseInt(conductores_tercerizados),
+        otros_conductores: parseInt(otros_conductores),
       }).unwrap();
       toast.success("Se ha registrado correctamente!");
       try {
@@ -241,15 +240,20 @@ const ListaVerificacionCumplimiento = () => {
       });
     });
 
-    dispatch(setReport({pasos, dataForm: {
-      empresa: watch('empresa'),
-      nit: watch('NIT'),
-      verificacion: watch('verificacion_realizada'),
-      fecha: watch('fecha'),
-    }}));
+    dispatch(
+      setReport({
+        pasos,
+        dataForm: {
+          empresa: watch("empresa"),
+          nit: watch("NIT"),
+          verificacion: watch("verificacion_realizada"),
+          fecha: watch("fecha"),
+        },
+      })
+    );
     // navigate("/report", "_blank");
-    window.open("/report", "_blank", "noreferrer")
-  }
+    window.open("/report", "_blank", "noreferrer");
+  };
 
   const conditionResponse = (level, misionalidad, value) => {
     if (level === "Todos los niveles") {
@@ -290,7 +294,7 @@ const ListaVerificacionCumplimiento = () => {
   };
 
   return (
-    <section className=" text-gray-800 flex flex-col gap-4">
+    <section className=" text-gray-800 flex flex-col gap-4 relative">
       <Toaster />
       <div className="shadow-md rounded-md bg-white">
         <div className="text-white bg-red-700 p-3 rounded-t-md text-base font-semibold">
@@ -471,7 +475,7 @@ const ListaVerificacionCumplimiento = () => {
           </div>
         </div>
       </div>
-      <table className="border text-left text-sm shadow-md bg-white">
+      <table className="border text-left text-sm shadow-md bg-white mb-16">
         <thead className="">
           <tr>
             <th className="border p-2">#</th>
@@ -515,10 +519,10 @@ const ListaVerificacionCumplimiento = () => {
                           ) === showAllOptions
                             ? arrResponses
                             : arrNoAplica
-                        } 
+                        }
                         selection
                         {...register(
-                          `respuesta_${content.number.replace(/\./g, "_")}` 
+                          `respuesta_${content.number.replace(/\./g, "_")}`
                         )}
                       />
                     }
@@ -548,16 +552,15 @@ const ListaVerificacionCumplimiento = () => {
           ))}
         </tbody>
       </table>
-      <div className="flex justify-end gap-2">
-        <ButtonPrimary
-          text="Reporte"
-          onClick={handleSubmit(onReport)}
-        />
-        <ButtonPrimary
-          text="Registro"
-          onClick={handleSubmit(onSubmit)}
-          loading={isLoading}
-        />
+      <div className="fixed bottom-5  right-10  ">
+        <div className="flex justify-end gap-2 ">
+          <ButtonPrimary text="Reporte" onClick={handleSubmit(onReport)} />
+          <ButtonPrimary
+            text="Registro"
+            onClick={handleSubmit(onSubmit)}
+            loading={isLoading}
+          />
+        </div>
       </div>
     </section>
   );

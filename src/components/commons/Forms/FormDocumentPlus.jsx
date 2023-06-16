@@ -2,6 +2,8 @@ import Form from "./Form";
 import {
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
+import FormUploadedFiles from "../Forms/FormUploadedFiles";
+import { dataTable } from "../../../constants/formUploaded";
 
 const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
@@ -75,6 +77,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
           {step} {nameStep}
         </div>
         <Form title={titleForm} inputs={inputs} cols={cols}  buttons={buttons} onSubmit={onSubmit} id={step}/>
+        <FormUploadedFiles title="test" data={dataTable} />
       </section>
     </>
   );

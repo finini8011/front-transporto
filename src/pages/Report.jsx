@@ -6,9 +6,13 @@ import { selectCurrentReport } from "../api/features/reportPESV/report";
 import InputRHF from "./../components/commons/input/text/InputRHF";
 import ButtonPrimary from "../components/commons/button/ButtonPrimary";
 import { lvc } from "../constants/listaVerificacion";
+import GraficLine from "./../../grafic/GraficLine";
+import GraficColumns from "./../../grafic/GraficColumns";
 
 const Report = () => {
   const { pasos, dataForm } = useSelector(selectCurrentReport);
+  const [stateGraficColumn, setStateGraficColumn] = useState(null);
+  const [stateGraficLine, setStateGraficLine] = useState(null);
   const {
     register,
     formState: { errors },
@@ -72,20 +76,58 @@ const Report = () => {
   };
 
   const getResponse = (data) => {
-    const dataFilter = pasos.filter(content => content.numero === data)
-    return dataFilter[0].respuesta
-  }
+    const dataFilter = pasos.filter((content) => content.numero === data);
+    return dataFilter[0].respuesta;
+  };
 
   const getObservation = (data) => {
-    const dataFilter = pasos.filter(content => content.numero === data)
-    return dataFilter[0].observaciones
-  }
+    const dataFilter = pasos.filter((content) => content.numero === data);
+    return dataFilter[0].observaciones;
+  };
 
   useEffect(() => {
-    setValue('empresa', dataForm.empresa);
-    setValue('NIT', dataForm.nit);
-    setValue('fecha', dataForm.fecha);
-    setValue('verificacion_realizada', dataForm.verificacion);
+    setValue("empresa", dataForm.empresa);
+    setValue("NIT", dataForm.nit);
+    setValue("fecha", dataForm.fecha);
+    setValue("verificacion_realizada", dataForm.verificacion);
+  }, []);
+
+  useEffect(() => {
+    const arrGrafidColumn = [];
+    arrGrafidColumn.push(parseInt(stepPercent(0, 2).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(2, 5).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(5, 7).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(7, 10).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(10, 18).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(18, 20).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(20, 24).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(24, 31).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(31, 32).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(32, 35).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(35, 39).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(39, 41).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(41, 43).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(43, 47).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(47, 50).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(50, 52).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(52, 56).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(56, 61).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(61, 64).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(64, 68).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(68, 72).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(72, 76).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(76, 78).replace(/%/g, "")));
+    arrGrafidColumn.push(parseInt(stepPercent(78, 80).replace(/%/g, "")));
+    setStateGraficColumn(arrGrafidColumn);
+  }, []);
+
+  useEffect(() => {
+    const arrGrafidLine = [];
+    arrGrafidLine.push(parseInt(phasePercent(0, 31).replace(/%/g, "")));
+    arrGrafidLine.push(parseInt(phasePercent(31, 64).replace(/%/g, "")));
+    arrGrafidLine.push(parseInt(phasePercent(64, 76).replace(/%/g, "")));
+    arrGrafidLine.push(parseInt(phasePercent(76, 80).replace(/%/g, "")));
+    setStateGraficLine(arrGrafidLine);
   }, []);
 
   return (
@@ -97,7 +139,8 @@ const Report = () => {
       <div className="w-[65rem] flex flex-col gap-4 py-5">
         <div className=" rounded-md bg-white">
           <div className=" bg-red-300 p-3 rounded-t-md text-xs font-semibold uppercase text-center">
-          LISTA DE VERIFICACION DE CUMPLIMIENTO DE LOS REQUISITOS DEL PLAN ESTRATEGICO DE SEGURIDAD VIAL
+            LISTA DE VERIFICACION DE CUMPLIMIENTO DE LOS REQUISITOS DEL PLAN
+            ESTRATEGICO DE SEGURIDAD VIAL
           </div>
           <div className="px-2">
             <div className="py-2 grid grid-cols-2 gap-2 items-end">
@@ -107,12 +150,7 @@ const Report = () => {
                 readOnly
                 {...register("empresa")}
               />
-              <InputRHF
-                type="text"
-                label="NIT"
-                readOnly
-                {...register("NIT")}
-              />
+              <InputRHF type="text" label="NIT" readOnly {...register("NIT")} />
               <InputRHF
                 type="text"
                 label="Verificación realidada por"
@@ -129,54 +167,50 @@ const Report = () => {
           </div>
         </div>
         <table className="border text-left text-xs bg-white">
-        <thead className="">
-          <tr>
-            <th className="border p-2">#</th>
-            <th className="border p-2">Nivel PESV</th>
-            <th className="border p-2">Requisito a Verificar</th>
-            <th className="border p-2">
-              Documento sugerido para verificar según Res. 40595 de 2022
-            </th>
-            <th className="border p-2">Respuesta</th>
-            <th className="border p-2">
-              Observaciones sobre los hallazgos o la no aplicabilidad del
-              requisito
-            </th>
-          </tr>
-        </thead>
-        <tbody className="font-normal">
-          {lvc.map((data, key) => (
-            <React.Fragment key={key}>
-              <tr>
-                <td
-                  className="bg-red-500 text-white text-center p-2 font-semibold"
-                  colSpan="6"
-                >
-                  {data.title}
-                </td>
-              </tr>
-              {data.body.map((content, index) => (
-                <tr className="text-start" key={index}>
-                  <td className="border p-2">{content.number} </td>
-                  <td className="border p-2">{content.level}</td>
-                  <td className="border p-2">{content.requirement}</td>
-                  <td className="border p-2">{content.document}</td>
-                  <td className="border p-2 text-center w-28">
-                    {
-                        getResponse(content.number)
-                    }
-                  </td>
-                  <td className="border p-2 ">
-                  {
-                        getObservation(content.number)
-                    }
+          <thead className="">
+            <tr>
+              <th className="border p-2">#</th>
+              <th className="border p-2">Nivel PESV</th>
+              <th className="border p-2">Requisito a Verificar</th>
+              <th className="border p-2">
+                Documento sugerido para verificar según Res. 40595 de 2022
+              </th>
+              <th className="border p-2">Respuesta</th>
+              <th className="border p-2">
+                Observaciones sobre los hallazgos o la no aplicabilidad del
+                requisito
+              </th>
+            </tr>
+          </thead>
+          <tbody className="font-normal">
+            {lvc.map((data, key) => (
+              <React.Fragment key={key}>
+                <tr>
+                  <td
+                    className="bg-red-500 text-white text-center p-2 font-semibold"
+                    colSpan="6"
+                  >
+                    {data.title}
                   </td>
                 </tr>
-              ))}
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
+                {data.body.map((content, index) => (
+                  <tr className="text-start" key={index}>
+                    <td className="border p-2">{content.number} </td>
+                    <td className="border p-2">{content.level}</td>
+                    <td className="border p-2">{content.requirement}</td>
+                    <td className="border p-2">{content.document}</td>
+                    <td className="border p-2 text-center w-28">
+                      {getResponse(content.number)}
+                    </td>
+                    <td className="border p-2 ">
+                      {getObservation(content.number)}
+                    </td>
+                  </tr>
+                ))}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
         <div className="font-bold text-xs text-center">
           RESUMEN RESULTADOS EVALUACIÓN CUMPLIMIENTO DEL PLAN ESTRATEGICO DE
           SEGURIDAD VIAL NIVEL AVANZADO - RES. 40595 DE 2022
@@ -405,6 +439,13 @@ const Report = () => {
             </tr>
           </tbody>
         </table>
+
+        <div className=" flex items-center justify-center">
+          <GraficColumns data={stateGraficColumn} />
+        </div>
+        <div className=" flex items-center justify-center">
+          <GraficLine data={stateGraficLine} />
+        </div>
       </div>
     </div>
   );

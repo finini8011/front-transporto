@@ -78,8 +78,8 @@ const Step3 = () => {
           "Aquí podrá subir documentos adicionales aparte de los considerados obligatorios dentro del PESV. Incluya quien crea el documento y a quien va dirigido, así como una breve descripción. La plataforma incluirá de manera automática la fecha en que se carga el documento para el manejo de la trazabilidad"
         }
         step={1.3}
-        nameStep={"DOCUMETOS ADICIONALES"}
-        cols={6}
+        nameStep={"DOCUMENTOS ADICIONALES"}
+        cols={5}
         onSubmit={handleFormSubmit}
       />
     </div>

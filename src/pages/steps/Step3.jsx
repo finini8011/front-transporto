@@ -8,14 +8,13 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 import MultiSelectForm from "../../components/commons/Forms/MultiselectForm";
 import { useState } from "react";
 const Step3 = () => {
+
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
+  
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
-  const step = "3.1";
-  const nameStep =
-    "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?";
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "3.3" ? "3da" : id;
     const selectedFile = values.cargaArchivo;
@@ -54,11 +53,13 @@ const Step3 = () => {
   return (
     <div>
       <Toaster />
-
+      <h1>Planificacion Paso#3</h1>
       <FormFlex
         titleForm={titleForm}
-        step={step}
-        nameStep={nameStep}
+        step={3.1}
+        nameStep={
+          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+        }
         cols={5}
         onSubmit={handleFormSubmit}
       />

@@ -127,7 +127,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
   ];
 
-  const { data, isLoading, isError, refetch } = useGetDataStepQuery("3.1");
+  const { data, isLoading, isError, refetch } = useGetDataStepQuery(step);
   useEffect(() => {
     refetch();
   }, []);

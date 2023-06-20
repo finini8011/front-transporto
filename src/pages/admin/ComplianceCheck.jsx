@@ -6,11 +6,15 @@ import {
   useLazyGetListVerificationPdfQuery,
 } from "../../api/services/listVerification/listVerificationApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import InputRHF from "../../components/commons/input/text/InputRHF";
 import Select from "../../components/commons/input/select/Select";
 import { lvc } from "../../constants/listaVerificacion";
 import ButtonPrimary from "../../components/commons/button/ButtonPrimary";
+import { setReport } from "../../api/features/reportPESV/report";
+
+
 
 const arrResponses = ["Cumple", "Cumple Parcialmente", "No cumple"];
 const arrNoAplica = ["No Aplica"];
@@ -25,6 +29,7 @@ const ListaVerificacionCumplimiento = () => {
   const [getListVerificationPdf, { isLoading: isGetPdfLoading }] =
     useLazyGetListVerificationPdfQuery();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -32,7 +37,7 @@ const ListaVerificacionCumplimiento = () => {
     handleSubmit,
     watch,
     setValue,
-    resetField
+    resetField,
   } = useForm();
 
   useEffect(() => {
@@ -53,13 +58,12 @@ const ListaVerificacionCumplimiento = () => {
 
   useEffect(() => {
     if (
-      watch("cantidad_vehiculos")!== "" &&
-      watch("cantidad_conductores")!=="" 
+      watch("cantidad_vehiculos") !== "" &&
+      watch("cantidad_conductores") !== ""
     ) {
-      watch("cantidad_vehiculos") >
-      watch("cantidad_conductores")
+      watch("cantidad_vehiculos") > watch("cantidad_conductores")
         ? setValorMayor(watch("cantidad_vehiculos"))
-        : setValorMayor(watch("cantidad_conductores"))
+        : setValorMayor(watch("cantidad_conductores"));
     } else {
       setValorMayor(0);
     }
@@ -153,7 +157,7 @@ const ListaVerificacionCumplimiento = () => {
       conductores_trabajadores,
       conductores_contratistas,
       conductores_tercerizados,
-      otros_conductores
+      otros_conductores,
     } = dataForm;
 
     if (
@@ -196,18 +200,18 @@ const ListaVerificacionCumplimiento = () => {
         verificacion_realizada,
         funcionarios,
         pasos,
-        vehiculos_propios : parseInt(vehiculos_propios),
-        vehiculos_arrendados : parseInt(vehiculos_arrendados),
-        vehiculos_intermediacion : parseInt(vehiculos_intermediacion),
-        vehiculos_contratistas : parseInt(vehiculos_contratistas),
-        vehiculos_leasing : parseInt(vehiculos_leasing),
-        vehiculos_renting : parseInt(vehiculos_renting),
-        vehiculos_colaboradores : parseInt(vehiculos_colaboradores),
-        conductores_directos : parseInt(conductores_directos),
-        conductores_trabajadores : parseInt(conductores_trabajadores),
-        conductores_contratistas : parseInt(conductores_contratistas),
-        conductores_tercerizados : parseInt(conductores_tercerizados),
-        otros_conductores : parseInt(otros_conductores)
+        vehiculos_propios: parseInt(vehiculos_propios),
+        vehiculos_arrendados: parseInt(vehiculos_arrendados),
+        vehiculos_intermediacion: parseInt(vehiculos_intermediacion),
+        vehiculos_contratistas: parseInt(vehiculos_contratistas),
+        vehiculos_leasing: parseInt(vehiculos_leasing),
+        vehiculos_renting: parseInt(vehiculos_renting),
+        vehiculos_colaboradores: parseInt(vehiculos_colaboradores),
+        conductores_directos: parseInt(conductores_directos),
+        conductores_trabajadores: parseInt(conductores_trabajadores),
+        conductores_contratistas: parseInt(conductores_contratistas),
+        conductores_tercerizados: parseInt(conductores_tercerizados),
+        otros_conductores: parseInt(otros_conductores),
       }).unwrap();
       toast.success("Se ha registrado correctamente!");
       try {
@@ -222,6 +226,34 @@ const ListaVerificacionCumplimiento = () => {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
+  };
+
+  const onReport = async (dataForm) => {
+    const pasos = []; //informacion donde se ingresaran los pasos
+    lvc.map((data) => {
+      data.body.map((content) => {
+        const numberFormat = content.number.replace(/\./g, "_");
+        pasos.push({
+          numero: content.number,
+          respuesta: dataForm[`respuesta_${numberFormat}`],
+          observaciones: dataForm[`observaciones_${numberFormat}`],
+        });
+      });
+    });
+
+    dispatch(
+      setReport({
+        pasos,
+        dataForm: {
+          empresa: watch("empresa"),
+          nit: watch("NIT"),
+          verificacion: watch("verificacion_realizada"),
+          fecha: watch("fecha"),
+        },
+      })
+    );
+    // navigate("/report", "_blank");
+    window.open("/report", "_blank", "noreferrer");
   };
 
   const conditionResponse = (level, misionalidad, value) => {
@@ -253,7 +285,7 @@ const ListaVerificacionCumplimiento = () => {
   };
 
   const resetOptions = () => {
-    lvc.map((data) => {
+    lvc.map((data) => { 
       data.body.map((content) => {
         setValue(`respuesta_${content.number.replace(/\./g, "_")}`, "");
         // resetField(`respuesta_${content.number.replace(/\./g, "_")}`)
@@ -263,7 +295,7 @@ const ListaVerificacionCumplimiento = () => {
   };
 
   return (
-    <section className=" text-gray-800 flex flex-col gap-4">
+    <section className=" text-gray-800 flex flex-col gap-4 relative">
       <Toaster />
       <div className="shadow-md rounded-md bg-white">
         <div className="text-white bg-red-700 p-3 rounded-t-md text-base font-semibold">
@@ -330,9 +362,8 @@ const ListaVerificacionCumplimiento = () => {
               type="text"
               label="Fecha de Verificación"
               placeholder="Fecha de Verificación"
-              {...register("fecha", {
-                readOnly: true,
-              })}
+              readOnly
+              {...register("fecha")}
             />
           </div>
         </div>
@@ -445,7 +476,7 @@ const ListaVerificacionCumplimiento = () => {
           </div>
         </div>
       </div>
-      <table className="border text-left text-sm shadow-md bg-white">
+      <table className="border text-left text-sm shadow-md bg-white mb-16">
         <thead className="">
           <tr>
             <th className="border p-2">#</th>
@@ -489,10 +520,10 @@ const ListaVerificacionCumplimiento = () => {
                           ) === showAllOptions
                             ? arrResponses
                             : arrNoAplica
-                        } 
+                        }
                         selection
                         {...register(
-                          `respuesta_${content.number.replace(/\./g, "_")}` 
+                          `respuesta_${content.number.replace(/\./g, "_")}`
                         )}
                       />
                     }
@@ -522,12 +553,15 @@ const ListaVerificacionCumplimiento = () => {
           ))}
         </tbody>
       </table>
-      <div className="flex justify-end ">
-        <ButtonPrimary
-          text="Registro"
-          onClick={handleSubmit(onSubmit)}
-          loading={isLoading}
-        />
+      <div className="fixed bottom-5  right-10  ">
+        <div className="flex justify-end gap-2 ">
+          <ButtonPrimary text="Reporte" onClick={handleSubmit(onReport)} />
+          <ButtonPrimary
+            text="Registro"
+            onClick={handleSubmit(onSubmit)}
+            loading={isLoading}
+          />
+        </div>
       </div>
     </section>
   );

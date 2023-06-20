@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
 import Header from "../header/header";
 
@@ -30,7 +30,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
 
-const MainAuth = ({ children }) => {
+const MainAuth = () => {
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState();
@@ -97,7 +97,7 @@ const MainAuth = ({ children }) => {
           {openMenu &&
             <Collapse in={openList} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/step")}>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => navigate("/register-company")}>
                   <FontAwesomeIcon icon={faPenToSquare} className="mr-3 w-5 h-5" />
                   <ListItemText primary="Registrar Empresa" />
                 </ListItemButton>
@@ -145,7 +145,7 @@ const MainAuth = ({ children }) => {
           openMenu={openMenu}
           setOpenMenu={setOpenMenu} />
         <div className="m-6">
-          {children}
+          <Outlet/>
         </div>
       </div>
     </div>

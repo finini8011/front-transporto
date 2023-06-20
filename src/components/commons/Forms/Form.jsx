@@ -28,6 +28,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
           switch (input.type) {
             case "text":
             case "file":
+              case "number":
               return (
                 <Input
                   key={index}

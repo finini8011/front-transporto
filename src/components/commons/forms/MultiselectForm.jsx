@@ -12,6 +12,7 @@ const MultiSelectForm = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "",
       start: 1,
       end: 3,
+      required: true
     },
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
@@ -20,6 +21,8 @@ const MultiSelectForm = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "textArea",
       start: 3,
       end: 6,
+      required: true
+
     },
     {
       type: "hr",

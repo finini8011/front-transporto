@@ -8,7 +8,7 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 import MultiSelectForm from "../../components/commons/Forms/MultiselectForm";
 import { useState } from "react";
 const Step3 = () => {
-  const [saveStep, { isLoading, error }] = useSaveStepMutation();
+  const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";

@@ -6,7 +6,11 @@ import FormUploadedFiles from "../Forms/FormUploadedFiles";
 import { dataTable } from "../../../constants/formUploaded";
 
 const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
-
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
   const inputs = [
     {
       label: "CREA",
@@ -16,6 +20,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "Ingrese nombre",
       start: 1,
       end: 3,
+      required: true
     },
     {
       label: "DESTINATARIO",
@@ -25,14 +30,16 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "Ingrese nombre",
       start: 3,
       end: 5,
+      required:true
     },
     {
       label: "Fecha",
       labelWeight: "bold",
       name: "fecha",
-      type: "date",
+      type: "span",
       start: 5,
       end: 5,
+      value: formattedDate
     },
     {
       label: "Descripcion",
@@ -41,6 +48,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "textArea",
       start: 1,
       end: 5,
+      required: true
     },
     {
       type: "hr",
@@ -53,6 +61,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "Seleccione archivo",
       start: 1,
       end: 4,
+      required:true,
       onchange: (name, value) =>
         console.log(
           `Función personalizada para campo ${name} - Valor: ${value}`

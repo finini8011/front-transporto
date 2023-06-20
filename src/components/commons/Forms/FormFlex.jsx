@@ -9,6 +9,12 @@ import {
 import { useState } from "react";
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const [inputValues, setInputValues] = useState({});
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
   const inputs = [
     {
       label: "CREA",
@@ -37,10 +43,10 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       labelWeight: "bold",
       name: "fecha",
       nameApi: "uploadDate",
-      type: "date",
+      type: "span",
       start: 5,
       end: 5,
-      required: true,
+      value: formattedDate,
     },
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
@@ -128,8 +134,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   useEffect(() => {
     if (data) {
-      
-    /*   const payload = JSON.parse(data.payload);
+      /*   const payload = JSON.parse(data.payload);
       const lastPayload = payload[payload.length - 1];
       const updatedInputValues = {};
       inputs.forEach((input) => {
@@ -154,7 +159,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
         <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
           {step} {nameStep}
         </div>
-      {/*   {data ? (
+        {/*   {data ? (
           <Form
             title={titleForm}
             inputs={inputs.map((input) => ({
@@ -167,15 +172,15 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
             id={step}
           />
         ) : ( */}
-          <Form
-            title={titleForm}
-            inputs={inputs}
-            cols={cols}
-            buttons={buttons}
-            onSubmit={onSubmit}
-            id={step}
-          />
-     {/*    )} */}
+        <Form
+          title={titleForm}
+          inputs={inputs}
+          cols={cols}
+          buttons={buttons}
+          onSubmit={onSubmit}
+          id={step}
+        />
+        {/*    )} */}
       </section>
     </>
   );

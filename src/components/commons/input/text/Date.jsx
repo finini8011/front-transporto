@@ -1,6 +1,6 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
-const Input = forwardRef((props, ref) => {
+const Date = forwardRef((props, ref) => {
   const {
     type,
     id,
@@ -9,9 +9,8 @@ const Input = forwardRef((props, ref) => {
     start,
     end,
     onChange,
-    hidden,
     error,
-    value,
+    hidden,
     ...inputProps
   } = props;
   let fontWeight = labelWeight ? labelWeight : "medium";
@@ -49,19 +48,18 @@ const Input = forwardRef((props, ref) => {
         {label}
       </label>
       <input
-        className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 w-full p-2.5 disabled:cursor-no-drop disabled:bg-gray-200 read-only:bg-gray-200 read-only:cursor-no-drop ${
+        className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 w-full p-2.5 disabled:cursor-no-drop disabled:bg-gray-200 ${
           hidden && "hidden"
         }`}
         type={type}
         name={id}
         id={id}
-        value={value}
         {...inputProps}
         ref={ref}
       />
-        {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
+      {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
     </div>
   );
 });
 
-export default Input;
+export default Date;

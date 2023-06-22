@@ -11,6 +11,7 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
+import { stepsApiSlice } from "./services/steps/stepsApiSlice";
 
 const persistConfig = {
   key: "root",
@@ -32,6 +33,8 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     // [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
+    [stepsApiSlice.reducerPath]: stepsApiSlice.reducer,
+
     // auth: authReducer,
     auth: persistedReducer,
     reportPESV: persistedReducer,
@@ -44,6 +47,7 @@ export const store = configureStore({
       .concat(thunk, apiSlice.middleware)
       // .concat(thunk, projectsApiSlice.middleware)
       .concat(thunk, listVerificationApiSlice.middleware)
+      .concat(thunk, stepsApiSlice.middleware)
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

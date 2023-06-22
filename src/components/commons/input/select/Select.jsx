@@ -1,13 +1,25 @@
+import { useState } from "react";
 import { forwardRef, useEffect } from "react";
 
 const Select = forwardRef((props, ref) => {
-  const { id, label, data, labelWeight, selection, start, end, ...inputProps } = props;
+  const { id, label, data, labelWeight, selection, start, end, error, onChange, ...inputProps } = props;
+  const [value, setValue] = useState('');
 
   const renderSelect = (info) => (
     <option key={info} value={info} className="text-black">
       {info}
     </option>
   );
+
+  const handleSelectChange = (event) => {
+    if(onChange){
+      const { value } = event.target;
+      setValue(value);
+      console.log(value)
+      onChange( value);
+    }
+   
+  };
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",
@@ -50,10 +62,13 @@ const Select = forwardRef((props, ref) => {
         id={id}
         {...inputProps}
         ref={ref}
+        onChange={handleSelectChange}
       >
         {selection && <option value="" disabled >Seleccionar</option>} 
         {data.map(renderSelect)}
       </select>
+      {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
+
     </div>
   );
 });

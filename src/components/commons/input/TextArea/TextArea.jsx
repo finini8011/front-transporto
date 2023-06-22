@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const TextArea = forwardRef((props, ref) => {
-  const { type, id, label, labelWeight, start, end, ...inputProps } = props;
+  const { type, id, label, labelWeight, start, end, error, ...inputProps } = props;
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",
@@ -47,6 +47,8 @@ const TextArea = forwardRef((props, ref) => {
         ref={ref}
         placeholder=''
       ></textarea>
+      {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
+
     </div>
   );
 });

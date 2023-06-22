@@ -7,6 +7,7 @@ import {
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
  
   const [inputValues, setInputValues] = useState({});
@@ -53,11 +54,12 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
       labelWeight: "bold",
       name: "observaciones",
-      nameApi: "observaciones",
+      nameApi:"observaciones",
       type: "textArea",
+      placeholder: "obeservaciones",
       start: 1,
       end: 5,
-      required: true,
+      required: false,
     },
     {
       type: "button",
@@ -95,12 +97,14 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       label: "Nombre Archivo cargado",
       type: "span",
       placeholder: "",
+      name:"originalName",
       nameApi: "originalName",
       start: 1,
       end: 4,
     },
     {
       label: "Estado actual",
+      name:"estado",
       nameApi: "estado",
       type: "span",
       start: 4,
@@ -135,7 +139,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   useEffect(() => {
     if (data) {
-      /*   const payload = JSON.parse(data.payload);
+         const payload = JSON.parse(data.payload);
       const lastPayload = payload[payload.length - 1];
       const updatedInputValues = {};
       inputs.forEach((input) => {
@@ -150,7 +154,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
           }
         }
       });
-      setInputValues(updatedInputValues); */
+      setInputValues(updatedInputValues); 
     }
   }, [data]);
 
@@ -160,7 +164,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
         <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
           {step} {nameStep}
         </div>
-        {/*   {data ? (
+           {data ? (
           <Form
             title={titleForm}
             inputs={inputs.map((input) => ({
@@ -172,7 +176,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
             onSubmit={onSubmit}
             id={step}
           />
-        ) : ( */}
+        ) : ( 
         <Form
           title={titleForm}
           inputs={inputs}
@@ -181,7 +185,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
           onSubmit={onSubmit}
           id={step}
         />
-        {/*    )} */}
+           )} 
       </section>
     </>
   );

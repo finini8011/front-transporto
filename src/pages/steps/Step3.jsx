@@ -74,7 +74,7 @@ const Step3 = () => {
         }
         cols={4}
         onSubmit={handleFormSubmit}
-      />
+      /> 
       <div className="pb-10"></div>
       <FormDocumentPlus
         titleForm={

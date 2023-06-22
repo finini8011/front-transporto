@@ -1,27 +1,29 @@
-import { configureStore } from "@reduxjs/toolkit";
-// Or from '@reduxjs/toolkit/query/react'
-import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { apiSlice } from "./services/auth/apiSlice";
-// import { projectsApiSlice } from "./services/projects/projectsApiSlice";
-import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
-import authReducer from "./features/auth/authSlice";
-import reportPESVReducer from "./features/reportPESV/report";
-
+import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
+// Or from '@reduxjs/toolkit/query/react'
+import authReducer from "./features/auth/authSlice";
+import reportPESVReducer from "./features/reportPESV/report";
+import stepsPESVReducer from "./features/stepsPESV/stepsPESV";
+
+import { apiSlice } from "./services/auth/apiSlice"; 
+import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
 import { stepsApiSlice } from "./services/steps/stepsApiSlice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["authState", "reportPESVState" ],
+  whitelist: ["authState", "reportPESVState", "stepsPESVState" ],
 };
 
 const rootReducer = combineReducers({
   authState: authReducer,
   reportPESVState: reportPESVReducer,
+  stepsPESVState: stepsPESVReducer,
+
   //aqui se pueden agregar mas reducers que quieran persistir
 });
 
@@ -31,13 +33,14 @@ export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [apiSlice.reducerPath]: apiSlice.reducer,
-    // [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
     [stepsApiSlice.reducerPath]: stepsApiSlice.reducer,
+
 
     // auth: authReducer,
     auth: persistedReducer,
     reportPESV: persistedReducer,
+    stepsPESV:stepsPESVReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

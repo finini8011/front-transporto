@@ -11,7 +11,6 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 import MultiSelectForm from "../../components/commons/Forms/MultiSelectForm";
 
 const Step13 = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [saveStep, saveStepInfo] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
   const titleForm =
@@ -36,7 +35,6 @@ const Step13 = () => {
     }
 
     try {
-      setIsLoading(true);
       const obj = {
         numStep: stepUrl,
         payload: payload,
@@ -47,11 +45,9 @@ const Step13 = () => {
       } else if (id == "13.2") {
         await saveStepQuestion(obj).unwrap();
       }
-      setIsLoading(false);
 
       toast.success("Se ha registrado correctamente!");
     } catch (e) {
-      setIsLoading(false);
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
@@ -60,19 +56,6 @@ const Step13 = () => {
     <div>
       <Toaster />
       <h1>Planificacion Paso#13</h1>
-      <LoadingOverlay active={isLoading} spinner styles={{
-          overlay: (base) => ({
-            ...base,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }),
-          spinner: (base) => ({
-            ...base,
-            width: '100px',
-            height: '100px',
-          }),
-        }} text="Cargando...">
         <FormFlex
           titleForm={titleForm}
           step={"13.1"}
@@ -102,7 +85,6 @@ const Step13 = () => {
           cols={5}
           onSubmit={handleFormSubmit}
         />
-      </LoadingOverlay>
     </div>
   );
 };

@@ -28,7 +28,6 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    console.log(data);
     if (email === "" || password === "")
       return toast.error("Llenar todos los campos");
     try {

@@ -13,20 +13,20 @@ import Modal from "react-modal";
 import InfoCompliance from "../../commons/InfoCompliance/InfoCompliance";
 import DirectAccess from "../../commons/DirectAccess/DirectAccess";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../api/features/auth/authSlice";
+import expandir from "/img/expandir.png";
+import empresa from "/img/empresa.png";
+import guia from "/img/guia.png";
+import modulo from "/img/modulo.png";
+import herramientas from "/img/herramientas.png";
+import buscar from "/img/buscar.png";
 
 const Header = ({ openMenu, setOpenMenu }) => {
-
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
-
-
-  const handleMenu = () => {
-    setOpenMenu(!openMenu);
-  }
-
-
+  const user = useSelector(selectCurrentUser);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -45,21 +45,26 @@ const Header = ({ openMenu, setOpenMenu }) => {
   };
   return (
     <React.Fragment>
-      <nav className="flex items-center justify-between flex-wrap bg-white p-2">
-        <ul className="flex flex-row">
+      <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20">
+        {/* <ul className="flex flex-row">
           <li>
             <button
-              className="p-2"
+              className="p-2 "
               data-widget="pushmenu"
               role="button"
-              onClick={handleMenu}>
+              onClick={handleMenu}
+              >
               <FontAwesomeIcon icon={faBars} size="lg" />
             </button>
           </li>
-        </ul>
+        </ul> */}
+        <div className="flex flex-col gap-2">
+          <h3 className="text-xl">ABC Transportes - {user.name} </h3>
+          <p className="text-sm color-fifth">Lun, 1 Ene 2023</p>
+        </div>
 
-        <ul className="flex flex-row">
-          <li>
+        <ul className="flex flex-row gap-4 color-fifth items-center">
+          {/* <li>
             <button className="p-2" onClick={() => navigate("/step")} >
               <FontAwesomeIcon icon={faPencil} />
             </button>
@@ -75,6 +80,31 @@ const Header = ({ openMenu, setOpenMenu }) => {
             <button className="p-2 ml-4" onClick={openModal}>
               <FontAwesomeIcon icon={faGrip} />
             </button>
+          </li> */}
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <img className="" src={buscar} alt="Expandir" />
+            <p>Buscar</p>
+          </li>
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <img className="" src={empresa} alt="Expandir" />
+            <p>Empresa</p>
+          </li>
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <img className="" src={guia} alt="Expandir" />
+            <p className="leading-none">Guía Rápida</p>
+            {/* <p className="leading-none"></p> */}
+          </li>
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <img className="" src={modulo} alt="Expandir" />
+            <p>Módulos</p>
+          </li>
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <img className="" src={herramientas} alt="Expandir" />
+            <p>Herramientas</p>
+          </li>
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <img className="" src={expandir} alt="Expandir" />
+            <p>Expandir</p>
           </li>
         </ul>
       </nav>
@@ -88,7 +118,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
         <button onClick={closeModal} className="modal-close">
           <FontAwesomeIcon icon={faRectangleXmark} />
         </button>
-        <InfoCompliance/>
+        <InfoCompliance />
       </Modal>
 
       <Modal

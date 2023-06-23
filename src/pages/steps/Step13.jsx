@@ -1,6 +1,4 @@
 import { Toaster, toast } from "react-hot-toast";
-import { useState } from "react";
-import LoadingOverlay from "react-loading-overlay";
 import {
   useSaveStepMutation,
   useSaveStepQuestionMutation,

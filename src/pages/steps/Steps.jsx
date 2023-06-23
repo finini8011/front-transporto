@@ -5,6 +5,7 @@ import Step2 from "./Step2";
 import Step3 from "../steps/Step3"
 import Step12 from "../steps/Step12"
 import Step13 from "../steps/Step13"
+import Step14 from "./Step14";
 
 
 
@@ -17,6 +18,8 @@ export default function Steps() {
         3: Step3,
         12: Step12,
         13: Step13,
+        14: Step14,
+
 
     };
     const Step = components[id || 1] ?? null;

@@ -9,6 +9,7 @@
     --fourth-color: #0090FF;
     --fifth-color: #c2c7d0;
     --sixth-color: #E6F4FF;
+    --seventh-color: #EEF2F6
   }
   /* aqui puedes crear cualquier clase de css */
   @media print {
@@ -33,6 +34,9 @@
   .bg-sixth {
     background-color: var(--sixth-color);
   }
+  .bg-seventh {
+    background-color: var(--seventh-color);
+  }
 
   /* colors */
   .color-primary {
@@ -50,9 +54,15 @@
   .color-fifth {
     color: var(--fifth-color);
   }
+  .color-seventh {
+    color: var(--fifth-color);
+  }
   /* borders */
   .border-third {
     border-color: var(--third-color);
+  }
+  .border-fourth {
+    border-color: var(--fourth-color);
   }
 }
 

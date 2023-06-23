@@ -169,24 +169,6 @@ const MainAuth = () => {
                 <List component="div" disablePadding>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    className={`flex gap-2 ${
-                      currentPage === "/step" && "active"
-                    }`}
-                    onClick={() => handleNavigate("/step")}
-                  >
-                    <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
-                    <ListItemText
-                      primary="Registrar Empresa"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.9rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
                     onClick={() => navigate("/preparacion")}
                     className="flex gap-2"
                   >
@@ -269,6 +251,24 @@ const MainAuth = () => {
               </Collapse>
             )}
             <ListItemButton
+              className={`flex gap-2 ${currentPage === "/step" && "active"}`}
+              sx={{ justifyContent: "center" }}
+              onClick={() => handleNavigate("/step")}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
+              {openMenu && (
+                <ListItemText
+                  primary="Lista de Chequeo"
+                  primaryTypographyProps={{
+                    component: "span",
+                    sx: {
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                />
+              )}
+            </ListItemButton>
+            <ListItemButton
               onClick={() => navigate("/informes")}
               className="flex gap-2"
               sx={{ justifyContent: "center" }}
@@ -326,7 +326,7 @@ const MainAuth = () => {
       <div className="flex-1 h-screen bg-slate-200 flex flex-col overflow-auto">
         <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
         <div className="flex">
-          <div className="m-6">
+          <div className="m-6 flex-1">
             <Outlet />
           </div>
           <LateralRight />

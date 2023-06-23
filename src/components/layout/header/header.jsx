@@ -12,7 +12,7 @@ import {
 import Modal from "react-modal";
 import InfoCompliance from "../../commons/InfoCompliance/InfoCompliance";
 import DirectAccess from "../../commons/DirectAccess/DirectAccess";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
 import expandir from "/img/expandir.png";
@@ -24,20 +24,21 @@ import buscar from "/img/buscar.png";
 
 const Header = ({ openMenu, setOpenMenu }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(location.pathname);
   const user = useSelector(selectCurrentUser);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+    navigate(page);
+    // Aquí puedes realizar la navegación a la página correspondiente
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  const openModalAccess = () => {
-    setIsModalAccessOpen(true);
   };
 
   const closeModalAccess = () => {
@@ -46,18 +47,6 @@ const Header = ({ openMenu, setOpenMenu }) => {
   return (
     <React.Fragment>
       <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20">
-        {/* <ul className="flex flex-row">
-          <li>
-            <button
-              className="p-2 "
-              data-widget="pushmenu"
-              role="button"
-              onClick={handleMenu}
-              >
-              <FontAwesomeIcon icon={faBars} size="lg" />
-            </button>
-          </li>
-        </ul> */}
         <div className="flex flex-col gap-2">
           <h3 className="text-xl">ABC Transportes - {user.name} </h3>
           <p className="text-sm color-fifth">Lun, 1 Ene 2023</p>
@@ -85,7 +74,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
             <img className="" src={buscar} alt="Expandir" />
             <p>Buscar</p>
           </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer" onClick={() => handleNavigate("/register-company")}>
             <img className="" src={empresa} alt="Expandir" />
             <p>Empresa</p>
           </li>

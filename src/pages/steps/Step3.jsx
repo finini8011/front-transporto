@@ -6,6 +6,7 @@ import {
 
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
+import FormSelect from "../../components/commons/Forms/FormSelect";
 //import MultiSelectForm from "../../components/commons/Forms/MultiSelectForm";
 
 const Step3 = () => {
@@ -51,7 +52,7 @@ const Step3 = () => {
     }
   };
 
-  
+
   return (
     <div>
       <Toaster />
@@ -66,15 +67,15 @@ const Step3 = () => {
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
-{/*       <MultiSelectForm
-        titleForm={""}
+      <FormSelect
+        titleForm={titleForm}
         step={"3.2"}
         nameStep={
           "El líder del diseño e implemetación del PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad vial"
         }
-        cols={4}
+        cols={5}
         onSubmit={handleFormSubmit}
-      />  */}
+      />
       <div className="pb-10"></div>
       <FormDocumentPlus
         titleForm={

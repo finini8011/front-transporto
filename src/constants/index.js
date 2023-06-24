@@ -1,123 +1,170 @@
 const dataCard = [
   {
-    title: "Paso #1",
+    title: "Paso 1",
     step: 1,
-    content: "Datos de la empresa"
+    content: "Datos de la empresa",
+    stage: 1
   },
   {
-    title: "Paso #2",
+    title: "Paso 2",
     step: 2,
-    content: "Lider de diseño e implementacion PESV"
+    content: "Lider de diseño e implementacion PESV",
+    stage: 1
+
   },
   {
-    title: "Paso #3",
+    title: "Paso 3",
     step: 3,
-    content: "Politica de seguridad vial de la Organizacion"
+    content: "Politica de seguridad vial de la Organizacion",
+    stage: 1
+
   },
   {
-    title: "Paso #4",
+    title: "Paso 4",
     step: 4,
-    content: "Liderazgo, compromiso y correspondencia del nivel directivo"
+    content: "Liderazgo, compromiso y correspondencia del nivel directivo",
+    stage: 1
+
   },
   {
-    title: "Paso #5",
+    title: "Paso 5",
     step: 5,
-    content: "Diagnostico"
+    content: "Diagnostico",
+    stage: 1
+
   },
   {
-    title: "Paso #6",
+    title: "Paso 6",
     step: 6,
-    content: "Caracterización, evaluación y control de riesgos"
+    content: "Caracterización, evaluación y control de riesgos",
+    stage: 1
+
   },
   {
-    title: "Paso #7",
+    title: "Paso 7",
     step: 7,
-    content: "Objetivos y metas del PSEV"
+    content: "Objetivos y metas del PSEV",
+    stage: 1
+
   },
   {
-    title: "Paso #8",
+    title: "Paso 8",
     step: 8,
-    content: "Programas de gestión de riesgos críticos y factores de desempeño"
+    content: "Programas de gestión de riesgos críticos y factores de desempeño",
+    stage: 1
+
   },
   {
-    title: "Paso #9",
+    title: "Paso 9",
     step: 9,
-    content: "Plan anual de trabajo"
+    content: "Plan anual de trabajo",
+    stage: 2
+
   },
   {
-    title: "Paso #10",
+    title: "Paso 10",
     step: 10,
-    content: "Competencia y plan anual de formación"
+    content: "Competencia y plan anual de formación",
+    stage: 2
+
   },
   {
-    title: "Paso #11",
+    title: "Paso 11",
     step: 11,
-    content: "Responsabilidades y comportamiento seguro"
+    content: "Responsabilidades y comportamiento seguro",
+    stage: 2
+
   },
   {
-    title: "Paso #12",
+    title: "Paso 12",
     step: 12,
-    content: "Plan de preparación y respuesta ante emergencias vitales"
+    content: "Plan de preparación y respuesta ante emergencias vitales",
+    stage: 2
+
   },
   {
-    title: "Paso #13",
+    title: "Paso 13",
     step: 13,
-    content: "Investigación interna de siniestros"
+    content: "Investigación interna de siniestros",
+    stage: 2
+
   },
   {
-    title: "Paso #14",
+    title: "Paso 14",
     step: 14,
-    content: "Vías seguras administradas por la organización"
+    content: "Vías seguras administradas por la organización",
+    stage: 2
+
   },
   {
-    title: "Paso #15",
+    title: "Paso 15",
     step: 15,
-    content: "Planificación de desplazamientos laborales"
+    content: "Planificación de desplazamientos laborales",
+    stage: 2
+
   },
   {
-    title: "Paso #16",
+    title: "Paso 16",
     step: 16,
-    content: "Inspección de vehículos y equipos"
+    content: "Inspección de vehículos y equipos",
+    stage: 2
+
   },
   {
-    title: "Paso #17",
+    title: "Paso 17",
     step: 17,
-    content: "Mantenimiento y control de vehículos"
+    content: "Mantenimiento y control de vehículos",
+    stage: 2
+
   },
   {
-    title: "Paso #18",
+    title: "Paso 18",
     step: 18,
-    content: "Gestión de cambios y gestión de contratistas"
+    content: "Gestión de cambios y gestión de contratistas",
+    stage: 2
+
   },
   {
-    title: "Paso #19",
+    title: "Paso 19",
     step: 19,
-    content: "Archivos y retención documental"
+    content: "Archivos y retención documental",
+    stage: 2
+
   },
   {
-    title: "Paso #20",
+    title: "Paso 20",
     step: 20,
-    content: "Definición de indicadores"
+    content: "Definición de indicadores",
+    stage: 3
+
   },
   {
-    title: "Paso #21",
+    title: "Paso 21",
     step: 21,
-    content: "Registro y análisis estadístico de accidentes de tránsito"
+    content: "Registro y análisis estadístico de accidentes de tránsito",
+    stage: 3
+
   },
   {
-    title: "Paso #22",
+    title: "Paso 22",
     step: 22,
-    content: "Auditoria Anual"
+    content: "Auditoria Anual",
+    stage: 3
+
   },
   {
-    title: "Paso #23",
+    title: "Paso 23",
     step: 23,
-    content: "Mejora Continua, acciones preventivas y correctivas"
+    content: "Mejora Continua, acciones preventivas y correctivas",
+    stage: 4
+
   },
   {
-    title: "Paso #24",
+    title: "Paso 24",
     step: 24,
-    content: "Mecanismos de comunicación"
+    content: "Mecanismos de comunicación",
+    stage: 4
+
   },
   
 ]

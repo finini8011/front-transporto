@@ -6,7 +6,7 @@ import {
 
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
-import MultiSelectForm from "../../components/commons/Forms/MultiSelectForm";
+import FormSelect from "../../components/commons/Forms/FormSelect";
 
 const Step12 = () => {
 
@@ -40,18 +40,18 @@ const Step12 = () => {
         payload: payload,
         file: selectedFile,
       };
-       if (id === "12.1" || id == "12.3") {
+      if (id === "12.1" || id == "12.3") {
         await saveStep(obj).unwrap();
       } else if (id == "12.2") {
         await saveStepQuestion(obj).unwrap();
-      } 
+      }
       toast.success("Se ha registrado correctamente!");
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
 
-  
+
   return (
     <div>
       <Toaster />
@@ -66,7 +66,7 @@ const Step12 = () => {
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
-      <MultiSelectForm
+      <FormSelect
         titleForm={""}
         step={"12.2"}
         nameStep={

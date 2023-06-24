@@ -7,7 +7,6 @@ import {
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
-//import MultiSelectForm from "../../components/commons/Forms/MultiSelectForm";
 
 const Step3 = () => {
 

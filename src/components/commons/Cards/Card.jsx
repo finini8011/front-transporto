@@ -33,13 +33,16 @@ const Card = ({ data, numberCard }) => {
   return (
     <div className="border border-[#EAEAEA] rounded-lg  bg-[#FFFF] p-4">
       <div className="flex items-center flex-row py-2">
+        <div>
         <div
           className={`flex justify-center ${
             bgVariants[data.state]
           } bg-opacity-10 rounded-full w-16 h-16`}
         >
-          <img src={`public/img/fase${data.stage}_${colors[data.state]}.svg`} width={25} />
+          <img src={`/img/fase${data.stage}_${colors[data.state]}.svg`} width={25} />
         </div>
+        </div>
+      
         <div
           className={`px-2 flex flex-col  uppercase text-xs ${
             colorVariants[data.state]
@@ -51,7 +54,7 @@ const Card = ({ data, numberCard }) => {
       </div>
       <div className="flex flex-col justify-center gap-1">
         <span className="font-medium text-sm">Paso {data.step}</span>
-        <span className="min-h-[3rem] font-medium text-sm opacity-50">
+        <span className="min-h-[4rem] font-medium text-sm opacity-50">
           {data.content}
         </span>
         <span

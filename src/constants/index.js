@@ -2,13 +2,14 @@ const dataCard = [
   {
     title: "Paso 1",
     step: 1,
-    content: "Datos de la empresa",
+    content: "Lider de diseño e implementacion PESV",
     stage: 1
+
   },
   {
     title: "Paso 2",
     step: 2,
-    content: "Lider de diseño e implementacion PESV",
+    content: "Comité de seguridad vial",
     stage: 1
 
   },

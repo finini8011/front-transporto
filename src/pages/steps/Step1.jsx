@@ -53,7 +53,7 @@ const Step1 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#3</h1>
+      <h1>Planificacion Paso#1</h1>
       <FormFlex
         titleForm={titleForm}
         step={"1.1"}

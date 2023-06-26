@@ -3,10 +3,10 @@ import Input from "../input/text/Input";
 import Select from "../input/select/Select";
 import TextArea from "../input/TextArea/TextArea";
 import ButtonIcon from "../button/ButtonIcon";
-import ButtonForm from "../button/ButtonForm";
+import ButtonInputForm from "../button/ButtonInputForm";
 import Date from "../input/text/Date";
 import { useState } from "react";
-const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
+const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
   const optionsChageState = [
@@ -55,17 +55,20 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="p-2" id={id}>
-      <h2 className="text-center text-xs mb-4">{title}</h2>
+    <form ref={formRef} onSubmit={handleSubmit} className="py-2 px-4" id={id}>
+      <h2 className="text-center text-sm mb-4">
+        {document && <strong>DOCUMENTO: </strong>}
+        {title}
+      </h2>
       <hr />
 
       {/*   <div className={`grid grid-cols-${cols} gap-2`}> */}
-      <div className={`grid grid-cols-${cols} gap-2`}>
+      <div className={`grid grid-cols-${cols} gap-2 mt-2`}>
         {inputs.map((input, index) => {
           switch (input.type) {
             case "text":
             case "file":
-              case "number":
+            case "number":
               return (
                 <Input
                   key={index}
@@ -134,12 +137,18 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
               );
             case "button":
               return (
-                <ButtonForm
+                /* <ButtonForm
                   text={input.text}
                   icon={input.icon}
                   type={input.type}
                   key={index}
-                />
+                /> */
+                <div
+                  className={`col-start-${input.start} col-end-${input.end}`}
+                  key={index}
+                >
+                  <button type="button" className="w-full h-full border-2 border-[#0090FF] rounded-2xl">hola</button>
+                </div>
               );
             case "span":
               return (

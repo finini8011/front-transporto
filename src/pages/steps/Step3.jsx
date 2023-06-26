@@ -15,7 +15,7 @@ const Step3 = () => {
   const [saveStepQuestion] = useSaveStepQuestionMutation();
 
   const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+    "Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "3.3" ? "3da" : id;
@@ -63,7 +63,7 @@ const Step3 = () => {
         nameStep={
           "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
         }
-        cols={5}
+        cols={7}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>

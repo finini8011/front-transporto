@@ -25,7 +25,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "text",
       placeholder: "Ingrese nombre",
       start: 1,
-      end: 3,
+      end: 4,
       required: true,
     },
     {
@@ -35,8 +35,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       nameApi: "destinatario",
       type: "text",
       placeholder: "Ingrese nombre",
-      start: 3,
-      end: 5,
+      start: 4,
+      end: 6,
       required: true,
     },
     {
@@ -45,27 +45,9 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       name: "fecha",
       nameApi: "uploadDate",
       type: "span",
-      start: 5,
-      end: 5,
+      start: 6,
+      end: 7,
       value: formattedDate,
-    },
-    {
-      label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
-      labelWeight: "bold",
-      name: "observaciones",
-      nameApi: "observaciones",
-      type: "textArea",
-      start: 1,
-      end: 5,
-      required: true,
-    },
-    {
-      type: "button",
-      text: "Descargar archivo guía acta de asignación lider del PESV",
-      icon: faDownload,
-    },
-    {
-      type: "hr",
     },
     {
       label: "Carga archivo",
@@ -74,7 +56,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "file",
       placeholder: "Seleccione archivo",
       start: 1,
-      end: 4,
+      end: 6,
       onchange: (name, value) =>
         console.log(
           `Función personalizada para campo ${name} - Valor: ${value}`
@@ -82,14 +64,11 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       required: true,
     },
     {
-      label: "Cambiar estado",
-      labelWeight: "bold",
-      name: "cambiarEstado",
-      type: "select",
-      placeholder: "",
-      start: 4,
-      end: 6,
-      required: true,
+      type: "button",
+      text: "Descargar archivo guía acta de asignación lider del PESV",
+      icon: faDownload,
+      start: 6,
+      end: 7,
     },
     {
       label: "Nombre Archivo cargado",
@@ -97,15 +76,40 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "",
       nameApi: "originalName",
       start: 1,
-      end: 4,
+      end: 6,
+    },
+    {
+      label: "Cambiar estado",
+      labelWeight: "bold",
+      name: "cambiarEstado",
+      type: "select",
+      placeholder: "",
+      start: 1,
+      end: 2,
+      required: true,
+    },
+  
+    {
+      label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
+      labelWeight: "bold",
+      name: "observaciones",
+      nameApi: "observaciones",
+      type: "textArea",
+      start: 2,
+      end: 7,
+      required: true,
     },
     {
       label: "Estado actual",
       nameApi: "estado",
       type: "span",
-      start: 4,
-      end: 6,
+      start: 1,
+      end: 2,
     },
+    {
+      type: "hr",
+    },
+   
     {
       type: "hr",
     },
@@ -157,8 +161,12 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
-        <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
-          {step} {nameStep}
+        <div className="rounded-t-2xl flex text-base">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium" > {step} {nameStep}</div>
+          <div className="min-w-[110px] bg-[#EEF2F6]/25 flex justify-center rounded-tr-2xl">
+            <button className="text-[#FC6363] font-medium">GUARDAR</button>
+            </div>
+         
         </div>
         {/*   {data ? (
           <Form
@@ -180,6 +188,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
           buttons={buttons}
           onSubmit={onSubmit}
           id={step}
+          document={true}
         />
         {/*    )} */}
       </section>

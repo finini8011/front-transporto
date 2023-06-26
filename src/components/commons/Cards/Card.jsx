@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 import CardItem from "../Cards/CardItem";
 
-const Card = ({ data, numberCard }) => {
+const Card = ({ data, numberCard, onClick }) => {
   const fases = [
     "Planificación",
     "Implementación y ejecución",
@@ -29,20 +31,33 @@ const Card = ({ data, numberCard }) => {
     Pendiente: "naranja",
     "No aplica": "gris",
   };
-  
+
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    onClick(data.step, data.state);
+  };
+
   return (
-    <div className="border border-[#EAEAEA] rounded-lg  bg-[#FFFF] p-4">
+    <div
+      className={`border border-[#EAEAEA] rounded-lg  bg-[#FFFF] p-4 ${
+        data.state === "No aplica" ? "opacity-50 cursor-not-allowed" : "hover:border-[#1F3FCF] hover:drop-shadow-lg"
+      }`}
+      onClick={() => handleCardClick(data.step, data.state)}
+    >
       <div className="flex items-center flex-row py-2">
         <div>
-        <div
-          className={`flex justify-center ${
-            bgVariants[data.state]
-          } bg-opacity-10 rounded-full w-16 h-16`}
-        >
-          <img src={`/img/fase${data.stage}_${colors[data.state]}.svg`} width={25} />
+          <div
+            className={`flex justify-center ${
+              bgVariants[data.state]
+            } bg-opacity-10 rounded-full w-16 h-16`}
+          >
+            <img
+              src={`/img/fase${data.stage}_${colors[data.state]}.svg`}
+              width={25}
+            />
+          </div>
         </div>
-        </div>
-      
+
         <div
           className={`px-2 flex flex-col  uppercase text-xs ${
             colorVariants[data.state]

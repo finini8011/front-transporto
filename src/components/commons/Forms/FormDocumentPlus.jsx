@@ -42,7 +42,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       value: formattedDate
     },
     {
-      label: "Descripcion",
+      label: "Descripción",
       labelWeight: "bold",
       name: "observaciones",
       type: "textArea",

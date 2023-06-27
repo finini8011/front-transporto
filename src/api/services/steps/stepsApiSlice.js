@@ -59,6 +59,18 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       invalidatesTags: ["Steps"],
     }),
+    getStateSteps: builder.query({
+      query: (nivel) => {
+        return {
+          url: `/steps/states`,
+          method: "POST",
+           body: {
+            "nivel": nivel
+          }, 
+        
+        };
+      },
+    }),
   }),
 });
-export const { useGetDataStepQuery, useSaveStepMutation, useSaveStepQuestionMutation } = stepsApiSlice;
+export const { useGetDataStepQuery, useSaveStepMutation, useSaveStepQuestionMutation, useGetStateStepsQuery } = stepsApiSlice;

@@ -74,7 +74,7 @@ const MainAuth = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex w-full">
       <div
         className={`shadow-md relative menu-container ${
           openMenu ? "menu-open" : "menu-close"
@@ -325,8 +325,8 @@ const MainAuth = () => {
       </div>
       <div className="flex-1 h-screen bg-white flex flex-col overflow-auto">
         <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
-        <div className="flex bg-white">
-          <div className="m-6">
+        <div className="flex bg-white mt-10">
+          <div className="m-6 min-w-[80%] p-4">
             <Outlet />
           </div>
           <LateralRight />

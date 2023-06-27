@@ -253,7 +253,7 @@ const MainAuth = () => {
               <FontAwesomeIcon icon={faClipboardList} className="w-5 h-5" />
               {openMenu && (
                 <ListItemText
-                  primary="Lista Verificacion"
+                  primary="Lista Verificación"
                   primaryTypographyProps={{
                     component: "span",
                     sx: {

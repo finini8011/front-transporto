@@ -32,9 +32,8 @@ import {
   faGrip,
   faHouse,
   faArrowUpRightFromSquare,
-  faUserCircle,
+  faClipboardList,
   faVoteYea,
-  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
 
@@ -76,31 +75,27 @@ const MainAuth = () => {
   return (
     <div className="min-h-screen flex w-full">
       <div
-        className={`shadow-md relative menu-container ${
-          openMenu ? "menu-open" : "menu-close"
-        }`}
-        // onMouseLeave={() => setOpenMenu(!openMenu)}
+        className={`shadow-md relative menu-container ${openMenu ? "menu-open" : "menu-close"
+          }`}
+      // onMouseLeave={() => setOpenMenu(!openMenu)}
       >
         <img
-          className={`absolute right-12 top-44 cursor-pointer z-10 ${
-            openMenu ? "block" : "hidden"
-          } `}
+          className={`absolute right-12 top-44 cursor-pointer z-10 ${openMenu ? "block" : "hidden"
+            } `}
           src={notification}
           alt=""
-          // onClick={handleOpenMenu}
+        // onClick={handleOpenMenu}
         />
         <img
-          className={`absolute -right-5 top-48 cursor-pointer z-10 ${
-            openMenu ? "rotate-0" : "rotate-180"
-          } `}
+          className={`absolute -right-5 top-48 cursor-pointer z-10 ${openMenu ? "rotate-0" : "rotate-180"
+            } `}
           src={arrow}
           alt=""
           onClick={handleOpenMenu}
         />
         <div
-          className={`flex items-center justify-center flex-col gap-2  border-third border-b ${
-            openMenu ? "py-2 px-4" : "p-2"
-          }`}
+          className={`flex items-center justify-center flex-col gap-2  border-third border-b ${openMenu ? "py-2 px-4" : "p-2"
+            }`}
         >
           <img src={openMenu ? logo : transporto} alt="logo" />
           {openMenu && (
@@ -167,24 +162,6 @@ const MainAuth = () => {
             {openMenu && (
               <Collapse in={openList} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    className={`flex gap-2 ${
-                      currentPage === "/step" && "active"
-                    }`}
-                    onClick={() => handleNavigate("/step")}
-                  >
-                    <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
-                    <ListItemText
-                      primary="Registrar Empresa"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.9rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => navigate("/preparacion")}
@@ -269,6 +246,25 @@ const MainAuth = () => {
               </Collapse>
             )}
             <ListItemButton
+              onClick={() => navigate("/list-verification")}
+              className="flex gap-2"
+              sx={{ justifyContent: "center" }}
+            >
+              <FontAwesomeIcon icon={faClipboardList} className="w-5 h-5" />
+              {openMenu && (
+                <ListItemText
+                  primary="Lista Verificacion"
+                  primaryTypographyProps={{
+                    component: "span",
+                    sx: {
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                />
+              )}
+            </ListItemButton>
+
+            <ListItemButton
               onClick={() => navigate("/informes")}
               className="flex gap-2"
               sx={{ justifyContent: "center" }}
@@ -307,9 +303,8 @@ const MainAuth = () => {
           </List>
           <div className={`${openMenu ? "px-4" : "px-2"} text-white `}>
             <div
-              className={`bg-fourth rounded-lg flex gap-2 py-2 justify-center overflow-hidden ${
-                openMenu ? "px-4" : ""
-              }`}
+              className={`bg-fourth rounded-lg flex gap-2 py-2 justify-center overflow-hidden ${openMenu ? "px-4" : ""
+                }`}
               onClick={logoutSession}
               role="button"
             >

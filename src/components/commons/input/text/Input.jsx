@@ -17,7 +17,7 @@ const Input = forwardRef((props, ref) => {
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",
-    medum: "font-medim",
+    medium: "font-medium",
   };
 
   const colsVariantsStart = {

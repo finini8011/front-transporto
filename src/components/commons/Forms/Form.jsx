@@ -144,10 +144,12 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   key={index}
                 /> */
                 <div
-                  className={`col-start-${input.start} col-end-${input.end}`}
+                  className={`col-start-${input.start} col-end-${input.end} flex`}
                   key={index}
                 >
-                  <button type="button" className="w-full h-full border-2 border-[#0090FF] rounded-2xl">hola</button>
+                  
+                  <button type="button" className="flex-grow h-full border-2 border-[#0090FF] rounded-2xl overflow-hidden text-overflow-ellipsis whitespace-nowrap max-w-full">{input.text}</button>
+
                 </div>
               );
             case "span":
@@ -157,7 +159,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   key={index}
                 >
                   <label
-                    className={`block mb-2 text-sm  font-bold text-gray-900`}
+                    className={`block mb-2 text-sm font-medium text-gray-900`}
                   >
                     {input.label}
                   </label>

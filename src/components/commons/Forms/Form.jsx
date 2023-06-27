@@ -48,6 +48,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
     });
 
     if (isValid) {
+      setErrors([]);
       onSubmit(formValues, id);
     } else {
       setErrors(newErrors);

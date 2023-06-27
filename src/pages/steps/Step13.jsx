@@ -8,24 +8,22 @@ import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
 
-const Step3 = () => {
-
-  const [saveStep] = useSaveStepMutation();
+const Step13 = () => {
+  const [saveStep, saveStepInfo] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
-
   const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+    "Documento: Procedimiento: para reportar, registrar, investigar, analizar y divulgar los siniestros viales para la investigación interna de siniestros viales";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "3.3" ? "3da" : id;
+    const stepUrl = id == "13.3" ? "13da" : id;
     const selectedFile = values.cargaArchivo;
     const payload = {};
-    if (id == "3.1") {
+    if (id == "13.1") {
       payload.creador = values.crea;
       payload.destinatario = values.destinatario;
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;
-    } else if (id == "3.2") {
+    } else if (id == "13.2") {
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;
     } else {
@@ -40,39 +38,39 @@ const Step3 = () => {
         payload: payload,
         file: selectedFile,
       };
-      if (id === "3.1" || id == "3.3") {
+      if (id === "13.1" || id == "13.3") {
         await saveStep(obj).unwrap();
-      } else if (id == "3.2") {
+      } else if (id == "13.2") {
         await saveStepQuestion(obj).unwrap();
       }
+
       toast.success("Se ha registrado correctamente!");
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
 
-
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#3</h1>
+      <h1>Planificacion Paso#13</h1>
       <FormFlex
         titleForm={titleForm}
-        step={"3.1"}
+        step={"13.1"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿La organización documentó y aplicó una técnica, metodología o procedimiento para reportar, registrar, investigar, analizar y divulgar los siniestros viales en los que se ven involucrados los colaboradores de la organización en los desplazamientos laborales y en el entorno próximo de la organización, incluye como mínimo los requisitos mencionados en el Paso 13?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
       <FormSelect
-        titleForm={titleForm}
-        step={"3.2"}
+        titleForm={""}
+        step={"13.2"}
         nameStep={
-          "El líder del diseño e implemetación del PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad vial"
+          "¿La organización divulgó las lecciones aprendidas de los siniestros viales?"
         }
-        cols={5}
+        cols={4}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
@@ -80,7 +78,7 @@ const Step3 = () => {
         titleForm={
           "Aquí podrá subir documentos adicionales aparte de los considerados obligatorios dentro del PESV. Incluya quien crea el documento y a quien va dirigido, así como una breve descripción. La plataforma incluirá de manera automática la fecha en que se carga el documento para el manejo de la trazabilidad"
         }
-        step={"3.3"}
+        step={"13.3"}
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
@@ -89,4 +87,4 @@ const Step3 = () => {
   );
 };
 
-export default Step3;
+export default Step13;

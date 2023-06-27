@@ -89,6 +89,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
+        <p>preubas</p>
         <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
           {step} {nameStep}
         </div>

@@ -51,11 +51,16 @@ const Card = ({ data, numberCard, onClick }) => {
               bgVariants[data.state]
             } bg-opacity-10 rounded-full w-16 h-16`}
           >
-            <img
+            {data.state ? (<img
               src={`/img/fase${data.stage}_${colors[data.state]}.svg`}
               width={25}
               alt="icon"
-            />
+            />): <img
+            src={`/img/fase${data.stage}_verde.svg`}
+            width={25}
+            alt="icon"
+          />}
+            
           </div>
         </div>
 

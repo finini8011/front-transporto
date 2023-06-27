@@ -7,7 +7,7 @@ import { useGetStateStepsQuery } from "../../api/services/steps/stepsApiSlice";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [loadedData, setLoadedData] = useState(false);
+  const [updatedDataCard, setUpdatedDataCard] = useState(dataCard);
   const persistRootValue = localStorage.getItem("persist:root");
   const authState = JSON.parse(persistRootValue).authState;
   const nivel = JSON.parse(authState).user.compania.nivel;
@@ -15,24 +15,30 @@ const Home = () => {
 
   useEffect(() => {
     if (data) {
-      dataCard.map((dataC, i) => {
-        dataC.state = data[i + 1],[0];
+      const updatedData = dataCard.map((dataC, i) => {
+        return {
+          ...dataC,
+          state: data[i + 1][0]
+        };
       });
-      setLoadedData(true);
+      setUpdatedDataCard(updatedData);
     }
   }, [data]);
 
+
   const handleCardClick = (step, state) => {
-    if (state !== "No aplica") {
+    console.log(state)
+    if (state !== "No aplica" && nivel == "Básico") {
       return navigate(`/step/${step}`);
     }
   };
 
   return (
     <div className="justify-center ">
-      {loadedData ? (
+    {/*   {loadedData ? ( */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {dataCard.map((data, key) => (
+        {
+          updatedDataCard.map((data, key) => (
             <Card
               key={key}
               data={data}
@@ -41,9 +47,9 @@ const Home = () => {
             />
           ))}
         </div>
-      ) : (
+    {/*   ) : (
         <div></div>
-      )}
+      )} */}
     </div>
   );
 };

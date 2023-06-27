@@ -54,6 +54,7 @@ const Card = ({ data, numberCard, onClick }) => {
             <img
               src={`/img/fase${data.stage}_${colors[data.state]}.svg`}
               width={25}
+              alt="icon"
             />
           </div>
         </div>

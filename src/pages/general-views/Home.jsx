@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     if (data) {
       dataCard.map((dataC, i) => {
-        dataC.state = data[i + 1][0];
+        dataC.state = data[i + 1],[0];
       });
       setLoadedData(true);
     }

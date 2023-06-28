@@ -4,11 +4,12 @@ import Form from "./Form";
 import {
   faDownload,
   faEye,
+  faGreaterThan,
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
- 
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -18,38 +19,31 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   const inputs = [
     {
-      label: "Cambiar estado",
-      labelWeight: "bold",
+      label: "CAMBIAR ESTADO",
+      labelWeight: "medium",
       name: "cambiarEstado",
       type: "select",
       placeholder: "",
       start: 1,
       end: 3,
-      required: true
+      required: true,
     },
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "observaciones",
       type: "textArea",
       start: 3,
       end: 6,
-      required: true
-
-    },
-    {
-      type: "hr",
+      required: true,
     },
 
     {
-      label: "Estado actual",
+      label: "ESTADO ACTUAL",
       type: "span",
       start: 1,
       end: 3,
       value: "SI",
-    },
-    {
-      type: "hr",
     },
   ];
   const buttons = [
@@ -89,9 +83,16 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
-        <p>preubas</p>
-        <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
-          {step} {nameStep}
+        <div className="rounded-t-2xl flex text-base">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium w-full">
+          <FontAwesomeIcon
+              size="xs"
+              icon={faGreaterThan}
+              className="mr-2"
+              style={{ color: "#008ffe" }}
+            />
+            {step} {nameStep}
+          </div>
         </div>
         {/*   {data ? (
           <Form

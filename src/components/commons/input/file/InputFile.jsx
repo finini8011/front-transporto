@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 
-const Input = forwardRef((props, ref) => {
+const InputFile = forwardRef((props, ref) => {
   const {
     type,
     id,
@@ -41,27 +41,30 @@ const Input = forwardRef((props, ref) => {
   };
 
   return (
-    <div className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]}`}>
+    <div
+      className={`${colsVariantsStart[start]} ${colsVariantsEnd[end]} w-full`}
+    >
       <label
         htmlFor={id}
         className={`block mb-2 text-sm  ${fontWeightVariants[fontWeight]} text-gray-900`}
       >
         {label}
       </label>
-      <input
-        className={`bg-white-500 border border-[#E9EEF3] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 w-full p-2.5 disabled:cursor-no-drop disabled:bg-gray-200 read-only:bg-gray-200 read-only:cursor-no-drop ${
-          hidden && "hidden"
-        }`}
-        type={type}
-        name={id}
-        id={id}
-        value={value}
-        {...inputProps}
-        ref={ref}
-      />
-        {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
+
+      <div className="flex">
+        <input
+          type="text"
+          className="pl-4 pr-12 py-2 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+          placeholder="Ingrese texto"
+        />
+        <button className="bg-blue-500 text-white py-2 px-4 rounded-r-lg cursor-pointer">
+          Buscar
+        </button>
+      </div>
+
+      {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
     </div>
   );
 });
 
-export default Input;
+export default InputFile;

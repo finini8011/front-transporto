@@ -8,13 +8,14 @@ const Implementacion = () => {
 
   let resultCumple = 0;
   let parcialmente = 0;
+  let arrayDateStateFase2 = [];
+  let resultNoAplica = 0;
 
   
 
   if (dataState) {
     const { 2: fase2 } = dataState;
-    let arrayDateStateFase2 = Object.values(fase2);
-    console.log(fase2, "fase2")
+     arrayDateStateFase2 = Object.values(fase2);
     arrayDateStateFase2.map((registro) => {
       if (registro === "Cumple") {
         resultCumple = resultCumple + 1;
@@ -22,13 +23,17 @@ const Implementacion = () => {
       if (registro === "Cumple parcialmente") {
         parcialmente = parcialmente + 1;
       }
+      console.log(arrayDateStateFase2, "fase2")
+      if (registro === "No aplica") {
+        resultNoAplica = resultNoAplica + 1;
+      }
+      console.log(arrayDateStateFase2, "fase2")
     })
   }
-  console.log(dataState)
 
 
   let resultParcialmente = parcialmente * 0.25;
-  let resultPesv = (resultCumple + resultParcialmente ) ;
+  let resultPesv = (resultCumple + resultParcialmente  )/(arrayDateStateFase2.length -resultNoAplica ) ;
 
   return (
     <div>

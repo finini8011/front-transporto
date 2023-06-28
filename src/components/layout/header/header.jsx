@@ -16,7 +16,6 @@ const Header = () => {
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   const user = useSelector(selectCurrentUser);
- console.log("datos", user)
 
   const handleNavigate = (page) => {
     setCurrentPage(page);

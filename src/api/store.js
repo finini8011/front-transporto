@@ -1,10 +1,10 @@
+import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
-import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query/react";
-// Or from '@reduxjs/toolkit/query/react'
+
 import authReducer from "./features/auth/authSlice";
 import reportPESVReducer from "./features/reportPESV/report";
 import stepsPESVReducer from "./features/stepsPESV/stepsPESV";
@@ -12,6 +12,8 @@ import stepsPESVReducer from "./features/stepsPESV/stepsPESV";
 import { apiSlice } from "./services/auth/apiSlice"; 
 import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
 import { stepsApiSlice } from "./services/steps/stepsApiSlice";
+import { companyApiSlice } from "./services/company/companyApiSlice";
+
 
 const persistConfig = {
   key: "root",
@@ -34,6 +36,7 @@ export const store = configureStore({
     // Add the generated reducer as a specific top-level slice
     [apiSlice.reducerPath]: apiSlice.reducer,
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
+    [companyApiSlice.reducerPath]: companyApiSlice.reducer,
     [stepsApiSlice.reducerPath]: stepsApiSlice.reducer,
 
 
@@ -50,6 +53,7 @@ export const store = configureStore({
       .concat(thunk, apiSlice.middleware)
       // .concat(thunk, projectsApiSlice.middleware)
       .concat(thunk, listVerificationApiSlice.middleware)
+      .concat(thunk, companyApiSlice.middleware)
       .concat(thunk, stepsApiSlice.middleware)
 });
 

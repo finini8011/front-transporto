@@ -99,5 +99,5 @@ export const listVerificationApiSlice = createApi({
 export const {
   useLazyGetListVerificationPdfQuery,
   useSaveListVerificationMutation,
-  useUpdateQuadrantItemMutation,
+  useUpdateQuadrantItemMutation
 } = listVerificationApiSlice;

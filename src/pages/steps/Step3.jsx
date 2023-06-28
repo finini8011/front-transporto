@@ -7,14 +7,15 @@ import {
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
+import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Step3 = () => {
-
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
 
   const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+    "Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "3.3" ? "3da" : id;
@@ -51,26 +52,28 @@ const Step3 = () => {
     }
   };
 
-
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#3</h1>
+    
       <FormFlex
         titleForm={titleForm}
+        mainTitle={"FASE 1: PLANIFICACIÓN - PASO 3. POLÍTICA DE SEGURIDAD VIAL DE LA ORGANIZACIÓN"}
+        stage={"1"}
         step={"3.1"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿Se cuenta con Política de Seguridad Vial documentada con alcance sobre los desplazamientos laborales y los trayectos en itinere para todos los colaboradores de la organización?"
         }
-        cols={5}
+        cols={7}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
+
       <FormSelect
         titleForm={titleForm}
         step={"3.2"}
         nameStep={
-          "El líder del diseño e implemetación del PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad vial"
+          "¿La Política de Seguridad Vial documentada cumple con los requisitos definidos en el paso 3?"
         }
         cols={5}
         onSubmit={handleFormSubmit}

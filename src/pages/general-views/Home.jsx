@@ -15,22 +15,37 @@ const Home = () => {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
-  //const { data } = useGetStateStepsQuery(user.compania?.nivel);
-  const {dataState} = useGetStatePESVQuery();
+  const { data } = useGetStateStepsQuery(user.compania?.nivel);
+  const {data:dataState} = useGetStatePESVQuery();
 
-  console.log(dataState, "datos de estado");
+  let resultCumple = 0;
+  let parcialmente = 0;
+  let arrayPesv =[];
 
+  if(dataState){
+    const {1:fase1, 2:fase2, 3:fase3, 4:fase4} = dataState;
+    const arrayDateStateFase1 = Object.values(fase1);
+    const arrayDateStateFase2 = Object.values(fase2);
+    const arrayDateStateFase3 = Object.values(fase3);
+    const arrayDateStateFase4 = Object.values(fase4);
+    arrayPesv = arrayDateStateFase1.concat(arrayDateStateFase2, arrayDateStateFase3,arrayDateStateFase4)    
+    arrayPesv.map((registro) =>{
+     if(registro === "Cumple"){
+     resultCumple = resultCumple + 1;
+     }
+     if(registro === "Cumple parcialmente"){
+      parcialmente = parcialmente + 1;
+      }
+    })
+  }
 
-  //logica para barra de progreso
-  let resultCumple = 10;
-  let parcialmente = 5;
   let resultParcialmente = parcialmente * 0.25;
-  let resultNoAplica = 2;
-  let resultPesv = resultCumple + resultParcialmente / 25 - resultNoAplica ;
+  let resultPesv = (resultCumple + resultParcialmente / arrayPesv.length) ;
+
 
 
   
-/*   useEffect(() => {
+   useEffect(() => {
     if (data) {
       const updatedData = dataCard.map((dataC, i) => {
         return {
@@ -40,7 +55,7 @@ const Home = () => {
       });
       setUpdatedDataCard(updatedData);
     }
-  }, [data]);  */
+  }, [data]);  
 
 
   const handleCardClick = (step, state) => {
@@ -53,7 +68,7 @@ const Home = () => {
 
   return (
     <div className="justify-center ">
-      <ProgressBar bgcolor="#0090ff" progress={resultPesv} height={12} width="100%" text="PESV" />
+      <ProgressBar bgcolor="#0090ff" progress={Math.floor(resultPesv)? Math.floor(resultPesv): 0} height={12} width="100%" text="PESV" />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {
           updatedDataCard.map((data, key) => (

@@ -22,7 +22,6 @@ import Calendario from "./pages/general-views/Calendario";
 import Implementacion from "./pages/general-views/Fases/Implementacion";
 import Mejora from "./pages/general-views/Fases/Mejora";
 import Planificacion from "./pages/general-views/Fases/Planificacion";
-import Preparacion from "./pages/general-views/Fases/Preparacion";
 import Seguimiento from "./pages/general-views/Fases/Seguimiento";
 
 const persistor = persistStore(store);
@@ -48,7 +47,6 @@ function App() {
               <Route path="/calendario" element={<Calendario/>}/>
 
               <Route path="/planificacion" element={<Planificacion/>}/>
-              <Route path="/preparacion" element={<Preparacion/>}/>
               <Route path="/mejora" element={<Mejora/>}/>
               <Route path="/implementacion" element={<Implementacion/>}/>
               <Route path="/seguimiento" element={<Seguimiento/>}/>

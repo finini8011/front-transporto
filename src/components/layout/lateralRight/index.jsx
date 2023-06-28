@@ -22,7 +22,7 @@ const LateralRight = () => {
   return (
     <section
       className={` mr-6 mt-6 transition-section  relative ${
-        openMenu ? "w-80" : "w-24"
+        openMenu ? "w-60" : "w-20"
       }`}
     >
       <img

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   selectCurrentUser,
-  logOut,
+  logOut
 } from "../../../api/features/auth/authSlice";
 import Header from "../header/header";
 
@@ -32,22 +32,25 @@ import {
   faGrip,
   faHouse,
   faArrowUpRightFromSquare,
-  faClipboardList,
+  faPenToSquare,
   faVoteYea,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
+import BreakCrumbs from "../../breakcrumbs";
 
 const MainAuth = () => {
+
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   const [openMenu, setOpenMenu] = useState();
-  const [openList, setOpenList] = React.useState(true);
+  const [openList, setOpenList] = useState(true);
 
   const handleClick = () => {
     setOpenList(!openList);
   };
+
   const logoutSession = () => {
     navigate("/");
     setTimeout(() => {
@@ -246,14 +249,14 @@ const MainAuth = () => {
               </Collapse>
             )}
             <ListItemButton
-              onClick={() => navigate("/list-verification")}
-              className="flex gap-2"
+              className={`flex gap-2 ${currentPage === "/list-verification" && "active"}`}
               sx={{ justifyContent: "center" }}
+              onClick={() => handleNavigate("/list-verification")}
             >
-              <FontAwesomeIcon icon={faClipboardList} className="w-5 h-5" />
+              <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
               {openMenu && (
                 <ListItemText
-                  primary="Lista Verificación"
+                  primary="Lista de Chequeo"
                   primaryTypographyProps={{
                     component: "span",
                     sx: {

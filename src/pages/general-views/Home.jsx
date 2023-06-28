@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Card from "../../components/commons/Cards/Card";
+import ProgressBar from "../../components/commons/Progress/ProgressBar";
 import { dataCard } from "../../constants";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../api/features/auth/authSlice";
 import { useGetStateStepsQuery } from "../../api/services/steps/stepsApiSlice";
+
 
 const Home = () => {
 
@@ -15,8 +17,6 @@ const Home = () => {
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
 
-
- 
 
   useEffect(() => {
     if (data) {
@@ -40,7 +40,8 @@ const Home = () => {
   };
 
   return (
-    <div className="justify-center " id="root">
+    <div className="justify-center ">
+       <ProgressBar bgcolor="#0090ff" progress={40}  height={12} width="100%" text="PESV"/>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {
           updatedDataCard.map((data, key) => (

@@ -13,11 +13,10 @@ const Home = () => {
   const [updatedDataCard, setUpdatedDataCard] = useState(dataCard);
   const persistRootValue = localStorage.getItem("persist:root");
   const authState = JSON.parse(persistRootValue).authState;
-  const nivel = JSON.parse(authState).user.compania.nivel;
-  const { data, error, isLoading } = useGetStateStepsQuery(nivel);
-  // console.log(user)
-  // console.log(data)
-  useEffect(() => {
+  const { data} = useGetStateStepsQuery();
+
+
+   useEffect(() => {
     if (data) {
       const updatedData = dataCard.map((dataC, i) => {
         return {
@@ -31,10 +30,11 @@ const Home = () => {
 
 
   const handleCardClick = (step, state) => {
-    console.log(state)
-    if (state !== "No aplica" && nivel == "Básico") {
+     if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
       return navigate(`/step/${step}`);
-    }
+    }else{
+      return navigate(`/step/${step}`);
+    } 
   };
 
   return (

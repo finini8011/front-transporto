@@ -1,93 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./header.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faPencil,
-  faGrip,
-  faRectangleXmark,
-  faShareFromSquare,
-} from "@fortawesome/free-solid-svg-icons";
 
-import Modal from "react-modal";
-import InfoCompliance from "../../commons/InfoCompliance/InfoCompliance";
-import DirectAccess from "../../commons/DirectAccess/DirectAccess";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
 import expandir from "/img/expandir.png";
-import empresa from "/img/empresa.png";
 import guia from "/img/guia.png";
 import modulo from "/img/modulo.png";
 import herramientas from "/img/herramientas.png";
 import buscar from "/img/buscar.png";
+import Empresa from "../../imgComponents/Empresa";
 
-const Header = ({ openMenu, setOpenMenu }) => {
+const Header = ({currentPage, setCurrentPage}) => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
+  const [date, setDate] = useState("");
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+    navigate(page);
+    // Aquí puedes realizar la navegación a la página correspondiente
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const openModalAccess = () => {
-    setIsModalAccessOpen(true);
-  };
-
-  const closeModalAccess = () => {
-    setIsModalAccessOpen(false);
-  };
+  useEffect(() => {
+    const date = new Date();
+    setDate(
+      new Intl.DateTimeFormat("es", {
+        dateStyle: "full",
+      }).format(date)
+    );
+  }, []);
+ 
   return (
     <React.Fragment>
-      <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20">
-        {/* <ul className="flex flex-row">
-          <li>
-            <button
-              className="p-2 "
-              data-widget="pushmenu"
-              role="button"
-              onClick={handleMenu}
-              >
-              <FontAwesomeIcon icon={faBars} size="lg" />
-            </button>
-          </li>
-        </ul> */}
+      <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20 z-10">
         <div className="flex flex-col gap-2">
-          <h3 className="text-xl">ABC Transportes - {user.name} </h3>
-          <p className="text-sm color-fifth">Lun, 1 Ene 2023</p>
+          <h3 className="text-xl">
+            {user.compania?.razon_social
+              ? user.compania.razon_social
+              : "Texto por definir"}
+            - {user.name}{" "}
+          </h3>
+          <p className="text-sm color-fifth">{date} </p>
         </div>
 
         <ul className="flex flex-row gap-4 color-fifth items-center">
-          {/* <li>
-            <button className="p-2" onClick={() => navigate("/step")} >
-              <FontAwesomeIcon icon={faPencil} />
-            </button>
-          </li>
-
-          <li>
-            <button className="p-2 ml-4" onClick={openModalAccess}>
-              <FontAwesomeIcon icon={faShareFromSquare} />
-            </button>
-          </li>
-
-          <li>
-            <button className="p-2 ml-4" onClick={openModal}>
-              <FontAwesomeIcon icon={faGrip} />
-            </button>
-          </li> */}
           <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
             <img className="" src={buscar} alt="Expandir" />
             <p>Buscar</p>
           </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <img className="" src={empresa} alt="Expandir" />
-            <p>Empresa</p>
+          <li
+            className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
+            onClick={() =>
+              handleNavigate(
+                user.compania ? "/update-company" : "/register-company"
+              )
+            }
+            role="button"
+          >
+            {/* <img className="m-auto" src={empresa} alt="Expandir" /> */}
+            <Empresa color={`${currentPage === "/register-company" || currentPage === "/update-company" ? "#0090FF" :"#c2c7d0"}`} />
+            <p className={`${currentPage === "/register-company" || currentPage === "/update-company" ? "color-fourth" :"color-fifth"}`}>Empresa</p>
           </li>
           <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
             <img className="" src={guia} alt="Expandir" />
@@ -108,27 +81,6 @@ const Header = ({ openMenu, setOpenMenu }) => {
           </li>
         </ul>
       </nav>
-
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <button onClick={closeModal} className="modal-close">
-          <FontAwesomeIcon icon={faRectangleXmark} />
-        </button>
-        <InfoCompliance />
-      </Modal>
-
-      <Modal
-        isOpen={isModalAccessOpen}
-        onRequestClose={closeModalAccess}
-        className="ModalAccess"
-        overlayClassName="Overlay"
-      >
-        <DirectAccess />
-      </Modal>
     </React.Fragment>
   );
 };

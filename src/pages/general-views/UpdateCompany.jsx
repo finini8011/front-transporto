@@ -4,22 +4,23 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {
   useGetCIIUQuery,
-  useSaveCompanyMutation,
+  useUpdateCompanyMutation,
   useGetDepartmentsQuery,
   useLazyGetCitiesOfDepartmentQuery,
-  useLazyValidateNITQuery,
 } from "../../api/services/company/companyApiSlice";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../api/features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser, setUser } from "../../api/features/auth/authSlice";
 
 import SelectRHF from "../../components/commons/input/select/SelectRHF";
 import InputRHF from "../../components/commons/input/text/InputRHF";
 import InputNumberCount from "../../components/commons/input/text/InputNumberCount";
 import Button from "../../components/commons/button/Button";
 
-const RegisterCompany = () => {
+const UpdateCompany = () => {
+  const { compania } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const [saveCompany, { isLoading, error }] = useSaveCompanyMutation();
+  const [updateCompany, { isLoading, error }] = useUpdateCompanyMutation();
+  const [count, setCount] = useState(0);
   const {
     data: dataCIIU,
     error: errorCIIU,
@@ -32,11 +33,8 @@ const RegisterCompany = () => {
   } = useGetDepartmentsQuery();
   const [getCities, { isLoading: isLoadingCities }] =
     useLazyGetCitiesOfDepartmentQuery();
-  const [validateNIT, { isLoading: isLoadingValidateNIT }] =
-    useLazyValidateNITQuery();
 
   const [dataCities, setDataCities] = useState([]);
-  const [stateValidateNIT, setStateValidateNIT] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,22 +45,7 @@ const RegisterCompany = () => {
     watch,
     setValue,
     resetField,
-  } = useForm({
-    defaultValues: {
-      vehiculos_propios: '0',
-      vehiculos_arrendados: '0',
-      vehiculos_intermediacion: '0',
-      vehiculos_contratistas: '0',
-      vehiculos_leasing: '0',
-      vehiculos_renting: '0',
-      vehiculos_colaboradores: '0',
-      conductores_directos: '0',
-      conductores_trabajadores: '0',
-      conductores_contratistas: '0',
-      conductores_tercerizados: '0',
-      otros_conductores: '0',
-    }
-  });
+  } = useForm();
 
   const onSubmit = async (dataForm) => {
     const {
@@ -105,23 +88,19 @@ const RegisterCompany = () => {
     )
       return toast.error("Llenar todos los campos del formulario");
 
-    if (stateValidateNIT) return toast.error("NIT ya registrado, ingrese otro");
-
     try {
-      const {user} =  await saveCompany({
+      const { user } = await updateCompany({
         email,
         cities_id: parseInt(cities_id),
         main_activity_ciiu: parseInt(main_activity_ciiu),
         secondary_activity_ciiu: parseInt(secondary_activity_ciiu),
         nit,
         razon_social,
-        // cantidad_vehiculos: parseInt(cantidad_vehiculos),
-        // cantidad_conductores: parseInt(cantidad_conductores),
         representante_legal,
         telefono1,
         telefono2,
         direccion,
-        misionalidad: misionalidad=== "true" ? true : false,
+        misionalidad: misionalidad === "true" ? true : false,
         vehiculos_propios: parseInt(vehiculos_propios),
         vehiculos_arrendados: parseInt(vehiculos_arrendados),
         vehiculos_intermediacion: parseInt(vehiculos_intermediacion),
@@ -135,10 +114,10 @@ const RegisterCompany = () => {
         conductores_tercerizados: parseInt(conductores_tercerizados),
         otros_conductores: parseInt(otros_conductores),
       }).unwrap();
-      dispatch(setUser(user) );
-      toast.success("Se ha registrado correctamente!");
+      dispatch(setUser(user));
+      toast.success("Se ha actualizado correctamente!");
       setTimeout(() => {
-      navigate("/home");
+        navigate("/home");
       }, 2500);
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
@@ -147,62 +126,65 @@ const RegisterCompany = () => {
   };
 
   useEffect(() => {
+    if (count > 0) {
+      const getCitiesOfDepartments = async () => {
+        const { data } = await getCities(parseInt(watch("departments")));
+        setDataCities(data);
+        // setValue("cities_id", compania.cities_id);
+      };
+      getCitiesOfDepartments();
+    }
+    setCount(1);
+  }, [watch("departments")]);
+
+  useEffect(() => {
+    // console.log(compania);
+    setValue("nit", compania.nit);
+    setValue("razon_social", compania.razon_social);
+    setValue("representante_legal", compania.representante_legal);
+    setValue("main_activity_ciiu", compania.main_activity_ciiu);
+    setValue("secondary_activity_ciiu", compania.secondary_activity_ciiu);
+    setValue("direccion", compania.direccion);
+    setValue("telefono1", compania.telefono1);
+    setValue("telefono2", compania.telefono2);
+    setValue("email", compania.email);
+    // setValue("departments", compania.departments_id);
+    // setValue("cities_id", compania.cities_id);
+    setValue("misionalidad", compania.misionalidad === 1 ? "true" : "false");
+    setValue("vehiculos_propios", compania.vehiculos_propios);
+    setValue("vehiculos_arrendados", compania.vehiculos_arrendados);
+    setValue("vehiculos_intermediacion", compania.vehiculos_intermediacion);
+    setValue("vehiculos_contratistas", compania.vehiculos_contratistas);
+    setValue("vehiculos_leasing", compania.vehiculos_leasing);
+    setValue("vehiculos_renting", compania.vehiculos_renting);
+    setValue("vehiculos_colaboradores", compania.vehiculos_colaboradores);
+    setValue("conductores_directos", compania.conductores_directos);
+    setValue("conductores_contratistas", compania.conductores_contratistas);
+    setValue("conductores_tercerizados", compania.conductores_tercerizados);
+    setValue("conductores_trabajadores", compania.conductores_trabajadores);
+    setValue("otros_conductores", compania.otros_conductores);
+  }, []);
+
+  useEffect(() => {
     if (!isLoadingDepartments) {
-      setValue("departments", dataDepartments[0].value);
+      setValue("departments", compania.departments_id);
     }
   }, [isLoadingDepartments]);
 
   useEffect(() => {
-    if (!isLoadingCIIU) {
-      setValue("main_activity_ciiu", dataCIIU[0].value);
-      setValue("secondary_activity_ciiu", dataCIIU[0].value);
-    }
-  }, [isLoadingCIIU]);
+    setValue("cities_id", compania.cities_id);
+  }, [dataCities]);
 
   useEffect(() => {
-    if (watch("departments")) {
-      const getCitiesOfDepartments = async () => {
-        const { data } = await getCities(parseInt(watch("departments")));
-        setDataCities(data);
-        setValue("cities_id", data[0].value);
-      };
-      getCitiesOfDepartments();
-    }
-  }, [watch("departments")]);
-
-  useEffect(() => {
-    if (watch("nit") !== "") {
-      const timeoutId = setTimeout(async () => {
-        const { data } = await validateNIT([watch("nit")]);
-        data === 1 ? setStateValidateNIT(true) : setStateValidateNIT(false);
-        data === 1 && toast.error("NIT ya registrado!");
-      }, 1000);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [watch("nit")]);
-
-  useEffect(() => {
-    if (
-      watch("vehiculos_propios").length > 0 &&
-      watch("vehiculos_arrendados").length > 0 &&
-      watch("vehiculos_intermediacion").length > 0 &&
-      watch("vehiculos_contratistas").length > 0 &&
-      watch("vehiculos_leasing").length > 0 &&
-      watch("vehiculos_renting").length > 0 &&
-      watch("vehiculos_colaboradores").length > 0
-    ) {
-      const totalVehiculos =
-        parseInt(watch("vehiculos_propios")) +
-        parseInt(watch("vehiculos_arrendados")) +
-        parseInt(watch("vehiculos_intermediacion")) +
-        parseInt(watch("vehiculos_contratistas")) +
-        parseInt(watch("vehiculos_leasing")) +
-        parseInt(watch("vehiculos_renting")) +
-        parseInt(watch("vehiculos_colaboradores"));
-      setValue("cantidad_vehiculos", totalVehiculos);
-    } else {
-      setValue("cantidad_vehiculos", "");
-    }
+    const totalVehiculos =
+      parseInt(watch("vehiculos_propios")) +
+      parseInt(watch("vehiculos_arrendados")) +
+      parseInt(watch("vehiculos_intermediacion")) +
+      parseInt(watch("vehiculos_contratistas")) +
+      parseInt(watch("vehiculos_leasing")) +
+      parseInt(watch("vehiculos_renting")) +
+      parseInt(watch("vehiculos_colaboradores"));
+    setValue("cantidad_vehiculos", totalVehiculos);
   }, [
     watch("vehiculos_propios"),
     watch("vehiculos_arrendados"),
@@ -214,23 +196,13 @@ const RegisterCompany = () => {
   ]);
 
   useEffect(() => {
-    if (
-      watch("conductores_directos").length > 0 &&
-      watch("conductores_trabajadores").length > 0 &&
-      watch("conductores_contratistas").length > 0 &&
-      watch("conductores_tercerizados").length > 0 &&
-      watch("otros_conductores").length > 0
-    ) {
-      const total =
-        parseInt(watch("conductores_directos")) +
-        parseInt(watch("conductores_trabajadores")) +
-        parseInt(watch("conductores_contratistas")) +
-        parseInt(watch("conductores_tercerizados")) +
-        parseInt(watch("otros_conductores"));
-      setValue("cantidad_conductores", total);
-    } else {
-      setValue("cantidad_conductores", "");
-    }
+    const total =
+      parseInt(watch("conductores_directos")) +
+      parseInt(watch("conductores_trabajadores")) +
+      parseInt(watch("conductores_contratistas")) +
+      parseInt(watch("conductores_tercerizados")) +
+      parseInt(watch("otros_conductores"));
+    setValue("cantidad_conductores", total);
   }, [
     watch("conductores_directos"),
     watch("conductores_trabajadores"),
@@ -240,11 +212,10 @@ const RegisterCompany = () => {
   ]);
 
   return (
-    <div>
     <div className="flex flex-col gap-2">
       <Toaster />
       <div className="bg-fourth text-white py-3 px-5 rounded-md flex justify-between items-center">
-        <p>Registro de nueva empresa</p>
+        <p>Datos de la empresa registrada</p>
         <p className="text-sm">Ayuda</p>
       </div>
       <div>
@@ -259,6 +230,7 @@ const RegisterCompany = () => {
               type="text"
               label="NIT"
               placeholder="Ingrese NIT"
+              readOnly
               {...register("nit")}
             />
             <InputRHF
@@ -280,12 +252,14 @@ const RegisterCompany = () => {
               label="Actividad Principal (CIIU)"
               dataApi={dataCIIU}
               {...register("main_activity_ciiu")}
+              disabled
             />
             <SelectRHF
               type="text"
               label="Actividad Secundaria (CIIU)"
               dataApi={dataCIIU}
               {...register("secondary_activity_ciiu")}
+              disabled
             />
           </div>
         </div>
@@ -296,7 +270,7 @@ const RegisterCompany = () => {
             {"> Datos de contacto"}
           </p>
         </div>
-        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300   ">
           <div className="grid grid-cols-3 gap-5">
             <InputRHF
               type="text"
@@ -358,6 +332,7 @@ const RegisterCompany = () => {
                 value={true}
                 defaultChecked
                 {...register("misionalidad")}
+                disabled
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "
               />
             </div>
@@ -372,6 +347,7 @@ const RegisterCompany = () => {
                 {...register("misionalidad")}
                 type="radio"
                 value={false}
+                disabled
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  "
               />
             </div>
@@ -384,7 +360,7 @@ const RegisterCompany = () => {
             {"> Tamaño de la organización"}
           </p>
         </div>
-        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl  border border-gray-300 ">
           <div className="grid grid-cols-2 gap-5">
             <div className="border border-gray-300 p-3 rounded-md">
               <p className="text-sm">
@@ -429,7 +405,7 @@ const RegisterCompany = () => {
                 <InputNumberCount
                   text="Total de vehículos de la flota automotor o no automotor"
                   size="text-base"
-                  disabled
+                  readOnly
                   {...register("cantidad_vehiculos")}
                 />
               </div>
@@ -469,7 +445,7 @@ const RegisterCompany = () => {
                 <InputNumberCount
                   text="Total de conductores contratados o administrados por la organización"
                   size="text-base"
-                  disabled
+                  readOnly
                   {...register("cantidad_conductores")}
                 />
               </div>
@@ -478,14 +454,12 @@ const RegisterCompany = () => {
         </div>
       </div>
       <Button
-        text="Registrar Empresa"
+        text="Actualizar Empresa"
         onClick={handleSubmit(onSubmit)}
         loading={isLoading}
       />
     </div>
-    {/* <Form title="complemento" inputs={inputs} cols={cols}  buttons={buttons} onSubmit={onSubmit} id={step}/> */}
-    </div>
-    );
+  );
 };
 
-export default RegisterCompany;
+export default UpdateCompany;

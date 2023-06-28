@@ -34,7 +34,7 @@ const Login = () => {
       const { user, token } = await loginUser(data).unwrap();
       dispatch(setToken({ accesstoken: token }));
       dispatch(setUser(user));
-      navigate("/home");
+      user.compania ? navigate("/home") : navigate("/register-company")
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       // return toast.error("Usuario no encontrado o no autorizado");

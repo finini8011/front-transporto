@@ -3,15 +3,20 @@ import { useNavigate } from "react-router-dom";
 
 import Card from "../../components/commons/Cards/Card";
 import { dataCard } from "../../constants";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../api/features/auth/authSlice";
 import { useGetStateStepsQuery } from "../../api/services/steps/stepsApiSlice";
 
 const Home = () => {
+
   const navigate = useNavigate();
-  const [updatedDataCard, setUpdatedDataCard] = useState(dataCard);
-  const persistRootValue = localStorage.getItem("persist:root");
-  const authState = JSON.parse(persistRootValue).authState;
-  const nivel = JSON.parse(authState).user.compania.nivel;
-  const { data, error, isLoading } = useGetStateStepsQuery(nivel);
+  const user = useSelector(selectCurrentUser);
+  
+  const [updatedDataCard, setUpdatedDataCard] = useState([]);
+  const { data } = useGetStateStepsQuery(user.compania?.nivel);
+
+
+ 
 
   useEffect(() => {
     if (data) {
@@ -27,16 +32,16 @@ const Home = () => {
 
 
   const handleCardClick = (step, state) => {
-    console.log(state)
-    if (state !== "No aplica" && nivel == "Básico") {
+    if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
+      return navigate(`/step/${step}`);
+    } else {
       return navigate(`/step/${step}`);
     }
   };
 
   return (
-    <div className="justify-center ">
-    {/*   {loadedData ? ( */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+    <div className="justify-center " id="root">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {
           updatedDataCard.map((data, key) => (
             <Card
@@ -46,10 +51,7 @@ const Home = () => {
               onClick={handleCardClick}
             />
           ))}
-        </div>
-    {/*   ) : (
-        <div></div>
-      )} */}
+      </div>
     </div>
   );
 };

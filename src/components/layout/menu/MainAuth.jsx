@@ -7,6 +7,7 @@ import {
   logOut,
 } from "../../../api/features/auth/authSlice";
 import Header from "../header/header";
+import toast, { Toaster } from "react-hot-toast";
 
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -32,11 +33,11 @@ import {
   faGrip,
   faHouse,
   faArrowUpRightFromSquare,
-  faUserCircle,
-  faVoteYea,
   faPenToSquare,
+  faVoteYea,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
+import BreakCrumbs from "../../breakcrumbs";
 
 const MainAuth = () => {
   const user = useSelector(selectCurrentUser);
@@ -44,11 +45,12 @@ const MainAuth = () => {
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   const [openMenu, setOpenMenu] = useState();
-  const [openList, setOpenList] = React.useState(true);
+  const [openList, setOpenList] = useState(true);
 
   const handleClick = () => {
     setOpenList(!openList);
   };
+
   const logoutSession = () => {
     navigate("/");
     setTimeout(() => {
@@ -57,9 +59,14 @@ const MainAuth = () => {
   };
 
   const handleNavigate = (page) => {
-    setCurrentPage(page);
-    navigate(page);
-    // Aquí puedes realizar la navegación a la página correspondiente
+    if (user.compania) {
+      setCurrentPage(page);
+      navigate(page);
+    } else {
+      setCurrentPage("/register-company");
+      navigate("/register-company");
+      toast.error("Necesita registrar su empresa antes de poder navegar por la web");
+    }
   };
 
   const handleOpenMenu = () => {
@@ -75,6 +82,7 @@ const MainAuth = () => {
 
   return (
     <div className="min-h-screen flex w-full">
+       <Toaster />
       <div
         className={`shadow-md relative menu-container ${
           openMenu ? "menu-open" : "menu-close"
@@ -169,26 +177,9 @@ const MainAuth = () => {
                 <List component="div" disablePadding>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    className={`flex gap-2 ${
-                      currentPage === "/step" && "active"
-                    }`}
-                    onClick={() => handleNavigate("/step")}
-                  >
-                    <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
-                    <ListItemText
-                      primary="Registrar Empresa"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.9rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => navigate("/preparacion")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/preparacion") }
+                    
+                    className={`flex gap-2 ${currentPage === "/preparacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faBuilding} className="w-5 h-5" />
                     <ListItemText
@@ -203,8 +194,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/planificacion")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/planificacion")}
+                    className={`flex gap-2 ${currentPage === "/planificacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faVoteYea} className="w-5 h-5" />
                     <ListItemText
@@ -219,8 +210,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/implementacion")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/implementacion")}
+                    className={`flex gap-2 ${currentPage === "/implementacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faCogs} className="w-5 h-5" />
                     <ListItemText
@@ -235,8 +226,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/seguimiento")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/seguimiento")}
+                    className={`flex gap-2 ${currentPage === "/seguimiento" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faEye} className="w-5 h-5" />
                     <ListItemText
@@ -251,8 +242,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/mejora")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/mejora")}
+                    className={`flex gap-2 ${currentPage === "/mejora" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faCheckSquare} className="w-5 h-5" />
                     <ListItemText
@@ -269,8 +260,29 @@ const MainAuth = () => {
               </Collapse>
             )}
             <ListItemButton
-              onClick={() => navigate("/informes")}
-              className="flex gap-2"
+              className={`flex gap-2 ${
+                currentPage === "/list-verification" && "active"
+              }`}
+              sx={{ justifyContent: "center" }}
+              onClick={() => handleNavigate("/list-verification")}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
+              {openMenu && (
+                <ListItemText
+                  primary="Lista de Chequeo"
+                  primaryTypographyProps={{
+                    component: "span",
+                    sx: {
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                />
+              )}
+            </ListItemButton>
+
+            <ListItemButton
+              onClick={() => handleNavigate("/informes")}
+              className={`flex gap-2 ${currentPage === "/informes" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faFile} className="w-5 h-5" />
@@ -287,8 +299,8 @@ const MainAuth = () => {
               )}
             </ListItemButton>
             <ListItemButton
-              onClick={() => navigate("/calendario")}
-              className="flex gap-2"
+              onClick={() => handleNavigate("/calendario")}
+              className={`flex gap-2 ${currentPage === "/calendario" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faCalendarDays} className="w-5 h-5" />
@@ -324,9 +336,9 @@ const MainAuth = () => {
         </div>
       </div>
       <div className="flex-1 h-screen bg-white flex flex-col overflow-auto">
-        <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
-        <div className="flex bg-white mt-10">
-          <div className="m-6 min-w-[80%] p-4">
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <div className="flex bg-white   ">
+          <div className="p-6 min-w-[80%] flex-1">
             <Outlet />
           </div>
           <LateralRight />

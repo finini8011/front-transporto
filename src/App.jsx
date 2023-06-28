@@ -14,7 +14,16 @@ import Login from "./pages/authenticated/Login";
 import Steps from "./pages/steps/Steps";
 import Home from './pages/general-views/Home';
 import RegisterCompany from "./pages/general-views/RegisterCompany";
+import UpdateCompany from "./pages/general-views/UpdateCompany";
 import ListVerification from "./pages/general-views/ListVerification";
+import Informes from "./pages/general-views/Informes";
+import Calendario from "./pages/general-views/Calendario";
+
+import Implementacion from "./pages/general-views/Fases/Implementacion";
+import Mejora from "./pages/general-views/Fases/Mejora";
+import Planificacion from "./pages/general-views/Fases/Planificacion";
+import Preparacion from "./pages/general-views/Fases/Preparacion";
+import Seguimiento from "./pages/general-views/Fases/Seguimiento";
 
 const persistor = persistStore(store);
 
@@ -33,7 +42,16 @@ function App() {
               <Route path="/notfound" element={<NotFound />} />
               <Route path="/step/:id" element={<Steps />} />
               <Route path="/register-company" element={<RegisterCompany/>}/>
+              <Route path="/update-company" element={<UpdateCompany/>}/>
               <Route path="/list-verification" element={<ListVerification/>}/>
+              <Route path="/informes" element={<Informes/>}/>
+              <Route path="/calendario" element={<Calendario/>}/>
+
+              <Route path="/planificacion" element={<Planificacion/>}/>
+              <Route path="/preparacion" element={<Preparacion/>}/>
+              <Route path="/mejora" element={<Mejora/>}/>
+              <Route path="/implementacion" element={<Implementacion/>}/>
+              <Route path="/seguimiento" element={<Seguimiento/>}/>
             </Route>         
           </Routes>
         </BrowserRouter>

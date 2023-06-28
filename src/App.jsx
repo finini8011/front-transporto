@@ -16,6 +16,8 @@ import Home from './pages/general-views/Home';
 import RegisterCompany from "./pages/general-views/RegisterCompany";
 import UpdateCompany from "./pages/general-views/UpdateCompany";
 import ListVerification from "./pages/general-views/ListVerification";
+import Informes from "./pages/general-views/Informes";
+import Calendario from "./pages/general-views/Calendario";
 
 import Implementacion from "./pages/general-views/Fases/Implementacion";
 import Mejora from "./pages/general-views/Fases/Mejora";
@@ -42,6 +44,8 @@ function App() {
               <Route path="/register-company" element={<RegisterCompany/>}/>
               <Route path="/update-company" element={<UpdateCompany/>}/>
               <Route path="/list-verification" element={<ListVerification/>}/>
+              <Route path="/informes" element={<Informes/>}/>
+              <Route path="/calendario" element={<Calendario/>}/>
 
               <Route path="/planificacion" element={<Planificacion/>}/>
               <Route path="/preparacion" element={<Preparacion/>}/>

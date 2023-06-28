@@ -3,17 +3,20 @@ import { useNavigate } from "react-router-dom";
 
 import Card from "../../components/commons/Cards/Card";
 import { dataCard } from "../../constants";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../api/features/auth/authSlice";
 import { useGetStateStepsQuery } from "../../api/services/steps/stepsApiSlice";
 
 const Home = () => {
   const navigate = useNavigate();
+  const user = useSelector(selectCurrentUser);
   const [updatedDataCard, setUpdatedDataCard] = useState(dataCard);
   const persistRootValue = localStorage.getItem("persist:root");
   const authState = JSON.parse(persistRootValue).authState;
-  const nivel = JSON.parse(authState).user.compania.nivel;
-  const { data, error, isLoading } = useGetStateStepsQuery(nivel);
+  const { data} = useGetStateStepsQuery();
 
-  useEffect(() => {
+
+   useEffect(() => {
     if (data) {
       const updatedData = dataCard.map((dataC, i) => {
         return {
@@ -27,10 +30,11 @@ const Home = () => {
 
 
   const handleCardClick = (step, state) => {
-    console.log(state)
-    if (state !== "No aplica" && nivel == "Básico") {
+     if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
       return navigate(`/step/${step}`);
-    }
+    }else{
+      return navigate(`/step/${step}`);
+    } 
   };
 
   return (

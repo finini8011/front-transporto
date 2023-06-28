@@ -324,7 +324,7 @@ const MainAuth = () => {
       <div className="flex-1 h-screen bg-white flex flex-col overflow-auto">
         <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
         <div className="flex bg-white mt-10">
-          <div className="m-6 min-w-[80%] p-4">
+          <div className="m-6 min-w-[80%] p-4 flex-1">
             <Outlet />
           </div>
           <LateralRight />

@@ -12,7 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setUser } from "../../api/features/auth/authSlice";
 
-import Select from "../../components/commons/input/select/Select";
+import SelectRHF from "../../components/commons/input/select/SelectRHF";
 import InputRHF from "../../components/commons/input/text/InputRHF";
 import InputNumberCount from "../../components/commons/input/text/InputNumberCount";
 import Button from "../../components/commons/button/Button";
@@ -253,7 +253,7 @@ const RegisterCompany = () => {
             {"> información básica"}
           </p>
         </div>
-        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl">
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
           <div className="grid grid-cols-3 gap-5">
             <InputRHF
               type="text"
@@ -275,13 +275,13 @@ const RegisterCompany = () => {
             />
           </div>
           <div className="grid grid-cols-2 gap-5">
-            <Select
+            <SelectRHF
               type="text"
               label="Actividad Principal (CIIU)"
               dataApi={dataCIIU}
               {...register("main_activity_ciiu")}
             />
-            <Select
+            <SelectRHF
               type="text"
               label="Actividad Secundaria (CIIU)"
               dataApi={dataCIIU}
@@ -296,7 +296,7 @@ const RegisterCompany = () => {
             {"> Datos de contacto"}
           </p>
         </div>
-        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl">
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
           <div className="grid grid-cols-3 gap-5">
             <InputRHF
               type="text"
@@ -324,13 +324,13 @@ const RegisterCompany = () => {
               placeholder="Ingrese dirección de correo electrónico"
               {...register("email")}
             />
-            <Select
+            <SelectRHF
               type="text"
               label="Departamento"
               dataApi={dataDepartments}
               {...register("departments")}
             />
-            <Select
+            <SelectRHF
               type="text"
               label="Ciudad"
               dataApi={dataCities}
@@ -343,7 +343,7 @@ const RegisterCompany = () => {
         <div className="bg-seventh py-2 px-5 rounded-t-xl ">
           <p className="color-fourth uppercase text-sm">{"> Misionalidad"}</p>
         </div>
-        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl">
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
           <div className="grid grid-cols-2 gap-5">
             <div className="flex items-center border border-gray-300 rounded px-4">
               <label
@@ -384,7 +384,7 @@ const RegisterCompany = () => {
             {"> Tamaño de la organización"}
           </p>
         </div>
-        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl">
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
           <div className="grid grid-cols-2 gap-5">
             <div className="border border-gray-300 p-3 rounded-md">
               <p className="text-sm">
@@ -483,7 +483,7 @@ const RegisterCompany = () => {
         loading={isLoading}
       />
     </div>
-    <Form title="complemento" inputs={inputs} cols={cols}  buttons={buttons} onSubmit={onSubmit} id={step}/>
+    {/* <Form title="complemento" inputs={inputs} cols={cols}  buttons={buttons} onSubmit={onSubmit} id={step}/> */}
     </div>
     );
 };

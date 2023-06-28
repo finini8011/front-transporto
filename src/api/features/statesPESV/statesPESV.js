@@ -6,7 +6,7 @@ const statesPESVSlice = createSlice({
     
     reducers:{
         setStates: (state, action) => {
-            state.states= action.payload
+            state.statePESV= action.payload
         },
     }
 })
@@ -15,4 +15,4 @@ export const {setStates} = statesPESVSlice.actions
 
 export default statesPESVSlice.reducer
 
-export const selectCurrentState = (state) => state.statesPESV.statesPESVState.states
+export const selectCurrentState = (state) => state.statesPESV.statesPESVState.statePESV

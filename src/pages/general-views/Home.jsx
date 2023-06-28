@@ -15,13 +15,11 @@ const Home = () => {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
-  const { data } = useGetStateStepsQuery(user.compania?.nivel);
-  const { substates} = useGetStatePESVQuery();
+  //const { data } = useGetStateStepsQuery(user.compania?.nivel);
+  const {dataState} = useGetStatePESVQuery();
 
+  console.log(dataState, "datos de estado");
 
-  useEffect(() => {
-    console.log(substates, "datos de estado")
-  }, []);
 
   //logica para barra de progreso
   let resultCumple = 10;
@@ -32,7 +30,7 @@ const Home = () => {
 
 
   
-  useEffect(() => {
+/*   useEffect(() => {
     if (data) {
       const updatedData = dataCard.map((dataC, i) => {
         return {
@@ -42,7 +40,7 @@ const Home = () => {
       });
       setUpdatedDataCard(updatedData);
     }
-  }, [data]);
+  }, [data]);  */
 
 
   const handleCardClick = (step, state) => {

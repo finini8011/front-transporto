@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   selectCurrentUser,
-  logOut,
+  logOut
 } from "../../../api/features/auth/authSlice";
 import Header from "../header/header";
 
@@ -37,18 +37,21 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
+import BreakCrumbs from "../../breakcrumbs";
 
 const MainAuth = () => {
+
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   const [openMenu, setOpenMenu] = useState();
-  const [openList, setOpenList] = React.useState(true);
+  const [openList, setOpenList] = useState(true);
 
   const handleClick = () => {
     setOpenList(!openList);
   };
+
   const logoutSession = () => {
     navigate("/");
     setTimeout(() => {
@@ -327,6 +330,7 @@ const MainAuth = () => {
         <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
         <div className="flex">
           <div className="m-6 flex-1">
+           <BreakCrumbs />
             <Outlet />
           </div>
           <LateralRight />

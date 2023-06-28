@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { apiSlice } from "./services/auth/apiSlice";
 // import { projectsApiSlice } from "./services/projects/projectsApiSlice";
 import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
+import { companyApiSlice } from "./services/company/companyApiSlice";
 import authReducer from "./features/auth/authSlice";
 import reportPESVReducer from "./features/reportPESV/report";
 
@@ -32,6 +33,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     // [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
+    [companyApiSlice.reducerPath]: companyApiSlice.reducer,
     // auth: authReducer,
     auth: persistedReducer,
     reportPESV: persistedReducer,
@@ -44,6 +46,7 @@ export const store = configureStore({
       .concat(thunk, apiSlice.middleware)
       // .concat(thunk, projectsApiSlice.middleware)
       .concat(thunk, listVerificationApiSlice.middleware)
+      .concat(thunk, companyApiSlice.middleware)
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

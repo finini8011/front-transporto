@@ -14,6 +14,7 @@ import Login from "./pages/authenticated/Login";
 import Steps from "./pages/steps/Steps";
 import Home from './pages/general-views/Home';
 import RegisterCompany from "./pages/general-views/RegisterCompany";
+import UpdateCompany from "./pages/general-views/UpdateCompany";
 
 const persistor = persistStore(store);
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="/notfound" element={<NotFound />} />
               <Route path="/step/:id" element={<Steps />} />
               <Route path="/register-company" element={<RegisterCompany/>}/>
+              <Route path="/update-company" element={<UpdateCompany/>}/>
             </Route>         
           </Routes>
         </BrowserRouter>

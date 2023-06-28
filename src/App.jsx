@@ -17,6 +17,12 @@ import RegisterCompany from "./pages/general-views/RegisterCompany";
 import UpdateCompany from "./pages/general-views/UpdateCompany";
 import ListVerification from "./pages/general-views/ListVerification";
 
+import Implementacion from "./pages/general-views/Fases/Implementacion";
+import Mejora from "./pages/general-views/Fases/Mejora";
+import Planificacion from "./pages/general-views/Fases/Planificacion";
+import Preparacion from "./pages/general-views/Fases/Preparacion";
+import Seguimiento from "./pages/general-views/Fases/Seguimiento";
+
 const persistor = persistStore(store);
 
 function App() {
@@ -36,6 +42,12 @@ function App() {
               <Route path="/register-company" element={<RegisterCompany/>}/>
               <Route path="/update-company" element={<UpdateCompany/>}/>
               <Route path="/list-verification" element={<ListVerification/>}/>
+
+              <Route path="/planificacion" element={<Planificacion/>}/>
+              <Route path="/preparacion" element={<Preparacion/>}/>
+              <Route path="/mejora" element={<Mejora/>}/>
+              <Route path="/implementacion" element={<Implementacion/>}/>
+              <Route path="/seguimiento" element={<Seguimiento/>}/>
             </Route>         
           </Routes>
         </BrowserRouter>

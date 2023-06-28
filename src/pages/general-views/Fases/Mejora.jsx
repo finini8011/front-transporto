@@ -3,7 +3,7 @@ const Mejora = () => {
 
   return (
     <div>
-      <p>fase preparacion</p>
+      <p>fase Mejora</p>
     </div>
   );
 };

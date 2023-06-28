@@ -21,6 +21,7 @@ const Home = () => {
   let resultCumple = 0;
   let parcialmente = 0;
   let arrayPesv =[];
+  let resultNoAplica = 0;
 
   if(dataState){
     const {1:fase1, 2:fase2, 3:fase3, 4:fase4} = dataState;
@@ -36,12 +37,14 @@ const Home = () => {
      if(registro === "Cumple parcialmente"){
       parcialmente = parcialmente + 1;
       }
+      if (registro === "No aplica") {
+        resultNoAplica = resultNoAplica + 1;
+      }
     })
   }
 
   let resultParcialmente = parcialmente * 0.25;
-  let resultPesv = (resultCumple + resultParcialmente / arrayPesv.length) ;
-
+  let resultPesv = (resultCumple + resultParcialmente  )/(arrayPesv.length - resultNoAplica )*100
 
 
   

@@ -23,22 +23,20 @@ const Implementacion = () => {
       if (registro === "Cumple parcialmente") {
         parcialmente = parcialmente + 1;
       }
-      console.log(arrayDateStateFase2, "fase2")
       if (registro === "No aplica") {
         resultNoAplica = resultNoAplica + 1;
       }
-      console.log(arrayDateStateFase2, "fase2")
     })
   }
 
 
   let resultParcialmente = parcialmente * 0.25;
-  let resultPesv = (resultCumple + resultParcialmente  )/(arrayDateStateFase2.length -resultNoAplica ) ;
+  let resultPesv = (resultCumple + resultParcialmente  )/(arrayDateStateFase2.length - resultNoAplica )*100 ;
 
   return (
     <div>
       <p>fase Implementacion</p>
-      <ProgressBar bgcolor="#0090ff" progress={Math.floor(resultPesv) ? Math.floor(resultPesv) : 0} height={12} width="100%" text="PESV" />
+      <ProgressBar bgcolor="#0090ff" progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0} height={12} width="100%" text="PESV" />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import ButtonIcon from "../button/ButtonIcon";
 import ButtonInputForm from "../button/ButtonInputForm";
 import Date from "../input/text/Date";
 import { useState } from "react";
+import InputFile from "../input/file/InputFile";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
@@ -68,7 +69,6 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
         {inputs.map((input, index) => {
           switch (input.type) {
             case "text":
-            case "file":
             case "number":
               return (
                 <Input
@@ -87,7 +87,24 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   }}
                 />
               );
-
+            case "file":
+              return (
+                <Input
+                  key={index}
+                  type={input.type}
+                  label={input.label}
+                  placeholder={input.placeholder}
+                  labelWeight={input.labelWeight}
+                  id={input.name}
+                  start={input.start}
+                  end={input.end}
+                  disabled={input.disabled}
+                  error={errors[input.name]}
+                  onChange={(value) => {
+                    input.onchange && input.onchange(input.name, value);
+                  }}
+                />
+              );
             case "textArea":
               return (
                 <TextArea
@@ -164,7 +181,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   >
                     {input.label}
                   </label>
-                  <div className="bg-gray-50 p-2 border rounded-lg">
+                  <div className="bg-gray-50 p-2 border rounded-lg min-h-[42px]">
                     <span>{input.value}</span>
                   </div>
                 </div>
@@ -172,7 +189,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
 
             case "hr":
               return (
-                <div className="col-start-1 col-end-6" key={index}>
+                <div className={`col-start-${input.start} col-end-${input.end}`} key={index}>
                   <hr />
                 </div>
               );

@@ -18,8 +18,8 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   const inputs = [
     {
-      label: "Cambiar estado",
-      labelWeight: "bold",
+      label: "CAMBIAR ESTADO",
+      labelWeight: "medium",
       name: "cambiarEstado",
       type: "select",
       placeholder: "",
@@ -29,7 +29,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "observaciones",
       type: "textArea",
       start: 3,
@@ -37,19 +37,13 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       required: true
 
     },
-    {
-      type: "hr",
-    },
 
     {
-      label: "Estado actual",
+      label: "ESTADO ACTUAL",
       type: "span",
       start: 1,
       end: 3,
       value: "SI",
-    },
-    {
-      type: "hr",
     },
   ];
   const buttons = [
@@ -89,9 +83,12 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
-        <p>preubas</p>
-        <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
-          {step} {nameStep}
+      <div className="rounded-t-2xl flex text-base">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium" > {step} {nameStep}</div>
+         {/*  <div className="min-w-[110px] bg-[#EEF2F6]/25 flex justify-center rounded-tr-2xl">
+            <button className="text-[#FC6363] font-medium">GUARDAR</button>
+            </div> */}
+         
         </div>
         {/*   {data ? (
           <Form

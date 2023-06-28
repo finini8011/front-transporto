@@ -76,7 +76,12 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "",
       nameApi: "originalName",
       start: 1,
-      end: 6,
+      end: 7,
+    },
+    {
+      type: "hr",
+      start:1,
+      end:8
     },
     {
       label: "CAMBIAR ESTADO",
@@ -88,7 +93,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       end: 2,
       required: true,
     },
-  
+    
+    
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
       labelWeight: "medium",
@@ -96,7 +102,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       nameApi: "observaciones",
       type: "textArea",
       start: 2,
-      end: 7,
+      end: 8,
       required: true,
     },
     {
@@ -106,13 +112,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       start: 1,
       end: 2,
     },
-    {
-      type: "hr",
-    },
    
-    {
-      type: "hr",
-    },
   ];
   const buttons = [
     {
@@ -160,12 +160,12 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   return (
     <>
-      <section className="bg-white text-gray-800 flex flex-col gap-4">
+      <section className="bg-white text-gray-800 flex flex-col gap-4 w-full">
         <div className="rounded-t-2xl flex text-base">
           <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium" > {step} {nameStep}</div>
-          <div className="min-w-[110px] bg-[#EEF2F6]/25 flex justify-center rounded-tr-2xl">
+         {/*  <div className="min-w-[110px] bg-[#EEF2F6]/25 flex justify-center rounded-tr-2xl">
             <button className="text-[#FC6363] font-medium">GUARDAR</button>
-            </div>
+            </div> */}
          
         </div>
         {/*   {data ? (

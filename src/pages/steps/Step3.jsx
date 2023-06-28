@@ -7,9 +7,10 @@ import {
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
+import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Step3 = () => {
-
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
 
@@ -51,11 +52,29 @@ const Step3 = () => {
     }
   };
 
-
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#3</h1>
+      <section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-4 flex">
+        <img
+          src={`/img/fase1_general.svg`}
+          width={25}
+          alt="icon"
+          className="mr-2"
+        />
+
+        <span>
+          <FontAwesomeIcon
+            size="xs"
+            icon={faGreaterThan}
+            style={{ color: "#008ffe" }}
+          />
+        </span>
+         
+        <span className="ml-2">
+        FASE 1: PLANIFICACIÓN - PASO 1. LIDER DE DISEÑO E IMPLEMENTACIÓN PESV
+        </span>
+      </section>
       <FormFlex
         titleForm={titleForm}
         step={"3.1"}

@@ -14,7 +14,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const inputs = [
     {
       label: "CREA",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "crea",
       type: "text",
       placeholder: "Ingrese nombre",
@@ -24,7 +24,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
     {
       label: "DESTINATARIO",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "destinatario",
       type: "text",
       placeholder: "Ingrese nombre",
@@ -42,25 +42,27 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       value: formattedDate
     },
     {
-      label: "Descripción",
-      labelWeight: "bold",
+      label: "DESCRIPCIÓN",
+      labelWeight: "medium",
       name: "observaciones",
       type: "textArea",
       start: 1,
-      end: 5,
+      end: 6,
       required: true
     },
     {
       type: "hr",
+      start: 1,
+      end: 6,
     },
     {
-      label: "Carga archivo",
-      labelWeight: "bold",
+      label: "CARGAR ARCHIVO",
+      labelWeight: "medium",
       name: "cargaArchivo",
       type: "file",
-      placeholder: "Seleccione archivo",
+      placeholder: "Seleccione el archivo",
       start: 1,
-      end: 4,
+      end: 6,
       required:true,
       onchange: (name, value) =>
         console.log(
@@ -69,6 +71,8 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
     {
       type: "hr",
+      start: 1,
+      end: 6,
     },
   ];
   const buttons = [
@@ -82,8 +86,11 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
-        <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
-          {step} {nameStep}
+      <div className="rounded-t-2xl flex text-base">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium" > {step} {nameStep}</div>
+       
+    
+         
         </div>
         <Form title={titleForm} inputs={inputs} cols={cols}  buttons={buttons} onSubmit={onSubmit} id={step}/>
         <FormUploadedFiles title="test" data={dataTable} />

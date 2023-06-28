@@ -178,7 +178,8 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/preparacion") }
-                    className="flex gap-2"
+                    
+                    className={`flex gap-2 ${currentPage === "/preparacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faBuilding} className="w-5 h-5" />
                     <ListItemText
@@ -194,7 +195,7 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/planificacion")}
-                    className="flex gap-2"
+                    className={`flex gap-2 ${currentPage === "/planificacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faVoteYea} className="w-5 h-5" />
                     <ListItemText
@@ -210,7 +211,7 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/implementacion")}
-                    className="flex gap-2"
+                    className={`flex gap-2 ${currentPage === "/implementacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faCogs} className="w-5 h-5" />
                     <ListItemText
@@ -226,7 +227,7 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/seguimiento")}
-                    className="flex gap-2"
+                    className={`flex gap-2 ${currentPage === "/seguimiento" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faEye} className="w-5 h-5" />
                     <ListItemText
@@ -242,7 +243,7 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/mejora")}
-                    className="flex gap-2"
+                    className={`flex gap-2 ${currentPage === "/mejora" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faCheckSquare} className="w-5 h-5" />
                     <ListItemText
@@ -281,7 +282,7 @@ const MainAuth = () => {
 
             <ListItemButton
               onClick={() => handleNavigate("/informes")}
-              className="flex gap-2"
+              className={`flex gap-2 ${currentPage === "/informes" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faFile} className="w-5 h-5" />
@@ -299,7 +300,7 @@ const MainAuth = () => {
             </ListItemButton>
             <ListItemButton
               onClick={() => handleNavigate("/calendario")}
-              className="flex gap-2"
+              className={`flex gap-2 ${currentPage === "/calendario" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faCalendarDays} className="w-5 h-5" />
@@ -335,7 +336,7 @@ const MainAuth = () => {
         </div>
       </div>
       <div className="flex-1 h-screen bg-white flex flex-col overflow-auto">
-        <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <div className="flex bg-white   ">
           <div className="p-6 min-w-[80%] flex-1">
             <Outlet />

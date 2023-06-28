@@ -83,7 +83,7 @@ const Card = ({ data, numberCard, onClick }) => {
             colorVariants[data.state]
           }`}
         >
-          {data.state}
+          {data.state? data.state :<span>Cargando</span>}
         </span>
       </div>
       {/*   <div className="min-h-[5rem] px-5 flex items-center flex-col justify-center gap-1">

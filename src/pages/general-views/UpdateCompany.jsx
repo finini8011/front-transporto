@@ -215,7 +215,7 @@ const UpdateCompany = () => {
     <div className="flex flex-col gap-2">
       <Toaster />
       <div className="bg-fourth text-white py-3 px-5 rounded-md flex justify-between items-center">
-        <p>Registro de nueva empresa</p>
+        <p>Datos de la empresa registrada</p>
         <p className="text-sm">Ayuda</p>
       </div>
       <div>

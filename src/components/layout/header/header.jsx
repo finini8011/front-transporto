@@ -27,7 +27,6 @@ const Header = ({ openMenu, setOpenMenu }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
- console.log("datos", user)
 
 
   const closeModal = () => {

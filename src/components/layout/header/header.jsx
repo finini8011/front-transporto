@@ -16,6 +16,7 @@ const Header = () => {
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   const user = useSelector(selectCurrentUser);
+ console.log("datos", user)
 
   const handleNavigate = (page) => {
     setCurrentPage(page);
@@ -36,9 +37,11 @@ const Header = () => {
             <img className="" src={buscar} alt="Expandir" />
             <p>Buscar</p>
           </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer" onClick={() => handleNavigate(user.compania ? "update-company" : "/register-company")}>
-            <img className="" src={empresa} alt="Expandir" />
+          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+            <button className="mt-1 " onClick={() => handleNavigate(user.compania ? "update-company" : "/register-company")}>
+            <img className="m-auto" src={empresa} alt="Expandir" />
             <p>Empresa</p>
+            </button>
           </li>
           <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
             <img className="" src={guia} alt="Expandir" />

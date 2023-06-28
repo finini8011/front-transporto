@@ -240,6 +240,7 @@ const RegisterCompany = () => {
   ]);
 
   return (
+    <div>
     <div className="flex flex-col gap-2">
       <Toaster />
       <div className="bg-fourth text-white py-3 px-5 rounded-md flex justify-between items-center">
@@ -482,7 +483,9 @@ const RegisterCompany = () => {
         loading={isLoading}
       />
     </div>
-  );
+    <Form title="complemento" inputs={inputs} cols={cols}  buttons={buttons} onSubmit={onSubmit} id={step}/>
+    </div>
+    );
 };
 
 export default RegisterCompany;

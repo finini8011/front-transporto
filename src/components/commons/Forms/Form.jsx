@@ -4,17 +4,55 @@ import Select from "../input/select/Select";
 import TextArea from "../input/TextArea/TextArea";
 import ButtonIcon from "../button/ButtonIcon";
 import ButtonForm from "../button/ButtonForm";
-
+import Date from "../input/text/Date";
+import { useState } from "react";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
   const formRef = useRef(null);
-
-  const optionsChageState = ["Seleccionar","Cumple", "NO cumple", "Cumple parcialmente"];
+  const [errors, setErrors] = useState({});
+  const optionsChageState = [
+    "Seleccionar",
+    "Cumple",
+    "NO cumple",
+    "Cumple parcialmente",
+  ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
     const formValues = Object.fromEntries(formData.entries());
-    onSubmit(formValues, id)
+    let isValid = true;
+    const newErrors = {};
+    inputs.forEach((input) => {
+      if (input.required && !formData.get(input.name)) {
+        isValid = false;
+        newErrors[input.name] = `Campo requerido`;
+      }
+
+      if (
+        input.required &&
+        input.name === "cambiarEstado" &&
+        formData.get(input.name) === "Seleccionar"
+      ) {
+        isValid = false;
+        newErrors[input.name] = `Campo requerido`;
+      }
+
+      if (
+        input.required &&
+        input.name === "cargaArchivo" &&
+        !formData.get(input.name).name
+      ) {
+        isValid = false;
+        newErrors[input.name] = `Campo requerido`;
+      }
+    });
+
+    if (isValid) {
+      setErrors([]);
+      onSubmit(formValues, id);
+    } else {
+      setErrors(newErrors);
+    }
   };
 
   return (
@@ -28,6 +66,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
           switch (input.type) {
             case "text":
             case "file":
+              case "number":
               return (
                 <Input
                   key={index}
@@ -39,11 +78,13 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   start={input.start}
                   end={input.end}
                   disabled={input.disabled}
+                  error={errors[input.name]}
                   onChange={(value) => {
                     input.onchange && input.onchange(input.name, value);
                   }}
                 />
               );
+
             case "textArea":
               return (
                 <TextArea
@@ -54,6 +95,8 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   id={input.name}
                   start={input.start}
                   end={input.end}
+                  value={input.value}
+                  error={errors[input.name]}
                 />
               );
 
@@ -65,20 +108,45 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                   label={input.label}
                   labelWeight={input.labelWeight}
                   placeholder={input.placeholder}
+                  id={input.name}
                   start={input.start}
                   end={input.end}
-                  data={optionsChageState} //
-                /*   {...register(`${input.name}`)} */
+                  error={errors[input.name]}
+                  data={optionsChageState}
+                  /*      required={input.required} */
+                />
+              );
+            case "date":
+              return (
+                <Date
+                  type={input.type}
+                  key={index}
+                  label={input.label}
+                  labelWeight={input.labelWeight}
+                  placeholder={input.placeholder}
+                  id={input.name}
+                  start={input.start}
+                  end={input.end}
+                  value={input.value}
+                  error={errors[input.name]}
+
+                  /*     required={input.required} */
                 />
               );
             case "button":
               return (
-                <ButtonForm text={input.text} icon={input.icon} type={input.type} key={index} />
+                <ButtonForm
+                  text={input.text}
+                  icon={input.icon}
+                  type={input.type}
+                  key={index}
+                />
               );
             case "span":
               return (
                 <div
-                  className={`col-start-${input.start} col-end-${input.end}`} key={index}
+                  className={`col-start-${input.start} col-end-${input.end}`}
+                  key={index}
                 >
                   <label
                     className={`block mb-2 text-sm  font-bold text-gray-900`}
@@ -86,7 +154,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id }) => {
                     {input.label}
                   </label>
                   <div className="bg-gray-50 p-2 border rounded-lg">
-                    <span >{input.value}</span>
+                    <span>{input.value}</span>
                   </div>
                 </div>
               );

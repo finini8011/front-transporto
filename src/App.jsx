@@ -15,6 +15,7 @@ import Steps from "./pages/steps/Steps";
 import Home from './pages/general-views/Home';
 import RegisterCompany from "./pages/general-views/RegisterCompany";
 import UpdateCompany from "./pages/general-views/UpdateCompany";
+import ListVerification from "./pages/general-views/ListVerification";
 
 const persistor = persistStore(store);
 
@@ -34,6 +35,7 @@ function App() {
               <Route path="/step/:id" element={<Steps />} />
               <Route path="/register-company" element={<RegisterCompany/>}/>
               <Route path="/update-company" element={<UpdateCompany/>}/>
+              <Route path="/list-verification" element={<ListVerification/>}/>
             </Route>         
           </Routes>
         </BrowserRouter>

@@ -1,18 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./header.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faPencil,
-  faGrip,
-  faRectangleXmark,
-  faShareFromSquare,
-} from "@fortawesome/free-solid-svg-icons";
 
-import Modal from "react-modal";
-import InfoCompliance from "../../commons/InfoCompliance/InfoCompliance";
-import DirectAccess from "../../commons/DirectAccess/DirectAccess";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
 import expandir from "/img/expandir.png";
@@ -22,20 +11,18 @@ import modulo from "/img/modulo.png";
 import herramientas from "/img/herramientas.png";
 import buscar from "/img/buscar.png";
 
-const Header = ({ openMenu, setOpenMenu }) => {
+const Header = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalAccessOpen, setIsModalAccessOpen] = useState(false);
+  const location = useLocation();
+  const [currentPage, setCurrentPage] = useState(location.pathname);
   const user = useSelector(selectCurrentUser);
 
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+    navigate(page);
+    // Aquí puedes realizar la navegación a la página correspondiente
   };
-
-  const closeModalAccess = () => {
-    setIsModalAccessOpen(false);
-  };
+  
   return (
     <React.Fragment>
       <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20">
@@ -50,7 +37,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
             <p>Buscar</p>
           </li>
           <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <button className="mt-1 "  onClick={() =>  navigate("/register-company")}>
+            <button className="mt-1 " onClick={() => handleNavigate(user.compania ? "update-company" : "/register-company")}>
             <img className="m-auto" src={empresa} alt="Expandir" />
             <p>Empresa</p>
             </button>
@@ -74,27 +61,6 @@ const Header = ({ openMenu, setOpenMenu }) => {
           </li>
         </ul>
       </nav>
-
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <button onClick={closeModal} className="modal-close">
-          <FontAwesomeIcon icon={faRectangleXmark} />
-        </button>
-        <InfoCompliance />
-      </Modal>
-
-      <Modal
-        isOpen={isModalAccessOpen}
-        onRequestClose={closeModalAccess}
-        className="ModalAccess"
-        overlayClassName="Overlay"
-      >
-        <DirectAccess />
-      </Modal>
     </React.Fragment>
   );
 };

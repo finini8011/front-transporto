@@ -52,10 +52,13 @@ const Step22 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#22</h1>
       <FormFlex
         titleForm={titleForm}
         step={"1.1"}
+        stage={"3"}
+        mainTitle={
+          "FASE 3: SEGUIMIENTO - PASO 22. AUDITORÍA ANUAL"
+        }
         nameStep={
           "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
         }

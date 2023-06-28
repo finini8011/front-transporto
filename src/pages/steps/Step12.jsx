@@ -9,7 +9,6 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
 
 const Step12 = () => {
-
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
 
@@ -51,12 +50,14 @@ const Step12 = () => {
     }
   };
 
-
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#12</h1>
       <FormFlex
+        stage={"2"}
+        mainTitle={
+          "FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 12. PLAN DE PREPARACIÓN Y RESPUESTA ANTE EMERGENCIAS VIALES"
+        }
         titleForm={titleForm}
         step={"12.1"}
         nameStep={

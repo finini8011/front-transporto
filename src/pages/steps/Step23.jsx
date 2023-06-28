@@ -52,8 +52,11 @@ const Step23 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#23</h1>
       <FormFlex
+        stage={"4"}
+        mainTitle={
+          "FASE 4: MEJORA CONTINUA - PASO 23. MEJORA CONTINUA, ACCIONES PREVENTIVAS Y CORRECTIVAS"
+        }
         titleForm={titleForm}
         step={"23.1.1"}
         nameStep={

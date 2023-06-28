@@ -4,11 +4,12 @@ import Form from "./Form";
 import {
   faDownload,
   faEye,
+  faGreaterThan,
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
- 
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -25,7 +26,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       placeholder: "",
       start: 1,
       end: 3,
-      required: true
+      required: true,
     },
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
@@ -34,8 +35,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "textArea",
       start: 3,
       end: 6,
-      required: true
-
+      required: true,
     },
 
     {
@@ -83,12 +83,16 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
-      <div className="rounded-t-2xl flex text-base">
-          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium" > {step} {nameStep}</div>
-         {/*  <div className="min-w-[110px] bg-[#EEF2F6]/25 flex justify-center rounded-tr-2xl">
-            <button className="text-[#FC6363] font-medium">GUARDAR</button>
-            </div> */}
-         
+        <div className="rounded-t-2xl flex text-base">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium w-full">
+          <FontAwesomeIcon
+              size="xs"
+              icon={faGreaterThan}
+              className="mr-2"
+              style={{ color: "#008ffe" }}
+            />
+            {step} {nameStep}
+          </div>
         </div>
         {/*   {data ? (
           <Form

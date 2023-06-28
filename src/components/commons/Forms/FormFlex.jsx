@@ -5,10 +5,11 @@ import {
   faDownload,
   faEye,
   faSquarePlus,
+  faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
- 
+const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -80,8 +81,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
     {
       type: "hr",
-      start:1,
-      end:8
+      start: 1,
+      end: 8,
     },
     {
       label: "CAMBIAR ESTADO",
@@ -93,8 +94,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       end: 2,
       required: true,
     },
-    
-    
+
     {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
       labelWeight: "medium",
@@ -112,7 +112,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       start: 1,
       end: 2,
     },
-   
   ];
   const buttons = [
     {
@@ -161,12 +160,37 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4 w-full">
+        {mainTitle && stage ? (  <section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
+          <img
+            src={`/img/fase${stage}_general.svg`}
+            width={25}
+            alt="icon"
+            className="mr-2"
+          />
+
+          <span>
+            <FontAwesomeIcon
+              size="xs"
+              icon={faGreaterThan}
+              style={{ color: "#008ffe" }}
+            />
+          </span>
+
+          <span className="ml-2">
+            {mainTitle}
+          </span>
+        </section>):''}
+      
         <div className="rounded-t-2xl flex text-base">
-          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium" > {step} {nameStep}</div>
-         {/*  <div className="min-w-[110px] bg-[#EEF2F6]/25 flex justify-center rounded-tr-2xl">
-            <button className="text-[#FC6363] font-medium">GUARDAR</button>
-            </div> */}
-         
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium w-full">
+            <FontAwesomeIcon
+              size="xs"
+              icon={faGreaterThan}
+              className="mr-2"
+              style={{ color: "#008ffe" }}
+            />
+            {step} {nameStep}
+          </div>
         </div>
         {/*   {data ? (
           <Form

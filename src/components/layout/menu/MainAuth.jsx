@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   selectCurrentUser,
-  logOut
+  logOut,
 } from "../../../api/features/auth/authSlice";
 import Header from "../header/header";
+import toast, { Toaster } from "react-hot-toast";
 
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -39,7 +40,6 @@ import "./MainAuth.css";
 import BreakCrumbs from "../../breakcrumbs";
 
 const MainAuth = () => {
-
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,9 +59,14 @@ const MainAuth = () => {
   };
 
   const handleNavigate = (page) => {
-    setCurrentPage(page);
-    navigate(page);
-    // Aquí puedes realizar la navegación a la página correspondiente
+    if (user.compania) {
+      setCurrentPage(page);
+      navigate(page);
+    } else {
+      setCurrentPage("/register-company");
+      navigate("/register-company");
+      toast.error("Necesita registrar su empresa antes de poder navegar por la web");
+    }
   };
 
   const handleOpenMenu = () => {
@@ -77,28 +82,33 @@ const MainAuth = () => {
 
   return (
     <div className="min-h-screen flex w-full">
+       <Toaster />
       <div
-        className={`shadow-md relative menu-container ${openMenu ? "menu-open" : "menu-close"
-          }`}
-      // onMouseLeave={() => setOpenMenu(!openMenu)}
+        className={`shadow-md relative menu-container ${
+          openMenu ? "menu-open" : "menu-close"
+        }`}
+        // onMouseLeave={() => setOpenMenu(!openMenu)}
       >
         <img
-          className={`absolute right-12 top-44 cursor-pointer z-10 ${openMenu ? "block" : "hidden"
-            } `}
+          className={`absolute right-12 top-44 cursor-pointer z-10 ${
+            openMenu ? "block" : "hidden"
+          } `}
           src={notification}
           alt=""
-        // onClick={handleOpenMenu}
+          // onClick={handleOpenMenu}
         />
         <img
-          className={`absolute -right-5 top-48 cursor-pointer z-10 ${openMenu ? "rotate-0" : "rotate-180"
-            } `}
+          className={`absolute -right-5 top-48 cursor-pointer z-10 ${
+            openMenu ? "rotate-0" : "rotate-180"
+          } `}
           src={arrow}
           alt=""
           onClick={handleOpenMenu}
         />
         <div
-          className={`flex items-center justify-center flex-col gap-2  border-third border-b ${openMenu ? "py-2 px-4" : "p-2"
-            }`}
+          className={`flex items-center justify-center flex-col gap-2  border-third border-b ${
+            openMenu ? "py-2 px-4" : "p-2"
+          }`}
         >
           <img src={openMenu ? logo : transporto} alt="logo" />
           {openMenu && (
@@ -167,8 +177,9 @@ const MainAuth = () => {
                 <List component="div" disablePadding>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/preparacion")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/preparacion") }
+                    
+                    className={`flex gap-2 ${currentPage === "/preparacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faBuilding} className="w-5 h-5" />
                     <ListItemText
@@ -183,8 +194,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/planificacion")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/planificacion")}
+                    className={`flex gap-2 ${currentPage === "/planificacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faVoteYea} className="w-5 h-5" />
                     <ListItemText
@@ -199,8 +210,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/implementacion")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/implementacion")}
+                    className={`flex gap-2 ${currentPage === "/implementacion" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faCogs} className="w-5 h-5" />
                     <ListItemText
@@ -215,8 +226,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/seguimiento")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/seguimiento")}
+                    className={`flex gap-2 ${currentPage === "/seguimiento" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faEye} className="w-5 h-5" />
                     <ListItemText
@@ -231,8 +242,8 @@ const MainAuth = () => {
                   </ListItemButton>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => navigate("/mejora")}
-                    className="flex gap-2"
+                    onClick={() => handleNavigate("/mejora")}
+                    className={`flex gap-2 ${currentPage === "/mejora" && "active"}`}
                   >
                     <FontAwesomeIcon icon={faCheckSquare} className="w-5 h-5" />
                     <ListItemText
@@ -249,7 +260,9 @@ const MainAuth = () => {
               </Collapse>
             )}
             <ListItemButton
-              className={`flex gap-2 ${currentPage === "/list-verification" && "active"}`}
+              className={`flex gap-2 ${
+                currentPage === "/list-verification" && "active"
+              }`}
               sx={{ justifyContent: "center" }}
               onClick={() => handleNavigate("/list-verification")}
             >
@@ -268,8 +281,8 @@ const MainAuth = () => {
             </ListItemButton>
 
             <ListItemButton
-              onClick={() => navigate("/informes")}
-              className="flex gap-2"
+              onClick={() => handleNavigate("/informes")}
+              className={`flex gap-2 ${currentPage === "/informes" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faFile} className="w-5 h-5" />
@@ -286,8 +299,8 @@ const MainAuth = () => {
               )}
             </ListItemButton>
             <ListItemButton
-              onClick={() => navigate("/calendario")}
-              className="flex gap-2"
+              onClick={() => handleNavigate("/calendario")}
+              className={`flex gap-2 ${currentPage === "/calendario" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faCalendarDays} className="w-5 h-5" />
@@ -306,8 +319,9 @@ const MainAuth = () => {
           </List>
           <div className={`${openMenu ? "px-4" : "px-2"} text-white `}>
             <div
-              className={`bg-fourth rounded-lg flex gap-2 py-2 justify-center overflow-hidden ${openMenu ? "px-4" : ""
-                }`}
+              className={`bg-fourth rounded-lg flex gap-2 py-2 justify-center overflow-hidden ${
+                openMenu ? "px-4" : ""
+              }`}
               onClick={logoutSession}
               role="button"
             >
@@ -322,9 +336,9 @@ const MainAuth = () => {
         </div>
       </div>
       <div className="flex-1 h-screen bg-white flex flex-col overflow-auto">
-        <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
-        <div className="flex bg-white mt-10">
-          <div className="m-6 min-w-[80%] p-4 flex-1">
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <div className="flex bg-white   ">
+          <div className="p-6 min-w-[80%] flex-1">
             <Outlet />
           </div>
           <LateralRight />

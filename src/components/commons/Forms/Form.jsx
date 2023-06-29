@@ -13,7 +13,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   const optionsChageState = [
     "Seleccionar",
     "Cumple",
-    "NO cumple",
+    "No cumple",
     "Cumple parcialmente",
   ];
 

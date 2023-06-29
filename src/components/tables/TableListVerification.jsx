@@ -11,7 +11,6 @@ const TableListVerification = () => {
   const { data: dataState } = useGetStatePESVQuery();
   let arrayPesv = [];
 
-   console.log(dataState)
   
    if(dataState){
     const {1:fase1, 2:fase2, 3:fase3, 4:fase4} = dataState;
@@ -21,7 +20,6 @@ const TableListVerification = () => {
     const arrayDateStateFase4 = Object.values(fase4);
     arrayPesv = arrayDateStateFase1.concat(arrayDateStateFase2, arrayDateStateFase3,arrayDateStateFase4)
   }
-console.log(arrayPesv,"array")
 
   return (
     <div className="mt-10">
@@ -62,7 +60,7 @@ console.log(arrayPesv,"array")
                   {arrayPesv[index]}
                   </td>
                   <td className="border p-2 ">
-                    <p>observaciones</p>
+                    <p>Observaciones</p>
                   </td>
                 </tr>
               ))}

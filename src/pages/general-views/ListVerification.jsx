@@ -14,7 +14,7 @@ import { selectCurrentUser, setUser } from "../../api/features/auth/authSlice";
 import SelectRHF from "../../components/commons/input/select/SelectRHF";
 import InputRHF from "../../components/commons/input/text/InputRHF";
 import InputNumberCount from "../../components/commons/input/text/InputNumberCount";
-import TableListVerification from "../../components/tables/tableListVerification";
+import TableCheckList from "../../components/tables/TableCheckList";
 
 const ListVerification = () => {
 
@@ -393,7 +393,7 @@ const ListVerification = () => {
         </div>
       </div>
     </div>
-    <TableListVerification/>
+    <TableCheckList/>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Step23 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "23.1.3" ? "3da" : id;
+    const stepUrl = id == "23.1.3" ? "23da" : id;
     const selectedFile = values.cargaArchivo;
     const payload = {};
     if (id == "23.1.1") {
@@ -57,7 +57,7 @@ const Step23 = () => {
         mainTitle={
           "FASE 4: MEJORA CONTINUA - PASO 23. MEJORA CONTINUA, ACCIONES PREVENTIVAS Y CORRECTIVAS"
         }
-        titleForm={titleForm}
+        titleForm={"Documento: Acciones preventivas y/o correctivas en seguridad vial"}
         step={"23.1.1"}
         nameStep={
           "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
@@ -67,7 +67,7 @@ const Step23 = () => {
       />
       <div className="pb-10"></div>
       <FormFlex
-        titleForm={titleForm}
+        titleForm={"Documento: Mejoras en seguridad vial en personas, vehículos, infraestructura, velocidad, comportamientos, infraestructura, emergencias"}
         step={"23.1.2"}
         nameStep={
           "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"

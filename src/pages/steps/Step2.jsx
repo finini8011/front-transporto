@@ -16,7 +16,7 @@ const Step2 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "2.3" ? "3da" : id;
+    const stepUrl = id == "2.3" ? "2da" : id;
     const selectedFile = values.cargaArchivo;
     const payload = {};
     if (id == "2.1") {

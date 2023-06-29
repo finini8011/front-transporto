@@ -1,15 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { lvc } from "../../constants/listaVerificacion";
 import { selectCurrentUser } from "../../api/features/auth/authSlice";
+import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
+import {
+  useGetCIIUQuery,
+  useGetDepartmentsQuery,
+} from "../../api/services/company/companyApiSlice";
+
 
 
 
 const ListVerification = () => {
 
-  const user = useSelector(selectCurrentUser);
-  console.log("datos", user)
+  const { compania } = useSelector(selectCurrentUser);
+  const { data: dataState } = useGetStatePESVQuery();
+  const { data: dataCity } = useGetCIIUQuery();
+  const { data: dataDepart } = useGetDepartmentsQuery();
+  const [city, setCity] = useState();
+  let arrayPesv = [];
 
+
+  console.log(city)
+
+
+
+
+  if (dataState) {
+    const { 1: fase1, 2: fase2, 3: fase3, 4: fase4 } = dataState;
+    const arrayDateStateFase1 = Object.values(fase1);
+    const arrayDateStateFase2 = Object.values(fase2);
+    const arrayDateStateFase3 = Object.values(fase3);
+    const arrayDateStateFase4 = Object.values(fase4);
+    arrayPesv = arrayDateStateFase1.concat(arrayDateStateFase2, arrayDateStateFase3, arrayDateStateFase4)
+  }
+
+
+
+  console.log(arrayPesv, "cambio")
 
   return (
     <div>
@@ -30,23 +58,23 @@ const ListVerification = () => {
             </p>
           </div>
           <div className="py-2 grid grid-cols-3 gap-2">
-            <p className="flex flex-col mb-2 mr-2"> Razon social <span className="bg-gray-100 p-2">{user.compania.razon_social}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> NIT <span className="bg-gray-100 p-2">{user.compania.nit}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Representante de la organizacion<span className="bg-gray-100 p-2">{user.compania.representante_legal}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Actividad principal <span className="bg-gray-100 p-2">{user.compania.main_activity_ciiu}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Actividad Secundaria <span className="bg-gray-100 p-2">{user.compania.secondary_activity_ciiu}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Razon social <span className="bg-gray-100 p-2">{compania.razon_social}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> NIT <span className="bg-gray-100 p-2">{compania.nit}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Representante de la organizacion<span className="bg-gray-100 p-2">{compania.representante_legal}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Actividad principal <span className="bg-gray-100 p-2">{compania.main_activity_ciiu}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Actividad Secundaria <span className="bg-gray-100 p-2">{compania.secondary_activity_ciiu}</span></p>
           </div>
         </div>
         <div className="text-white bg-fourth p-3 rounded-t-md text-base font-semibold uppercase">
           Datos de Contacto
         </div>
         <div className="py-2 grid grid-cols-3 gap-2">
-          <p className="flex flex-col mb-2 mr-2"> Dirreccion <span className="bg-gray-100 p-2">{user.compania.direccion}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Telefono #1<span className="bg-gray-100 p-2">{user.compania.telefono1}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Telefono #2<span className="bg-gray-100 p-2">{user.compania.telefono2}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Correo electronico <span className="bg-gray-100 p-2">{user.compania.email}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Departamento <span className="bg-gray-100 p-2">{user.compania.departments}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Cuidad <span className="bg-gray-100 p-2">{user.compania.cities_id}</span></p>
+          <p className="flex flex-col mb-2 mr-2"> Dirreccion <span className="bg-gray-100 p-2">{compania.direccion}</span></p>
+          <p className="flex flex-col mb-2 mr-2"> Telefono #1<span className="bg-gray-100 p-2">{compania.telefono1}</span></p>
+          <p className="flex flex-col mb-2 mr-2"> Telefono #2<span className="bg-gray-100 p-2">{compania.telefono2}</span></p>
+          <p className="flex flex-col mb-2 mr-2"> Correo electronico <span className="bg-gray-100 p-2">{compania.email}</span></p>
+          <p className="flex flex-col mb-2 mr-2"> Departamento <span className="bg-gray-100 p-2">{compania.departments_id}</span></p>
+          <p className="flex flex-col mb-2 mr-2"> Cuidad <span className="bg-gray-100 p-2">{compania.cities_id}</span></p>
         </div>
       </div>
       <div className="shadow-md rounded-md bg-white">
@@ -55,7 +83,7 @@ const ListVerification = () => {
         </div>
         <div className="px-2">
           <div className="py-2 grid grid-cols-3 gap-2">
-            <p className="flex flex-col mb-2 mr-2"> Misionalidad <span className="bg-gray-100 p-2">{user.compania.misionalidad}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Misionalidad <span className="bg-gray-100 p-2">{compania.misionalidad}</span></p>
           </div>
         </div>
       </div>
@@ -67,11 +95,11 @@ const ListVerification = () => {
         </div>
         <div className="px-2">
           <div className="py-2 grid grid-cols-3 gap-2">
-            <p className="flex flex-col mb-2 mr-2"> Telefono #1<span className="bg-gray-100 p-2">{user.compania.telefono1}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Telefono #2<span className="bg-gray-100 p-2">{user.compania.telefono2}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Correo electronico <span className="bg-gray-100 p-2">{user.compania.email}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Departamento <span className="bg-gray-100 p-2">{user.compania.departments}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Cuidad <span className="bg-gray-100 p-2">{user.compania.cities_id}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Telefono #1<span className="bg-gray-100 p-2">{compania.telefono1}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Telefono #2<span className="bg-gray-100 p-2">{compania.telefono2}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Correo electronico <span className="bg-gray-100 p-2">{compania.email}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Departamento <span className="bg-gray-100 p-2">{compania.departments}</span></p>
+            <p className="flex flex-col mb-2 mr-2"> Cuidad <span className="bg-gray-100 p-2">{compania.cities_id}</span></p>
           </div>
         </div>
       </div>
@@ -109,7 +137,6 @@ const ListVerification = () => {
                   <td className="border p-2">{content.requirement}</td>
                   <td className="border p-2">{content.document}</td>
                   <td className="border p-2 text-center w-36">
-                    <p>pruebaaa</p>
                   </td>
                   <td className="border p-2 ">
                     <p>observaciones</p>

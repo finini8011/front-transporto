@@ -18,6 +18,8 @@ const Home = () => {
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const {data:dataState} = useGetStatePESVQuery();
 
+  console.log(updatedDataCard,"aquii")
+
   let resultCumple = 0;
   let parcialmente = 0;
   let arrayPesv =[];
@@ -68,6 +70,8 @@ const Home = () => {
       return navigate(`/step/${step}`);
     }
   };
+
+
 
   return (
     <div className="justify-center ">

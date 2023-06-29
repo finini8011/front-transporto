@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { lvc } from "../../constants/listaVerificacion";
 import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
+
 
 
 
 const TableListVerification = () => {
 
   const { data: dataState } = useGetStatePESVQuery();
+
+   console.log(dataState)
+  
 
 
 
@@ -46,7 +50,6 @@ const TableListVerification = () => {
                   <td className="border p-2">{content.requirement}</td>
                   <td className="border p-2">{content.document}</td>
                   <td className="border p-2 text-center w-36">
-                    <p>prueba</p>
                   </td>
                   <td className="border p-2 ">
                     <p>observaciones</p>

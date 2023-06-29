@@ -1,152 +1,399 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { lvc } from "../../constants/listaVerificacion";
-import { selectCurrentUser } from "../../api/features/auth/authSlice";
-import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import {
   useGetCIIUQuery,
+  useUpdateCompanyMutation,
   useGetDepartmentsQuery,
+  useLazyGetCitiesOfDepartmentQuery,
 } from "../../api/services/company/companyApiSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser, setUser } from "../../api/features/auth/authSlice";
 
-
-
+import SelectRHF from "../../components/commons/input/select/SelectRHF";
+import InputRHF from "../../components/commons/input/text/InputRHF";
+import InputNumberCount from "../../components/commons/input/text/InputNumberCount";
+import TableCheckList from "../../components/tables/TableCheckList";
 
 const ListVerification = () => {
 
+
   const { compania } = useSelector(selectCurrentUser);
-  const { data: dataState } = useGetStatePESVQuery();
-  const { data: dataCity } = useGetCIIUQuery();
-  const { data: dataDepart } = useGetDepartmentsQuery();
-  const [city, setCity] = useState();
-  let arrayPesv = [];
+  const dispatch = useDispatch();
+  const [updateCompany] = useUpdateCompanyMutation();
+  const [count, setCount] = useState(0);
+  const {
+    data: dataCIIU,
+  } = useGetCIIUQuery();
+  const {
+    data: dataDepartments,
+    error: errorDepartments,
+    isLoading: isLoadingDepartments,
+  } = useGetDepartmentsQuery();
+  const [getCities] =
+    useLazyGetCitiesOfDepartmentQuery();
 
+  const [dataCities, setDataCities] = useState([]);
+  const {
+    register,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm();
 
-  console.log(city)
+  useEffect(() => {
+    if (count > 0) {
+      const getCitiesOfDepartments = async () => {
+        const { data } = await getCities(parseInt(watch("departments")));
+        setDataCities(data);
+        // setValue("cities_id", compania.cities_id);
+      };
+      getCitiesOfDepartments();
+    }
+    setCount(1);
+  }, [watch("departments")]);
 
+  useEffect(() => {
+    // console.log(compania);
+    setValue("nit", compania.nit);
+    setValue("razon_social", compania.razon_social);
+    setValue("representante_legal", compania.representante_legal);
+    setValue("main_activity_ciiu", compania.main_activity_ciiu);
+    setValue("secondary_activity_ciiu", compania.secondary_activity_ciiu);
+    setValue("direccion", compania.direccion);
+    setValue("telefono1", compania.telefono1);
+    setValue("telefono2", compania.telefono2);
+    setValue("email", compania.email);
+    // setValue("departments", compania.departments_id);
+    // setValue("cities_id", compania.cities_id);
+    setValue("misionalidad", compania.misionalidad === 1 ? "true" : "false");
+    setValue("vehiculos_propios", compania.vehiculos_propios);
+    setValue("vehiculos_arrendados", compania.vehiculos_arrendados);
+    setValue("vehiculos_intermediacion", compania.vehiculos_intermediacion);
+    setValue("vehiculos_contratistas", compania.vehiculos_contratistas);
+    setValue("vehiculos_leasing", compania.vehiculos_leasing);
+    setValue("vehiculos_renting", compania.vehiculos_renting);
+    setValue("vehiculos_colaboradores", compania.vehiculos_colaboradores);
+    setValue("conductores_directos", compania.conductores_directos);
+    setValue("conductores_contratistas", compania.conductores_contratistas);
+    setValue("conductores_tercerizados", compania.conductores_tercerizados);
+    setValue("conductores_trabajadores", compania.conductores_trabajadores);
+    setValue("otros_conductores", compania.otros_conductores);
+  }, []);
 
+  useEffect(() => {
+    if (!isLoadingDepartments) {
+      setValue("departments", compania.departments_id);
+    }
+  }, [isLoadingDepartments]);
 
+  useEffect(() => {
+    setValue("cities_id", compania.cities_id);
+  }, [dataCities]);
 
-  if (dataState) {
-    const { 1: fase1, 2: fase2, 3: fase3, 4: fase4 } = dataState;
-    const arrayDateStateFase1 = Object.values(fase1);
-    const arrayDateStateFase2 = Object.values(fase2);
-    const arrayDateStateFase3 = Object.values(fase3);
-    const arrayDateStateFase4 = Object.values(fase4);
-    arrayPesv = arrayDateStateFase1.concat(arrayDateStateFase2, arrayDateStateFase3, arrayDateStateFase4)
-  }
+  useEffect(() => {
+    const totalVehiculos =
+      parseInt(watch("vehiculos_propios")) +
+      parseInt(watch("vehiculos_arrendados")) +
+      parseInt(watch("vehiculos_intermediacion")) +
+      parseInt(watch("vehiculos_contratistas")) +
+      parseInt(watch("vehiculos_leasing")) +
+      parseInt(watch("vehiculos_renting")) +
+      parseInt(watch("vehiculos_colaboradores"));
+    setValue("cantidad_vehiculos", totalVehiculos);
+  }, [
+    watch("vehiculos_propios"),
+    watch("vehiculos_arrendados"),
+    watch("vehiculos_intermediacion"),
+    watch("vehiculos_contratistas"),
+    watch("vehiculos_leasing"),
+    watch("vehiculos_renting"),
+    watch("vehiculos_colaboradores"),
+  ]);
 
-
-
-  console.log(arrayPesv, "cambio")
+  useEffect(() => {
+    const total =
+      parseInt(watch("conductores_directos")) +
+      parseInt(watch("conductores_trabajadores")) +
+      parseInt(watch("conductores_contratistas")) +
+      parseInt(watch("conductores_tercerizados")) +
+      parseInt(watch("otros_conductores"));
+    setValue("cantidad_conductores", total);
+  }, [
+    watch("conductores_directos"),
+    watch("conductores_trabajadores"),
+    watch("conductores_contratistas"),
+    watch("conductores_tercerizados"),
+    watch("otros_conductores"),
+  ]);
 
   return (
-    <div>
-      <div className="text-white bg-fourth p-3 rounded-t-md text-base font-semibold">
-        LISTA DE VERIFICACION DE CUMPLIMIENTO DE LOS REQUISITOS DEL PLAN
-        ESTRATEGICO DE SEGURIDAD VIAL
+    <div className="p-8">
+    <div className="flex flex-col gap-2">
+      <Toaster />
+      <div className="bg-fourth text-white py-3 px-5 rounded-md flex justify-between items-center">
+        <p>Lista de Verificacion</p>
       </div>
-      <div className="shadow-md rounded-md bg-white">
-        <div className="px-2">
-          <div className="flex">
-            <p className="text-center p-3 border-b border-r flex-1">
-              METODOLOGIA RESOLUCIÓN N. 40595 DE 2022 DE MINISTERIO DE
-              TRANSPORTE
-            </p>
-            <p className="text-center p-3 border-b flex-1">
-              Lista de Chequeo versión 1.0 Fuente: Resolución 40595 de 2022
-              Ministerio de Transporte
-            </p>
+      <div>
+        <div className="bg-seventh py-2 px-5 rounded-t-xl ">
+          <p className="color-fourth uppercase text-sm">
+            {"> información básica"}
+          </p>
+        </div>
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
+          <div className="grid grid-cols-3 gap-5">
+            <InputRHF
+              type="text"
+              label="NIT"
+              placeholder="Ingrese NIT"
+              readOnly
+              {...register("nit")}
+            />
+            <InputRHF
+              type="text"
+              label="Razón Social"
+              placeholder="Ingrese Razón Social"
+              {...register("razon_social")}
+              disabled
+            />
+            <InputRHF
+              type="text"
+              label="Representante Legal"
+              placeholder="Ingrese Representante Legal"
+              {...register("representante_legal")}
+              disabled
+            />
           </div>
-          <div className="py-2 grid grid-cols-3 gap-2">
-            <p className="flex flex-col mb-2 mr-2"> Razon social <span className="bg-gray-100 p-2">{compania.razon_social}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> NIT <span className="bg-gray-100 p-2">{compania.nit}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Representante de la organizacion<span className="bg-gray-100 p-2">{compania.representante_legal}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Actividad principal <span className="bg-gray-100 p-2">{compania.main_activity_ciiu}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Actividad Secundaria <span className="bg-gray-100 p-2">{compania.secondary_activity_ciiu}</span></p>
-          </div>
-        </div>
-        <div className="text-white bg-fourth p-3 rounded-t-md text-base font-semibold uppercase">
-          Datos de Contacto
-        </div>
-        <div className="py-2 grid grid-cols-3 gap-2">
-          <p className="flex flex-col mb-2 mr-2"> Dirreccion <span className="bg-gray-100 p-2">{compania.direccion}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Telefono #1<span className="bg-gray-100 p-2">{compania.telefono1}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Telefono #2<span className="bg-gray-100 p-2">{compania.telefono2}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Correo electronico <span className="bg-gray-100 p-2">{compania.email}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Departamento <span className="bg-gray-100 p-2">{compania.departments_id}</span></p>
-          <p className="flex flex-col mb-2 mr-2"> Cuidad <span className="bg-gray-100 p-2">{compania.cities_id}</span></p>
-        </div>
-      </div>
-      <div className="shadow-md rounded-md bg-white">
-        <div className="text-white bg-fourth p-3 rounded-t-md text-base font-semibold uppercase">
-          Misionalidad
-        </div>
-        <div className="px-2">
-          <div className="py-2 grid grid-cols-3 gap-2">
-            <p className="flex flex-col mb-2 mr-2"> Misionalidad <span className="bg-gray-100 p-2">{compania.misionalidad}</span></p>
-          </div>
-        </div>
-      </div>
-      <div className="shadow-md rounded-md bg-white">
-        <div className="text-white bg-fourth p-3 rounded-t-md text-base font-semibold uppercase">
-          Vehículos automotores (autos, camiones, montacargas, maquinaria,
-          etc) o no automotores (bicicletas, patinetas, triciclos o
-          similares)
-        </div>
-        <div className="px-2">
-          <div className="py-2 grid grid-cols-3 gap-2">
-            <p className="flex flex-col mb-2 mr-2"> Telefono #1<span className="bg-gray-100 p-2">{compania.telefono1}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Telefono #2<span className="bg-gray-100 p-2">{compania.telefono2}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Correo electronico <span className="bg-gray-100 p-2">{compania.email}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Departamento <span className="bg-gray-100 p-2">{compania.departments}</span></p>
-            <p className="flex flex-col mb-2 mr-2"> Cuidad <span className="bg-gray-100 p-2">{compania.cities_id}</span></p>
+          <div className="grid grid-cols-2 gap-5">
+            <SelectRHF
+              type="text"
+              label="Actividad Principal (CIIU)"
+              dataApi={dataCIIU}
+              {...register("main_activity_ciiu")}
+              disabled
+            />
+            <SelectRHF
+              type="text"
+              label="Actividad Secundaria (CIIU)"
+              dataApi={dataCIIU}
+              {...register("secondary_activity_ciiu")}
+              disabled
+            />
           </div>
         </div>
       </div>
-      <table className="border text-left text-sm shadow-md bg-white mb-16">
-        <thead className="">
-          <tr>
-            <th className="border p-2">#</th>
-            <th className="border p-2">Nivel PESV</th>
-            <th className="border p-2">Requisito a Verificar</th>
-            <th className="border p-2">
-              Documento sugerido para verificar según Res. 40595 de 2022
-            </th>
-            <th className="border p-2">Respuesta</th>
-            <th className="border p-2">
-              Observaciones sobre los hallazgos o la no aplicabilidad del
-              requisito
-            </th>
-          </tr>
-        </thead>
-        <tbody className="font-normal">
-          {lvc.map((data, key) => (
-            <React.Fragment key={key}>
-              <tr>
-                <td
-                  className="bg-fourth text-white text-center p-2 font-semibold"
-                  colSpan="6"
-                >
-                  {data.title}
-                </td>
-              </tr>
-              {data.body.map((content, index) => (
-                <tr className="text-start" key={index}>
-                  <td className="border p-2">{content.number} </td>
-                  <td className="border p-2">{content.level}</td>
-                  <td className="border p-2">{content.requirement}</td>
-                  <td className="border p-2">{content.document}</td>
-                  <td className="border p-2 text-center w-36">
-                  </td>
-                  <td className="border p-2 ">
-                    <p>observaciones</p>
-                  </td>
-                </tr>
-              ))}
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
+      <div>
+        <div className="bg-seventh py-2 px-5 rounded-t-xl ">
+          <p className="color-fourth uppercase text-sm">
+            {"> Datos de contacto"}
+          </p>
+        </div>
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300   ">
+          <div className="grid grid-cols-3 gap-5">
+            <InputRHF
+              type="text"
+              label="Dirección"
+              placeholder="Ingrese Dirección de la Empresa"
+              {...register("direccion")}
+              disabled
+            />
+            <InputRHF
+              type="text"
+              label="Teléfono #1"
+              placeholder="Ingrese número de teléfono principal"
+              {...register("telefono1")}
+              disabled
+            />
+            <InputRHF
+              type="text"
+              label="Teléfono #2"
+              placeholder="Ingrese número de teléfono secundario"
+              {...register("telefono2")}
+              disabled
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-5">
+            <InputRHF
+              type="text"
+              label="Correo electrónico	"
+              placeholder="Ingrese dirección de correo electrónico"
+              {...register("email")}
+              disabled
+            />
+            <SelectRHF
+              type="text"
+              label="Departamento"
+              dataApi={dataDepartments}
+              {...register("departments")}
+              disabled
+            />
+            <SelectRHF
+              type="text"
+              label="Ciudad"
+              dataApi={dataCities}
+              {...register("cities_id")}
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="bg-seventh py-2 px-5 rounded-t-xl ">
+          <p className="color-fourth uppercase text-sm">{"> Misionalidad"}</p>
+        </div>
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl border border-gray-300 ">
+          <div className="grid grid-cols-2 gap-5">
+            <div className="flex items-center border border-gray-300 rounded px-4">
+              <label
+                htmlFor="bordered-radio-1"
+                className="w-full py-4 ml-2 text-sm font-medium text-gray-900"
+              >
+                La empresa se dedica a la prestación de servicios de transporte
+                terrestre automotor
+              </label>
+              <input
+                type="radio"
+                value={true}
+                defaultChecked
+                {...register("misionalidad")}
+                disabled
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "
+              />
+            </div>
+            <div className="flex items-center border border-gray-300 rounded px-4">
+              <label
+                htmlFor="bordered-radio-2"
+                className="w-full py-4 ml-2 text-sm font-medium text-gray-900"
+              >
+                La empresa se dedica a actividades diferentes al transporte
+              </label>
+              <input
+                {...register("misionalidad")}
+                type="radio"
+                value={false}
+                disabled
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="bg-seventh py-2 px-5 rounded-t-xl ">
+          <p className="color-fourth uppercase text-sm">
+            {"> Tamaño de la organización"}
+          </p>
+        </div>
+        <div className="p-5 flex flex-col gap-5  bg-white rounded-b-xl  border border-gray-300 ">
+          <div className="grid grid-cols-2 gap-5">
+            <div className="border border-gray-300 p-3 rounded-md">
+              <p className="text-sm">
+                Vehículos automotores (autos, camiones, montacargas, maquinaria,
+                etc) o no automotores (bicicletas, patinetas, triciclos o
+                similares)
+              </p>
+              <div className="flex justify-end">
+                <div className="text-center w-20 text-xs  font-semibold color-fifth uppercase">
+                  Cantidad
+                </div>
+              </div>
+              <div className="flex flex-col gap-1">
+                <InputNumberCount
+                  text="Cantidad de vehículos propios"
+                  {...register("vehiculos_propios")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de vehículos arrendados"
+                  {...register("vehiculos_arrendados")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de vehículos en intermediación o administración"
+                  {...register("vehiculos_intermediacion")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de vehículos de contratistas"
+                  {...register("vehiculos_contratistas")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de vehículos en leasing"
+                  {...register("vehiculos_leasing")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de vehículos en renting"
+                  {...register("vehiculos_renting")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de vehículos de los colaboradores puestos al servicio de la organización (se pague o no de rodamiento, combustible o emovolumenes similares)"
+                  {...register("vehiculos_colaboradores")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Total de vehículos de la flota automotor o no automotor"
+                  size="text-base"
+                  readOnly
+                  {...register("cantidad_vehiculos")}
+                  disabled
+                />
+              </div>
+            </div>
+            <div className="border border-gray-300 p-3 rounded-md">
+              <p className="text-sm">
+                Conductores contratados o administrados por la organización
+                (independientemente del nombre del cargo, aquellos que conducen
+                para cumplir su función)
+              </p>
+              <div className="flex justify-end">
+                <div className="text-center w-20 text-xs  font-semibold color-fifth uppercase">
+                  Cantidad
+                </div>
+              </div>
+              <div className="flex flex-col gap-1">
+                <InputNumberCount
+                  text="Cantidad de trabajadores directos como conductores"
+                  {...register("conductores_directos")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de trabajadores (administrativos, directivos o de apoyo), que conducen para desarrollar sus funciones"
+                  {...register("conductores_trabajadores")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Cantidad de contratistas y/o afiliados que conducen para desarrollar sus funciones"
+                  {...register("conductores_contratistas")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Personal vinculado mediante tercerización, subcontratación, outsourcing o intermediación laboral, que conduce para desarrollar sus funciones"
+                  {...register("conductores_tercerizados")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Otros colaboradores que conducen para desarrollar sus funciones"
+                  {...register("otros_conductores")}
+                  disabled
+                />
+                <InputNumberCount
+                  text="Total de conductores contratados o administrados por la organización"
+                  size="text-base"
+                  readOnly
+                  {...register("cantidad_conductores")}
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <TableCheckList/>
     </div>
   );
 };

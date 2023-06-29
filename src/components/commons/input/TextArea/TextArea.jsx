@@ -27,6 +27,7 @@ const TextArea = forwardRef((props, ref) => {
     5: "col-end-5",
     6: "col-end-6",
     7: "col-end-7",
+    8: "col-end-8",
   };
 
   return (

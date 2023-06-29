@@ -53,8 +53,11 @@ const Step13 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#13</h1>
       <FormFlex
+         stage={"2"}
+         mainTitle={
+           "FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 13. INVESTIGACIÓN INTERNA DE SINIESTROS"
+         }
         titleForm={titleForm}
         step={"13.1"}
         nameStep={

@@ -53,9 +53,10 @@ const Step11 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#11</h1>
       <FormFlex
         titleForm={titleForm}
+        stage={"2"}
+        mainTitle={"FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 11. RESPONSABILIDADES Y COMPORTAMIENTO SEGURO"}
         step={"11.1"}
         nameStep={
           "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"

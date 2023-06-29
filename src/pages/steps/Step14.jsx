@@ -53,10 +53,13 @@ const Step14 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#14</h1>
       <FormFlex
         titleForm={titleForm}
         step={"14.1.1"}
+        stage={"2"}
+        mainTitle={
+          "FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 14. VÍAS SEGURAS ADMINISTRADAS POR LA ORGANIZACIÓN"
+        }
         nameStep={
           "La organización documentó un protocolo de operación y mantenimiento de las vías públicas y/o privadas que tenga a cargo, que administre o que controle directamente la organización, incluye como mínimo los requisitos mencionados en El Paso 14?"
         }

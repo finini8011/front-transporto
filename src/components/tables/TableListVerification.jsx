@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { lvc } from "../../constants/listaVerificacion";
 import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
+import { array } from "prop-types";
 
 
 
@@ -8,11 +9,19 @@ import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
 const TableListVerification = () => {
 
   const { data: dataState } = useGetStatePESVQuery();
+  let arrayPesv = [];
 
    console.log(dataState)
   
-
-
+   if(dataState){
+    const {1:fase1, 2:fase2, 3:fase3, 4:fase4} = dataState;
+    const arrayDateStateFase1 = Object.values(fase1);
+    const arrayDateStateFase2 = Object.values(fase2);
+    const arrayDateStateFase3 = Object.values(fase3);
+    const arrayDateStateFase4 = Object.values(fase4);
+    arrayPesv = arrayDateStateFase1.concat(arrayDateStateFase2, arrayDateStateFase3,arrayDateStateFase4)
+  }
+console.log(arrayPesv,"array")
 
   return (
     <div className="mt-10">
@@ -50,6 +59,7 @@ const TableListVerification = () => {
                   <td className="border p-2">{content.requirement}</td>
                   <td className="border p-2">{content.document}</td>
                   <td className="border p-2 text-center w-36">
+                  {arrayPesv[index]}
                   </td>
                   <td className="border p-2 ">
                     <p>observaciones</p>

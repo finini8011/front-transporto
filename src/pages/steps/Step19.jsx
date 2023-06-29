@@ -1,10 +1,17 @@
+import React from "react";
+import pageConst from "../../../public/img/pageConst.jpg"
 
 const Step19 = () => {
 
 
   return (
     <div>
-      <p>En Construccion</p>
+      <img
+        src={pageConst}
+        width={900}
+        alt="icon"
+        className="m-auto"
+      />
     </div>
   );
 };

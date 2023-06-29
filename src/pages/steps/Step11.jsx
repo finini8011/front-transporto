@@ -16,7 +16,7 @@ const Step11 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "11.3" ? "3da" : id;
+    const stepUrl = id == "11.3" ? "11da" : id;
     const selectedFile = values.cargaArchivo;
     const payload = {};
     if (id == "11.1") {
@@ -54,40 +54,40 @@ const Step11 = () => {
     <div>
       <Toaster />
       <FormFlex
-        titleForm={titleForm}
+        titleForm={"Documento: Funciones y responsabilidades seguridad vial por actor vial - Cargos"}
         stage={"2"}
         mainTitle={"FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 11. RESPONSABILIDADES Y COMPORTAMIENTO SEGURO"}
         step={"11.1"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿La organización asigno, documentó y comunicó en debida forma las funciones y responsabilidades en materia de seguridad vial de todos los actores viales de la organización, ¿contiene como mínimo lo indicado en el Paso 11?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
       <FormFlex
-        titleForm={titleForm}
+        titleForm={"Documento: Procedimientos en los que se establezcan los requisitos de contratación en seguridad vial de los colaboradores"}
         step={"11.2"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿¿La organización realizó la evaluación de la competencia en seguridad vial a colaboradores que realizan desplazamientos laborales, al menos una (1) vez al año, contiene como mínimo lo indicado en el Paso 11?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
       <FormFlex
-        titleForm={titleForm}
+        titleForm={"Documento: Procedimiento para la evaluación de la competencia de los conductores"}
         step={"11.3"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿La organización cuenta con el procedimiento documentado de evaluación de la competencia de los conductores?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
-            <FormFlex
-        titleForm={titleForm}
+      <FormFlex
+        titleForm={"Documento: Procedimiento para la evaluación de la competencia de los conductores"}
         step={"11.4"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿La organización definió la metodología para lograr comportamientos interdependientes y promoción de la formación de hábitos y conductas seguros en la vía?"
         }
         cols={5}
         onSubmit={handleFormSubmit}

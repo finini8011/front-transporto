@@ -37,7 +37,7 @@ import {
   faVoteYea,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
-import BreakCrumbs from "../../breakcrumbs";
+import BreakCrumbs from "../../breakcrumbs/BreakCrumbs";
 
 const MainAuth = () => {
   const user = useSelector(selectCurrentUser);

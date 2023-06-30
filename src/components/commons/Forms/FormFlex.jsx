@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import BreakCrumbs from "../../breakcrumbs/BreakCrumbs";
+import BreakCrumbsM from "../../breakcrumbs/BreakCrumbsM";
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
@@ -17,11 +19,13 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
 
+  
+
   const inputs = [
     {
       label: "CREA",
       labelWeight: "medium",
-      name: "crea",
+      name: "creador",
       nameApi: "creador",
       type: "text",
       placeholder: "Ingrese nombre",
@@ -43,7 +47,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     {
       label: "Fecha",
       labelWeight: "medium",
-      name: "fecha",
+      name: "uploadDate",
       nameApi: "uploadDate",
       type: "span",
       start: 7,
@@ -53,7 +57,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     {
       label: "CARGAR ARCHIVO",
       labelWeight: "medium",
-      name: "cargaArchivo",
+      name: "fileName",
       type: "file",
       placeholder: "Seleccione archivo",
       start: 1,
@@ -75,6 +79,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       label: "NOMBRE DEL ARCHIVO CARGADO",
       type: "span",
       placeholder: "",
+      name: "originalName",
       nameApi: "originalName",
       start: 1,
       end: 7,
@@ -107,6 +112,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     },
     {
       label: "ESTADO ACTUAL",
+      name: "estado",
       nameApi: "estado",
       type: "span",
       start: 1,
@@ -131,36 +137,41 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     },
   ];
 
-  const { data, isLoading, isError, refetch } = useGetDataStepQuery(step);
+  const { data: dataGet, refetch } = useGetDataStepQuery(step);
   useEffect(() => {
     refetch();
   }, []);
 
-  useEffect(() => {
-    if (data) {
-      /*   const payload = JSON.parse(data.payload);
-      const lastPayload = payload[payload.length - 1];
-      const updatedInputValues = {};
-      inputs.forEach((input) => {
-        if (lastPayload[input.nameApi]) {
-          if (input.nameApi !== "uploadDate") {
-            updatedInputValues[input.name] = lastPayload[input.nameApi];
-          } else {
-            const dateString = lastPayload[input.nameApi];
-            const dateParts = dateString.split(" ")[0].split("-");
-            const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-            updatedInputValues[input.name] = formattedDate;
+     useEffect(() => {
+      if (dataGet) {
+        const payload = JSON.parse(dataGet.payload);
+        const lastPayload = payload[payload.length - 1];
+        const updatedInputValues = {};
+        console.log(inputs,"inputs")
+        inputs.forEach((input) => {
+         // console.log(lastPayload,"laspayload")
+          console.log(input.nameApi,"api")
+          console.log(inputValues,"input")
+          if (lastPayload[input.nameApi]) {
+            if (input.nameApi !== "uploadDate") {
+              updatedInputValues[input.name] = lastPayload[input.nameApi];
+            } else {
+              const dateString = lastPayload[input.nameApi];
+              const dateParts = dateString.split(" ")[0].split("-");
+              const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+              updatedInputValues[input.name] = formattedDate;
+            }
           }
-        }
-      });
-      setInputValues(updatedInputValues); */
-    }
-  }, [data]);
+        });
+        console.log(updatedInputValues,"duuu")
+        setInputValues(updatedInputValues);
+      }
+    }, [dataGet]);
 
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4 w-full">
-        {mainTitle && stage ? (  <section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
+        {mainTitle && stage ? (<section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
           <img
             src={`/img/fase${stage}_general.svg`}
             width={25}
@@ -179,8 +190,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
           <span className="ml-2">
             {mainTitle}
           </span>
-        </section>):''}
-      
+        </section>) : ''}
+
         <div className="rounded-t-2xl flex text-base">
           <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium w-full">
             <FontAwesomeIcon
@@ -192,7 +203,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             {step} {nameStep}
           </div>
         </div>
-        {/*   {data ? (
+        {dataGet ? (
           <Form
             title={titleForm}
             inputs={inputs.map((input) => ({
@@ -204,17 +215,17 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             onSubmit={onSubmit}
             id={step}
           />
-        ) : ( */}
-        <Form
-          title={titleForm}
-          inputs={inputs}
-          cols={cols}
-          buttons={buttons}
-          onSubmit={onSubmit}
-          id={step}
-          document={true}
-        />
-        {/*    )} */}
+        ) : (
+          <Form
+            title={titleForm}
+            inputs={inputs}
+            cols={cols}
+            buttons={buttons}
+            onSubmit={onSubmit}
+            id={step}
+            document={true}
+          />
+        )}
       </section>
     </>
   );

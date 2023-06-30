@@ -63,11 +63,7 @@ export const stepsApiSlice = createApi({
       query: (nivel) => {
         return {
           url: `/steps/states`,
-          method: "POST",
-           body: {
-            "nivel": nivel
-          }, 
-        
+          method: "GET",
         };
       },
     }),

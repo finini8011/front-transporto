@@ -43,7 +43,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "span",
       start: 1,
       end: 3,
-      value: "SI",
+      value: "",
     },
   ];
   const buttons = [

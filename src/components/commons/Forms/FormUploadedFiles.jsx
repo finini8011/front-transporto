@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import ButtonPaginationNext from "../button/ButtonPaginationNext";
-import ButtonPaginationPrev from "../button/ButtonPaginationPrev";
-import SelectEntries from "../input/select/SelectEntries";
-import Table from "../Table/Table";
-import DataTable from "../Table/DataTable";
+// import ButtonPaginationNext from "../button/ButtonPaginationNext";
+// import ButtonPaginationPrev from "../button/ButtonPaginationPrev";
+// import SelectEntries from "../input/select/SelectEntries";
+// import Table from "../Table/Table";
+// import DataTable from "../Table/Datatable";
 
 const FormUploadedFiles = ({ title, stepNumber, columns, rows, onDeleteSelected }) => {
   const {
@@ -19,7 +19,7 @@ const FormUploadedFiles = ({ title, stepNumber, columns, rows, onDeleteSelected 
   return (
     <section className="bg-white text-gray-800 flex flex-col w-full">
       <div className="mt-5 shadow-md rounded-md">
-        <DataTable title={title} columns={columns} rows={rows} onDeleteSelected={handleDeleteSelected}/>
+        {/* <DataTable title={title} columns={columns} rows={rows} onDeleteSelected={handleDeleteSelected}/> */}
         {/*  <div className="grid grid-cols-6 gap-6 mb-2">
                     <SelectEntries text="10" />
                     <div className="col-end-8 col-span-2 flex justify-end">

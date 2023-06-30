@@ -11,6 +11,7 @@ const InputNumberCount = forwardRef((props, ref) => {
         <input
           className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  focus:outline-none  w-full py-2 disabled:cursor-no-drop disabled:bg-gray-200 text-center`}
           type="number"
+          min={0}
           name={id}
           id={id}
           {...inputProps}

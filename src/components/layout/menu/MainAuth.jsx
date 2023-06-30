@@ -177,23 +177,6 @@ const MainAuth = () => {
                 <List component="div" disablePadding>
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    onClick={() => handleNavigate("/preparacion") }
-                    
-                    className={`flex gap-2 ${currentPage === "/preparacion" && "active"}`}
-                  >
-                    <FontAwesomeIcon icon={faBuilding} className="w-5 h-5" />
-                    <ListItemText
-                      primary="Preparación"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.9rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/planificacion")}
                     className={`flex gap-2 ${currentPage === "/planificacion" && "active"}`}
                   >

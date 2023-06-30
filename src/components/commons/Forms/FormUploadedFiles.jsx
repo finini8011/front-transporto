@@ -18,14 +18,11 @@ const FormUploadedFiles = ({ title, stepNumber, data }) => {
 
     return (
         <section className="bg-white text-gray-800 flex flex-col w-full">
-            <div className="px-2 mt-2 shadow-md rounded-md">
-                <div className="p-3 rounded-t-md text-center">
-                    {title}
-                </div>
+            <div className="px-2 mt-5 shadow-md rounded-md">
                 <div className="grid grid-cols-6 gap-6 mb-2">
                     <SelectEntries text="10" />
                     <div className="col-end-8 col-span-2 flex justify-end">
-                        <label className="text-sm font-medium text-gray-900 dark:text-white mr-2">
+                        <label className="text-sm font-medium text-gray-900 mr-2">
                             Search:
                         </label>
                         <input

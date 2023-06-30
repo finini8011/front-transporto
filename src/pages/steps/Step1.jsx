@@ -16,7 +16,7 @@ const Step1 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "1.3" ? "3da" : id;
+    const stepUrl = id == "1.3" ? "1da" : id;
     const selectedFile = values.cargaArchivo;
     const payload = {};
     if (id == "1.1") {
@@ -59,17 +59,17 @@ const Step1 = () => {
         mainTitle={"FASE 1: PLANIFICACIÓN - PASO 1. LIDER DE DISEÑO E IMPLEMENTACIÓN PESV"}
         step={"1.1"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿Se tiene designada una persona con poder decisión en los temas relacionados con la gestión de la seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
       <FormSelect
-        titleForm={titleForm}
+        titleForm=""
         step={"1.2"}
         nameStep={
-          "El líder del diseño e implemetación del PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad vial"
+          "El líder del diseño e implementación de PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad Vial."
         }
         cols={5}
         onSubmit={handleFormSubmit}

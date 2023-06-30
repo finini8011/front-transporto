@@ -6,7 +6,6 @@ import {
 
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
-import FormSelect from "../../components/commons/Forms/FormSelect";
 
 const Step13 = () => {
   const [saveStep, saveStepInfo] = useSaveStepMutation();
@@ -54,26 +53,27 @@ const Step13 = () => {
     <div>
       <Toaster />
       <FormFlex
-         stage={"2"}
-         mainTitle={
-           "FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 13. INVESTIGACIÓN INTERNA DE SINIESTROS"
-         }
-        titleForm={titleForm}
+        stage={"2"}
+        mainTitle={
+          "FASE 2: IMPLEMENTACIÓN Y EJECUCIÓN - PASO 13. INVESTIGACIÓN INTERNA DE SINIESTROS"
+        }
+        titleForm={"Documento: Procedimiento: para reportar, registrar, investigar, analizar y divulgar los siniestros viales para la investigación interna de siniestros viales"}
         step={"13.1"}
         nameStep={
-          "¿La organización documentó y aplicó una técnica, metodología o procedimiento para reportar, registrar, investigar, analizar y divulgar los siniestros viales en los que se ven involucrados los colaboradores de la organización en los desplazamientos laborales y en el entorno próximo de la organización, incluye como mínimo los requisitos mencionados en el Paso 13?"
+          "¿La organización documentó y aplicó una técnica, metodología o procedimiento para reportar, registrar, investigar, analizar y divulgar los siniestros viales en los que se ven involucrados los colaboradores de la organización en los desplazamientos laborales y en el entorno próximo de la organización, incluye como mínimo los requisitos mencionados en el Paso 13"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
-      <FormSelect
-        titleForm={""}
+      <FormFlex
+        stage={"2"}
+        titleForm={"Documento: Lecciones aprendidas"}
         step={"13.2"}
         nameStep={
           "¿La organización divulgó las lecciones aprendidas de los siniestros viales?"
         }
-        cols={4}
+        cols={5}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>

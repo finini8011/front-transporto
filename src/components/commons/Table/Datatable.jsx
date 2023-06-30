@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { DataGrid, esES } from "@mui/x-data-grid";
-import { makeStyles } from "@mui/styles";
+/* import { makeStyles } from "@mui/styles"; */
 
-const useStyles = makeStyles({
+/* const useStyles = makeStyles({
   headerCell: {
     color: "#0090FF", 
 
@@ -10,10 +10,10 @@ const useStyles = makeStyles({
   rowCell: {
     color: "#7A86A1"
   },
-});
+}); */
 const DataTable = ({ title, columns, rows, onDeleteSelected }) => {
-  const classes = useStyles();
-
+/*   const classes = useStyles();
+ */
   const [selectedIds, setSelectedIds] = useState([]);
 
   const handleSelectRow = (id) => {
@@ -52,12 +52,12 @@ const DataTable = ({ title, columns, rows, onDeleteSelected }) => {
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         rows={rows.map((row) => ({
             ...row,
-            headerClassName: classes.rowCell, 
+           /*  headerClassName: classes.rowCell,  */
           }))}
         columns={columns.map((column) => ({
           ...column,
-          headerClassName: classes.headerCell, 
-        }))}
+/*           headerClassName: classes.headerCell, 
+ */        }))}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

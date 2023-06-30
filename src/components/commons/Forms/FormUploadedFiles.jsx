@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 // import ButtonPaginationPrev from "../button/ButtonPaginationPrev";
 // import SelectEntries from "../input/select/SelectEntries";
 // import Table from "../Table/Table";
-// import DataTable from "../Table/Datatable";
+import DataTable from "../Table/Datatable";
 
 const FormUploadedFiles = ({ title, stepNumber, columns, rows, onDeleteSelected }) => {
   const {

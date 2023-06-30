@@ -3,23 +3,24 @@ import { useForm } from "react-hook-form";
 import ButtonPaginationNext from "../button/ButtonPaginationNext";
 import ButtonPaginationPrev from "../button/ButtonPaginationPrev";
 import SelectEntries from "../input/select/SelectEntries";
-import Table from "../Table/Table"
+import Table from "../Table/Table";
+import DataTable from "../Table/DataTable";
 
+const FormUploadedFiles = ({ title, stepNumber, columns, rows, onDeleteSelected }) => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const handleDeleteSelected = (selectedIds) => {
+    onDeleteSelected(selectedIds)
+  };
 
-const FormUploadedFiles = ({ title, stepNumber, data }) => {
-
-    const titles = ["Acciones", "Descripción", "Documento", "Creador", "Destinatario", "Fecha de Creación"];
-    
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm();
-
-    return (
-        <section className="bg-white text-gray-800 flex flex-col w-full">
-            <div className="px-2 mt-5 shadow-md rounded-md">
-                <div className="grid grid-cols-6 gap-6 mb-2">
+  return (
+    <section className="bg-white text-gray-800 flex flex-col w-full">
+      <div className="mt-5 shadow-md rounded-md">
+        <DataTable title={title} columns={columns} rows={rows} onDeleteSelected={handleDeleteSelected}/>
+        {/*  <div className="grid grid-cols-6 gap-6 mb-2">
                     <SelectEntries text="10" />
                     <div className="col-end-8 col-span-2 flex justify-end">
                         <label className="text-sm font-medium text-gray-900 mr-2">
@@ -46,12 +47,10 @@ const FormUploadedFiles = ({ title, stepNumber, data }) => {
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </section >
-    );
+                </div> */}
+      </div>
+    </section>
+  );
 };
 
 export default FormUploadedFiles;
-
-

@@ -16,6 +16,16 @@ export const stepsApiSlice = createApi({
   // refetchOnFocus:true,
   tagTypes: ["Steps"],
   endpoints: (builder) => ({
+    getStatePESV: builder.query({
+      query: () => {
+        return {
+          url: `/steps/substates`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Steps"],
+      invalidatesTags: ["Steps"],
+    }),
     getDataStep: builder.query({
       query: (numStep) => {
         // retorna true si el nit existe
@@ -72,7 +82,9 @@ export const stepsApiSlice = createApi({
           method: "GET",
         };
       },
+      providesTags: ["Steps"],
+      invalidatesTags: ["Steps"],
     }),
   }),
 });
-export const { useGetDataStepQuery, useSaveStepMutation, useSaveStepQuestionMutation, useGetStateStepsQuery } = stepsApiSlice;
+export const { useGetDataStepQuery, useSaveStepMutation, useSaveStepQuestionMutation, useGetStateStepsQuery, useGetStatePESVQuery } = stepsApiSlice;

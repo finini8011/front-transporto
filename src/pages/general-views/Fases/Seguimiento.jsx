@@ -5,8 +5,7 @@ import Card from "../../../components/commons/Cards/Card";
 import ProgressBar from "../../../components/commons/Progress/ProgressBar";
 import { dataCard } from "../../../constants";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
-import { useGetStateStepsQuery } from "../../../api/services/steps/stepsApiSlice";
-import {useGetStatePESVQuery } from "../../../api/services/states/statesApiSlice";
+import { useGetStateStepsQuery,useGetStatePESVQuery } from "../../../api/services/steps/stepsApiSlice";
 
 const Seguimiento = () => {
 

@@ -6,10 +6,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { esES } from "@mui/x-date-pickers/locales";
 
 import arrow from "/img/arrow.svg";
-import face from "/img/face.png";
-import teach from "/img/teach.png";
-import document from "/img/document.png";
-import book from "/img/book.png";
+import face from "/img/face.svg";
+import teach from "/img/teach.svg";
+import document from "/img/document.svg";
+import book from "/img/book.svg";
 import "./lateralRight.css";
 
 const LateralRight = () => {

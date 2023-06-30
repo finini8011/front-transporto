@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import {
   useGetCIIUQuery,
   useSaveCompanyMutation,
@@ -16,8 +15,12 @@ import SelectRHF from "../../components/commons/input/select/SelectRHF";
 import InputRHF from "../../components/commons/input/text/InputRHF";
 import InputNumberCount from "../../components/commons/input/text/InputNumberCount";
 import Button from "../../components/commons/button/Button";
+import { useOutletContext } from "react-router-dom";
 
 const RegisterCompany = () => {
+
+  const {handleNavigate} = useOutletContext()
+
   const dispatch = useDispatch();
   const [saveCompany, { isLoading, error }] = useSaveCompanyMutation();
   const {
@@ -37,8 +40,6 @@ const RegisterCompany = () => {
 
   const [dataCities, setDataCities] = useState([]);
   const [stateValidateNIT, setStateValidateNIT] = useState(false);
-
-  const navigate = useNavigate();
 
   const {
     register,
@@ -104,6 +105,22 @@ const RegisterCompany = () => {
       email === ""
     )
       return toast.error("Llenar todos los campos del formulario");
+    
+      if (
+        parseInt(vehiculos_propios)<0 ||
+        parseInt(vehiculos_arrendados)<0  ||
+        parseInt(vehiculos_intermediacion)<0  ||
+        parseInt(vehiculos_contratistas)<0  ||
+        parseInt(vehiculos_leasing)<0  ||
+        parseInt(vehiculos_renting)<0 ||
+        parseInt(vehiculos_colaboradores)<0  ||
+        parseInt(conductores_directos)<0 ||
+        parseInt(conductores_trabajadores)<0  ||
+        parseInt(conductores_contratistas)<0  ||
+        parseInt(conductores_tercerizados)<0  ||
+        parseInt(otros_conductores)<0  
+      )
+        return toast.error("Los campos del tamaño de la organización no pueden tener valores negativos");
 
     if (stateValidateNIT) return toast.error("NIT ya registrado, ingrese otro");
 
@@ -135,10 +152,11 @@ const RegisterCompany = () => {
         conductores_tercerizados: parseInt(conductores_tercerizados),
         otros_conductores: parseInt(otros_conductores),
       }).unwrap();
+      console.log(user)
       dispatch(setUser(user) );
       toast.success("Se ha registrado correctamente!");
       setTimeout(() => {
-      navigate("/home");
+        handleNavigate("/home")
       }, 2500);
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")

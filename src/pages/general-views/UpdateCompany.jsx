@@ -88,6 +88,22 @@ const UpdateCompany = () => {
     )
       return toast.error("Llenar todos los campos del formulario");
 
+      if (
+        parseInt(vehiculos_propios)<0 ||
+        parseInt(vehiculos_arrendados)<0  ||
+        parseInt(vehiculos_intermediacion)<0  ||
+        parseInt(vehiculos_contratistas)<0  ||
+        parseInt(vehiculos_leasing)<0  ||
+        parseInt(vehiculos_renting)<0 ||
+        parseInt(vehiculos_colaboradores)<0  ||
+        parseInt(conductores_directos)<0 ||
+        parseInt(conductores_trabajadores)<0  ||
+        parseInt(conductores_contratistas)<0  ||
+        parseInt(conductores_tercerizados)<0  ||
+        parseInt(otros_conductores)<0  
+      )
+        return toast.error("Los campos del tamaño de la organización no pueden tener valores negativos");
+
     try {
       const { user } = await updateCompany({
         email,
@@ -116,9 +132,7 @@ const UpdateCompany = () => {
       }).unwrap();
       dispatch(setUser(user));
       toast.success("Se ha actualizado correctamente!");
-      setTimeout(() => {
-        navigate("/home");
-      }, 2500);
+
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");
@@ -375,7 +389,7 @@ const UpdateCompany = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <InputNumberCount
-                  text="Cantidad de vehículos propios"
+                  text="Cantidad de vehículos propios"                 
                   {...register("vehiculos_propios")}
                 />
                 <InputNumberCount

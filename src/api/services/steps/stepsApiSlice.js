@@ -17,9 +17,15 @@ export const stepsApiSlice = createApi({
   tagTypes: ["Steps"],
   endpoints: (builder) => ({
     getDataStep: builder.query({
-      query: (numStep) => `steps/${numStep}/get_data`,
+      query: (numStep) => {
+        // retorna true si el nit existe
+        return {
+          url: `steps/${numStep}/get_data`,
+          method: "GET",
+        };
+      },
       providesTags: ["Steps"],
-      invalidatesTags: ["Steps"],
+      providesTags: ["Steps"],
     }),
     saveStep: builder.mutation({
       query: ({ numStep, payload, file }) => {

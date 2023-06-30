@@ -44,6 +44,13 @@ const Login = () => {
     }
   };
 
+  const handleEnter = (event)=> {
+   
+    if (event.key === "Enter") {
+      handleSubmit(onSubmit)()
+    }
+  }
+
   return (
     <section className="bg-[#e8ecee] ">
       <Toaster />
@@ -71,6 +78,7 @@ const Login = () => {
                   label="Password"
                   type="password"
                   placeholder="°°°°°°°°°"
+                  onKeyPress={handleEnter}
                   {...register("password")}
                 />
 

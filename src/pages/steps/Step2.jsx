@@ -53,8 +53,9 @@ const Step2 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#2</h1>
       <FormFlex
+        stage={"1"}
+        mainTitle={"FASE 1: PLANIFICACIÓN - PASO 2. COMITÉ DE SEGURIDAD VIAL"}
         titleForm={titleForm}
         step={"2.1"}
         nameStep={

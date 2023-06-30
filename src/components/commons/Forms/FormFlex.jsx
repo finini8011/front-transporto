@@ -5,10 +5,11 @@ import {
   faDownload,
   faEye,
   faSquarePlus,
+  faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
- 
+const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -21,62 +22,44 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const inputs = [
     {
       label: "CREA",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "crea",
       nameApi: "creador",
       type: "text",
       placeholder: "Ingrese nombre",
       start: 1,
-      end: 3,
+      end: 4,
       required: true,
     },
     {
       label: "DESTINATARIO",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "destinatario",
       nameApi: "destinatario",
       type: "text",
-      placeholder: "Ingrese nombre",
-      start: 3,
-      end: 5,
+      placeholder: "Ingrese destinatario",
+      start: 4,
+      end: 7,
       required: true,
     },
     {
       label: "Fecha",
-      labelWeight: "bold",
+      labelWeight: "medium",
       name: "fecha",
       nameApi: "uploadDate",
       type: "span",
-      start: 5,
-      end: 5,
+      start: 7,
+      end: 7,
       value: formattedDate,
     },
     {
-      label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
-      labelWeight: "bold",
-      name: "observaciones",
-      nameApi: "observaciones",
-      type: "textArea",
-      start: 1,
-      end: 5,
-      required: true,
-    },
-    {
-      type: "button",
-      text: "Descargar archivo guía acta de asignación lider del PESV",
-      icon: faDownload,
-    },
-    {
-      type: "hr",
-    },
-    {
-      label: "Carga archivo",
-      labelWeight: "bold",
+      label: "CARGAR ARCHIVO",
+      labelWeight: "medium",
       name: "cargaArchivo",
       type: "file",
       placeholder: "Seleccione archivo",
       start: 1,
-      end: 4,
+      end: 7,
       onchange: (name, value) =>
         console.log(
           `Función personalizada para campo ${name} - Valor: ${value}`
@@ -84,32 +67,52 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       required: true,
     },
     {
-      label: "Cambiar estado",
-      labelWeight: "bold",
-      name: "cambiarEstado",
-      type: "select",
-      placeholder: "",
-      start: 4,
-      end: 6,
-      required: true,
+      type: "button",
+      text: "Descargar Archivo de Guía Acta Asignación Líder del PESV",
+      icon: faDownload,
+      start: 7,
+      end: 8,
     },
     {
-      label: "Nombre Archivo cargado",
+      label: "NOMBRE DEL ARCHIVO CARGADO",
       type: "span",
       placeholder: "",
       nameApi: "originalName",
       start: 1,
-      end: 4,
-    },
-    {
-      label: "Estado actual",
-      nameApi: "estado",
-      type: "span",
-      start: 4,
-      end: 6,
+      end: 7,
     },
     {
       type: "hr",
+      start: 1,
+      end: 8,
+    },
+    {
+      label: "CAMBIAR ESTADO",
+      labelWeight: "medium",
+      name: "cambiarEstado",
+      type: "select",
+      placeholder: "",
+      start: 1,
+      end: 2,
+      required: true,
+    },
+
+    {
+      label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
+      labelWeight: "medium",
+      name: "observaciones",
+      nameApi: "observaciones",
+      type: "textArea",
+      start: 2,
+      end: 8,
+      required: true,
+    },
+    {
+      label: "ESTADO ACTUAL",
+      nameApi: "estado",
+      type: "span",
+      start: 1,
+      end: 2,
     },
   ];
   const buttons = [
@@ -178,9 +181,38 @@ useEffect(() => {
 
   return (
     <>
-      <section className="bg-white text-gray-800 flex flex-col gap-4">
-        <div className="text-white bg-primary-600 p-3 rounded-t-md text-base">
-          {step} {nameStep}
+      <section className="bg-white text-gray-800 flex flex-col gap-4 w-full">
+        {mainTitle && stage ? (  <section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
+          <img
+            src={`/img/fase${stage}_general.svg`}
+            width={25}
+            alt="icon"
+            className="mr-2"
+          />
+
+          <span>
+            <FontAwesomeIcon
+              size="xs"
+              icon={faGreaterThan}
+              style={{ color: "#008ffe" }}
+            />
+          </span>
+
+          <span className="ml-2">
+            {mainTitle}
+          </span>
+        </section>):''}
+      
+        <div className="rounded-t-2xl flex text-base">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium w-full">
+            <FontAwesomeIcon
+              size="xs"
+              icon={faGreaterThan}
+              className="mr-2"
+              style={{ color: "#008ffe" }}
+            />
+            {step} {nameStep}
+          </div>
         </div>
         {/*   {data ? (
           <Form
@@ -202,6 +234,7 @@ useEffect(() => {
           buttons={buttons}
           onSubmit={onSubmit}
           id={step}
+          document={true}
         />
         {/*    )} */}
       </section>

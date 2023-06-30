@@ -53,9 +53,12 @@ const Step24 = () => {
   return (
     <div>
       <Toaster />
-      <h1>Planificacion Paso#24</h1>
       <FormFlex
         titleForm={titleForm}
+        stage={"4"}
+        mainTitle={
+          "FASE 4: MEJORA CONTINUA - PASO 24. MECANISMOS DE COMUNICACIÓN"
+        }
         step={"1.1"}
         nameStep={
           "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"

@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "/img/logo.png";
 import abc from "/img/abc.png";
 import transporto from "/img/transporto.png";
-import arrow from "/img/arrow.png";
+import arrow from "/img/arrow.svg";
 import notification from "/img/notification.png";
 import LateralRight from "../lateralRight";
 

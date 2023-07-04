@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "/img/logo.png";
 import abc from "/img/abc.png";
 import transporto from "/img/transporto.png";
-import arrow from "/img/arrow.png";
+import arrow from "/img/arrow.svg";
 import notification from "/img/notification.png";
 import LateralRight from "../lateralRight";
 
@@ -65,7 +65,9 @@ const MainAuth = () => {
     } else {
       setCurrentPage("/register-company");
       navigate("/register-company");
-      toast.error("Necesita registrar su empresa antes de poder navegar por la web");
+      toast.error(
+        "Necesita registrar su empresa antes de poder navegar por la web"
+      );
     }
   };
 
@@ -82,7 +84,7 @@ const MainAuth = () => {
 
   return (
     <div className="min-h-screen flex w-full">
-       <Toaster />
+      <Toaster />
       <div
         className={`shadow-md relative menu-container ${
           openMenu ? "menu-open" : "menu-close"
@@ -178,7 +180,9 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/planificacion")}
-                    className={`flex gap-2 ${currentPage === "/planificacion" && "active"}`}
+                    className={`flex gap-2 ${
+                      currentPage === "/planificacion" && "active"
+                    }`}
                   >
                     <FontAwesomeIcon icon={faVoteYea} className="w-5 h-5" />
                     <ListItemText
@@ -194,7 +198,9 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/implementacion")}
-                    className={`flex gap-2 ${currentPage === "/implementacion" && "active"}`}
+                    className={`flex gap-2 ${
+                      currentPage === "/implementacion" && "active"
+                    }`}
                   >
                     <FontAwesomeIcon icon={faCogs} className="w-5 h-5" />
                     <ListItemText
@@ -210,7 +216,9 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/seguimiento")}
-                    className={`flex gap-2 ${currentPage === "/seguimiento" && "active"}`}
+                    className={`flex gap-2 ${
+                      currentPage === "/seguimiento" && "active"
+                    }`}
                   >
                     <FontAwesomeIcon icon={faEye} className="w-5 h-5" />
                     <ListItemText
@@ -226,7 +234,9 @@ const MainAuth = () => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/mejora")}
-                    className={`flex gap-2 ${currentPage === "/mejora" && "active"}`}
+                    className={`flex gap-2 ${
+                      currentPage === "/mejora" && "active"
+                    }`}
                   >
                     <FontAwesomeIcon icon={faCheckSquare} className="w-5 h-5" />
                     <ListItemText
@@ -265,7 +275,9 @@ const MainAuth = () => {
 
             <ListItemButton
               onClick={() => handleNavigate("/informes")}
-              className={`flex gap-2 ${currentPage === "/informes" && "active"}`}
+              className={`flex gap-2 ${
+                currentPage === "/informes" && "active"
+              }`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faFile} className="w-5 h-5" />
@@ -283,7 +295,9 @@ const MainAuth = () => {
             </ListItemButton>
             <ListItemButton
               onClick={() => handleNavigate("/calendario")}
-              className={`flex gap-2 ${currentPage === "/calendario" && "active"}`}
+              className={`flex gap-2 ${
+                currentPage === "/calendario" && "active"
+              }`}
               sx={{ justifyContent: "center" }}
             >
               <FontAwesomeIcon icon={faCalendarDays} className="w-5 h-5" />
@@ -324,7 +338,11 @@ const MainAuth = () => {
           <div className="p-6 min-w-[80%] flex-1">
             <Outlet context={{handleNavigate}} />
           </div>
-          <LateralRight />
+          <div className="flex-shrink-0">
+            <div className="sticky top-0 bottom-0">
+              <LateralRight />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -5,11 +5,11 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { esES } from "@mui/x-date-pickers/locales";
 
-import arrow from "/img/arrow.png";
-import face from "/img/face.png";
-import teach from "/img/teach.png";
-import document from "/img/document.png";
-import book from "/img/book.png";
+import arrow from "/img/arrow.svg";
+import face from "/img/face.svg";
+import teach from "/img/teach.svg";
+import document from "/img/document.svg";
+import book from "/img/book.svg";
 import "./lateralRight.css";
 
 const LateralRight = () => {
@@ -33,7 +33,7 @@ const LateralRight = () => {
         alt=""
         onClick={handleOpenMenu}
       />
-      <div className="bg-white border-third border rounded-md p-4 flex flex-col gap-2 overflow-hidden">
+      <div className="bg-white border-third border rounded-md p-4 flex flex-col gap-2 overflow-hidden h-full">
         {openMenu && (
           <LocalizationProvider
             dateAdapter={AdapterDayjs}

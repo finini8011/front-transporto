@@ -59,9 +59,9 @@ export const stepsApiSlice = createApi({
     }),
     saveStepQuestion: builder.mutation({
       query: ({ numStep, payload }) => {
-       
+
         const payload2 = {
-          payload:[
+          payload: [
             payload
           ]
         }
@@ -85,6 +85,24 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       invalidatesTags: ["Steps"],
     }),
+
+    getStateList: builder.query({
+      query: (nivel) => {
+        return {
+          url: `/steps/checklist`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Steps"],
+      invalidatesTags: ["Steps"],
+    }),
   }),
 });
-export const { useGetDataStepQuery, useSaveStepMutation, useSaveStepQuestionMutation, useGetStateStepsQuery, useGetStatePESVQuery } = stepsApiSlice;
+export const {
+  useGetDataStepQuery,
+  useSaveStepMutation,
+  useSaveStepQuestionMutation,
+  useGetStateStepsQuery,
+  useGetStatePESVQuery,
+  useGetStateListQuery
+} = stepsApiSlice;

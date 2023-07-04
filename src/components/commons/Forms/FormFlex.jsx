@@ -9,9 +9,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import BreakCrumbs from "../../breakcrumbs/BreakCrumbs";
-import BreakCrumbsM from "../../breakcrumbs/BreakCrumbsM";
+import EditFormFlex from "./EditFormFlex";
+
+
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
+
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -19,15 +21,12 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
   const { data, isLoading, isError } = useGetDataStepQuery(step);
-  // console.log(step)7
-
-  
 
   const inputs = [
     {
       label: "CREA",
       labelWeight: "medium",
-      name: "creador",
+      name: "crea",
       nameApi: "creador",
       type: "text",
       placeholder: "Ingrese nombre",
@@ -49,7 +48,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     {
       label: "Fecha",
       labelWeight: "medium",
-      name: "uploadDate",
+      name: "fecha",
       nameApi: "uploadDate",
       type: "span",
       start: 7,
@@ -59,7 +58,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     {
       label: "CARGAR ARCHIVO",
       labelWeight: "medium",
-      name: "fileName",
+      name: "cargaArchivo",
       type: "file",
       placeholder: "Seleccione archivo",
       start: 1,
@@ -81,7 +80,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       label: "NOMBRE DEL ARCHIVO CARGADO",
       type: "span",
       placeholder: "",
-      name: "originalName",
       nameApi: "originalName",
       start: 1,
       end: 7,
@@ -114,7 +112,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     },
     {
       label: "ESTADO ACTUAL",
-      name: "estado",
       nameApi: "estado",
       type: "span",
       start: 1,
@@ -140,50 +137,13 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
   ];
 
 
-useEffect(() => {
- if(!isLoading){
-  const payload = JSON.parse(data.payload);
-  const lastPayload = payload[payload.length - 1];
-  const updatedInputValues = {};
-  inputs.forEach((input) => {
-    if (lastPayload[input.nameApi]) {
-      if (input.nameApi !== "uploadDate") {
-        updatedInputValues[input.name] = lastPayload[input.nameApi];
-      } else {
-        const dateString = lastPayload[input.nameApi];
-        const dateParts = dateString.split(" ")[0].split("-");
-        const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-        updatedInputValues[input.name] = formattedDate;
-      }
+  useEffect(() => {
+    if (!isLoading) {
     }
-  });
-  setInputValues(updatedInputValues); 
- }
-}, [isLoading])
+  }, [isLoading])
 
 
-  // useEffect(() => {
-  //   if (data) {
-  //        const payload = JSON.parse(data.payload);
-  //     const lastPayload = payload[payload.length - 1];
-  //     const updatedInputValues = {};
-  //     inputs.forEach((input) => {
-  //       if (lastPayload[input.nameApi]) {
-  //         if (input.nameApi !== "uploadDate") {
-  //           updatedInputValues[input.name] = lastPayload[input.nameApi];
-  //         } else {
-  //           const dateString = lastPayload[input.nameApi];
-  //           const dateParts = dateString.split(" ")[0].split("-");
-  //           const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  //           updatedInputValues[input.name] = formattedDate;
-  //         }
-  //       }
-  //     });
-  //     setInputValues(updatedInputValues); 
-  //   }
-  // }, [data]);
-
-  
+  console.log(data, "data")
 
   return (
     <>
@@ -220,6 +180,8 @@ useEffect(() => {
             {step} {nameStep}
           </div>
         </div>
+        {data && <EditFormFlex id={step} />}
+        {data? (
           <Form
             title={titleForm}
             inputs={inputs}
@@ -229,6 +191,9 @@ useEffect(() => {
             id={step}
             document={true}
           />
+        ) : (
+          <EditFormFlex id={step} />
+        )}
       </section>
     </>
   );

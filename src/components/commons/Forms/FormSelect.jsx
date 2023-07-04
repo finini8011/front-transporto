@@ -84,7 +84,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
         <div className="rounded-t-2xl flex text-base">
-          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-tl-2xl font-medium w-full">
+          <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-t-2xl font-medium w-full">
           <FontAwesomeIcon
               size="xs"
               icon={faGreaterThan}

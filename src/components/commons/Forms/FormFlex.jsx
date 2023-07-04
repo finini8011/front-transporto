@@ -18,6 +18,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
+  const { data, isLoading, isError } = useGetDataStepQuery(step);
+  // console.log(step)7
 
   
 
@@ -137,36 +139,51 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     },
   ];
 
-  const { data: dataGet, refetch } = useGetDataStepQuery(step);
-  useEffect(() => {
-    refetch();
-  }, []);
 
-     useEffect(() => {
-      if (dataGet) {
-        const payload = JSON.parse(dataGet.payload);
-        const lastPayload = payload[payload.length - 1];
-        const updatedInputValues = {};
-        console.log(inputs,"inputs")
-        inputs.forEach((input) => {
-         // console.log(lastPayload,"laspayload")
-          console.log(input.nameApi,"api")
-          console.log(inputValues,"input")
-          if (lastPayload[input.nameApi]) {
-            if (input.nameApi !== "uploadDate") {
-              updatedInputValues[input.name] = lastPayload[input.nameApi];
-            } else {
-              const dateString = lastPayload[input.nameApi];
-              const dateParts = dateString.split(" ")[0].split("-");
-              const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-              updatedInputValues[input.name] = formattedDate;
-            }
-          }
-        });
-        console.log(updatedInputValues,"duuu")
-        setInputValues(updatedInputValues);
+useEffect(() => {
+ if(!isLoading){
+  const payload = JSON.parse(data.payload);
+  const lastPayload = payload[payload.length - 1];
+  const updatedInputValues = {};
+  inputs.forEach((input) => {
+    if (lastPayload[input.nameApi]) {
+      if (input.nameApi !== "uploadDate") {
+        updatedInputValues[input.name] = lastPayload[input.nameApi];
+      } else {
+        const dateString = lastPayload[input.nameApi];
+        const dateParts = dateString.split(" ")[0].split("-");
+        const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        updatedInputValues[input.name] = formattedDate;
       }
-    }, [dataGet]);
+    }
+  });
+  setInputValues(updatedInputValues); 
+ }
+}, [isLoading])
+
+
+  // useEffect(() => {
+  //   if (data) {
+  //        const payload = JSON.parse(data.payload);
+  //     const lastPayload = payload[payload.length - 1];
+  //     const updatedInputValues = {};
+  //     inputs.forEach((input) => {
+  //       if (lastPayload[input.nameApi]) {
+  //         if (input.nameApi !== "uploadDate") {
+  //           updatedInputValues[input.name] = lastPayload[input.nameApi];
+  //         } else {
+  //           const dateString = lastPayload[input.nameApi];
+  //           const dateParts = dateString.split(" ")[0].split("-");
+  //           const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  //           updatedInputValues[input.name] = formattedDate;
+  //         }
+  //       }
+  //     });
+  //     setInputValues(updatedInputValues); 
+  //   }
+  // }, [data]);
+
+  
 
   return (
     <>

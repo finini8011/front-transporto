@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { lvc } from "../../constants/listaVerificacion";
-import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
+import { useGetStatePESVQuery } from "../../api/services/steps/stepsApiSlice";
 
 
 

@@ -220,19 +220,6 @@ useEffect(() => {
             {step} {nameStep}
           </div>
         </div>
-        {dataGet ? (
-          <Form
-            title={titleForm}
-            inputs={inputs.map((input) => ({
-              ...input,
-              value: inputValues[input.name],
-            }))}
-            cols={cols}
-            buttons={buttons}
-            onSubmit={onSubmit}
-            id={step}
-          />
-        ) : (
           <Form
             title={titleForm}
             inputs={inputs}
@@ -242,7 +229,6 @@ useEffect(() => {
             id={step}
             document={true}
           />
-        )}
       </section>
     </>
   );

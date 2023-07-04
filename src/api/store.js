@@ -14,7 +14,6 @@ import { apiSlice } from "./services/auth/apiSlice";
 import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
 import { stepsApiSlice } from "./services/steps/stepsApiSlice";
 import { companyApiSlice } from "./services/company/companyApiSlice";
-import { statesApiSlice  } from "./services/states/statesApiSlice";
 
 const persistConfig = {
   key: "root",
@@ -26,7 +25,6 @@ const rootReducer = combineReducers({
   authState: authReducer,
   reportPESVState: reportPESVReducer,
   stepsPESVState: stepsPESVReducer,
-  statesApiSlice : statesPESVReducer,
 
   //aqui se pueden agregar mas reducers que quieran persistir
 });
@@ -40,14 +38,12 @@ export const store = configureStore({
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
     [companyApiSlice.reducerPath]: companyApiSlice.reducer,
     [stepsApiSlice.reducerPath]: stepsApiSlice.reducer,
-    [statesApiSlice.reducerPath]: statesApiSlice.reducer,
 
 
     // auth: authReducer,
     auth: persistedReducer,
     reportPESV: persistedReducer,
     stepsPESV:stepsPESVReducer,
-    statesPESV: statesPESVReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -59,7 +55,6 @@ export const store = configureStore({
       .concat(thunk, listVerificationApiSlice.middleware)
       .concat(thunk, companyApiSlice.middleware)
       .concat(thunk, stepsApiSlice.middleware)
-      .concat(thunk, statesApiSlice.middleware)
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

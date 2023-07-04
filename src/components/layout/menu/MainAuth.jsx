@@ -336,7 +336,7 @@ const MainAuth = () => {
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <div className="flex bg-white   ">
           <div className="p-6 min-w-[80%] flex-1">
-            <Outlet />
+            <Outlet context={{handleNavigate}} />
           </div>
           <div className="flex-shrink-0">
             <div className="sticky top-0 bottom-0">

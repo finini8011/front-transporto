@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
+import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 import Form from "./Form";
 import {
   faDownload,
@@ -20,13 +20,19 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
-  const { data, isLoading, isError } = useGetDataStepQuery(step);
+  const [isLoading, setIsLoading] = useState(true);
+  const [getDataStep] =
+    useLazyGetDataStepQuery(step);
+
+
+
+  const [lastPayload, setLastPayload] = useState({});
 
   const inputs = [
     {
       label: "CREA",
       labelWeight: "medium",
-      name: "crea",
+      name: "creador",
       nameApi: "creador",
       type: "text",
       placeholder: "Ingrese nombre",
@@ -58,7 +64,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     {
       label: "CARGAR ARCHIVO",
       labelWeight: "medium",
-      name: "cargaArchivo",
+      name: "fileName",
+      nameApi: "fileName",
       type: "file",
       placeholder: "Seleccione archivo",
       start: 1,
@@ -80,6 +87,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       label: "NOMBRE DEL ARCHIVO CARGADO",
       type: "span",
       placeholder: "",
+      name: "originalName",
       nameApi: "originalName",
       start: 1,
       end: 7,
@@ -112,6 +120,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     },
     {
       label: "ESTADO ACTUAL",
+      name: "estado",
       nameApi: "estado",
       type: "span",
       start: 1,
@@ -138,12 +147,41 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
 
 
   useEffect(() => {
+    const getData = async () => {
+      const { data, isLoading: loading } = await getDataStep(step);
+      const payload = data ? JSON.parse(data.payload) : [];
+      const dataGetPayload = payload[payload.length - 1];
+      console.log(dataGetPayload, "getData")
+      setLastPayload(dataGetPayload);
+      setIsLoading(loading);
+    };
+    getData();
     if (!isLoading) {
+      const updatedInputValues = {};
+      if (lastPayload) {
+        console.log(lastPayload, "entro")
+        inputs.forEach((input) => {
+          console.log(input.nameApi, "estadostodos")
+
+          if (lastPayload[input.nameApi]) {
+            if (input.nameApi !== "uploadDate") {
+              updatedInputValues[input.name] = lastPayload[input.nameApi];
+              //console.log(updatedInputValues,"estadi")
+            } else {
+              const dateString = lastPayload[input.nameApi];
+              const dateParts = dateString.split(" ")[0].split("-");
+              const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+              updatedInputValues[input.name] = formattedDate;
+            }
+          }
+        });
+      }
+      console.log(updatedInputValues, "update")
+      setInputValues(updatedInputValues);
     }
   }, [isLoading])
 
 
-  console.log(data, "data")
 
   return (
     <>
@@ -180,8 +218,40 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             {step} {nameStep}
           </div>
         </div>
-        {data && <EditFormFlex id={step} />}
-        {data? (
+
+        {lastPayload ? (
+          <Form
+            title={titleForm}
+            inputs={inputs.map((input) => ({
+              ...input,
+              value: inputValues[input.name],
+              onChange: (valor) => {
+                console.log(valor, "valor")
+                let fileLoad;
+                let fileName;
+                if (input.type === "file") {
+                  fileLoad = valor.target.files[0];
+                  fileName = valor.target.files[0].name;
+                  setInputValues({
+                    ...inputValues,
+                    [input.name]: fileLoad,
+                    originalName : fileName
+                  });
+                } else {
+                  setInputValues({
+                    ...inputValues,
+                    [input.name]: valor
+                  });
+                }
+                console.log(inputValues, "valores")
+              }
+            }))}
+            cols={cols}
+            buttons={buttons}
+            onSubmit={onSubmit}
+            id={step}
+          />
+        ) : (
           <Form
             title={titleForm}
             inputs={inputs}
@@ -191,8 +261,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             id={step}
             document={true}
           />
-        ) : (
-          <EditFormFlex id={step} />
         )}
       </section>
     </>

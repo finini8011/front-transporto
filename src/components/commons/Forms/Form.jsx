@@ -10,11 +10,12 @@ import InputFile from "../input/file/InputFile";
 const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
+
   const optionsChageState = [
     "Seleccionar",
     "Cumple",
-    "No cumple",
     "Cumple parcialmente",
+    "No cumple",
   ];
 
   const handleSubmit = (event) => {
@@ -69,6 +70,21 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
         {inputs.map((input, index) => {
           switch (input.type) {
             case "text":
+              return(
+                <Input
+                  key={index}
+                  type={input.type}
+                  label={input.label}
+                  placeholder={input.placeholder}
+                  labelWeight={input.labelWeight}
+                  id={input.name}
+                  start={input.start}
+                  end={input.end}
+                  value={input.value}
+                  error={errors[input.name]}
+                  onChange={input.onChange}
+                />
+              );
             case "number":
               return (
                 <Input
@@ -100,9 +116,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   end={input.end}
                   disabled={input.disabled}
                   error={errors[input.name]}
-                  onChange={(value) => {
-                    input.onchange && input.onchange(input.name, value);
-                  }}
+                  onChange={input.onChange}
                 />
               );
             case "textArea":
@@ -117,6 +131,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   end={input.end}
                   value={input.value}
                   error={errors[input.name]}
+                  onChange={input.onChange}
                 />
               );
 

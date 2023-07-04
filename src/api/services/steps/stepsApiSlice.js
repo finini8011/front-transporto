@@ -104,5 +104,6 @@ export const {
   useSaveStepQuestionMutation,
   useGetStateStepsQuery,
   useGetStatePESVQuery,
-  useGetStateListQuery
+  useGetStateListQuery,
+  useLazyGetDataStepQuery
 } = stepsApiSlice;

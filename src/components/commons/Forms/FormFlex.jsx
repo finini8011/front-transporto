@@ -221,10 +221,13 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
               if (input.name === "fileName") {
                 fileLoad = valor.target.files[0];
                 originalName = valor.target.files[0].name;
+                console.log(originalName, 'name')
+                console.log(valor.target.files[0],'target');
+                console.log(fileLoad, 'fff')
                 setInputValues({
                   ...inputValues,
-                  [input.name]: fileLoad,
-                  originalName
+                  fileName: fileLoad,
+                  originalName: originalName
                 });
               } else {
                 setInputValues({

@@ -16,8 +16,10 @@ const Step1 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
+    console.log(values, 'values submit')
+
     const stepUrl = id == "1.3" ? "1da" : id;
-    const selectedFile = values.cargaArchivo;
+    const selectedFile = values.cargaArchivo || values.fileName;
     const payload = {};
     if (id == "1.1") {
       payload.creador = values.crea;
@@ -34,6 +36,7 @@ const Step1 = () => {
     }
 
     try {
+      console.log(selectedFile, 'selectedFile')
       const obj = {
         numStep: stepUrl,
         payload: payload,

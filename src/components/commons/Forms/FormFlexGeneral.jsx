@@ -42,7 +42,7 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
 
       if (
         input.required &&
-        input.name === "cargaArchivo" &&
+        input.name === "cargaArchivo"  && 
         !formData.get(input.name).name
       ) {
         isValid = false;
@@ -106,7 +106,7 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
               );
             case "file":
               return (
-                <InputForm
+                <Input
                   key={index}
                   type={input.type}
                   label={input.label}
@@ -117,7 +117,9 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
                   end={input.end}
                   disabled={input.disabled}
                   error={errors[input.name]}
-                  onChange={input.onChange}
+                  onChange={(value) => {
+                    input.onchange && input.onchange(input.name, value);
+                  }}
                 />
               );
             case "textArea":

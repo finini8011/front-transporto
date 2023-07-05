@@ -39,13 +39,13 @@ const DataTable = ({ title, columns, rows, onDeleteSelected }) => {
     <div className="h-[400px] w-full">
       <div className="bg-[#F7F7F8] p-2 flex justify-between items-center">
         <div>{title}</div>
-        <div>
+{/*         <div>
           <div className="rounded-lg bg-white shadow-xl p-3 flex">
             <button onClick={handleDeleteSelected}>
               <img src="/img/icon-delete.svg" />
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <DataGrid sx={{border:0,  boxShadow: 0,}}

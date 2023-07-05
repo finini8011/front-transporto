@@ -16,7 +16,8 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [getDataStep] =
     useLazyGetDataStepQuery(`${mainStep[0]}da`);
-  const [lastPayload, setLastPayload] = useState({});
+  const [lastPayload, setLastPayload] = useState();
+  const [rows, setRows] = useState();
 
 
   const columns = [
@@ -33,30 +34,17 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       headerName: 'Fecha Creación',
       sortable: true,
       width: 200,
-    /*   valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`, */
+      /*   valueGetter: (params) =>
+          `${params.row.firstName || ''} ${params.row.lastName || ''}`, */
     },
   ];
-/*   const rows = lastPayload.map((row)=>{
-    return{     
-      id: i+1,
-      documento: row.filename,
-      descripcion: row.observaciones,
-      crea: row.creadorAdicional,
-      destinatario: row.destinatarioAdicional,
-      fecha: row.uploadDate
-    }
-  }) */
 
-   const rows = [
-    { id: 1, descripcion: "Descripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas" , fecha: "12-01-01"},
-    { id: 2, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas" , fecha: "12-01-01"},
-    { id: 3, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas" , fecha: "12-01-01"},
-    { id: 4, descripcion: "dDescripción de archivo", documento: 'doc.pdf', crea: 'Santiago Rodriguez', destinatario: "Mario Rojas" , fecha: "12-01-01"},
-    { id: 5, descripcion: "dDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Camilo Rojas" , fecha: "12-01-01"},
-    {id: 6, descripcion: "Dddddescripción de archivo", documento: 'doc.pdf', crea: 'Marcos Rodriguez', destinatario: "Maria Rojas" , fecha: "12-01-01"},
-    
-  ]; 
+     const rowss = [
+      { id: 1, descripcion: "Descripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
+      { id: 2, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
+      { id: 3, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
+    ]; 
+
   const inputs = [
     {
       label: "CREA",
@@ -129,7 +117,9 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
   ];
 
-  const deleteDocs = (selectedItems)=>{
+
+
+  const deleteDocs = (selectedItems) => {
   }
   useEffect(() => {
     const getData = async () => {
@@ -137,17 +127,33 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       const payload = data ? JSON.parse(data?.payload) : [];
       setLastPayload(payload);
       setIsLoading(loading);
-      console.log(payload,"data")
     };
     getData();
+    console.log(lastPayload,"aqui")
+    if (lastPayload != undefined) {
+      const newRows = lastPayload?.map((row, index )=> {
+        return {
+          id: row.index,
+          documento: row.originalName,
+          descripcion: row.descripcion,
+          crea: row.creadorAdicional,
+          destinatario: row.destinatarioAdicional,
+          fecha: row.uploadDate
+        }
+      })
+      setRows(newRows);
+    }
   }, [isLoading])
+
+
+  console.log(rows, "data")
 
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4">
         <div className="rounded-t-2xl flex text-base">
           <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-t-2xl  font-medium w-full">
-         {nameStep}
+            {nameStep}
           </div>
         </div>
         <Form
@@ -158,7 +164,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
           onSubmit={onSubmit}
           id={step}
         />
-        <FormUploadedFiles title="ARCHIVOS CARGADOS" columns={columns} rows={rows} onDeleteSelected={deleteDocs}/>
+        <FormUploadedFiles title="ARCHIVOS CARGADOS" columns={columns} rows={rows} onDeleteSelected={deleteDocs} />
       </section>
     </>
   );

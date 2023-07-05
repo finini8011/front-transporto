@@ -159,9 +159,9 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     getData();
     if (!isLoading) {
       const updatedInputValues = {};
-      if (lastPayload) {
+      if (Object.keys(lastPayload).length > 0) {
         inputs.forEach((input) => {
-          if (lastPayload[input.nameApi]) {
+          if (!!lastPayload[input.nameApi]) {
             if (input.nameApi !== "uploadDate") {
               updatedInputValues[input.name] = lastPayload[input.nameApi];
             } else {
@@ -172,7 +172,10 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             }
           }
         });
+      } else{
+        updatedInputValues['fecha'] = formattedDate;
       }
+    
       setInputValues(updatedInputValues);
     }
   }, [isLoading])

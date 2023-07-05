@@ -166,7 +166,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
           }
         });
       }
-      console.log(updatedInputValues)
       setInputValues(updatedInputValues);
     }
   }, [isLoading])

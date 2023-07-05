@@ -1,21 +1,28 @@
-import { useEffect } from "react";
-import { useGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
+import { useEffect, useState } from "react";
+import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 import Form from "./Form";
+import FormFlexGeneral from "./FormFlexGeneral";
 import {
   faDownload,
   faEye,
-  faGreaterThan,
   faSquarePlus,
+  faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
+
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastPayload, setLastPayload] = useState({});
+  const [getDataStep] =
+    useLazyGetDataStepQuery(step);
 
   const inputs = [
     {
@@ -32,6 +39,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       label: "Observaciones sobre el hallazgo o la no aplicación del requisito",
       labelWeight: "medium",
       name: "observaciones",
+      nameApi:"observaciones",
       type: "textArea",
       start: 3,
       end: 6,
@@ -40,10 +48,12 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
     {
       label: "ESTADO ACTUAL",
+      name: "estado",
+      nameApi: "estado",
       type: "span",
       start: 1,
       end: 3,
-      value: "SI",
+      value: "",
     },
   ];
   const buttons = [
@@ -54,31 +64,34 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
   ];
 
-  const { data, isLoading, isError, refetch } = useGetDataStepQuery(step);
   useEffect(() => {
-    refetch();
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      /*   const payload = JSON.parse(data.payload);
-      const lastPayload = payload[payload.length - 1];
+    const getData = async () => {
+      const { data, isLoading: loading } = await getDataStep(step);
+      const payload = data ? JSON.parse(data?.payload) : [];
+      const dataGetPayload = payload[payload.length - 1];
+      setLastPayload(dataGetPayload);
+      setIsLoading(loading);
+    };
+    getData();
+    if (!isLoading) {
       const updatedInputValues = {};
-      inputs.forEach((input) => {
-        if (lastPayload[input.nameApi]) {
-          if (input.nameApi !== "uploadDate") {
-            updatedInputValues[input.name] = lastPayload[input.nameApi];
-          } else {
-            const dateString = lastPayload[input.nameApi];
-            const dateParts = dateString.split(" ")[0].split("-");
-            const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-            updatedInputValues[input.name] = formattedDate;
+      if (lastPayload) {
+        inputs.forEach((input) => {
+          if (lastPayload[input.nameApi]) {
+            if (input.nameApi !== "uploadDate") {
+              updatedInputValues[input.name] = lastPayload[input.nameApi];
+            } else {
+              const dateString = lastPayload[input.nameApi];
+              const dateParts = dateString.split(" ")[0].split("-");
+              const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+              updatedInputValues[input.name] = formattedDate;
+            }
           }
-        }
-      });
-      setInputValues(updatedInputValues); */
+        });
+      }
+      setInputValues(updatedInputValues);
     }
-  }, [data]);
+  }, [isLoading])
 
   return (
     <>
@@ -94,28 +107,49 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
             {step} {nameStep}
           </div>
         </div>
-        {/*   {data ? (
-          <Form
-            title={titleForm}
-            inputs={inputs.map((input) => ({
-              ...input,
-              value: inputValues[input.name],
-            }))}
-            cols={cols}
-            buttons={buttons}
-            onSubmit={onSubmit}
-            id={step}
-          />
-        ) : ( */}
-        <Form
+        {lastPayload ? (
+          <FormFlexGeneral
           title={titleForm}
-          inputs={inputs}
+          inputs={inputs.map((input) => ({
+            ...input,
+            value: inputValues[input.name],
+            onChange: (valor) => {
+              console.log(valor, "valor")
+              let fileLoad;
+              let originalName;
+              if (input.name === "fileName") {
+                fileLoad = valor.target.files[0];
+                originalName = valor.target.files[0].name;
+                setInputValues({
+                  ...inputValues,
+                  [input.name]: fileLoad,
+                  originalName
+                });
+              } else {
+                setInputValues({
+                  ...inputValues,
+                  [input.name]: valor
+                });
+              }
+              console.log(inputValues, "valores")
+            }
+          }))}
           cols={cols}
           buttons={buttons}
           onSubmit={onSubmit}
           id={step}
         />
-        {/*    )} */}
+        ) : (
+          <FormFlexGeneral
+            title={titleForm}
+            inputs={inputs}
+            cols={cols}
+            buttons={buttons}
+            onSubmit={onSubmit}
+            id={step}
+            document={true}
+          />
+        )}
       </section>
     </>
   );

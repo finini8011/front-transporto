@@ -18,13 +18,8 @@ const Select = forwardRef((props, ref) => {
   );
 
   const handleSelectChange = (event) => {
-    if(onChange){
       const { value } = event.target;
       setValue(value);
-      console.log(value)
-      onChange( value);
-    }
-   
   };
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {

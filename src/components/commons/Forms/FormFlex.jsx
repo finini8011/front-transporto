@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
+import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 import Form from "./Form";
+import FormFlexGeneral from "./FormFlexGeneral";
 import {
   faDownload,
   faEye,
@@ -9,21 +10,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+
+
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
+
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
-  const { data, isLoading, isError } = useGetDataStepQuery(step);
-  // console.log(step)7
+  const [isLoading, setIsLoading] = useState(true);
+  const [getDataStep] =
+    useLazyGetDataStepQuery(step);
+
+
+
+  const [lastPayload, setLastPayload] = useState({});
 
   const inputs = [
     {
       label: "CREA",
       labelWeight: "medium",
-      name: "crea",
+      name: "creador",
       nameApi: "creador",
       type: "text",
       placeholder: "Ingrese nombre",
@@ -55,15 +64,12 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     {
       label: "CARGAR ARCHIVO",
       labelWeight: "medium",
-      name: "cargaArchivo",
+      name: "fileName",
+      nameApi: "fileName",
       type: "file",
       placeholder: "Seleccione archivo",
       start: 1,
       end: 7,
-      onchange: (name, value) =>
-        console.log(
-          `Función personalizada para campo ${name} - Valor: ${value}`
-        ),
       required: true,
     },
     {
@@ -77,6 +83,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       label: "NOMBRE DEL ARCHIVO CARGADO",
       type: "span",
       placeholder: "",
+      name: "originalName",
       nameApi: "originalName",
       start: 1,
       end: 7,
@@ -105,10 +112,10 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       type: "textArea",
       start: 2,
       end: 8,
-      required: true,
     },
     {
       label: "ESTADO ACTUAL",
+      name: "estado",
       nameApi: "estado",
       type: "span",
       start: 1,
@@ -121,68 +128,61 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       type: "submit",
       icon: faSquarePlus,
     },
-    {
-      text: "Ver documento",
-      type: "button",
-      icon: faEye,
-    },
-    {
-      text: "Descargar documento",
-      type: "button",
-      icon: faDownload,
-    },
+    /*     {
+          text: "Ver documento",
+          type: "button",
+          icon: faEye,
+        },
+        {
+          text: "Descargar documento",
+          type: "button",
+          icon: faDownload,
+        }, */
   ];
 
 
-useEffect(() => {
- if(!isLoading){
-  const payload = JSON.parse(data.payload);
-  const lastPayload = payload[payload.length - 1];
-  const updatedInputValues = {};
-  inputs.forEach((input) => {
-    if (lastPayload[input.nameApi]) {
-      if (input.nameApi !== "uploadDate") {
-        updatedInputValues[input.name] = lastPayload[input.nameApi];
-      } else {
-        const dateString = lastPayload[input.nameApi];
-        const dateParts = dateString.split(" ")[0].split("-");
-        const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-        updatedInputValues[input.name] = formattedDate;
+  useEffect(() => {
+    const getData = async () => {
+      const { data, isLoading: loading } = await getDataStep(step);
+      let payload = [];
+      let dataGetPayload = {};
+      if (!!data) {
+        const {payload:payloadData} = data;
+        if(!!payloadData){
+          payload = JSON.parse(data.payload);
+          dataGetPayload = payload[payload.length - 1];
+        }
       }
+      setLastPayload(dataGetPayload);
+      setIsLoading(loading);
+    };
+    getData();
+    if (!isLoading) {
+      const updatedInputValues = {};
+      if (lastPayload) {
+        inputs.forEach((input) => {
+          if (lastPayload[input.nameApi]) {
+            if (input.nameApi !== "uploadDate") {
+              updatedInputValues[input.name] = lastPayload[input.nameApi];
+            } else {
+              const dateString = lastPayload[input.nameApi];
+              const dateParts = dateString.split(" ")[0].split("-");
+              const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+              updatedInputValues[input.name] = formattedDate;
+            }
+          }
+        });
+      }
+      setInputValues(updatedInputValues);
     }
-  });
-  setInputValues(updatedInputValues); 
- }
-}, [isLoading])
+  }, [isLoading])
 
 
-  // useEffect(() => {
-  //   if (data) {
-  //        const payload = JSON.parse(data.payload);
-  //     const lastPayload = payload[payload.length - 1];
-  //     const updatedInputValues = {};
-  //     inputs.forEach((input) => {
-  //       if (lastPayload[input.nameApi]) {
-  //         if (input.nameApi !== "uploadDate") {
-  //           updatedInputValues[input.name] = lastPayload[input.nameApi];
-  //         } else {
-  //           const dateString = lastPayload[input.nameApi];
-  //           const dateParts = dateString.split(" ")[0].split("-");
-  //           const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  //           updatedInputValues[input.name] = formattedDate;
-  //         }
-  //       }
-  //     });
-  //     setInputValues(updatedInputValues); 
-  //   }
-  // }, [data]);
-
-  
 
   return (
     <>
       <section className="bg-white text-gray-800 flex flex-col gap-4 w-full">
-        {mainTitle && stage ? (  <section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
+        {mainTitle && stage ? (<section className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
           <img
             src={`/img/fase${stage}_general.svg`}
             width={25}
@@ -201,8 +201,8 @@ useEffect(() => {
           <span className="ml-2">
             {mainTitle}
           </span>
-        </section>):''}
-      
+        </section>) : ''}
+
         <div className="rounded-t-2xl flex text-base">
           <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-t-2xl font-medium w-full">
             <FontAwesomeIcon
@@ -214,29 +214,36 @@ useEffect(() => {
             {step} {nameStep}
           </div>
         </div>
-        {/*   {data ? (
-          <Form
+
+        {lastPayload ? (
+          <FormFlexGeneral
             title={titleForm}
             inputs={inputs.map((input) => ({
               ...input,
               value: inputValues[input.name],
+              onChange: (valor) => {
+                setInputValues({
+                  ...inputValues,
+                  [input.name]: valor
+                });
+              }
             }))}
             cols={cols}
             buttons={buttons}
             onSubmit={onSubmit}
             id={step}
           />
-        ) : ( */}
-        <Form
-          title={titleForm}
-          inputs={inputs}
-          cols={cols}
-          buttons={buttons}
-          onSubmit={onSubmit}
-          id={step}
-          document={true}
-        />
-        {/*    )} */}
+        ) : (
+          <FormFlexGeneral
+            title={titleForm}
+            inputs={inputs}
+            cols={cols}
+            buttons={buttons}
+            onSubmit={onSubmit}
+            id={step}
+            document={true}
+          />
+        )}
       </section>
     </>
   );

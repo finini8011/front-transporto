@@ -6,6 +6,7 @@ import ProgressBar from "../../../components/commons/Progress/ProgressBar";
 import { dataCard } from "../../../constants";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
 import { useGetStateStepsQuery, useGetStatePESVQuery } from "../../../api/services/steps/stepsApiSlice";
+import { useOutletContext } from "react-router-dom";
 
 const Mejora = () => {
   
@@ -14,6 +15,7 @@ const Mejora = () => {
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const {data:dataState} = useGetStatePESVQuery();
+  const {handleNavigate} = useOutletContext()
 
   let resultCumple = 0;
   let parcialmente = 0;
@@ -56,9 +58,9 @@ const Mejora = () => {
 
   const handleCardClick = (step, state) => {
     if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
-      return navigate(`/step/${step}`);
+      return handleNavigate(`/step/${step}`)
     } else {
-      return navigate(`/step/${step}`);
+      return handleNavigate(`/step/${step}`)
     }
   };
   <ProgressBar bgcolor="#0090ff" progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0} height={12} width="100%" text="FASE#4 MEJORA" />

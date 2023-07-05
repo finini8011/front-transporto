@@ -16,10 +16,10 @@ const Step2 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "2.3" ? "2da" : id;
+    const stepUrl = id == "2.4" ? "2da" : id;
     const selectedFile = values.cargaArchivo || values.fileName;
     const payload = {};
-    if (id == "2.1") {
+    if (id == "2.1" || id =="2.3") {
       payload.creador = values.creador;
       payload.destinatario = values.destinatario;
       payload.observaciones = values.observaciones;
@@ -39,7 +39,7 @@ const Step2 = () => {
         payload: payload,
         file: selectedFile,
       };
-      if (id === "2.1" || id == "2.3") {
+      if (id === "2.1" || id == "2.3" || id == "2.4") {
         await saveStep(obj).unwrap();
       } else if (id == "2.2") {
         await saveStepQuestion(obj).unwrap();
@@ -56,20 +56,30 @@ const Step2 = () => {
       <FormFlex
         stage={"1"}
         mainTitle={"FASE 1: PLANIFICACIÓN - PASO 2. COMITÉ DE SEGURIDAD VIAL"}
-        titleForm={titleForm}
+        titleForm={"Documento: Designación miembros del Comité PESV funciones, responsabilidades, competencia y formación requeridos Firmado nivel directivo - gerencia"}
         step={"2.1"}
         nameStep={
-          "¿Se le tiene designada una persona con poder de decisión en los temas relacionados con la gestión de las seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"
+          "¿El nivel directivo designo los miembros del Comité de Seguridad Vial (CSV), este comité está conformado por al menos tres (3)personas con poder de decisión (incluyendo al líder del PESV y se recomienda número impar de participantes)?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
       />
       <div className="pb-10"></div>
       <FormSelect
-        titleForm={titleForm}
+        titleForm={""}
         step={"2.2"}
         nameStep={
-          "El líder del diseño e implemetación del PESV es el responsable de diligenciar el reporte de autogestión anual y los resultados de la medición de los indicadores del plan estratégico de seguridad vial"
+          "¿En caso de que el Comité de Seguridad Vial (CSV) está integrado con el COPASST, cumple los requisitos definidos en la normatividad vigente en materia de Seguridad y Salud en el Trabajo?"
+        }
+        cols={5}
+        onSubmit={handleFormSubmit}
+      />
+      <div className="pb-10"></div>
+      <FormFlex
+        titleForm={"¿El Comité de Seguridad Vial (CSV) cumple con las responsabilidades y funciones del paso 2?"}
+        step={"2.3"}
+        nameStep={
+          "Documento: Acta de reunión CVS - Plan de trabajo - Seguimiento trimestral del PESV - Indicadores"
         }
         cols={5}
         onSubmit={handleFormSubmit}
@@ -79,7 +89,7 @@ const Step2 = () => {
         titleForm={
           "Aquí podrá subir documentos adicionales aparte de los considerados obligatorios dentro del PESV. Incluya quien crea el documento y a quien va dirigido, así como una breve descripción. La plataforma incluirá de manera automática la fecha en que se carga el documento para el manejo de la trazabilidad"
         }
-        step={"2.3"}
+        step={"2.4"}
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}

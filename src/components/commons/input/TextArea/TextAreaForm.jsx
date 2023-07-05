@@ -1,25 +1,14 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
-const Input = forwardRef((props, ref) => {
-  const {
-    type,
-    id,
-    label,
-    labelWeight,
-    start,
-    end,
-    onChange,
-    hidden,
-    error,
-    value,
-    ...inputProps
-  } = props;
+const TextAreaForm = forwardRef((props, ref) => {
+  const { type, id, label, labelWeight, start, end, error, onChange, ...inputProps } = props;
   let fontWeight = labelWeight ? labelWeight : "medium";
   const fontWeightVariants = {
     bold: "font-bold",
-    medium: "font-medium",
+    medum: "font-medim",
   };
 
+  
   const colsVariantsStart = {
     1: "col-start-1",
     2: "col-start-2",
@@ -38,6 +27,7 @@ const Input = forwardRef((props, ref) => {
     5: "col-end-5",
     6: "col-end-6",
     7: "col-end-7",
+    8: "col-end-8",
   };
 
   return (
@@ -48,21 +38,23 @@ const Input = forwardRef((props, ref) => {
       >
         {label}
       </label>
-      <input
-        className={`bg-white-500 border border-[#E9EEF3] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 w-full p-2.5 disabled:cursor-no-drop disabled:bg-gray-200 read-only:bg-gray-200 read-only:cursor-no-drop ${
-          hidden && "hidden"
-        }`}
-        type={type}
+     
+      <textarea
         name={id}
+        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:outline-none focus:ring-1 focus:border-primary-600 block w-full p-2.5"
+
         id={id}
-        value={value}
         {...inputProps}
         ref={ref}
-      
-      />
-        {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
+        placeholder=''
+        onChange={(e) => {
+          onChange(e.target.value)
+        }}
+      ></textarea>
+      {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
+
     </div>
   );
 });
 
-export default Input;
+export default TextAreaForm;

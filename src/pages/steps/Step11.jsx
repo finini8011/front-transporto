@@ -16,15 +16,15 @@ const Step11 = () => {
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-    const stepUrl = id == "11.3" ? "11da" : id;
+    const stepUrl = id == "11.5" ? "11da" : id;
     const selectedFile = values.cargaArchivo;
     const payload = {};
-    if (id == "11.1") {
+    if (id == "11.1" || id == "11.2"  || id == "11.4" ) {
       payload.creador = values.crea;
       payload.destinatario = values.destinatario;
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;
-    } else if (id == "11.2") {
+    } else if (id == "11.3") {
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;
     } else {
@@ -39,9 +39,9 @@ const Step11 = () => {
         payload: payload,
         file: selectedFile,
       };
-      if (id === "11.1" || id == "11.3") {
+      if (id === "11.1" || id == "11.2"  || id == "11.4" || id == "11.5") {
         await saveStep(obj).unwrap();
-      } else if (id == "11.2") {
+      } else if (id == "11.3") {
         await saveStepQuestion(obj).unwrap();
       }
       toast.success("Se ha registrado correctamente!");

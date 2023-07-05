@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { lvc } from "../../constants/listaVerificacion";
-import { useGetStatePESVQuery } from "../../api/services/steps/stepsApiSlice";
+import { useGetStateListQuery } from "../../api/services/steps/stepsApiSlice";
 
 
 
 
 const TableCheckList = () => {
 
-  const { data: dataState } = useGetStatePESVQuery();
-  let arrayPesv = [];
+  const { data: dataState } = useGetStateListQuery ();
 
-  
-   if(dataState){
-    const {1:fase1, 2:fase2, 3:fase3, 4:fase4} = dataState;
-    const arrayDateStateFase1 = Object.values(fase1);
-    const arrayDateStateFase2 = Object.values(fase2);
-    const arrayDateStateFase3 = Object.values(fase3);
-    const arrayDateStateFase4 = Object.values(fase4);
-    arrayPesv = arrayDateStateFase1.concat(arrayDateStateFase2, arrayDateStateFase3,arrayDateStateFase4)
-  }
+
+  console.log(dataState,"aqui")
+
 
   return (
     <div className="mt-10">
-      <table className="border text-left text-sm shadow-md bg-white mb-16">
+      <table className="border text-center text-sm shadow-md bg-white mb-16">
         <thead className="">
           <tr>
             <th className="border p-2">#</th>
@@ -56,10 +49,10 @@ const TableCheckList = () => {
                   <td className="border p-2">{content.requirement}</td>
                   <td className="border p-2">{content.document}</td>
                   <td className="border p-2 text-center w-36">
-                  {arrayPesv[index]}
+                    {dataState && dataState[content.number][0] }
                   </td>
                   <td className="border p-2 ">
-                    <p>Observaciones</p>
+                  {dataState && dataState[content.number][1]}
                   </td>
                 </tr>
               ))}

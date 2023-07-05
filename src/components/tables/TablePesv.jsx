@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../api/features/auth/authSlice";
-import { useGetStateStepsQuery, useGetStatePESVQuery } from "../../api/services/steps/stepsApiSlice";
+import React from "react";
+import { useGetStatePESVQuery } from "../../api/services/steps/stepsApiSlice";
 import GraficColumns from "../../../grafic/GraficColumns";
 import GraficLine from "../../../grafic/GraficLine";
 
 
 const TablePesv = () => {
 
-  const user = useSelector(selectCurrentUser);
-  const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const { data: dataState } = useGetStatePESVQuery();
-
-
+  
   let resultCumple = 0;
   let parcialmente = 0;
   let resultNoAplica = 0;
@@ -33,8 +28,6 @@ const TablePesv = () => {
   let arrayDateStateFase2 = [];
   let arrayDateStateFase3 = [];
   let arrayDateStateFase4 = [];
-
-
 
   if (dataState) {
     const { 1: fase1, 2: fase2, 3: fase3, 4: fase4 } = dataState;
@@ -113,8 +106,6 @@ const TablePesv = () => {
       });
     }
   }
- 
-
   let resultParcialmente = parcialmente * 0.25;
   let resultParcialmente1 = parcialmente1 * 0.25;
   let resultParcialmente2 = parcialmente2 * 0.25;

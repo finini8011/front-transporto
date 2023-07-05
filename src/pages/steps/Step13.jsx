@@ -15,10 +15,10 @@ const Step13 = () => {
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "13.3" ? "13da" : id;
-    const selectedFile = values.cargaArchivo;
+    const selectedFile = values.cargaArchivo || values.fileName;
     const payload = {};
     if (id == "13.1") {
-      payload.creador = values.crea;
+      payload.creador = values.creador;
       payload.destinatario = values.destinatario;
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;

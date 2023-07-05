@@ -67,8 +67,15 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   useEffect(() => {
     const getData = async () => {
       const { data, isLoading: loading } = await getDataStep(step);
-      const payload = data ? JSON.parse(data?.payload) : [];
-      const dataGetPayload = payload[payload.length - 1];
+      let payload = [];
+      let dataGetPayload = {};
+      if (!!data) {
+        const {payload:payloadData} = data;
+        if(!!payloadData){
+          payload = JSON.parse(data.payload);
+          dataGetPayload = payload[payload.length - 1];
+        }
+      };
       setLastPayload(dataGetPayload);
       setIsLoading(loading);
     };

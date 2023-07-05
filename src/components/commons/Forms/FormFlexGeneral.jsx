@@ -1,20 +1,22 @@
 import React, { useRef } from "react";
 import Input from "../input/text/Input";
+import InputForm from "../input/text/InputForm";
 import Select from "../input/select/Select";
-import TextArea from "../input/TextArea/TextArea";
+import TextAreaForm from "../input/TextArea/TextAreaForm"
 import ButtonIcon from "../button/ButtonIcon";
-import ButtonInputForm from "../button/ButtonInputForm";
 import Date from "../input/text/Date";
 import { useState } from "react";
-import InputFile from "../input/file/InputFile";
-const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
+
+
+const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
+
   const optionsChageState = [
     "Seleccionar",
     "Cumple",
-    "No cumple",
     "Cumple parcialmente",
+    "No cumple",
   ];
 
   const handleSubmit = (event) => {
@@ -69,6 +71,21 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
         {inputs.map((input, index) => {
           switch (input.type) {
             case "text":
+              return(
+                <InputForm
+                  key={index}
+                  type={input.type}
+                  label={input.label}
+                  placeholder={input.placeholder}
+                  labelWeight={input.labelWeight}
+                  id={input.name}
+                  start={input.start}
+                  end={input.end}
+                  value={input.value}
+                  error={errors[input.name]}
+                  onChange={input.onChange}
+                />
+              );
             case "number":
               return (
                 <Input
@@ -89,7 +106,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
               );
             case "file":
               return (
-                <Input
+                <InputForm
                   key={index}
                   type={input.type}
                   label={input.label}
@@ -100,14 +117,12 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   end={input.end}
                   disabled={input.disabled}
                   error={errors[input.name]}
-                  onChange={(value) => {
-                    input.onchange && input.onchange(input.name, value);
-                  }}
+                  onChange={input.onChange}
                 />
               );
             case "textArea":
               return (
-                <TextArea
+                <TextAreaForm
                   key={index}
                   label={input.label}
                   placeholder={input.placeholder}
@@ -117,6 +132,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
                   end={input.end}
                   value={input.value}
                   error={errors[input.name]}
+                  onChange={input.onChange}
                 />
               );
 
@@ -218,4 +234,4 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   );
 };
 
-export default Form;
+export default FormFlexGeneral;

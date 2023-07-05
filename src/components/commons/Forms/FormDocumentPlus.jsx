@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
+
 import Form from "./Form";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import FormUploadedFiles from "../Forms/FormUploadedFiles";
 import { dataTable } from "../../../constants/formUploaded";
-import { useGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
+import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 
 const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const currentDate = new Date();
@@ -11,8 +13,12 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
   const mainStep = step.split(".");
-  const { data, isLoading, isError, refetch } = useGetDataStepQuery(`${mainStep[0]}da`);
-/*   const payload = JSON.parse(data.payload); */
+  const [isLoading, setIsLoading] = useState(true);
+  const [getDataStep] =
+    useLazyGetDataStepQuery(`${mainStep[0]}da`);
+  const [lastPayload, setLastPayload] = useState({});
+
+
   const columns = [
     { field: 'descripcion', headerName: 'Descripcion', width: 250 },
     { field: 'documento', headerName: 'Documento', width: 230 },
@@ -31,9 +37,10 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
         `${params.row.firstName || ''} ${params.row.lastName || ''}`, */
     },
   ];
- /*  const rows = payload.map((row)=>{
-    return{
-      id: row.filename,
+/*   const rows = lastPayload.map((row)=>{
+    return{     
+      id: i+1,
+      documento: row.filename,
       descripcion: row.observaciones,
       crea: row.creadorAdicional,
       destinatario: row.destinatarioAdicional,
@@ -124,6 +131,16 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   const deleteDocs = (selectedItems)=>{
   }
+  useEffect(() => {
+    const getData = async () => {
+      const { data, isLoading: loading } = await getDataStep(`${mainStep[0]}da`);
+      const payload = data ? JSON.parse(data?.payload) : [];
+      setLastPayload(payload);
+      setIsLoading(loading);
+      console.log(payload,"data")
+    };
+    getData();
+  }, [isLoading])
 
   return (
     <>

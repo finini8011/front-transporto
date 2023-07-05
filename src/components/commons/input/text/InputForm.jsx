@@ -59,6 +59,7 @@ const InputForm = forwardRef((props, ref) => {
         ref={ref}
         onChange={(e) => {
           if(type === "file"){
+            console.log(e,"e")
           onChange(e)
           }if(type === "text"){
             onChange(e.target.value)

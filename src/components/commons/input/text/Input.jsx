@@ -58,6 +58,7 @@ const Input = forwardRef((props, ref) => {
         value={value}
         {...inputProps}
         ref={ref}
+      
       />
         {error && <span className="text-red-500 font-bold text-xs">{error}</span>}
     </div>

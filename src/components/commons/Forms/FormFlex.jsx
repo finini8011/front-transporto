@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 import Form from "./Form";
+import FormFlexGeneral from "./FormFlexGeneral";
 import {
   faDownload,
   faEye,
@@ -9,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import EditFormFlex from "./EditFormFlex";
 
 
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
@@ -70,10 +70,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       placeholder: "Seleccione archivo",
       start: 1,
       end: 7,
-      onchange: (name, value) =>
-        console.log(
-          `Función personalizada para campo ${name} - Valor: ${value}`
-        ),
       required: true,
     },
     {
@@ -116,7 +112,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       type: "textArea",
       start: 2,
       end: 8,
-      required: true,
     },
     {
       label: "ESTADO ACTUAL",
@@ -133,7 +128,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       type: "submit",
       icon: faSquarePlus,
     },
-    {
+/*     {
       text: "Ver documento",
       type: "button",
       icon: faEye,
@@ -142,16 +137,15 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       text: "Descargar documento",
       type: "button",
       icon: faDownload,
-    },
+    }, */ 
   ];
 
 
   useEffect(() => {
     const getData = async () => {
       const { data, isLoading: loading } = await getDataStep(step);
-      const payload = data ? JSON.parse(data.payload) : [];
+      const payload = data ? JSON.parse(data?.payload) : [];
       const dataGetPayload = payload[payload.length - 1];
-      console.log(dataGetPayload, "getData")
       setLastPayload(dataGetPayload);
       setIsLoading(loading);
     };
@@ -159,14 +153,10 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
     if (!isLoading) {
       const updatedInputValues = {};
       if (lastPayload) {
-        console.log(lastPayload, "entro")
         inputs.forEach((input) => {
-          console.log(input.nameApi, "estadostodos")
-
           if (lastPayload[input.nameApi]) {
             if (input.nameApi !== "uploadDate") {
               updatedInputValues[input.name] = lastPayload[input.nameApi];
-              //console.log(updatedInputValues,"estadi")
             } else {
               const dateString = lastPayload[input.nameApi];
               const dateParts = dateString.split(" ")[0].split("-");
@@ -176,7 +166,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
           }
         });
       }
-      console.log(updatedInputValues, "update")
       setInputValues(updatedInputValues);
     }
   }, [isLoading])
@@ -220,39 +209,39 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
         </div>
 
         {lastPayload ? (
-          <Form
-            title={titleForm}
-            inputs={inputs.map((input) => ({
-              ...input,
-              value: inputValues[input.name],
-              onChange: (valor) => {
-                console.log(valor, "valor")
-                let fileLoad;
-                let fileName;
-                if (input.type === "file") {
-                  fileLoad = valor.target.files[0];
-                  fileName = valor.target.files[0].name;
-                  setInputValues({
-                    ...inputValues,
-                    [input.name]: fileLoad,
-                    originalName : fileName
-                  });
-                } else {
-                  setInputValues({
-                    ...inputValues,
-                    [input.name]: valor
-                  });
-                }
-                console.log(inputValues, "valores")
+          <FormFlexGeneral
+          title={titleForm}
+          inputs={inputs.map((input) => ({
+            ...input,
+            value: inputValues[input.name],
+            onChange: (valor) => {
+              console.log(valor, "valor")
+              let fileLoad;
+              let originalName;
+              if (input.name === "fileName") {
+                fileLoad = valor.target.files[0];
+                originalName = valor.target.files[0].name;
+                setInputValues({
+                  ...inputValues,
+                  [input.name]: fileLoad,
+                  originalName
+                });
+              } else {
+                setInputValues({
+                  ...inputValues,
+                  [input.name]: valor
+                });
               }
-            }))}
-            cols={cols}
-            buttons={buttons}
-            onSubmit={onSubmit}
-            id={step}
-          />
+              console.log(inputValues, "valores")
+            }
+          }))}
+          cols={cols}
+          buttons={buttons}
+          onSubmit={onSubmit}
+          id={step}
+        />
         ) : (
-          <Form
+          <FormFlexGeneral
             title={titleForm}
             inputs={inputs}
             cols={cols}

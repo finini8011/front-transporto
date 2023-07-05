@@ -147,8 +147,8 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       let payload = [];
       let dataGetPayload = {};
       if (!!data) {
-        const {payload:payloadData} = data;
-        if(!!payloadData){
+        const { payload: payloadData } = data;
+        if (!!payloadData) {
           payload = JSON.parse(data.payload);
           dataGetPayload = payload[payload.length - 1];
         }
@@ -172,10 +172,9 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             }
           }
         });
-      } else{
+      } else {
         updatedInputValues['fecha'] = formattedDate;
       }
-    
       setInputValues(updatedInputValues);
     }
   }, [isLoading])

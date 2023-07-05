@@ -124,7 +124,15 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   useEffect(() => {
     const getData = async () => {
       const { data, isLoading: loading } = await getDataStep(`${mainStep[0]}da`);
-      const payload = data ? JSON.parse(data?.payload) : [];
+      let payload = [];
+      let dataGetPayload = {};
+      if (!!data) {
+        const {payload:payloadData} = data;
+        if(!!payloadData){
+          payload = JSON.parse(data.payload);
+          dataGetPayload = payload[payload.length - 1];
+        }
+      }
       setLastPayload(payload);
       setIsLoading(loading);
     };

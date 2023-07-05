@@ -54,12 +54,16 @@ const MainAuth = () => {
   const logoutSession = () => {
     navigate("/");
     setTimeout(() => {
-      dispatch(logOut(null));
+      // dispatch(logOut(null));
     }, 500);
   };
 
-  const handleNavigate = (page) => {
-    if (user.compania) {
+  const handleNavigate = (page, validate=false) => {
+    if (validate) {
+      setCurrentPage(page);
+      navigate(page);
+    }
+    else if (user.compania) {
       setCurrentPage(page);
       navigate(page);
     } else {

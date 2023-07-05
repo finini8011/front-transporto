@@ -152,12 +152,13 @@ const RegisterCompany = () => {
         conductores_tercerizados: parseInt(conductores_tercerizados),
         otros_conductores: parseInt(otros_conductores),
       }).unwrap();
-      console.log(user)
-      dispatch(setUser(user) );
       toast.success("Se ha registrado correctamente!");
+      dispatch(setUser(user) );
+
       setTimeout(() => {
-        handleNavigate("/home")
+        handleNavigate("/home", true)
       }, 2500);
+
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");

@@ -129,7 +129,6 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       setIsLoading(loading);
     };
     getData();
-    console.log(lastPayload,"aqui")
      if (!!lastPayload) {
       const newRows = lastPayload?.map((row, index )=> {
         return {
@@ -146,7 +145,6 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   }, [isLoading])
 
 
-  console.log(rows, "data")
 
   return (
     <>

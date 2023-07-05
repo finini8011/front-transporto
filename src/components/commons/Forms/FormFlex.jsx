@@ -128,16 +128,16 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
       type: "submit",
       icon: faSquarePlus,
     },
-/*     {
-      text: "Ver documento",
-      type: "button",
-      icon: faEye,
-    },
-    {
-      text: "Descargar documento",
-      type: "button",
-      icon: faDownload,
-    }, */ 
+    /*     {
+          text: "Ver documento",
+          type: "button",
+          icon: faEye,
+        },
+        {
+          text: "Descargar documento",
+          type: "button",
+          icon: faDownload,
+        }, */
   ];
 
 
@@ -166,6 +166,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
           }
         });
       }
+      console.log(updatedInputValues)
       setInputValues(updatedInputValues);
     }
   }, [isLoading])
@@ -210,39 +211,22 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
 
         {lastPayload ? (
           <FormFlexGeneral
-          title={titleForm}
-          inputs={inputs.map((input) => ({
-            ...input,
-            value: inputValues[input.name],
-            onChange: (valor) => {
-              console.log(valor, "valor")
-              let fileLoad;
-              let originalName;
-              if (input.name === "fileName") {
-                fileLoad = valor.target.files[0];
-                originalName = valor.target.files[0].name;
-                console.log(originalName, 'name')
-                console.log(valor.target.files[0],'target');
-                console.log(fileLoad, 'fff')
-                setInputValues({
-                  ...inputValues,
-                  fileName: fileLoad,
-                  originalName: originalName
-                });
-              } else {
+            title={titleForm}
+            inputs={inputs.map((input) => ({
+              ...input,
+              value: inputValues[input.name],
+              onChange: (valor) => {
                 setInputValues({
                   ...inputValues,
                   [input.name]: valor
                 });
               }
-              console.log(inputValues, "valores")
-            }
-          }))}
-          cols={cols}
-          buttons={buttons}
-          onSubmit={onSubmit}
-          id={step}
-        />
+            }))}
+            cols={cols}
+            buttons={buttons}
+            onSubmit={onSubmit}
+            id={step}
+          />
         ) : (
           <FormFlexGeneral
             title={titleForm}

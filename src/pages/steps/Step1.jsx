@@ -22,7 +22,7 @@ const Step1 = () => {
     const selectedFile = values.cargaArchivo || values.fileName;
     const payload = {};
     if (id == "1.1") {
-      payload.creador = values.crea;
+      payload.creador = values.creador;
       payload.destinatario = values.destinatario;
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;

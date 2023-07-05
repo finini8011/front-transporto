@@ -7,13 +7,15 @@ import { useGetStateListQuery } from "../../api/services/steps/stepsApiSlice";
 
 const TableCheckList = () => {
 
+  const { data: dataState } = useGetStateListQuery ();
 
-  
+
+  console.log(dataState,"aqui")
 
 
   return (
     <div className="mt-10">
-      <table className="border text-left text-sm shadow-md bg-white mb-16">
+      <table className="border text-center text-sm shadow-md bg-white mb-16">
         <thead className="">
           <tr>
             <th className="border p-2">#</th>
@@ -47,10 +49,10 @@ const TableCheckList = () => {
                   <td className="border p-2">{content.requirement}</td>
                   <td className="border p-2">{content.document}</td>
                   <td className="border p-2 text-center w-36">
-                    estados
+                    {dataState[content.number][0]}
                   </td>
                   <td className="border p-2 ">
-                    <p>Observaciones</p>
+                  {dataState[content.number][1]}
                   </td>
                 </tr>
               ))}

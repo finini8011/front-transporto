@@ -39,7 +39,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     },
   ];
 
-     const rowss = [
+     const rowsgg = [
       { id: 1, descripcion: "Descripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
       { id: 2, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
       { id: 3, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
@@ -130,10 +130,10 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
     };
     getData();
     console.log(lastPayload,"aqui")
-    if (lastPayload != undefined) {
+     if (!!lastPayload) {
       const newRows = lastPayload?.map((row, index )=> {
         return {
-          id: row.index,
+          id: index,
           documento: row.originalName,
           descripcion: row.descripcion,
           crea: row.creadorAdicional,
@@ -142,7 +142,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
         }
       })
       setRows(newRows);
-    }
+    } 
   }, [isLoading])
 
 

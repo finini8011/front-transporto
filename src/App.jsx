@@ -35,6 +35,7 @@ function App() {
             <Route exact path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/report-list" element={<ListVerification />} />
             <Route element={<MainAuth />}>
               <Route path="/home" element={<Home />} />
               <Route path="/step" element={<ComplianceCheck />} />

@@ -71,11 +71,13 @@ const Home = () => {
     }
   };
 
+  
+
   return (
     <div className="justify-center ">
       <ProgressBar
         bgcolor="#0090ff"
-        progress={Math.floor(resultPesv) ? Math.floor(resultPesv) : 0}
+        progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0}
         height={12}
         width="100%"
         text="PESV"

@@ -9,10 +9,6 @@ const TableCheckList = () => {
 
   const { data: dataState } = useGetStateListQuery ();
 
-
-  console.log(dataState,"aqui")
-
-
   return (
     <div className="mt-10">
       <table className="border text-center text-sm shadow-md bg-white mb-16">

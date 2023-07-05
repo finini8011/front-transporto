@@ -12,10 +12,10 @@ const ListVerification = () => {
 
 
   return (
-    <div className="p-20 bg-white items-center justify-center ">
+    <div className="p-10 bg-white items-center justify-center ">
       <div><TableCheckList /></div>
       <TablePesv />
-      <ButtonPrimary text="Generar pdf" onClick={() => functionPrint()} />
+      <ButtonPrimary text="Reporte" onClick={() => functionPrint()} />
     </div>
 
   );

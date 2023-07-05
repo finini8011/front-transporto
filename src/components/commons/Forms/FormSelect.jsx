@@ -43,7 +43,6 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       type: "textArea",
       start: 3,
       end: 6,
-      required: true,
     },
 
     {

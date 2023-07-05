@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../api/features/auth/authSlice";
 import { useGetStateStepsQuery, useGetStatePESVQuery } from "../../api/services/steps/stepsApiSlice";
+import GraficColumns from "../../../grafic/GraficColumns";
+import GraficLine from "../../../grafic/GraficLine";
 
 
 const TablePesv = () => {
@@ -142,6 +144,7 @@ const TablePesv = () => {
 
 
   return (
+    <div>
       <table className="border text-center shadow-md w-full mb-12 text-xs bg-white ">
         <thead className="uppercase text-xs bg-blue-400">
           <tr>
@@ -366,6 +369,9 @@ const TablePesv = () => {
           </tr>
         </tbody>
       </table>
+      <div className="mb-10"><GraficColumns  /></div>
+      <div className="mb-10"><GraficLine /></div>
+      </div>
   );
 };
 

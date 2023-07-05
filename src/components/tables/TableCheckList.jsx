@@ -49,10 +49,10 @@ const TableCheckList = () => {
                   <td className="border p-2">{content.requirement}</td>
                   <td className="border p-2">{content.document}</td>
                   <td className="border p-2 text-center w-36">
-                    {dataState[content.number][0]}
+                    {dataState && dataState[content.number][0] }
                   </td>
                   <td className="border p-2 ">
-                  {dataState[content.number][1]}
+                  {dataState && dataState[content.number][1]}
                   </td>
                 </tr>
               ))}

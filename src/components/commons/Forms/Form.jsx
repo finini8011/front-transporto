@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import Input from "../input/text/Input";
+import InputForm from "../input/text/InputForm";
 import Select from "../input/select/Select";
-import TextArea from "../input/TextArea/TextArea";
+import TextAreaForm from "../input/TextArea/TextAreaForm"
 import ButtonIcon from "../button/ButtonIcon";
-import ButtonInputForm from "../button/ButtonInputForm";
 import Date from "../input/text/Date";
 import { useState } from "react";
-import InputFile from "../input/file/InputFile";
+
+
 const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
   const formRef = useRef(null);
   const [errors, setErrors] = useState({});
@@ -71,7 +72,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
           switch (input.type) {
             case "text":
               return(
-                <Input
+                <InputForm
                   key={index}
                   type={input.type}
                   label={input.label}
@@ -105,7 +106,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
               );
             case "file":
               return (
-                <Input
+                <InputForm
                   key={index}
                   type={input.type}
                   label={input.label}
@@ -121,7 +122,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
               );
             case "textArea":
               return (
-                <TextArea
+                <TextAreaForm
                   key={index}
                   label={input.label}
                   placeholder={input.placeholder}

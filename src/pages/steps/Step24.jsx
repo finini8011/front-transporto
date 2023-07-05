@@ -19,12 +19,9 @@ const Step24 = () => {
     const stepUrl = id == "24.1.3" ? "24da" : id;
     const selectedFile = values.cargaArchivo || values.fileName;
     const payload = {};
-    if (id == "24.1.1") {
+    if (id == "24.1.1" || id == "24.1.2") {
       payload.creador = values.creador;
       payload.destinatario = values.destinatario;
-      payload.observaciones = values.observaciones;
-      payload.estado = values.cambiarEstado;
-    } else if (id == "24.1.2") {
       payload.observaciones = values.observaciones;
       payload.estado = values.cambiarEstado;
     } else {

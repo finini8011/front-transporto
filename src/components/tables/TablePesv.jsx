@@ -7,7 +7,9 @@ import GraficLine from "../../../grafic/GraficLine";
 const TablePesv = () => {
 
   const { data: dataState } = useGetStatePESVQuery();
-  
+
+
+  //fases and pesv %
   let resultCumple = 0;
   let parcialmente = 0;
   let resultNoAplica = 0;
@@ -20,7 +22,7 @@ const TablePesv = () => {
   let resultCumple3 = 0;
   let parcialmente3 = 0;
   let resultNoAplica3 = 0;
-  let resultCumple4= 0;
+  let resultCumple4 = 0;
   let parcialmente4 = 0;
   let resultNoAplica4 = 0;
   let arrayPesv = [];
@@ -115,7 +117,7 @@ const TablePesv = () => {
   let resultPesv = ((resultCumple + resultParcialmente) /
     (arrayPesv.length - resultNoAplica)) * 100;
 
-  let resultFase1 = ((resultCumple1 +resultParcialmente1) /
+  let resultFase1 = ((resultCumple1 + resultParcialmente1) /
     (arrayDateStateFase1.length - resultNoAplica1)) * 100;
 
   let resultFase2 = ((resultCumple2 + resultParcialmente2) /
@@ -128,11 +130,83 @@ const TablePesv = () => {
     (arrayDateStateFase4.length - resultNoAplica4)) * 100;
 
 
+  //steps and substeps %
+  let resultstep1 = 0;
+  let parcialmentestep1 = 0;
+  let resultstep2 = 0;
+  let parcialmentestep2 = 0;
+  let resultstep3 = 0;
+  let parcialmentestep3 = 0;
+  let resultstep11 = 0;
+  let parcialmentestep11 = 0;
+  let resultstep12 = 0;
+  let parcialmentestep12 = 0;
+  let resultstep13 = 0;
+  let parcialmentestep13 = 0;
+  let resultstep14 = 0;
+  let parcialmentestep14 = 0;
+  let resultstep22 = 0;
+  let parcialmentestep22 = 0;
+  let resultstep23 = 0;
+  let parcialmentestep23 = 0;
+  let resultstep24 = 0;
+  let parcialmentestep24 = 0;
+  const arreglosFase1 = [];
+  const arreglosFase2 = [] || {};
+  const arreglosFase3 = [] || {};
+  const arreglosFase4 = [] || {};
+  if (dataState) {
+    const { 1: fase1, 2: fase2, 3: fase3, 4: fase4 } = dataState;
+    for (const key in fase1) {
+      const primerNumero = parseInt(key);
+      if (!arreglosFase1.hasOwnProperty(primerNumero)) {
+        arreglosFase1[primerNumero] = [];
+      }
+      arreglosFase1[primerNumero].push(fase1[key]);
+    }
+    for (const key in fase2) {
+      const primerNumero = parseInt(key);
+      if (!arreglosFase2.hasOwnProperty(primerNumero)) {
+        arreglosFase2[primerNumero] = [];
+      }
+      arreglosFase2[primerNumero].push(fase2[key]);
+    }
+    for (const key in fase3) {
+      const primerNumero = parseInt(key);
+      if (!arreglosFase3.hasOwnProperty(primerNumero)) {
+        arreglosFase3[primerNumero] = [];
+      }
+      arreglosFase3[primerNumero].push(fase3[key]);
+    }
+    for (const key in fase4) {
+      const primerNumero = parseInt(key);
+      if (!arreglosFase4.hasOwnProperty(primerNumero)) {
+        arreglosFase4[primerNumero] = [];
+      }
+      arreglosFase4[primerNumero].push(fase4[key]);
+    }
+    arreglosFase1[1].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep1 = resultstep1 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep1 = parcialmentestep1 + 1;
+      }
+    });
+  }
+  let resultParcialmenteStep1 = parcialmentestep1 * 0.25;
+  let resultStep1Final = ((resultstep1 + resultParcialmenteStep1) / 2) * 100;
+
+  console.log(arreglosFase1[1],"resultados")
 
 
-
-
-
+  // grafics
+  const FasesLine = [
+    Math.round(resultFase1),
+    Math.round(resultFase2),
+    Math.round(resultFase3),
+    Math.round(resultFase4)
+  ]
 
   return (
     <div>
@@ -161,18 +235,20 @@ const TablePesv = () => {
             <td className="border p-2">
               Líder del diseño e implementación del PESV
             </td>
-            <td className="border p-2 bg-red-300">nada</td>
+            <td className="border p-2 bg-red-300">
+              {Math.round(resultStep1Final) ? Math.round(resultStep1Final) : 0} %
+            </td>
             <td
               className="border p-2 text-xs  uppercase bg-teal-300"
               rowSpan="8"
             >
-              {Math.floor(resultFase1) ? Math.floor(resultFase1) : 0} %
+              {Math.round(resultFase1) ? Math.round(resultFase1) : 0} %
             </td>
             <td
               className="border p-2 text-xs font-bold uppercase bg-amber-300"
               rowSpan="24"
             >
-              {Math.floor(resultPesv) ? Math.floor(resultPesv) : 0} %
+              {Math.round(resultPesv) ? Math.round(resultPesv) : 0} %
             </td>
           </tr>
           <tr className="">
@@ -232,7 +308,7 @@ const TablePesv = () => {
               className="border p-2 text-xs uppercase bg-green-400"
               rowSpan="11"
             >
-              {Math.floor(resultFase2) ? Math.floor(resultFase2) : 0} %
+              {Math.round(resultFase2) ? Math.round(resultFase2) : 0} %
             </td>
           </tr>
           <tr className="">
@@ -317,7 +393,7 @@ const TablePesv = () => {
               className="border p-2 text-xs  uppercase bg-lime-300"
               rowSpan="3"
             >
-              {Math.floor(resultFase3) ? Math.floor(resultFase3) : 0} %
+              {Math.round(resultFase3) ? Math.round(resultFase3) : 0} %
             </td>
           </tr>
           <tr>
@@ -348,7 +424,7 @@ const TablePesv = () => {
               className="border p-2 text-xs uppercase bg-sky-500"
               rowSpan="2"
             >
-              {Math.floor(resultFase4) ? Math.floor(resultFase4) : 0} %
+              {Math.round(resultFase4) ? Math.round(resultFase4) : 0} %
             </td>
           </tr>
           <tr>
@@ -360,9 +436,9 @@ const TablePesv = () => {
           </tr>
         </tbody>
       </table>
-      <div className="mb-10"><GraficColumns  /></div>
-      <div className="mb-10"><GraficLine /></div>
-      </div>
+      <div className="mb-10"><GraficColumns /></div>
+      <div className="mb-10"><GraficLine data={FasesLine} /></div>
+    </div>
   );
 };
 

@@ -69,7 +69,7 @@ const Implementacion = () => {
 
   return (
     <div className="justify-center ">
-      <ProgressBar bgcolor="#0090ff" progress={Math.floor(resultPesv)? Math.floor(resultPesv): 0} height={12} width="100%" text="FASE#2 IMPLEMENTACION" />
+      <ProgressBar bgcolor="#0090ff" progress={Math.round(resultPesv)? Math.round(resultPesv): 0} height={12} width="100%" text="FASE#2 IMPLEMENTACION" />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {
           updatedDataCard.map((data, key) => (

@@ -6,6 +6,7 @@ import ProgressBar from "../../../components/commons/Progress/ProgressBar";
 import { dataCard } from "../../../constants";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
 import { useGetStateStepsQuery, useGetStatePESVQuery } from "../../../api/services/steps/stepsApiSlice";
+import { useOutletContext } from "react-router-dom";
 
 const Planificacion = () => {
 
@@ -14,6 +15,7 @@ const Planificacion = () => {
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const {data:dataState} = useGetStatePESVQuery();
+  const {handleNavigate} = useOutletContext()
 
   let resultCumple = 0;
   let parcialmente = 0;
@@ -59,9 +61,9 @@ const Planificacion = () => {
 
   const handleCardClick = (step, state) => {
     if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
-      return navigate(`/step/${step}`);
+      return handleNavigate(`/step/${step}`)
     } else {
-      return navigate(`/step/${step}`);
+      return handleNavigate(`/step/${step}`)
     }
   };
 

@@ -436,8 +436,8 @@ const TablePesv = () => {
           </tr>
         </tbody>
       </table>
-      <div className="mb-10"><GraficColumns /></div>
-      <div className="mb-10"><GraficLine data={FasesLine} /></div>
+      <div className="mb-10 flex items-center justify-center"><GraficColumns /></div>
+      <div className="mb-10 flex items-center justify-center"><GraficLine data={FasesLine} /></div>
     </div>
   );
 };

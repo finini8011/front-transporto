@@ -21,7 +21,7 @@ const ListVerification = () => {
   return (
     <div className={local === "/list-verification" ? "p-10 bg-white items-center justify-center" :
       "bg-white w-4/5 m-auto  block items-center justify-center p-10"}>
-      <div><TableCheckList /></div>
+      <div className="mb-5"><TableCheckList /></div>
       <TablePesv />
       {local === "/list-verification" ?
         <ButtonPrimary text="Reporte" onClick={() => navigate("/report-list")} /> :

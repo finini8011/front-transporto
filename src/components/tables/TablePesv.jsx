@@ -152,9 +152,9 @@ const TablePesv = () => {
   let resultstep24 = 0;
   let parcialmentestep24 = 0;
   const arreglosFase1 = [];
-  const arreglosFase2 = [] || {};
-  const arreglosFase3 = [] || {};
-  const arreglosFase4 = [] || {};
+  const arreglosFase2 = [];
+  const arreglosFase3 = [];
+  const arreglosFase4 = [];
   if (dataState) {
     const { 1: fase1, 2: fase2, 3: fase3, 4: fase4 } = dataState;
     for (const key in fase1) {
@@ -193,11 +193,101 @@ const TablePesv = () => {
         parcialmentestep1 = parcialmentestep1 + 1;
       }
     });
+    arreglosFase1[2].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep2 = resultstep2 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep2 = parcialmentestep2 + 1;
+      }
+    });
+    arreglosFase1[3].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep3 = resultstep3 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep3 = parcialmentestep3 + 1;
+      }
+    });
+    arreglosFase2[11].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep11 = resultstep11 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep11 = parcialmentestep11 + 1;
+      }
+    });
+    arreglosFase2[12].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep12 = resultstep12 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep12 = parcialmentestep12 + 1;
+      }
+    });
+    arreglosFase2[13].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep13 = resultstep13 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep13 = parcialmentestep13 + 1;
+      }
+    });
+    arreglosFase2[14].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep14 = resultstep14 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep14 = parcialmentestep14 + 1;
+      }
+    });
+    arreglosFase3[22].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep22 = resultstep22 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep22 = parcialmentestep22 + 1;
+      }
+    });
+    arreglosFase4[23].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep23 = resultstep23 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep23 = parcialmentestep23 + 1;
+      }
+    });
+    arreglosFase4[24].map((registro) => {
+      if (registro === "Cumple") {
+        resultstep24 = resultstep24 + 1;
+      }
+      if (registro === "Cumple parcialmente") {
+        parcialmentestep24 = parcialmentestep24 + 1;
+      }
+    });
   }
+  
   let resultParcialmenteStep1 = parcialmentestep1 * 0.25;
   let resultStep1Final = ((resultstep1 + resultParcialmenteStep1) / 2) * 100;
+  let resultParcialmenteStep2 = parcialmentestep2 * 0.25;
+  let resultStep2Final = ((resultstep2 + resultParcialmenteStep2) / 3) * 100;
+  let resultParcialmenteStep3 = parcialmentestep3 * 0.25;
+  let resultStep3Final = ((resultstep3 + resultParcialmenteStep3) / 2) * 100;
+  let resultParcialmenteStep11 = parcialmentestep11 * 0.25;
+  let resultStep11Final = ((resultstep11 + resultParcialmenteStep11) / 4) * 100;
+  let resultParcialmenteStep12 = parcialmentestep12 * 0.25;
+  let resultStep12Final = ((resultstep12 + resultParcialmenteStep12) / 2) * 100;
+  let resultParcialmenteStep13 = parcialmentestep13 * 0.25;
+  let resultStep13Final = ((resultstep13 + resultParcialmenteStep13) / 2) * 100;
+  let resultParcialmenteStep14 = parcialmentestep14 * 0.25;
+  let resultStep14Final = ((resultstep14 + resultParcialmenteStep14) / 4) * 100;
+  let resultParcialmenteStep22 = parcialmentestep22 * 0.25;
+  let resultStep22Final = ((resultstep22 + resultParcialmenteStep22) / 4) * 100;
+  let resultParcialmenteStep23 = parcialmentestep23 * 0.25;
+  let resultStep23Final = ((resultstep23 + resultParcialmenteStep23) / 2) * 100;
+  let resultParcialmenteStep24 = parcialmentestep24 * 0.25;
+  let resultStep24Final = ((resultstep24 + resultParcialmenteStep24) / 2) * 100;
 
-  console.log(arreglosFase1[1],"resultados")
 
 
   // grafics
@@ -206,6 +296,33 @@ const TablePesv = () => {
     Math.round(resultFase2),
     Math.round(resultFase3),
     Math.round(resultFase4)
+  ]
+
+  const FaseColumn = [
+    Math.round(resultStep1Final),
+    Math.round(resultStep2Final),
+    Math.round(resultStep3Final),
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    Math.round(resultStep11Final),
+    Math.round(resultStep12Final),
+    Math.round(resultStep13Final),
+    Math.round(resultStep14Final),
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    Math.round(resultStep22Final),
+    Math.round(resultStep23Final),
+    Math.round(resultStep24Final),
   ]
 
   return (
@@ -254,45 +371,51 @@ const TablePesv = () => {
           <tr className="">
             <td className="border p-2">paso 2</td>
             <td className="border p-2">Comité de seguridad vial </td>
-            <td className="border p-2 bg-red-300">nada</td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep2Final) ? Math.round(resultStep2Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 3</td>
             <td className="border p-2">
               Política de Seguridad Vial de la Organización
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep3Final) ? Math.round(resultStep3Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 4</td>
             <td className="border p-2">
               Liderazgo, compromiso y corresponsabilidad del nivel directivo
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+              0%
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 5</td>
             <td className="border p-2">Diagnóstico</td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 6</td>
             <td className="border p-2">
               Caracterización, evaluación y control de riesgos
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 7</td>
             <td className="border p-2">Objetivos y metas del PESV</td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 8</td>
             <td className="border p-2">
               Programas de gestión de riesgos criticos y factores de desempeño
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td
@@ -303,7 +426,7 @@ const TablePesv = () => {
             </td>
             <td className="border p-2">paso 9</td>
             <td className="border p-2">Plan anual de trabajo</td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
             <td
               className="border p-2 text-xs uppercase bg-green-400"
               rowSpan="11"
@@ -316,66 +439,74 @@ const TablePesv = () => {
             <td className="border p-2">
               Competencia y plan anual de formación{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 11</td>
             <td className="border p-2">
               Responsabilidad y comportamiento seguro
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep11Final) ? Math.round(resultStep11Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 12</td>
             <td className="border p-2">
               Plan de preparación y respuesta ante emergencias viales{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep12Final) ? Math.round(resultStep12Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 13</td>
             <td className="border p-2">
               Investigación interna de siniestros viales{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep13Final) ? Math.round(resultStep13Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 14</td>
             <td className="border p-2">
               Vías seguras administradas por la organización{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep14Final) ? Math.round(resultStep14Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 15</td>
             <td className="border p-2">
               Planificación de desplazamientos laborales.
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 16</td>
             <td className="border p-2">Inspección de vehículos y equipos</td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 17</td>
             <td className="border p-2">
               Mantenimiento y control de vehículos seguros y equipos{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 18</td>
             <td className="border p-2">
               Gestión del cambio y gestión de contratistas{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td className="border p-2">paso 19</td>
             <td className="border p-2">Archivo y retención documental</td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr className="">
             <td
@@ -388,7 +519,7 @@ const TablePesv = () => {
             <td className="border p-2">
               Indicadores y reporte de autogestión PESV
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
             <td
               className="border p-2 text-xs  uppercase bg-lime-300"
               rowSpan="3"
@@ -401,12 +532,14 @@ const TablePesv = () => {
             <td className="border p-2">
               Registro y análisis estadístico de siniestros viales
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">0%</td>
           </tr>
           <tr>
             <td className="border p-2">paso 22</td>
             <td className="border p-2">Auditoría anual </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep22Final) ? Math.round(resultStep22Final) : 0} %
+            </td>
           </tr>
           <tr className="">
             <td
@@ -419,7 +552,9 @@ const TablePesv = () => {
             <td className="border p-2">
               Mejora continua, acciones preventivas y correctivas{" "}
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep23Final) ? Math.round(resultStep23Final) : 0} %
+            </td>
             <td
               className="border p-2 text-xs uppercase bg-sky-500"
               rowSpan="2"
@@ -432,11 +567,13 @@ const TablePesv = () => {
             <td className="border p-2">
               Mecanismos de comunicación y participación
             </td>
-            <td className="border p-2 bg-red-300"></td>
+            <td className="border p-2 bg-red-300">
+            {Math.round(resultStep24Final) ? Math.round(resultStep24Final) : 0} %
+            </td>
           </tr>
         </tbody>
       </table>
-      <div className="mb-10 flex items-center justify-center"><GraficColumns /></div>
+      <div className="mb-10 flex items-center justify-center"><GraficColumns data={FaseColumn}/></div>
       <div className="mb-10 flex items-center justify-center"><GraficLine data={FasesLine} /></div>
     </div>
   );

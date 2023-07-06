@@ -535,6 +535,10 @@ const MainAuth = () => {
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <div className="flex bg-white   ">
           <div className="p-6 min-w-[80%] flex-1">
+            {
+              (currentPage !== "/guide" && currentPage !== "/register-company") &&      <BreakCrumbs handleNavigate={handleNavigate} />
+            }
+       
             <Outlet context={{ handleNavigate }} />
           </div>
           <div className="flex-shrink-0">

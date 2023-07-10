@@ -56,6 +56,7 @@ const Step1 = () => {
   };
 
   useEffect(() => {
+    
   },[isSaving])
 
   return (
@@ -72,6 +73,7 @@ const Step1 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <div className="pb-10"></div>
       <FormSelect
@@ -83,6 +85,7 @@ const Step1 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -94,6 +97,7 @@ const Step1 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
     </div>
   );

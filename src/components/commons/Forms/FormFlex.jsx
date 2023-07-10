@@ -9,7 +9,7 @@ import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSli
 import FormFlexGeneral from "./FormFlexGeneral";
 
 
-const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage, isSaving }) => {
+const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage, isSaving, setIsSaving }) => {
 
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
@@ -134,7 +134,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage,
   ];
   useEffect(() => {
     let dataGetPayload = {};
-    setTimeout(async() => {
+    setTimeout(async () => {
       const getData = async () => {
         const { data, isLoading: loading } = await getDataStep(step);
         let payload = [];
@@ -142,7 +142,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage,
           const { payload: payloadData } = data;
           if (!!payloadData) {
             payload = JSON.parse(data.payload);
-            dataGetPayload =  payload[payload.length - 1];
+            dataGetPayload = payload[payload.length - 1];
           }
         }
         setIsLoading(loading);
@@ -169,6 +169,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage,
         setInputValues(updatedInputValues);
       }
     }, 3000);
+    setIsSaving(false);
   }, [isSaving])
 
 

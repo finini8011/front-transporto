@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -8,15 +9,17 @@ import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
 
+
+
 const Step1 = () => {
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
+  const [isSaving, setIsSaving] = useState(false);
 
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
-
     const stepUrl = id == "1.3" ? "1da" : id;
     const selectedFile = values.cargaArchivo || values.fileName;
     const payload = {};
@@ -35,7 +38,6 @@ const Step1 = () => {
     }
 
     try {
-      console.log(selectedFile, 'selectedFile')
       const obj = {
         numStep: stepUrl,
         payload: payload,
@@ -47,10 +49,14 @@ const Step1 = () => {
         await saveStepQuestion(obj).unwrap();
       }
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
@@ -65,6 +71,7 @@ const Step1 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormSelect
@@ -75,6 +82,7 @@ const Step1 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -85,6 +93,7 @@ const Step1 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

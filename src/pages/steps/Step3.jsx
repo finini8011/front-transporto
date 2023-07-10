@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -7,15 +8,12 @@ import {
 import FormDocumentPlus from "../../components/commons/Forms/FormDocumentPlus";
 import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
-import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Step3 = () => {
+
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
-
-  const titleForm =
-    "Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "3.3" ? "3da" : id;
@@ -34,7 +32,6 @@ const Step3 = () => {
       payload.destinatarioAdicional = values.destinatario;
       payload.descripcion = values.observaciones;
     }
-
     try {
       const obj = {
         numStep: stepUrl,
@@ -47,17 +44,20 @@ const Step3 = () => {
         await saveStepQuestion(obj).unwrap();
       }
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
       <Toaster />
     
       <FormFlex
-        titleForm={titleForm}
+        titleForm={"Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia"}
         mainTitle={"FASE 1: PLANIFICACIÓN - PASO 3. POLÍTICA DE SEGURIDAD VIAL DE LA ORGANIZACIÓN"}
         stage={"1"}
         step={"3.1"}
@@ -66,17 +66,19 @@ const Step3 = () => {
         }
         cols={7}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
 
       <FormSelect
-        titleForm={titleForm}
+        titleForm={"Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia"}
         step={"3.2"}
         nameStep={
           "¿La Política de Seguridad Vial documentada cumple con los requisitos definidos en el paso 3?"
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -87,6 +89,7 @@ const Step3 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

@@ -6,7 +6,7 @@ import FormUploadedFiles from "../Forms/FormUploadedFiles";
 import { dataTable } from "../../../constants/formUploaded";
 import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 
-const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
+const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit, isSaving }) => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
@@ -14,10 +14,10 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   const formattedDate = `${year}-${month}-${day}`;
   const mainStep = step.split(".");
   const [isLoading, setIsLoading] = useState(true);
-  const [getDataStep] =
-    useLazyGetDataStepQuery(`${mainStep[0]}da`);
   const [lastPayload, setLastPayload] = useState();
   const [rows, setRows] = useState();
+  const [getDataStep] =
+    useLazyGetDataStepQuery(`${mainStep[0]}da`);
 
 
   const columns = [
@@ -34,16 +34,8 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       headerName: 'Fecha Creación',
       sortable: true,
       width: 200,
-      /*   valueGetter: (params) =>
-          `${params.row.firstName || ''} ${params.row.lastName || ''}`, */
     },
   ];
-
-     const rowsgg = [
-      { id: 1, descripcion: "Descripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
-      { id: 2, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
-      { id: 3, descripcion: "DDescripción de archivo", documento: 'doc.pdf', crea: 'Juan Rodriguez', destinatario: "Maria Rojas", fecha: "12-01-01" },
-    ]; 
 
   const inputs = [
     {
@@ -121,14 +113,48 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
 
   const deleteDocs = (selectedItems) => {
   }
+
+  useEffect(() => {
+    let dataGetPayload = [];
+    setTimeout(async () => {
+      const getData = async () => {
+        const { data, isLoading: loading } = await getDataStep(`${mainStep[0]}da`);
+        if (!!data) {
+          const { payload: payloadData } = data;
+          if (!!payloadData) {
+            dataGetPayload = JSON.parse(data.payload);
+          }
+        }
+        setIsLoading(loading);
+      };
+      await getData();
+      if (!isLoading) {
+        if (!!dataGetPayload) {
+          const newRows = dataGetPayload.map((row, index) => {
+            return {
+              id: index,
+              documento: row.originalName,
+              descripcion: row.descripcion,
+              crea: row.creadorAdicional,
+              destinatario: row.destinatarioAdicional,
+              fecha: row.uploadDate
+            }
+          })
+          setRows(newRows);
+        }
+      }
+    }, 3000);
+  }, [isSaving])
+
+  
   useEffect(() => {
     const getData = async () => {
       const { data, isLoading: loading } = await getDataStep(`${mainStep[0]}da`);
       let payload = [];
       let dataGetPayload = {};
       if (!!data) {
-        const {payload:payloadData} = data;
-        if(!!payloadData){
+        const { payload: payloadData } = data;
+        if (!!payloadData) {
           payload = JSON.parse(data.payload);
           dataGetPayload = payload[payload.length - 1];
         }
@@ -137,19 +163,21 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit }) => {
       setIsLoading(loading);
     };
     getData();
-     if (!!lastPayload) {
-      const newRows = lastPayload?.map((row, index )=> {
-        return {
-          id: index,
-          documento: row.originalName,
-          descripcion: row.descripcion,
-          crea: row.creadorAdicional,
-          destinatario: row.destinatarioAdicional,
-          fecha: row.uploadDate
-        }
-      })
-      setRows(newRows);
-    } 
+    if (!isLoading) {
+      if (!!lastPayload) {
+        const newRows = lastPayload?.map((row, index) => {
+          return {
+            id: index,
+            documento: row.originalName,
+            descripcion: row.descripcion,
+            crea: row.creadorAdicional,
+            destinatario: row.destinatarioAdicional,
+            fecha: row.uploadDate
+          }
+        })
+        setRows(newRows);
+      }
+    }
   }, [isLoading])
 
 

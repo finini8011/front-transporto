@@ -9,7 +9,11 @@
     --fourth-color: #0090FF;
     --fifth-color: #c2c7d0;
     --sixth-color: #E6F4FF;
-    --seventh-color: #EEF2F6
+    --seventh-color: #EEF2F6;
+    --eigth-color: #903733;
+    --nineth-color: #5A9A40;
+    --tenth-color: #153FD7;
+    --eleventh-color: #DBB929;
   }
   /* aqui puedes crear cualquier clase de css */
   @media print {
@@ -55,7 +59,19 @@
     color: var(--fifth-color);
   }
   .color-seventh {
-    color: var(--fifth-color);
+    color: var(--seventh-color);
+  }
+  .color-eigth {
+    color: var(--eigth-color);
+  }
+  .color-nineth {
+    color: var(--nineth-color);
+  }
+  .color-tenth {
+    color: var(--tenth-color);
+  }
+  .color-eleventh {
+    color: var(--eleventh-color);
   }
   /* borders */
   .border-third {

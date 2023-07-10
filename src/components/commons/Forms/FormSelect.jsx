@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
+const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit, isSaving  }) => {
 
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
@@ -64,38 +64,83 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit }) => {
   ];
 
   useEffect(() => {
-    const getData = async () => {
-      const { data, isLoading: loading } = await getDataStep(step);
-      let payload = [];
-      let dataGetPayload = {};
-      if (!!data) {
-        const {payload:payloadData} = data;
-        if(!!payloadData){
-          payload = JSON.parse(data.payload);
-          dataGetPayload = payload[payload.length - 1];
-        }
-      };
-      setLastPayload(dataGetPayload);
-      setIsLoading(loading);
-    };
-    getData();
-    if (!isLoading) {
-      const updatedInputValues = {};
-      if (lastPayload) {
-        inputs.forEach((input) => {
-          if (lastPayload[input.nameApi]) {
-            if (input.nameApi !== "uploadDate") {
-              updatedInputValues[input.name] = lastPayload[input.nameApi];
-            } else {
-              const dateString = lastPayload[input.nameApi];
-              const dateParts = dateString.split(" ")[0].split("-");
-              const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-              updatedInputValues[input.name] = formattedDate;
-            }
+    let dataGetPayload = {};
+    setTimeout(async() => {
+      const getData = async () => {
+        const { data, isLoading: loading } = await getDataStep(step);
+        let payload = [];
+        if (!!data) {
+          const { payload: payloadData } = data;
+          if (!!payloadData) {
+            payload = JSON.parse(data.payload);
+            dataGetPayload =  payload[payload.length - 1];
           }
-        });
+        }
+        setIsLoading(loading);
+      };
+      await getData();
+      if (!isLoading) {
+        const updatedInputValues = {};
+        if (Object.keys(dataGetPayload).length > 0) {
+          inputs.forEach((input) => {
+            if (!!dataGetPayload[input.nameApi]) {
+              if (input.nameApi !== "uploadDate") {
+                updatedInputValues[input.name] = dataGetPayload[input.nameApi];
+              } else {
+                const dateString = dataGetPayload[input.nameApi];
+                const dateParts = dateString.split(" ")[0].split("-");
+                const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+                updatedInputValues[input.name] = formattedDate;
+              }
+            }
+          });
+        } else {
+          updatedInputValues['fecha'] = formattedDate;
+        }
+        setInputValues(updatedInputValues);
       }
-      setInputValues(updatedInputValues);
+    }, 3000);
+  }, [isSaving])
+
+
+
+  useEffect(() => {
+    if (!isSaving) {
+      const getData = async () => {
+        const { data, isLoading: loading } = await getDataStep(step);
+        let payload = [];
+        let dataGetPayload = {};
+        if (!!data) {
+          const { payload: payloadData } = data;
+          if (!!payloadData) {
+            payload = JSON.parse(data.payload);
+            dataGetPayload = payload[payload.length - 1];
+          }
+        }
+        setLastPayload(dataGetPayload);
+        setIsLoading(loading);
+      };
+      getData();
+      if (!isLoading) {
+        const updatedInputValues = {};
+        if (Object.keys(lastPayload).length > 0) {
+          inputs.forEach((input) => {
+            if (!!lastPayload[input.nameApi]) {
+              if (input.nameApi !== "uploadDate") {
+                updatedInputValues[input.name] = lastPayload[input.nameApi];
+              } else {
+                const dateString = lastPayload[input.nameApi];
+                const dateParts = dateString.split(" ")[0].split("-");
+                const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+                updatedInputValues[input.name] = formattedDate;
+              }
+            }
+          });
+        } else {
+          updatedInputValues['fecha'] = formattedDate;
+        }
+        setInputValues(updatedInputValues);
+      }
     }
   }, [isLoading])
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import {
   useGetCIIUQuery,
   useUpdateCompanyMutation,
@@ -10,6 +9,7 @@ import {
 } from "../../api/services/company/companyApiSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser, setUser } from "../../api/features/auth/authSlice";
+import { useOutletContext } from "react-router-dom";
 
 import SelectRHF from "../../components/commons/input/select/SelectRHF";
 import InputRHF from "../../components/commons/input/text/InputRHF";
@@ -19,6 +19,7 @@ import Button from "../../components/commons/button/Button";
 const UpdateCompany = () => {
   const { compania } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const { handleNavigate } = useOutletContext();
   const [updateCompany, { isLoading, error }] = useUpdateCompanyMutation();
   const [count, setCount] = useState(0);
   const {
@@ -36,16 +37,7 @@ const UpdateCompany = () => {
 
   const [dataCities, setDataCities] = useState([]);
 
-  const navigate = useNavigate();
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    watch,
-    setValue,
-    resetField,
-  } = useForm();
+  const { register, handleSubmit, watch, setValue } = useForm();
 
   const onSubmit = async (dataForm) => {
     const {
@@ -88,21 +80,23 @@ const UpdateCompany = () => {
     )
       return toast.error("Llenar todos los campos del formulario");
 
-      if (
-        parseInt(vehiculos_propios)<0 ||
-        parseInt(vehiculos_arrendados)<0  ||
-        parseInt(vehiculos_intermediacion)<0  ||
-        parseInt(vehiculos_contratistas)<0  ||
-        parseInt(vehiculos_leasing)<0  ||
-        parseInt(vehiculos_renting)<0 ||
-        parseInt(vehiculos_colaboradores)<0  ||
-        parseInt(conductores_directos)<0 ||
-        parseInt(conductores_trabajadores)<0  ||
-        parseInt(conductores_contratistas)<0  ||
-        parseInt(conductores_tercerizados)<0  ||
-        parseInt(otros_conductores)<0  
-      )
-        return toast.error("Los campos del tamaño de la organización no pueden tener valores negativos");
+    if (
+      parseInt(vehiculos_propios) < 0 ||
+      parseInt(vehiculos_arrendados) < 0 ||
+      parseInt(vehiculos_intermediacion) < 0 ||
+      parseInt(vehiculos_contratistas) < 0 ||
+      parseInt(vehiculos_leasing) < 0 ||
+      parseInt(vehiculos_renting) < 0 ||
+      parseInt(vehiculos_colaboradores) < 0 ||
+      parseInt(conductores_directos) < 0 ||
+      parseInt(conductores_trabajadores) < 0 ||
+      parseInt(conductores_contratistas) < 0 ||
+      parseInt(conductores_tercerizados) < 0 ||
+      parseInt(otros_conductores) < 0
+    )
+      return toast.error(
+        "Los campos del tamaño de la organización no pueden tener valores negativos"
+      );
 
     try {
       const { user } = await updateCompany({
@@ -132,7 +126,6 @@ const UpdateCompany = () => {
       }).unwrap();
       dispatch(setUser(user));
       toast.success("Se ha actualizado correctamente!");
-
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");
@@ -144,7 +137,6 @@ const UpdateCompany = () => {
       const getCitiesOfDepartments = async () => {
         const { data } = await getCities(parseInt(watch("departments")));
         setDataCities(data);
-        // setValue("cities_id", compania.cities_id);
       };
       getCitiesOfDepartments();
     }
@@ -152,7 +144,6 @@ const UpdateCompany = () => {
   }, [watch("departments")]);
 
   useEffect(() => {
-    // console.log(compania);
     setValue("nit", compania.nit);
     setValue("razon_social", compania.razon_social);
     setValue("representante_legal", compania.representante_legal);
@@ -162,8 +153,6 @@ const UpdateCompany = () => {
     setValue("telefono1", compania.telefono1);
     setValue("telefono2", compania.telefono2);
     setValue("email", compania.email);
-    // setValue("departments", compania.departments_id);
-    // setValue("cities_id", compania.cities_id);
     setValue("misionalidad", compania.misionalidad === 1 ? "true" : "false");
     setValue("vehiculos_propios", compania.vehiculos_propios);
     setValue("vehiculos_arrendados", compania.vehiculos_arrendados);
@@ -225,9 +214,33 @@ const UpdateCompany = () => {
     watch("otros_conductores"),
   ]);
 
+
   return (
     <div className="flex flex-col gap-2">
       <Toaster />
+      <div className="text-center border border-gray-300 rounded-xl py-3">
+        <p className="color-fourth font-semibold text-xl">
+          EMPRESA REGISTRADA CON EXITO
+        </p>
+        <p>
+          A su empresa le corresponde realizar un PESV en nivel{" "}
+          <span className="color-fourth text-base font-semibold uppercase">
+            {compania.nivel}
+          </span>
+        </p>
+      </div>
+      <h3>
+        Inicie con el desarrollo del Plan Estratégico de Seguridad Vial
+        dirigiéndose a{" "}
+        <span className="color-fourth cursor-pointer hover:underline" onClick={() => handleNavigate("/home")}>
+          INICIO
+        </span>
+        . Si necesita información para aprender sobre el funcionamiento de la
+        plataforma consulte la  <span className="color-fourth cursor-pointer hover:underline" onClick={() => handleNavigate("/guide")}>
+          Guía Rápida
+        </span>. para aprender sobre el
+        funcionamiento de esta plataforma.
+      </h3>
       <div className="bg-fourth text-white py-3 px-5 rounded-md flex justify-between items-center">
         <p>Datos de la empresa registrada</p>
         <p className="text-sm">Ayuda</p>
@@ -389,7 +402,7 @@ const UpdateCompany = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <InputNumberCount
-                  text="Cantidad de vehículos propios"                 
+                  text="Cantidad de vehículos propios"
                   {...register("vehiculos_propios")}
                 />
                 <InputNumberCount

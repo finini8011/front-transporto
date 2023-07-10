@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -9,11 +10,10 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
 
 const Step2 = () => {
+
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
-
-  const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "2.4" ? "2da" : id;
@@ -32,7 +32,6 @@ const Step2 = () => {
       payload.destinatarioAdicional = values.destinatario;
       payload.descripcion = values.observaciones;
     }
-
     try {
       const obj = {
         numStep: stepUrl,
@@ -45,10 +44,14 @@ const Step2 = () => {
         await saveStepQuestion(obj).unwrap();
       }
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
@@ -63,6 +66,7 @@ const Step2 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormSelect
@@ -73,6 +77,7 @@ const Step2 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormFlex
@@ -83,6 +88,7 @@ const Step2 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -93,6 +99,7 @@ const Step2 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

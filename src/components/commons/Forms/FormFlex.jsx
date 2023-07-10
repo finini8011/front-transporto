@@ -1,15 +1,12 @@
-import { useEffect } from "react";
-import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
-import Form from "./Form";
-import FormFlexGeneral from "./FormFlexGeneral";
+import { useEffect, useState } from "react";
 import {
   faDownload,
-  faEye,
   faSquarePlus,
   faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
+import FormFlexGeneral from "./FormFlexGeneral";
 
 
 const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage }) => {
@@ -21,11 +18,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
   const [isLoading, setIsLoading] = useState(true);
-  const [getDataStep] =
-    useLazyGetDataStepQuery(step);
-
-
-
+  const [getDataStep] = useLazyGetDataStepQuery(step);
   const [lastPayload, setLastPayload] = useState({});
 
   const inputs = [
@@ -191,7 +184,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             alt="icon"
             className="mr-2"
           />
-
           <span>
             <FontAwesomeIcon
               size="xs"
@@ -199,12 +191,10 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
               style={{ color: "#008ffe" }}
             />
           </span>
-
           <span className="ml-2">
             {mainTitle}
           </span>
         </section>) : ''}
-
         <div className="rounded-t-2xl flex text-base">
           <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-t-2xl font-medium w-full">
             <FontAwesomeIcon
@@ -216,7 +206,6 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage 
             {step} {nameStep}
           </div>
         </div>
-
         {lastPayload ? (
           <FormFlexGeneral
             title={titleForm}

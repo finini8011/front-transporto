@@ -9,11 +9,9 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 import FormSelect from "../../components/commons/Forms/FormSelect";
 
 const Step2 = () => {
+
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
-
-  const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "2.4" ? "2da" : id;
@@ -32,7 +30,6 @@ const Step2 = () => {
       payload.destinatarioAdicional = values.destinatario;
       payload.descripcion = values.observaciones;
     }
-
     try {
       const obj = {
         numStep: stepUrl,

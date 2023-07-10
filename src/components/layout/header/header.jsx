@@ -10,8 +10,9 @@ import modulo from "/img/modulo.png";
 import herramientas from "/img/herramientas.png";
 import buscar from "/img/buscar.png";
 import Empresa from "../../imgComponents/Empresa";
+import Guide from "../../imgComponents/Guide";
 
-const Header = ({currentPage, setCurrentPage}) => {
+const Header = ({ currentPage, setCurrentPage }) => {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [date, setDate] = useState("");
@@ -30,7 +31,7 @@ const Header = ({currentPage, setCurrentPage}) => {
       }).format(date)
     );
   }, []);
- 
+
   return (
     <React.Fragment>
       <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20 z-10">
@@ -59,12 +60,43 @@ const Header = ({currentPage, setCurrentPage}) => {
             role="button"
           >
             {/* <img className="m-auto" src={empresa} alt="Expandir" /> */}
-            <Empresa color={`${currentPage === "/register-company" || currentPage === "/update-company" ? "#0090FF" :"#c2c7d0"}`} />
-            <p className={`${currentPage === "/register-company" || currentPage === "/update-company" ? "color-fourth" :"color-fifth"}`}>Empresa</p>
+            <Empresa
+              color={`${
+                currentPage === "/register-company" ||
+                currentPage === "/update-company"
+                  ? "#0090FF"
+                  : "#c2c7d0"
+              }`}
+            />
+            <p
+              className={`${
+                currentPage === "/register-company" ||
+                currentPage === "/update-company"
+                  ? "color-fourth"
+                  : "color-fifth"
+              }`}
+            >
+              Empresa
+            </p>
           </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <img className="" src={guia} alt="Expandir" />
-            <p className="leading-none">Guía Rápida</p>
+          <li
+            className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
+            onClick={() => handleNavigate("/guide")}
+          >
+          <Guide
+              color={`${
+                currentPage === "/guide"
+                  ? "#0090FF"
+                  : "#c2c7d0"
+              }`}
+            />
+            <p
+              className={`${
+                currentPage === "/guide"
+                  ? "color-fourth"
+                  : "color-fifth"
+              }`}
+            >Guía Rápida</p>
             {/* <p className="leading-none"></p> */}
           </li>
           <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">

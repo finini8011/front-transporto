@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -11,6 +12,7 @@ import FormSelect from "../../components/commons/Forms/FormSelect";
 const Step24 = () => {
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
+  const [isSaving, setIsSaving] = useState(false);
 
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
@@ -42,10 +44,14 @@ const Step24 = () => {
         await saveStepQuestion(obj).unwrap();
       }
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
@@ -62,6 +68,7 @@ const Step24 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormFlex
@@ -73,6 +80,7 @@ const Step24 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -83,6 +91,7 @@ const Step24 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

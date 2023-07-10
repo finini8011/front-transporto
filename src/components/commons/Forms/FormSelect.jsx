@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit, isSaving  }) => {
+const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit, isSaving,setIsSaving  }) => {
 
   const [inputValues, setInputValues] = useState({});
   const currentDate = new Date();
@@ -100,6 +100,7 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit, isSaving  }) =>
         setInputValues(updatedInputValues);
       }
     }, 3000);
+    setIsSaving(false);
   }, [isSaving])
 
 

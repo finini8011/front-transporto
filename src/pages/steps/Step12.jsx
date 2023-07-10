@@ -71,6 +71,7 @@ const Step12 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <div className="pb-10"></div>
       <FormSelect
@@ -82,6 +83,7 @@ const Step12 = () => {
         cols={4}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -93,6 +95,7 @@ const Step12 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
     </div>
   );

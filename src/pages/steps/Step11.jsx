@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -11,6 +12,8 @@ import FormSelect from "../../components/commons/Forms/FormSelect";
 const Step11 = () => {
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
+  const [isSaving, setIsSaving] = useState(false);
+
 
   const titleForm =
     "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
@@ -45,10 +48,13 @@ const Step11 = () => {
         await saveStepQuestion(obj).unwrap();
       }
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
@@ -63,6 +69,7 @@ const Step11 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <FormFlex
         titleForm={"Documento: Procedimientos en los que se establezcan los requisitos de contratación en seguridad vial de los colaboradores"}
@@ -72,6 +79,7 @@ const Step11 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormFlex
@@ -82,6 +90,7 @@ const Step11 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <FormFlex
         titleForm={"Documento: Procedimiento para la evaluación de la competencia de los conductores"}
@@ -91,6 +100,7 @@ const Step11 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -101,6 +111,7 @@ const Step11 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -10,6 +11,7 @@ import FormFlex from "../../components/commons/Forms/FormFlex";
 const Step13 = () => {
   const [saveStep, saveStepInfo] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
+  const [isSaving, setIsSaving] = useState(false);
   const titleForm =
     "Documento: Procedimiento: para reportar, registrar, investigar, analizar y divulgar los siniestros viales para la investigación interna de siniestros viales";
 
@@ -44,10 +46,13 @@ const Step13 = () => {
       }
 
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
@@ -64,6 +69,7 @@ const Step13 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormFlex
@@ -75,6 +81,7 @@ const Step13 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -85,6 +92,7 @@ const Step13 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import {
   useSaveStepMutation,
@@ -11,6 +12,7 @@ import FormSelect from "../../components/commons/Forms/FormSelect";
 const Step14 = () => {
   const [saveStep] = useSaveStepMutation();
   const [saveStepQuestion] = useSaveStepQuestionMutation();
+  const [isSaving, setIsSaving] = useState(false);
   const titleForm =
     "Documento: Protocolo de operación y mantenimiento de las vías públicas y/o privadas";
 
@@ -45,10 +47,14 @@ const Step14 = () => {
       }
 
       toast.success("Se ha registrado correctamente!");
+      setIsSaving(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
   };
+
+  useEffect(() => {
+  },[isSaving])
 
   return (
     <div>
@@ -65,6 +71,7 @@ const Step14 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
 
@@ -76,6 +83,7 @@ const Step14 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
 
@@ -87,6 +95,7 @@ const Step14 = () => {
         }
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
       <div className="pb-10"></div>
       <FormSelect
@@ -107,6 +116,7 @@ const Step14 = () => {
         nameStep={"DOCUMENTOS ADICIONALES"}
         cols={5}
         onSubmit={handleFormSubmit}
+        isSaving={isSaving}
       />
     </div>
   );

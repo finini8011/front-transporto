@@ -70,6 +70,7 @@ const Step11 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <FormFlex
         titleForm={"Documento: Procedimientos en los que se establezcan los requisitos de contratación en seguridad vial de los colaboradores"}
@@ -80,6 +81,7 @@ const Step11 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <div className="pb-10"></div>
       <FormFlex
@@ -91,6 +93,7 @@ const Step11 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <FormFlex
         titleForm={"Documento: Procedimiento para la evaluación de la competencia de los conductores"}
@@ -101,6 +104,7 @@ const Step11 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
       <div className="pb-10"></div>
       <FormDocumentPlus
@@ -112,6 +116,7 @@ const Step11 = () => {
         cols={5}
         onSubmit={handleFormSubmit}
         isSaving={isSaving}
+        setIsSaving={setIsSaving}
       />
     </div>
   );

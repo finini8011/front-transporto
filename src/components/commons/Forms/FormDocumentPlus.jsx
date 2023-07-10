@@ -6,7 +6,7 @@ import FormUploadedFiles from "../Forms/FormUploadedFiles";
 import { dataTable } from "../../../constants/formUploaded";
 import { useLazyGetDataStepQuery } from "../../../api/services/steps/stepsApiSlice";
 
-const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit, isSaving }) => {
+const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit, isSaving , setIsSaving }) => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
@@ -144,6 +144,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit, isSaving 
         }
       }
     }, 3000);
+    setIsSaving(false);
   }, [isSaving])
 
   

@@ -94,3 +94,13 @@ body {
   text-align: left;
   background-color: #fff;
 }
+
+
+.bg-modal{
+  display: block;
+  background-color: papayawhip;
+  height: 50vh;
+  width: 500px;
+  margin: auto;
+  margin-top: 20vh;
+}

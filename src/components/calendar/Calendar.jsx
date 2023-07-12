@@ -1,134 +1,161 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
+import { Toaster, toast } from "react-hot-toast";
 import { formatDate } from '@fullcalendar/core'
+import Modal from '@mui/material/Modal';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import moment from 'moment';
 import { INITIAL_EVENTS, createEventId } from '../../utils/event-utils'
+import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '../../api/services/calendar/calendarApiSlice';
 
-export default class Calendar extends React.Component {
 
-  state = {
-    weekendsVisible: true,
-    currentEvents: []
+const Calendar = () => {
+
+  const [currentEvents, setCurrentEvents] = useState(INITIAL_EVENTS);
+  const [weekendsVisible, setWeekendsVisible] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [selectInfoTemp, setSelectInfoTemp] = useState(null);
+  const [inputTitle, setInputTitle] = useState();
+  const [inputDescription, setInputDescription] = useState();
+  const [tags, setTags] = useState();
+  const [inputMinutos, setInputMinutos] = useState();
+
+  const [getCalendar] = useLazyGetDataCalendarQuery();
+  const [saveCalendar] = useSaveCalendarQuestionMutation();
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  // creacion
+  const handleDateSelect = (selectInfo) => {
+    setSelectInfoTemp(selectInfo)
+    handleOpen();
   }
+  // edicion
+  const handleEventClick = (info) => {
+    console.log(currentEvents)
+    //edicion
+    const minutes = prompt('nueva duracion en minutos');
+    // modificacion de la fecha
+    const newEnd = moment(info.event.end).add(minutes, 'minutes');
 
-  render() {
-    return (
-      <div className='demo-app'>
-        {this.renderSidebar()}
-        <div className='demo-app-main'>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            }}
-            initialView='dayGridMonth'
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
-          />
-        </div>
-      </div>
-    )
-  }
+    // seteo en el calendario
+    info.event.setEnd(newEnd.toISOString());
 
-  renderSidebar() {
-    return (
-      <div className='demo-app-sidebar'>
-        <div className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            toggle weekends
-          </label>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
-        </div>
-      </div>
-    )
-  }
-
-  handleWeekendsToggle = () => {
-    this.setState({
-      weekendsVisible: !this.state.weekendsVisible
+    // seteo en el estado
+    const currentEventsTemp = currentEvents.map((event) => {
+      if (info.event.id == event.id) {
+        event.end = newEnd.toISOString();
+      }
+      return event;
     })
+    setCurrentEvents(currentEventsTemp);
+  };
+
+  // detector de cambios de eventos
+  const handleEvents = (events) => {
+    // se dispara siempre que cambian los eventos en el calendario
+    console.log(currentEvents);
+    // llamaado al api para get
+    // ir al get y stear de nuevo currentEvents
   }
 
-  handleDateSelect = (selectInfo) => {
-    let title = prompt('Please enter a new title for your event')
-    let calendarApi = selectInfo.view.calendar
 
+  // render de la celda del evento
+  const renderEventContent = (eventInfo) => {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b>
+        <i>{eventInfo.event.title}</i>
+      </>
+    )
+  }
+
+  const saveEvent = async () => {
+    //prepara calendario
+    let calendarApi = selectInfoTemp.view.calendar
     calendarApi.unselect() // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
+    // modificacion de fecha
+    const newEnd = moment(selectInfoTemp.end).add(inputMinutos, 'minutes');
+    console.log(newEnd, 'END');
+    // composicion del objeto evento
+    const newEvent = {
+      id: createEventId(),
+      title: inputTitle,
+      description: inputDescription,
+      tag: ["1.1","1.2","1,3"],
+      start: selectInfoTemp.startStr,
+      end: newEnd.toISOString(),
+      allDay: selectInfoTemp.allDay
+    };
+    // post del evento
+    try {
+      const payload = {
+        titulo: newEvent.title,
+        etiqueta: newEvent.tag,
+        hora_final: newEvent.end,
+        descripcion: newEvent.description,
+        hora_inicial:newEvent.start,
+        dia_entero: newEvent.allDay,
+      };
+      await saveCalendar({payload})
+      toast.success("Evento creado correctamente");
+      console.log("exito entro")
+    } catch(e) {
+      console.log("error")
+      return toast.error("Hubo un error, vuelve a intentarlo");
     }
+    // seteo en el calendario
+    calendarApi.addEvent(newEvent);
+    // seteo del estado
+    setCurrentEvents([...currentEvents, newEvent]);
+    setInputDescription("");
+    setInputTitle("");
+    setInputMinutos("");
   }
 
-  handleEventClick = (clickInfo) => {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
-    }
-  }
-
-  handleEvents = (events) => {
-    this.setState({
-      currentEvents: events
-    })
-  }
-
-}
-
-function renderEventContent(eventInfo) {
   return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
+    <div className='demo-app'>
+      <div className='demo-app-main'>
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay'
+          }}
+          initialView='timeGridWeek'
+          editable={true}
+          selectable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          weekends={weekendsVisible}
+          initialEvents={currentEvents}
+          select={handleDateSelect}
+          eventContent={renderEventContent}
+          eventClick={handleEventClick}
+          eventsSet={handleEvents}
+        />
+      </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className='bg-modal'>
+          <h1>aaaaa</h1>
+          <input type='text' placeholder='title' value={inputTitle} onChange={(e) => { setInputTitle(e.target.value) }} />
+          <input type='text' placeholder='description' value={inputDescription} onChange={(e) => { setInputDescription(e.target.value) }} />
+          <input type='text' placeholder='minutes' value={inputMinutos} onChange={(e) => { setInputMinutos(e.target.value) }} />
+          <button onClick={() => { saveEvent(); handleClose() }} >guardar</button>
+        </div>
+      </Modal>
+    </div>
+  );
 }
 
-function renderSidebarEvent(event) {
-  return (
-    <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
-  )
-}
+export default Calendar;

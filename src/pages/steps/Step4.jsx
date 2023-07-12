@@ -7,13 +7,13 @@ const Step4 = () => {
 
   return (
     <div>
-       <img
+{/*        <img
         src={pageConst}
         width={900}
         alt="icon"
         className="m-auto"
-      /> 
-      {/* <Calendar/> */}
+      />  */}
+       <Calendar/>
     </div>
   );
 };

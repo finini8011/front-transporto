@@ -20,7 +20,12 @@ const Calendar = () => {
   const [inputTitle, setInputTitle] = useState();
   const [inputDescription, setInputDescription] = useState();
   const [tags, setTags] = useState();
-  const [inputMinutos, setInputMinutos] = useState();
+  const [inputHourEnd, setInputHourEnd] = useState();
+  const [inputDateEnd, setInputDateEnd] = useState();
+
+  const [inputDateInit, setInputDateInit] = useState();
+  const [inputHourInit, setInputHourInit] = useState();
+
 
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
@@ -33,12 +38,25 @@ const Calendar = () => {
   // creacion
   const handleDateSelect = (selectInfo) => {
     setSelectInfoTemp(selectInfo)
+
+    const endDateTime = moment(selectInfo.end);
+    const endDateTemp = endDateTime.format('YYYY-MM-DD');
+    const endHourTemp = endDateTime.format('HH:mm');
+
+
+    const initDateTime = moment(selectInfo.start);
+    const initDateTemp = initDateTime.format('YYYY-MM-DD');
+    const initHourTemp = initDateTime.format('HH:mm');
+
+    setInputHourEnd(endHourTemp);
+    setInputDateEnd(endDateTemp);
+    setInputHourInit(initHourTemp);
+    setInputDateInit(initDateTemp);
     handleOpen();
   }
   // edicion
   const handleEventClick = (info) => {
-    console.log(currentEvents)
-    //edicion
+/*     //edicion
     const minutes = prompt('nueva duracion en minutos');
     // modificacion de la fecha
     const newEnd = moment(info.event.end).add(minutes, 'minutes');
@@ -53,47 +71,16 @@ const Calendar = () => {
       }
       return event;
     })
-    setCurrentEvents(currentEventsTemp);
+    setCurrentEvents(currentEventsTemp); */
   };
 
-    // detector de cambios de eventos
-    const handleEvents = (events) => {
-      // se dispara siempre que cambian los eventos en el calendario
-      console.log(currentEvents, "handleevents");
-      // llamaado al api para get
-      // ir al get y stear de nuevo currentEvents
-    }
-
-
-  useEffect(() => {
-    console.log(currentEvents.length === 0)
-    const getDataCalendar = async () => {
-        console.log('iffff')
-        const { data, isLoading: loading } = await getCalendar();
-        const allEvents = Object.values(data).flat().filter(elemento => elemento !== null);
-        console.log(allEvents, "datos")
-        const allCurrentEventsTemp = allEvents.map((eventData, index) => {
-          return {
-            id: eventData.id || index,
-            title: eventData.titulo,
-            description: eventData.descripcion,
-            tag: eventData.etiqueta,
-            start: eventData.fecha_inicial || eventData.hora_inicial,
-            end: eventData.fecha_final || eventData.hora_final,
-            allDay: eventData.dia_entero || false
-          }
-        });
-        console.log(allCurrentEventsTemp, "actualizado")
-        
-        setCurrentEvents(allCurrentEventsTemp);
-
-      }
-      if(currentEvents.length === 0){
-        getDataCalendar();
-      }
-      
-  }, [])
-
+  // detector de cambios de eventos
+  const handleEvents = (events) => {
+    // se dispara siempre que cambian los eventos en el calendario
+    console.log(currentEvents, "handleevents");
+    // llamaado al api para get
+    // ir al get y stear de nuevo currentEvents
+  }
 
   // render de la celda del evento
   const renderEventContent = (eventInfo) => {
@@ -109,18 +96,14 @@ const Calendar = () => {
     //prepara calendario
     let calendarApi = selectInfoTemp.view.calendar
     calendarApi.unselect() // clear date selection
-
-    // modificacion de fecha
-    const newEnd = moment(selectInfoTemp.end).add(inputMinutos, 'minutes');
-    console.log(newEnd, 'END');
     // composicion del objeto evento
     const newEvent = {
       id: createEventId(),
       title: inputTitle,
       description: inputDescription,
       tag: ["1.1", "1.2", "1,3"],
-      start: selectInfoTemp.startStr,
-      end: newEnd.toISOString(),
+      start: `${inputDateInit}T${inputHourInit}`,
+      end: `${inputDateEnd}T${inputHourEnd}`,
       allDay: selectInfoTemp.allDay
     };
     // post del evento
@@ -146,8 +129,40 @@ const Calendar = () => {
     setCurrentEvents([...currentEvents, newEvent]);
     setInputDescription("");
     setInputTitle("");
-    setInputMinutos("");
+    setInputDateEnd("");
+    setInputHourEnd("");
+    setInputDateInit("");
+    setInputHourInit("");
   }
+
+  useEffect(() => {
+    console.log(currentEvents.length === 0)
+    const getDataCalendar = async () => {
+      console.log('iffff')
+      const { data, isLoading: loading } = await getCalendar();
+      const allEvents = Object.values(data).flat().filter(elemento => elemento !== null);
+      console.log(allEvents, "datos")
+      const allCurrentEventsTemp = allEvents.map((eventData, index) => {
+        return {
+          id: eventData.id || index,
+          title: eventData.titulo,
+          description: eventData.descripcion,
+          tag: eventData.etiqueta,
+          start: eventData.fecha_inicial || eventData.hora_inicial,
+          end: eventData.fecha_final || eventData.hora_final,
+          allDay: eventData.dia_entero || false
+        }
+      });
+      console.log(allCurrentEventsTemp, "actualizado")
+
+      setCurrentEvents(allCurrentEventsTemp);
+
+    }
+    if (currentEvents.length === 0) {
+      getDataCalendar();
+    }
+
+  }, [])
 
   return (
     <div className='demo-app'>
@@ -180,6 +195,7 @@ const Calendar = () => {
       >
         <div className='bg-modal'>
           <h1>aaaaa</h1>
+          <p>fecha</p>
           <input
             type='text'
             placeholder='title'
@@ -192,11 +208,26 @@ const Calendar = () => {
             value={inputDescription}
             onChange={(e) => { setInputDescription(e.target.value) }}
           />
+          <p>fecha</p>
           <input
-            type='text'
-            placeholder='minutes'
-            value={inputMinutos}
-            onChange={(e) => { setInputMinutos(e.target.value) }}
+            type='date'
+            placeholder='fecha'
+            value={inputDateInit}
+            onChange={(e) => { setInputDateInit(e.target.value); setInputDateEnd(e.target.value) }}
+          />
+          <p>hora inicial</p>
+          <input
+            type='time'
+            placeholder='hora Inicial'
+            value={inputHourInit}
+            onChange={(e) => { setInputHourInit(e.target.value) }}
+          />
+          <p>hora final</p>
+          <input
+            type='time'
+            placeholder='hora final'
+            value={inputHourEnd}
+            onChange={(e) => { setInputHourEnd(e.target.value) }}
           />
           <button onClick={() => { saveEvent(); handleClose() }} >guardar</button>
         </div>

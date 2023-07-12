@@ -7,8 +7,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import moment from 'moment';
+import esLocale from '@fullcalendar/core/locales/es'
 import { INITIAL_EVENTS, createEventId } from '../../utils/event-utils'
 import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '../../api/services/calendar/calendarApiSlice';
+import "./Calendar.css";
 
 
 const Calendar = () => {
@@ -56,22 +58,22 @@ const Calendar = () => {
   }
   // edicion
   const handleEventClick = (info) => {
-/*     //edicion
-    const minutes = prompt('nueva duracion en minutos');
-    // modificacion de la fecha
-    const newEnd = moment(info.event.end).add(minutes, 'minutes');
-
-    // seteo en el calendario
-    info.event.setEnd(newEnd.toISOString());
-
-    // seteo en el estado
-    const currentEventsTemp = currentEvents.map((event) => {
-      if (info.event.id == event.id) {
-        event.end = newEnd.toISOString();
-      }
-      return event;
-    })
-    setCurrentEvents(currentEventsTemp); */
+    /*     //edicion
+        const minutes = prompt('nueva duracion en minutos');
+        // modificacion de la fecha
+        const newEnd = moment(info.event.end).add(minutes, 'minutes');
+    
+        // seteo en el calendario
+        info.event.setEnd(newEnd.toISOString());
+    
+        // seteo en el estado
+        const currentEventsTemp = currentEvents.map((event) => {
+          if (info.event.id == event.id) {
+            event.end = newEnd.toISOString();
+          }
+          return event;
+        })
+        setCurrentEvents(currentEventsTemp); */
   };
 
   // detector de cambios de eventos
@@ -168,13 +170,14 @@ const Calendar = () => {
     <div className='demo-app'>
       <div className='demo-app-main'>
         <FullCalendar
+          locale={esLocale}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
-            left: 'prev,next today',
+            left: 'prev,next',
             center: 'title',
-            right: 'timeGridWeek,timeGridDay'
+            right: 'today'
           }}
-          initialView='timeGridWeek'
+          initialView='dayGridMonth'
           editable={true}
           selectable={true}
           selectMirror={true}
@@ -194,14 +197,15 @@ const Calendar = () => {
         aria-describedby="modal-modal-description"
       >
         <div className='bg-modal'>
-          <h1>aaaaa</h1>
-          <p>fecha</p>
+          <h1>Cree un evento</h1>
+          <p>titluo del evento</p>
           <input
             type='text'
             placeholder='title'
             value={inputTitle}
             onChange={(e) => { setInputTitle(e.target.value) }}
           />
+          <p>descripcion</p>
           <input
             type='text'
             placeholder='description'
@@ -229,7 +233,9 @@ const Calendar = () => {
             value={inputHourEnd}
             onChange={(e) => { setInputHourEnd(e.target.value) }}
           />
-          <button onClick={() => { saveEvent(); handleClose() }} >guardar</button>
+          <button onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
+          
+          <button onClick={() => { handleClose() }} >Cancelar</button>
         </div>
       </Modal>
     </div>

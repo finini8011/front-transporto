@@ -22,7 +22,7 @@ const LateralRight = () => {
 
   return (
     <section
-      className={` mr-6 mt-6 transition-section  relative ${openMenu ? "w-60" : "w-20"
+      className={` mr-3 mt-6 transition-section  relative ${openMenu ? "w-60" : "w-20"
         }`}
     >
       <img
@@ -33,13 +33,11 @@ const LateralRight = () => {
         onClick={handleOpenMenu}
       />
       <div className="bg-white border-third border rounded-md p-4 flex flex-col gap-2 overflow-hidden h-full">
-      <div className="rounded-md pb-15 flex items-center">
         {openMenu && (
-          <div className="w-full h-max">
+          <div className="">
             <Calendar />
           </div>
         )}
-        </div>
         <div className="bg-sixth rounded-md p-2 flex items-center gap-2">
           <img src={face} alt="" />
           {openMenu && (

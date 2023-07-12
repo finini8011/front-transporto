@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Toaster, toast } from "react-hot-toast";
 import { formatDate } from '@fullcalendar/core'
 import Modal from '@mui/material/Modal';
@@ -13,7 +13,7 @@ import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '..
 
 const Calendar = () => {
 
-  const [currentEvents, setCurrentEvents] = useState(INITIAL_EVENTS);
+  const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [open, setOpen] = useState(false);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
@@ -24,6 +24,8 @@ const Calendar = () => {
 
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
+
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,13 +56,43 @@ const Calendar = () => {
     setCurrentEvents(currentEventsTemp);
   };
 
-  // detector de cambios de eventos
-  const handleEvents = (events) => {
-    // se dispara siempre que cambian los eventos en el calendario
-    console.log(currentEvents);
-    // llamaado al api para get
-    // ir al get y stear de nuevo currentEvents
-  }
+    // detector de cambios de eventos
+    const handleEvents = (events) => {
+      // se dispara siempre que cambian los eventos en el calendario
+      console.log(currentEvents, "handleevents");
+      // llamaado al api para get
+      // ir al get y stear de nuevo currentEvents
+    }
+
+
+  useEffect(() => {
+    console.log(currentEvents.length === 0)
+    const getDataCalendar = async () => {
+        console.log('iffff')
+        const { data, isLoading: loading } = await getCalendar();
+        const allEvents = Object.values(data).flat().filter(elemento => elemento !== null);
+        console.log(allEvents, "datos")
+        const allCurrentEventsTemp = allEvents.map((eventData, index) => {
+          return {
+            id: eventData.id || index,
+            title: eventData.titulo,
+            description: eventData.descripcion,
+            tag: eventData.etiqueta,
+            start: eventData.fecha_inicial || eventData.hora_inicial,
+            end: eventData.fecha_final || eventData.hora_final,
+            allDay: eventData.dia_entero || false
+          }
+        });
+        console.log(allCurrentEventsTemp, "actualizado")
+        
+        setCurrentEvents(allCurrentEventsTemp);
+
+      }
+      if(currentEvents.length === 0){
+        getDataCalendar();
+      }
+      
+  }, [])
 
 
   // render de la celda del evento
@@ -86,7 +118,7 @@ const Calendar = () => {
       id: createEventId(),
       title: inputTitle,
       description: inputDescription,
-      tag: ["1.1","1.2","1,3"],
+      tag: ["1.1", "1.2", "1,3"],
       start: selectInfoTemp.startStr,
       end: newEnd.toISOString(),
       allDay: selectInfoTemp.allDay
@@ -96,15 +128,15 @@ const Calendar = () => {
       const payload = {
         titulo: newEvent.title,
         etiqueta: newEvent.tag,
-        hora_final: newEvent.end,
+        fecha_final: newEvent.end,
         descripcion: newEvent.description,
-        hora_inicial:newEvent.start,
+        fecha_inicial: newEvent.start,
         dia_entero: newEvent.allDay,
       };
-      await saveCalendar({payload})
+      await saveCalendar({ payload })
       toast.success("Evento creado correctamente");
       console.log("exito entro")
-    } catch(e) {
+    } catch (e) {
       console.log("error")
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
@@ -133,7 +165,7 @@ const Calendar = () => {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          initialEvents={currentEvents}
+          events={currentEvents}
           select={handleDateSelect}
           eventContent={renderEventContent}
           eventClick={handleEventClick}
@@ -148,9 +180,24 @@ const Calendar = () => {
       >
         <div className='bg-modal'>
           <h1>aaaaa</h1>
-          <input type='text' placeholder='title' value={inputTitle} onChange={(e) => { setInputTitle(e.target.value) }} />
-          <input type='text' placeholder='description' value={inputDescription} onChange={(e) => { setInputDescription(e.target.value) }} />
-          <input type='text' placeholder='minutes' value={inputMinutos} onChange={(e) => { setInputMinutos(e.target.value) }} />
+          <input
+            type='text'
+            placeholder='title'
+            value={inputTitle}
+            onChange={(e) => { setInputTitle(e.target.value) }}
+          />
+          <input
+            type='text'
+            placeholder='description'
+            value={inputDescription}
+            onChange={(e) => { setInputDescription(e.target.value) }}
+          />
+          <input
+            type='text'
+            placeholder='minutes'
+            value={inputMinutos}
+            onChange={(e) => { setInputMinutos(e.target.value) }}
+          />
           <button onClick={() => { saveEvent(); handleClose() }} >guardar</button>
         </div>
       </Modal>

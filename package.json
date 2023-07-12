@@ -9,6 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.8",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/interaction": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
+    "@fullcalendar/timegrid": "^6.1.8",
     "@ckeditor/ckeditor5-alignment": "^37.1.0",
     "@ckeditor/ckeditor5-build-classic": "^37.1.0",
     "@ckeditor/ckeditor5-react": "^6.0.0",
@@ -29,7 +34,6 @@
     "install": "^0.13.0",
     "npm": "^9.7.1",
     "react": "^18.2.0",
-    "react-big-calendar": "^1.8.1",
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
     "react-export-table-to-excel": "^1.0.6",

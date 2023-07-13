@@ -1,57 +1,57 @@
-.CalendarSmall .fc-col-header{
-  width: 209px !important;
-}
-.CalendarSmall .fc-scrollgrid-sync-table{
+.CalendarSmall .fc-col-header {
   width: 209px !important;
 }
 
-.CalendarSmall .fc-scroller{
+.CalendarSmall .fc-scrollgrid-sync-table {
+  width: 209px !important;
+}
+
+.CalendarSmall .fc-scroller {
   overflow: unset !important;
 }
 
-.CalendarSmall .fc-view-harness{
+.CalendarSmall .fc-view-harness {
   width: 209px !important;
   height: 200px !important;
 }
 
-.CalendarSmall .fc-toolbar.fc-header-toolbar{
+.CalendarSmall .fc-toolbar.fc-header-toolbar {
   width: 209px !important;
   justify-content: space-around !important;
 }
 
-.CalendarSmall .fc-daygrid-day-number{
+.CalendarSmall .fc-daygrid-day-number {
   font-size: 0.5em !important;
 }
 
-.CalendarSmall .fc-day-today{
-  background-color:#0089ff47 !important;
+.CalendarSmall .fc-day-today {
+  background-color: #0089ff47 !important;
 }
 
-.CalendarSmall .fc-col-header-cell-cushion{
+.CalendarSmall .fc-col-header-cell-cushion {
   font-size: 0.6em !important;
 }
 
-.CalendarSmall .fc-direction-ltr .fc-daygrid-more-link{
-  font-size: 0 !important;
+.CalendarSmall .fc-direction-ltr .fc-daygrid-more-link {
   background: #2196f3c7 !important;
   box-sizing: content-box !important;
   display: inline-block !important;
   height: 0px !important;
   width: 0px !important;
 }
+
 .CalendarSmall .fc-direction-ltr .fc-daygrid-event.fc-event-end {
-  font-size: 0;
   background: #2196f3c7 !important;
   box-sizing: content-box !important;
   display: inline-block !important;
   height: 0px !important;
   width: 0px !important;
-} 
-.CalendarSmall .fc-toolbar-title{
+}
+
+.CalendarSmall .fc-toolbar-title {
   font-size: 0.9em !important;
   font-weight: bold;
 }
-
 
 .CalendarSmall .fc-button.fc-button-primary {
   font-size: 0.50em !important;
@@ -61,17 +61,19 @@
   overflow: unset !important;
 }
 
-.CalendarSmall .fc-scrollgrid-sync-table{
+.CalendarSmall .fc-scrollgrid-sync-table {
   height: 173px !important;
 }
 
-.redersText{
+.redersText {
   font-size: 0.9em;
 }
 
-.CalendarBig .fc-direction-ltr .fc-daygrid-event.fc-event-end{
+/**************************** css Calendario Grande *******************************************/
+
+.CalendarBig .fc-direction-ltr .fc-daygrid-event.fc-event-end {
   background-color: var(--fc-event-bg-color);
-    border: 1px solid var(--fc-event-border-color);
-    color: white;
-    font-size: 0.7em;
+  border: 1px solid var(--fc-event-border-color);
+  color: white;
+  font-size: 0.7em;
 }

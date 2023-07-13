@@ -19,15 +19,16 @@ const Calendar = ({ calendarSmall }) => {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [open, setOpen] = useState(false);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
+
   const [inputTitle, setInputTitle] = useState();
   const [inputDescription, setInputDescription] = useState();
-  const [tags, setTags] = useState();
+  const [tags, setTags] = useState([]);
   const [inputHourEnd, setInputHourEnd] = useState();
-  const [inputDateEnd, setInputDateEnd] = useState();
-
   const [inputDateInit, setInputDateInit] = useState();
   const [inputHourInit, setInputHourInit] = useState();
 
+  const [isEdit, setIsEdit] = useState(false);
+  const [showCurrentEditEvent, setShowCurrentEditEvent] = useState({});
 
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
@@ -35,7 +36,7 @@ const Calendar = ({ calendarSmall }) => {
 
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => { setOpen(false); setIsEdit(false) };
 
   // creacion
   const handleDateSelect = (selectInfo) => {
@@ -51,19 +52,15 @@ const Calendar = ({ calendarSmall }) => {
     const initHourTemp = initDateTime.format('HH:mm');
 
     setInputHourEnd(endHourTemp);
-    setInputDateEnd(endDateTemp);
     setInputHourInit(initHourTemp);
     setInputDateInit(initDateTemp);
     handleOpen();
   }
   // edicion y visualizacion
   const handleEventClick = (info) => {
-    console.log(info, "info")
-    /*   <p className='redersTextList'>{info.timeText}</p>
-      <p className='redersTextList'>{info.event.extendedProps.owner}</p>
-      <p className='redersTextList'>{info.event.extendedProps.description}</p>
-      <p className='redersTextList'>{info.event.extendedProps.tag}</p>
-      <p className='redersTextList'>{info.event.title}</p> */
+    handleOpen();
+    setIsEdit(true);
+    setShowCurrentEditEvent(info.event);
   };
 
   // detector de cambios de eventos
@@ -92,7 +89,7 @@ const Calendar = ({ calendarSmall }) => {
       description: inputDescription,
       tag: ["1.1", "1.2", "1,3"],
       start: `${inputDateInit}T${inputHourInit}`,
-      end: `${inputDateEnd}T${inputHourEnd}`,
+      end: `${inputDateInit}T${inputHourEnd}`,
       allDay: (inputHourInit && inputHourEnd) ? false : true,
     };
     // post del evento
@@ -114,7 +111,6 @@ const Calendar = ({ calendarSmall }) => {
     setCurrentEvents([...currentEvents, newEvent]);
     setInputDescription("");
     setInputTitle("");
-    setInputDateEnd("");
     setInputHourEnd("");
     setInputDateInit("");
     setInputHourInit("");
@@ -187,47 +183,60 @@ const Calendar = ({ calendarSmall }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className='bg-modal'>
-          <h1>Cree un evento</h1>
-          <p>titluo del evento</p>
-          <input
-            type='text'
-            placeholder='title'
-            value={inputTitle}
-            onChange={(e) => { setInputTitle(e.target.value) }}
-          />
-          <p>descripcion</p>
-          <input
-            type='text'
-            placeholder='description'
-            value={inputDescription}
-            onChange={(e) => { setInputDescription(e.target.value) }}
-          />
-          <p>fecha</p>
-          <input
-            type='date'
-            placeholder='fecha'
-            value={inputDateInit}
-            onChange={(e) => { setInputDateInit(e.target.value); setInputDateEnd(e.target.value) }}
-          />
-          <p>hora inicial</p>
-          <input
-            type='time'
-            placeholder='hora Inicial'
-            value={inputHourInit}
-            onChange={(e) => { setInputHourInit(e.target.value) }}
-          />
-          <p>hora final</p>
-          <input
-            type='time'
-            placeholder='hora final'
-            value={inputHourEnd}
-            onChange={(e) => { setInputHourEnd(e.target.value) }}
-          />
-          <button onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
+        {isEdit ?
+          (
+            <div className='bg-modal edit-event'>
+              <p>Evento</p>
+              <p className='redersTextList'>Usuario: {showCurrentEditEvent?.extendedProps.owner}</p>
+              <p className='redersTextList'>Titulo: {showCurrentEditEvent?.title}</p>
+              <p className='redersTextList'>Descripcion: {showCurrentEditEvent?.extendedProps.description}</p>
+               <p className='redersTextList'> Fecha y Hora Inicial: {showCurrentEditEvent?._instance.range.start.toLocaleString()}</p>
+               <p className='redersTextList'> Fecha y Hora Final: {showCurrentEditEvent?._instance.range.end.toLocaleString()}</p>
+              <p className='redersTextList'>Etiquetas: {showCurrentEditEvent?.extendedProps.tag}</p>
+            </div>
+          ) : (
+            <div className='bg-modal create-event'>
+              <h1>Cree un evento</h1>
+              <p>titluo del evento</p>
+              <input
+                type='text'
+                placeholder='title'
+                value={inputTitle}
+                onChange={(e) => { setInputTitle(e.target.value) }}
+              />
+              <p>descripcion</p>
+              <input
+                type='text'
+                placeholder='description'
+                value={inputDescription}
+                onChange={(e) => { setInputDescription(e.target.value) }}
+              />
+              <p>fecha</p>
+              <input
+                type='date'
+                placeholder='fecha'
+                value={inputDateInit}
+                onChange={(e) => { setInputDateInit(e.target.value) }}
+              />
+              <p>hora inicial</p>
+              <input
+                type='time'
+                placeholder='hora Inicial'
+                value={inputHourInit}
+                onChange={(e) => { setInputHourInit(e.target.value) }}
+              />
+              <p>hora final</p>
+              <input
+                type='time'
+                placeholder='hora final'
+                value={inputHourEnd}
+                onChange={(e) => { setInputHourEnd(e.target.value) }}
+              />
+              <button onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
 
-          <button onClick={() => { handleClose() }} >Cancelar</button>
-        </div>
+              <button onClick={() => { handleClose() }} >Cancelar</button>
+            </div>
+          )}
       </Modal>
     </div>
   );

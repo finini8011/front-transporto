@@ -47,4 +47,12 @@
   overflow: unset !important;
 }
 
+.redersText{
+  font-size: 0.9em;
+}
 
+.CalendarBig .fc-direction-ltr .fc-daygrid-event.fc-event-end{
+  background-color: var(--fc-event-bg-color);
+    border: 1px solid var(--fc-event-border-color);
+    color: white;
+}

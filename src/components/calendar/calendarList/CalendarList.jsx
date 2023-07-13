@@ -57,8 +57,9 @@ const CalendarList = () => {
   const renderEventContent = (eventInfo) => {
     return (
       <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
+        <p className='redersTextList'>{eventInfo.timeText}</p>
+        <p className='redersTextList'>{eventInfo.event.extendedProps.owner}</p>
+        <p className='redersTextList'>Titulo: {eventInfo.event.title}</p>
       </>
 
     )
@@ -68,7 +69,17 @@ const CalendarList = () => {
   useEffect(() => {
     const getDataCalendar = async () => {
       const { data, isLoading: loading } = await getCalendar();
-      const allEvents = Object.values(data).flat().filter(elemento => elemento !== null);
+      const allEventsNew = Object.values(data);
+      const allEventsKeys = Object.keys(data);
+      const allEventsNewArray = allEventsNew.map((arreglo, index) => {
+        const newArray =
+        arreglo.map((eventData) => {
+          const eventDataTemp = {...eventData, owner:allEventsKeys[index]};
+          return eventDataTemp;
+        })
+        return  newArray;
+      })
+      const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
           id: eventData.id || index,
@@ -77,7 +88,8 @@ const CalendarList = () => {
           tag: eventData.etiqueta,
           start: eventData.fecha_inicial || eventData.hora_inicial,
           end: eventData.fecha_final || eventData.hora_final,
-          allDay: eventData.dia_entero || false
+          allDay: eventData.dia_entero || false,
+          owner: eventData.owner
         }
       });
       setCurrentEvents(allCurrentEventsTemp);
@@ -87,6 +99,8 @@ const CalendarList = () => {
     }
 
   }, [])
+
+
 
   return (
     <div className='CalendarList'>

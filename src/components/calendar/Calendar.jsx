@@ -13,7 +13,7 @@ import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '..
 import "./Calendar.css";
 
 
-const Calendar = ({calendarSmall}) => {
+const Calendar = ({ calendarSmall }) => {
 
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
@@ -80,14 +80,16 @@ const Calendar = ({calendarSmall}) => {
   const handleEvents = (events) => {
     // se dispara siempre que cambian los eventos en el calendario
     // llamaado al api para get
+    console.log(events, "eventos handle")
   }
 
   // render de la celda del evento
   const renderEventContent = (eventInfo) => {
+    console.log(eventInfo,"eventinfo")
     return (
       <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
+        <p className='redersText'>{eventInfo.timeText}--</p>
+        <p className='redersText'>{eventInfo.event.title}</p>
       </>
     )
   }
@@ -137,7 +139,17 @@ const Calendar = ({calendarSmall}) => {
   useEffect(() => {
     const getDataCalendar = async () => {
       const { data, isLoading: loading } = await getCalendar();
-      const allEvents = Object.values(data).flat().filter(elemento => elemento !== null);
+      const allEventsNew = Object.values(data);
+      const allEventsKeys = Object.keys(data);
+      const allEventsNewArray = allEventsNew.map((arreglo, index) => {
+        const newArray =
+        arreglo.map((eventData) => {
+          const eventDataTemp = {...eventData, owner:allEventsKeys[index]};
+          return eventDataTemp;
+        })
+        return  newArray;
+      })
+      const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
           id: eventData.id || index,
@@ -146,7 +158,8 @@ const Calendar = ({calendarSmall}) => {
           tag: eventData.etiqueta,
           start: eventData.fecha_inicial || eventData.hora_inicial,
           end: eventData.fecha_final || eventData.hora_final,
-          allDay: eventData.dia_entero || false
+          allDay: eventData.dia_entero || false,
+          owner: eventData.owner
         }
       });
       setCurrentEvents(allCurrentEventsTemp);
@@ -158,8 +171,8 @@ const Calendar = ({calendarSmall}) => {
   }, [])
 
   return (
-    <div className={calendarSmall ? 'CalendarSmall' : 'w-full'}>
-      <div className={calendarSmall ? 'CalendarSmall' : 'w-full'}>
+    <div className={calendarSmall ? 'CalendarSmall' : 'w-full CalendarBig'}>
+      <div className={calendarSmall ? 'CalendarSmall' : 'w-full CalendarBig'}>
         <FullCalendar
           locale={esLocale}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

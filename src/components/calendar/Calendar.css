@@ -42,7 +42,9 @@
 .CalendarSmall .fc-button.fc-button-primary {
   font-size: 0.50em !important;
 }
+
 .CalendarSmall .fc-scroller.fc-scroller-liquid-absolute {
   overflow: unset !important;
 }
+
 

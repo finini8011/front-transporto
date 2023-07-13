@@ -158,8 +158,8 @@ const Calendar = ({calendarSmall}) => {
   }, [])
 
   return (
-    <div className={calendarSmall ? 'CalendarSmall' : ''}>
-      <div className={calendarSmall ? 'CalendarSmall' : ''}>
+    <div className={calendarSmall ? 'CalendarSmall' : 'w-full'}>
+      <div className={calendarSmall ? 'CalendarSmall' : 'w-full'}>
         <FullCalendar
           locale={esLocale}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

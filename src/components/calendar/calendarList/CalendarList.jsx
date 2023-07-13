@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Toaster, toast } from "react-hot-toast";
-import { formatDate } from '@fullcalendar/core'
-import Modal from '@mui/material/Modal';
+import { useNavigate } from "react-router-dom";
 import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
-import moment from 'moment';
 import esLocale from '@fullcalendar/core/locales/es'
-import { INITIAL_EVENTS, createEventId } from '../../../utils/event-utils'
-import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '../../../api/services/calendar/calendarApiSlice';
+import { useLazyGetDataCalendarQuery} from '../../../api/services/calendar/calendarApiSlice';
 import "./CalendarList.css";
 
 
 const CalendarList = () => {
 
+  const navigate = useNavigate();
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [getCalendar] = useLazyGetDataCalendarQuery();
@@ -28,22 +23,7 @@ const CalendarList = () => {
   }
   // edicion
   const handleEventClick = (info) => {
-    /*     //edicion
-        const minutes = prompt('nueva duracion en minutos');
-        // modificacion de la fecha
-        const newEnd = moment(info.event.end).add(minutes, 'minutes');
-    
-        // seteo en el calendario
-        info.event.setEnd(newEnd.toISOString());
-    
-        // seteo en el estado
-        const currentEventsTemp = currentEvents.map((event) => {
-          if (info.event.id == event.id) {
-            event.end = newEnd.toISOString();
-          }
-          return event;
-        })
-        setCurrentEvents(currentEventsTemp); */
+    navigate("/calendario");
   };
 
   // detector de cambios de eventos

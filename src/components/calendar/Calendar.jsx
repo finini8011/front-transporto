@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Toaster, toast } from "react-hot-toast";
-import { formatDate } from '@fullcalendar/core'
+import { toast } from "react-hot-toast";
 import Modal from '@mui/material/Modal';
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import esLocale from '@fullcalendar/core/locales/es';
+import { createEventId } from '../../utils/event-utils';
+import {
+  useLazyGetDataCalendarQuery,
+  useSaveCalendarQuestionMutation
+} from '../../api/services/calendar/calendarApiSlice';
 import moment from 'moment';
-import esLocale from '@fullcalendar/core/locales/es'
-import { INITIAL_EVENTS, createEventId } from '../../utils/event-utils'
-import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '../../api/services/calendar/calendarApiSlice';
 import "./Calendar.css";
 
 
@@ -17,9 +19,9 @@ const Calendar = ({ calendarSmall }) => {
 
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
-  const [open, setOpen] = useState(false);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
 
+  //states inputs
   const [inputTitle, setInputTitle] = useState();
   const [inputDescription, setInputDescription] = useState();
   const [tags, setTags] = useState([]);
@@ -27,18 +29,20 @@ const Calendar = ({ calendarSmall }) => {
   const [inputDateInit, setInputDateInit] = useState();
   const [inputHourInit, setInputHourInit] = useState();
 
+  //edit states
   const [isEdit, setIsEdit] = useState(false);
   const [showCurrentEditEvent, setShowCurrentEditEvent] = useState({});
 
+  //get y post data
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
 
-
-
+  //modals funtions and states
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => { setOpen(false); setIsEdit(false) };
 
-  // creacion
+  // create
   const handleDateSelect = (selectInfo) => {
     setSelectInfoTemp(selectInfo)
 
@@ -56,20 +60,20 @@ const Calendar = ({ calendarSmall }) => {
     setInputDateInit(initDateTemp);
     handleOpen();
   }
-  // edicion y visualizacion
+  // edit and view
   const handleEventClick = (info) => {
     handleOpen();
     setIsEdit(true);
     setShowCurrentEditEvent(info.event);
   };
 
-  // detector de cambios de eventos
+  // event change detector
   const handleEvents = (events) => {
     // se dispara siempre que cambian los eventos en el calendario
     // llamaado al api para get
   }
 
-  // render de la celda del evento
+  // render event
   const renderEventContent = (eventInfo) => {
     return (
       <>
@@ -78,6 +82,7 @@ const Calendar = ({ calendarSmall }) => {
     )
   }
 
+  // save event 
   const saveEvent = async () => {
     //prepara calendario
     let calendarApi = selectInfoTemp.view.calendar
@@ -119,6 +124,7 @@ const Calendar = ({ calendarSmall }) => {
     calendarApi.addEvent(newEvent);
   }
 
+//data get start
   useEffect(() => {
     const getDataCalendar = async () => {
       const { data, isLoading: loading } = await getCalendar();
@@ -190,9 +196,10 @@ const Calendar = ({ calendarSmall }) => {
               <p className='redersTextList'>Usuario: {showCurrentEditEvent?.extendedProps.owner}</p>
               <p className='redersTextList'>Titulo: {showCurrentEditEvent?.title}</p>
               <p className='redersTextList'>Descripcion: {showCurrentEditEvent?.extendedProps.description}</p>
-               <p className='redersTextList'> Fecha y Hora Inicial: {showCurrentEditEvent?._instance.range.start.toLocaleString()}</p>
-               <p className='redersTextList'> Fecha y Hora Final: {showCurrentEditEvent?._instance.range.end.toLocaleString()}</p>
+              <p className='redersTextList'> Fecha y Hora Inicial: {showCurrentEditEvent?._instance.range.start.toLocaleString()}</p>
+              <p className='redersTextList'> Fecha y Hora Final: {showCurrentEditEvent?._instance.range.end.toLocaleString()}</p>
               <p className='redersTextList'>Etiquetas: {showCurrentEditEvent?.extendedProps.tag}</p>
+              <button onClick={() => { handleClose() }} >Cerrar</button>
             </div>
           ) : (
             <div className='bg-modal create-event'>

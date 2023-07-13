@@ -205,18 +205,26 @@ const Calendar = ({ calendarSmall }) => {
         {isEdit ?
           (
             <div className='bg-modal edit-event'>
-              <p>Evento</p>
-              <p className='redersTextList'>Usuario: {showCurrentEditEvent?.extendedProps.owner}</p>
-              <p className='redersTextList'>Titulo: {showCurrentEditEvent?.title}</p>
-              <p className='redersTextList'>Descripcion: {showCurrentEditEvent?.extendedProps.description}</p>
-              <p className='redersTextList'> Fecha y Hora Inicial: {showCurrentEditEvent?._instance.range.start.toLocaleString()}</p>
-              <p className='redersTextList'> Fecha y Hora Final: {showCurrentEditEvent?._instance.range.end.toLocaleString()}</p>
-              <p className='redersTextList'>Etiquetas: {showCurrentEditEvent?.extendedProps.tag}</p>
-              <button onClick={() => { handleClose() }} >Cerrar</button>
+              <h1 className='text-xl text-blue-500 mb-2'>Evento Agendado</h1>
+              <p className='redersTextListModal'>Usuario:</p>
+              <span>{showCurrentEditEvent?.extendedProps.owner}</span>
+              <p className='redersTextListModal'>Titulo:</p>
+              <span>{showCurrentEditEvent?.title}</span>
+              <p className='redersTextListModal'>Descripcion:</p>
+              <span> {showCurrentEditEvent?.extendedProps.description}</span>
+              <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
+              <span>{showCurrentEditEvent?._instance.range.start.toLocaleString()}</span>
+              <p className='redersTextListModal'> Fecha y Hora Final:</p>
+              <span>{showCurrentEditEvent?._instance.range.end.toLocaleString()}</span>
+              <p className='redersTextListModal'>Etiquetas:</p>
+              <span>{showCurrentEditEvent?.extendedProps.tag}</span>
+              <div>
+                <button className='buttonfooter mt-5' onClick={() => { handleClose() }} >Cerrar</button>
+              </div>
             </div>
           ) : (
             <div className='bg-modal create-event'>
-              <p>Creando evento</p>
+              <p className='text-xl text-blue-500 mb-2'>Creando evento</p>
               <div className='modal-colum'>
                 <div className='w-2/4'>
                   <p className='textModal'>Titulo</p>
@@ -227,6 +235,7 @@ const Calendar = ({ calendarSmall }) => {
                     placeholder='title'
                     value={inputTitle}
                     onChange={(e) => { setInputTitle(e.target.value) }}
+                    required
                   />
                 </div>
                 <div className='w-2/4'>

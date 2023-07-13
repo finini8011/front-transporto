@@ -75,7 +75,8 @@ const MainAuth = () => {
     try {
       await logOutUser()
       toast.success("Sesion cerrada correctamente"); 
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");}, 500);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }

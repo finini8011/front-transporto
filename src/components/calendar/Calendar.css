@@ -5,8 +5,13 @@
   width: 209px !important;
 }
 
+.CalendarSmall .fc-scroller{
+  overflow: unset !important;
+}
+
 .CalendarSmall .fc-view-harness{
   width: 209px !important;
+  height: 200px !important;
 }
 
 .CalendarSmall .fc-toolbar.fc-header-toolbar{
@@ -28,16 +33,25 @@
 
 .CalendarSmall .fc-direction-ltr .fc-daygrid-more-link{
   font-size: 0 !important;
-  background: #2196f3c7;
-  box-sizing: content-box;
-  display: inline-block;
-  height: 0px;
-  width: 0px;
+  background: #2196f3c7 !important;
+  box-sizing: content-box !important;
+  display: inline-block !important;
+  height: 0px !important;
+  width: 0px !important;
 }
+.CalendarSmall .fc-direction-ltr .fc-daygrid-event.fc-event-end {
+  font-size: 0;
+  background: #2196f3c7 !important;
+  box-sizing: content-box !important;
+  display: inline-block !important;
+  height: 0px !important;
+  width: 0px !important;
+} 
 .CalendarSmall .fc-toolbar-title{
   font-size: 0.9em !important;
   font-weight: bold;
 }
+
 
 .CalendarSmall .fc-button.fc-button-primary {
   font-size: 0.50em !important;
@@ -45,6 +59,10 @@
 
 .CalendarSmall .fc-scroller.fc-scroller-liquid-absolute {
   overflow: unset !important;
+}
+
+.CalendarSmall .fc-scrollgrid-sync-table{
+  height: 173px !important;
 }
 
 .redersText{
@@ -55,4 +73,5 @@
   background-color: var(--fc-event-bg-color);
     border: 1px solid var(--fc-event-border-color);
     color: white;
+    font-size: 0.7em;
 }

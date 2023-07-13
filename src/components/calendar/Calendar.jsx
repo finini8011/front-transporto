@@ -56,39 +56,26 @@ const Calendar = ({ calendarSmall }) => {
     setInputDateInit(initDateTemp);
     handleOpen();
   }
-  // edicion
+  // edicion y visualizacion
   const handleEventClick = (info) => {
-    /*     //edicion
-        const minutes = prompt('nueva duracion en minutos');
-        // modificacion de la fecha
-        const newEnd = moment(info.event.end).add(minutes, 'minutes');
-    
-        // seteo en el calendario
-        info.event.setEnd(newEnd.toISOString());
-    
-        // seteo en el estado
-        const currentEventsTemp = currentEvents.map((event) => {
-          if (info.event.id == event.id) {
-            event.end = newEnd.toISOString();
-          }
-          return event;
-        })
-        setCurrentEvents(currentEventsTemp); */
+    console.log(info, "info")
+    /*   <p className='redersTextList'>{info.timeText}</p>
+      <p className='redersTextList'>{info.event.extendedProps.owner}</p>
+      <p className='redersTextList'>{info.event.extendedProps.description}</p>
+      <p className='redersTextList'>{info.event.extendedProps.tag}</p>
+      <p className='redersTextList'>{info.event.title}</p> */
   };
 
   // detector de cambios de eventos
   const handleEvents = (events) => {
     // se dispara siempre que cambian los eventos en el calendario
     // llamaado al api para get
-    console.log(events, "eventos handle")
   }
 
   // render de la celda del evento
   const renderEventContent = (eventInfo) => {
-    console.log(eventInfo,"eventinfo")
     return (
       <>
-        <p className='redersText'>{eventInfo.timeText}--</p>
         <p className='redersText'>{eventInfo.event.title}</p>
       </>
     )
@@ -143,11 +130,11 @@ const Calendar = ({ calendarSmall }) => {
       const allEventsKeys = Object.keys(data);
       const allEventsNewArray = allEventsNew.map((arreglo, index) => {
         const newArray =
-        arreglo.map((eventData) => {
-          const eventDataTemp = {...eventData, owner:allEventsKeys[index]};
-          return eventDataTemp;
-        })
-        return  newArray;
+          arreglo.map((eventData) => {
+            const eventDataTemp = { ...eventData, owner: allEventsKeys[index] };
+            return eventDataTemp;
+          })
+        return newArray;
       })
       const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {

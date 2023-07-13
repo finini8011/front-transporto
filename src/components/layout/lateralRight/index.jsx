@@ -12,6 +12,7 @@ import document from "/img/document.svg";
 import book from "/img/book.svg";
 import "./lateralRight.css";
 import Calendar from "../../calendar/Calendar";
+import CalendarList from "../../calendar/calendarList/CalendarList";
 
 const LateralRight = () => {
   const [openMenu, setOpenMenu] = useState();
@@ -35,7 +36,8 @@ const LateralRight = () => {
       <div className="bg-white border-third border rounded-md p-4 flex flex-col gap-2 overflow-hidden h-full">
         {openMenu && (
           <div className="">
-            <Calendar />
+            <Calendar calendarSmall />
+            <CalendarList/>
           </div>
         )}
         <div className="bg-sixth rounded-md p-2 flex items-center gap-2">

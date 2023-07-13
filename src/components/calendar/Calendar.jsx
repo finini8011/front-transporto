@@ -13,7 +13,7 @@ import { useLazyGetDataCalendarQuery, useSaveCalendarQuestionMutation } from '..
 import "./Calendar.css";
 
 
-const Calendar = () => {
+const Calendar = ({calendarSmall}) => {
 
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
@@ -79,9 +79,7 @@ const Calendar = () => {
   // detector de cambios de eventos
   const handleEvents = (events) => {
     // se dispara siempre que cambian los eventos en el calendario
-    console.log(currentEvents, "handleevents");
     // llamaado al api para get
-    // ir al get y stear de nuevo currentEvents
   }
 
   // render de la celda del evento
@@ -106,7 +104,7 @@ const Calendar = () => {
       tag: ["1.1", "1.2", "1,3"],
       start: `${inputDateInit}T${inputHourInit}`,
       end: `${inputDateEnd}T${inputHourEnd}`,
-      allDay: selectInfoTemp.allDay
+      allDay: (inputHourInit && inputHourEnd) ? false : true,
     };
     // post del evento
     try {
@@ -120,13 +118,9 @@ const Calendar = () => {
       };
       await saveCalendar({ payload })
       toast.success("Evento creado correctamente");
-      console.log("exito entro")
     } catch (e) {
-      console.log("error")
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
-    // seteo en el calendario
-    calendarApi.addEvent(newEvent);
     // seteo del estado
     setCurrentEvents([...currentEvents, newEvent]);
     setInputDescription("");
@@ -135,15 +129,15 @@ const Calendar = () => {
     setInputHourEnd("");
     setInputDateInit("");
     setInputHourInit("");
+
+    // seteo en el calendario
+    calendarApi.addEvent(newEvent);
   }
 
   useEffect(() => {
-    console.log(currentEvents.length === 0)
     const getDataCalendar = async () => {
-      console.log('iffff')
       const { data, isLoading: loading } = await getCalendar();
       const allEvents = Object.values(data).flat().filter(elemento => elemento !== null);
-      console.log(allEvents, "datos")
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
           id: eventData.id || index,
@@ -155,10 +149,7 @@ const Calendar = () => {
           allDay: eventData.dia_entero || false
         }
       });
-      console.log(allCurrentEventsTemp, "actualizado")
-
       setCurrentEvents(allCurrentEventsTemp);
-
     }
     if (currentEvents.length === 0) {
       getDataCalendar();
@@ -167,15 +158,15 @@ const Calendar = () => {
   }, [])
 
   return (
-    <div className='demo-app'>
-      <div className='demo-app-main'>
+    <div className={calendarSmall ? 'CalendarSmall' : ''}>
+      <div className={calendarSmall ? 'CalendarSmall' : ''}>
         <FullCalendar
           locale={esLocale}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next',
             center: 'title',
-            right: 'today'
+            right: calendarSmall ? 'today' : 'dayGridMonth,timeGridWeek,timeGridDay',
           }}
           initialView='dayGridMonth'
           editable={true}
@@ -234,7 +225,7 @@ const Calendar = () => {
             onChange={(e) => { setInputHourEnd(e.target.value) }}
           />
           <button onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
-          
+
           <button onClick={() => { handleClose() }} >Cancelar</button>
         </div>
       </Modal>

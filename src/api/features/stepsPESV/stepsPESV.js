@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const stepsPESVSlice = createSlice({
     name: 'stepsPESV',
-    initialState: {report:null},
+    initialState: {step:null},
     
     reducers:{
         setSteps: (state, action) => {

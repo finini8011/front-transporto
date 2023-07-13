@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import CardItem from "../Cards/CardItem";
 
 const Card = ({ data, numberCard, onClick }) => {
   const fases = [
@@ -86,9 +85,6 @@ const Card = ({ data, numberCard, onClick }) => {
           {data.state? data.state :<span>Cargando</span>}
         </span>
       </div>
-      {/*   <div className="min-h-[5rem] px-5 flex items-center flex-col justify-center gap-1">
-        <CardItem text={numberCard + 1} stepNumber={data.step} />
-      </div> */}
     </div>
   );
 };

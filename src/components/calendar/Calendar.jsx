@@ -12,6 +12,7 @@ import {
   useSaveCalendarQuestionMutation
 } from '../../api/services/calendar/calendarApiSlice';
 import moment from 'moment';
+import { ListTags } from '../../constants/ListTags';
 import "./Calendar.css";
 
 
@@ -20,6 +21,7 @@ const Calendar = ({ calendarSmall }) => {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
+  
 
   //states inputs
   const [inputTitle, setInputTitle] = useState();
@@ -81,6 +83,15 @@ const Calendar = ({ calendarSmall }) => {
       </>
     )
   }
+  //funtion tags
+ 
+
+  const handleClickTags = (subStep) => {
+    setTags((prevArray) => [...prevArray, subStep]);
+  }
+  const handleClickTagsDelet = (subStep) => {
+    setTags((prevArray) => prevArray.filter((item) => item !== subStep));
+  }
 
   // save event 
   const saveEvent = async () => {
@@ -92,7 +103,7 @@ const Calendar = ({ calendarSmall }) => {
       id: createEventId(),
       title: inputTitle,
       description: inputDescription,
-      tag: ["1.1", "1.2", "1,3"],
+      tag: tags,
       start: `${inputDateInit}T${inputHourInit}`,
       end: `${inputDateInit}T${inputHourEnd}`,
       allDay: (inputHourInit && inputHourEnd) ? false : true,
@@ -119,12 +130,13 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd("");
     setInputDateInit("");
     setInputHourInit("");
+    setTags("");
 
     // seteo en el calendario
     calendarApi.addEvent(newEvent);
   }
 
-//data get start
+  //data get start
   useEffect(() => {
     const getDataCalendar = async () => {
       const { data, isLoading: loading } = await getCalendar();
@@ -160,6 +172,7 @@ const Calendar = ({ calendarSmall }) => {
   }, [])
 
   return (
+
     <div className={calendarSmall ? 'CalendarSmall' : 'w-full CalendarBig'}>
       <div className={calendarSmall ? 'CalendarSmall' : 'w-full CalendarBig'}>
         <FullCalendar
@@ -203,7 +216,6 @@ const Calendar = ({ calendarSmall }) => {
             </div>
           ) : (
             <div className='bg-modal create-event'>
-              <h1>Cree un evento</h1>
               <p>titluo del evento</p>
               <input
                 type='text'
@@ -239,8 +251,22 @@ const Calendar = ({ calendarSmall }) => {
                 value={inputHourEnd}
                 onChange={(e) => { setInputHourEnd(e.target.value) }}
               />
+              <div className='tags bg-red'>
+                {ListTags.map((item, index) => (
+                  <div key={index}>
+                    {item.SubStep.map((subStep, subIndex) => (
+                      <button key={subIndex} onClick={() => handleClickTags(subStep)}>{subStep}</button>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <div className='mt-5'>
+                <p>Etiquetas</p>
+                {tags.map((subStep, subIndex) => (
+                  <button key={subIndex} onClick={() => handleClickTagsDelet(subStep)}>{subStep}</button>
+                ))}
+              </div>
               <button onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
-
               <button onClick={() => { handleClose() }} >Cancelar</button>
             </div>
           )}

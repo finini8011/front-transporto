@@ -232,7 +232,7 @@ const Calendar = ({ calendarSmall }) => {
                     type='text'
                     name="titulo"
                     className='w-11/12 rounded-md border-zinc-800'
-                    placeholder='title'
+                    placeholder='titulo'
                     value={inputTitle}
                     onChange={(e) => { setInputTitle(e.target.value) }}
                     required
@@ -274,9 +274,9 @@ const Calendar = ({ calendarSmall }) => {
                 </div>
               </div>
               <div className='w-full'>
-                <p className='textModal'>Descripcion</p>
+                <p className='textModal'>Descripción</p>
                 <textarea
-                  placeholder='description'
+                  placeholder='descripción'
                   className='w-full rounded-md border-zinc-800'
                   value={inputDescription}
                   maxlength="50"
@@ -305,7 +305,7 @@ const Calendar = ({ calendarSmall }) => {
               </div>
               <div className='buttonfooter-container'>
                 <button className='buttonfooter' onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
-                <button className='buttonfooter' onClick={() => { handleClose() }} >Cancelar</button>
+                <button className='buttonfooter' onClick={() => { handleClose(); setTags([]) }} >Cancelar</button>
               </div>
             </div>
           )}

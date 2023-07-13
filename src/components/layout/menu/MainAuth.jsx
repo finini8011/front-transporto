@@ -492,8 +492,8 @@ const MainAuth = () => {
               )}
             </ListItemButton>
             <ListItemButton
-              onClick={() => handleNavigate("/calendario")}
-              className={`flex gap-2 ${currentPage === "/calendario" && "active"
+              onClick={() => handleNavigate("/calendar")}
+              className={`flex gap-2 ${currentPage === "/calendar" && "active"
                 }`}
               sx={{ justifyContent: "center" }}
             >

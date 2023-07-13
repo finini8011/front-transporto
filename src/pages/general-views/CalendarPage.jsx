@@ -1,12 +1,12 @@
 import React from "react";
 import Calendar from "../../components/calendar/Calendar";
 
-const Calendario = () => {
+const CalendarPage = () => {
   return (
-    <div>
+    <div className="w-10/12 m-auto">
       <Calendar />
     </div>
   );
 };
 
-export default Calendario 
+export default CalendarPage 

@@ -40,6 +40,12 @@ export const apiSlice = createApi({
       }),
       // invalidatesTags: ["Auth"],
     }),
+    logOutUser: builder.mutation({
+      query: () => ({
+        url: `/logout`,
+        method: "POST",
+      }),
+    }),
     // verifiedCredentials: builder.mutation({
     //   query: (data) => ({
     //     url: `${urlAuth}/test/userCredentials/isVerified`,
@@ -54,5 +60,6 @@ export const apiSlice = createApi({
 export const {
   useLoginUserMutation,
   useCreateUserMutation,
+  useLogOutUserMutation,
   // useVerifiedCredentialsMutation,
 } = apiSlice;

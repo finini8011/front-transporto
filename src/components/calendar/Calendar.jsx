@@ -21,7 +21,7 @@ const Calendar = ({ calendarSmall }) => {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
-  
+
 
   //states inputs
   const [inputTitle, setInputTitle] = useState();
@@ -84,7 +84,7 @@ const Calendar = ({ calendarSmall }) => {
     )
   }
   //funtion tags
- 
+
 
   const handleClickTags = (subStep) => {
     setTags((prevArray) => [...prevArray, subStep]);
@@ -216,58 +216,88 @@ const Calendar = ({ calendarSmall }) => {
             </div>
           ) : (
             <div className='bg-modal create-event'>
-              <p>titluo del evento</p>
-              <input
-                type='text'
-                placeholder='title'
-                value={inputTitle}
-                onChange={(e) => { setInputTitle(e.target.value) }}
-              />
-              <p>descripcion</p>
-              <input
-                type='text'
-                placeholder='description'
-                value={inputDescription}
-                onChange={(e) => { setInputDescription(e.target.value) }}
-              />
-              <p>fecha</p>
-              <input
-                type='date'
-                placeholder='fecha'
-                value={inputDateInit}
-                onChange={(e) => { setInputDateInit(e.target.value) }}
-              />
-              <p>hora inicial</p>
-              <input
-                type='time'
-                placeholder='hora Inicial'
-                value={inputHourInit}
-                onChange={(e) => { setInputHourInit(e.target.value) }}
-              />
-              <p>hora final</p>
-              <input
-                type='time'
-                placeholder='hora final'
-                value={inputHourEnd}
-                onChange={(e) => { setInputHourEnd(e.target.value) }}
-              />
-              <div className='tags bg-red'>
-                {ListTags.map((item, index) => (
-                  <div key={index}>
-                    {item.SubStep.map((subStep, subIndex) => (
-                      <button key={subIndex} onClick={() => handleClickTags(subStep)}>{subStep}</button>
-                    ))}
+              <p>Creando evento</p>
+              <div className='modal-colum'>
+                <div className='w-2/4'>
+                  <p className='textModal'>Titulo</p>
+                  <input
+                    type='text'
+                    name="titulo"
+                    className='w-11/12 rounded-md border-zinc-800'
+                    placeholder='title'
+                    value={inputTitle}
+                    onChange={(e) => { setInputTitle(e.target.value) }}
+                  />
+                </div>
+                <div className='w-2/4'>
+                  <div>
+                    <p className='textModal'>Fecha</p>
+                    <input
+                      type='date'
+                      className='w-11/12 rounded-md border-zinc-800'
+                      placeholder='fecha'
+                      value={inputDateInit}
+                      onChange={(e) => { setInputDateInit(e.target.value) }}
+                    />
                   </div>
+                </div>
+              </div>
+              <div className='modal-colum'>
+                <div className='w-2/4'>
+                  <p className='textModal'>Hora inicial</p>
+                  <input
+                    type='time'
+                    className='w-11/12 rounded-md border-zinc-800'
+                    placeholder='hora Inicial'
+                    value={inputHourInit}
+                    onChange={(e) => { setInputHourInit(e.target.value) }}
+                  />
+                </div>
+                <div className='w-2/4'>
+                  <p className='textModal'>Hora final</p>
+                  <input
+                    type='time'
+                    className='w-11/12 rounded-md border-zinc-800'
+                    placeholder='hora final'
+                    value={inputHourEnd}
+                    onChange={(e) => { setInputHourEnd(e.target.value) }}
+                  />
+                </div>
+              </div>
+              <div className='w-full'>
+                <p className='textModal'>Descripcion</p>
+                <textarea
+                  placeholder='description'
+                  className='w-full rounded-md border-zinc-800'
+                  value={inputDescription}
+                  maxlength="50"
+                  rows="2"
+                  onChange={(e) => { setInputDescription(e.target.value) }}
+                />
+              </div>
+              <p className='textModal'>Etiquetas</p>
+              <div className='tags shadow-2xl'>
+                {ListTags.map((item, index) => (
+                  item.SubStep.map((subStep, subIndex) => (
+                    <button
+                      className='buttonTags mb-2'
+                      key={subIndex}
+                      onClick={() => handleClickTags(subStep)}>{subStep}</button>
+                  ))
                 ))}
               </div>
-              <div className='mt-5'>
-                <p>Etiquetas</p>
+              <div className='mt-3'>
                 {tags.map((subStep, subIndex) => (
-                  <button key={subIndex} onClick={() => handleClickTagsDelet(subStep)}>{subStep}</button>
+                  <button
+                    className='buttonTags'
+                    key={subIndex}
+                    onClick={() => handleClickTagsDelet(subStep)}>{subStep} X</button>
                 ))}
               </div>
-              <button onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
-              <button onClick={() => { handleClose() }} >Cancelar</button>
+              <div className='buttonfooter-container'>
+                <button className='buttonfooter' onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
+                <button className='buttonfooter' onClick={() => { handleClose() }} >Cancelar</button>
+              </div>
             </div>
           )}
       </Modal>

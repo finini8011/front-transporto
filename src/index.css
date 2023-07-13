@@ -98,9 +98,10 @@ body {
 
 .bg-modal{
   display: block;
-  background-color: papayawhip;
+  background-color: #ededee;
   height: 70vh;
-  width: 600px;
+  width: 500px;
   margin: auto;
   margin-top: 20vh;
+  padding: 25px;
 }

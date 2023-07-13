@@ -23,7 +23,7 @@ const CalendarList = () => {
   }
   // edicion
   const handleEventClick = (info) => {
-    navigate("/calendario");
+    navigate("/calendar");
   };
 
   // detector de cambios de eventos

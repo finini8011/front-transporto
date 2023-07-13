@@ -130,8 +130,6 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd("");
     setInputDateInit("");
     setInputHourInit("");
-    setTags("");
-
     // seteo en el calendario
     calendarApi.addEvent(newEvent);
   }

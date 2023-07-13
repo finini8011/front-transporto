@@ -11,7 +11,7 @@ const Step4 = () => {
         width={900}
         alt="icon"
         className="m-auto"
-      />
+      />  
     </div>
   );
 };

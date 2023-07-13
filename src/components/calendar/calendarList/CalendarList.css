@@ -1,0 +1,61 @@
+.CalendarList .fc-col-header{
+  width: 209px !important;
+}
+.CalendarList .fc-scrollgrid-sync-table{
+  width: 209px !important;
+}
+
+.CalendarList .fc-view-harness{
+  width: 209px !important;
+}
+
+.CalendarList .fc-toolbar.fc-header-toolbar{
+  width: 209px !important;
+  justify-content: space-around !important;
+}
+.CalendarList .fc-list-day-cushion{
+width: 209px !important;
+}
+
+.CalendarList .fc-list-day-text{
+  font-size: 0.7em;
+}
+
+.CalendarList .fc-list-day-side-text{
+  font-size: 0.7em ;
+}
+
+.CalendarList .fc-theme-standard .fc-list-day-cushion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.CalendarList .fc-list-event-time{
+  font-size: 0.6em;
+}
+
+.CalendarList .fc-list-event-title{
+  font-size: 0.6em;
+}
+
+.CalendarList .fc td, .fc th {
+   vertical-align: unset !important;
+}
+
+.CalendarList .fc .fc-list-event-dot {
+  border: calc(var(--fc-list-event-dot-width)/3) solid var(--fc-event-border-color);
+  border-radius: calc(var(--fc-list-event-dot-width)/1);
+}
+
+.CalendarList .fc-toolbar-title{
+  font-size: 0.9em !important;
+  font-weight: bold;
+}
+
+.CalendarList .fc-button.fc-button-primary {
+  font-size: 0.50em !important;
+}
+
+.redersTextList{
+font-size:0.9em;
+}

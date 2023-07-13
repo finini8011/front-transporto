@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const statesPESVSlice = createSlice({
     name: 'statesPESV',
-    initialState: {report:null},
+    initialState: {statePESV:null},
     
     reducers:{
         setStates: (state, action) => {

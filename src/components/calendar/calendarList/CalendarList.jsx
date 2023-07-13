@@ -59,7 +59,7 @@ const CalendarList = () => {
       <>
         <p className='redersTextList'>{eventInfo.timeText}</p>
         <p className='redersTextList'>{eventInfo.event.extendedProps.owner}</p>
-        <p className='redersTextList'>Titulo: {eventInfo.event.title}</p>
+        <p className='redersTextList'>{eventInfo.event.title}</p>
       </>
 
     )

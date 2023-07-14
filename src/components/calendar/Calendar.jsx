@@ -148,7 +148,7 @@ const Calendar = ({ calendarSmall }) => {
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
           id: eventData.id || index,
-          title: eventData.titulo,
+          title: eventData.titulo || "Sin Nombre",
           description: eventData.descripcion,
           tag: eventData.etiqueta,
           start: eventData.fecha_inicial || eventData.hora_inicial,

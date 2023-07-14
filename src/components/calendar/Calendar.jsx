@@ -209,9 +209,9 @@ const Calendar = ({ calendarSmall }) => {
               <p className='redersTextListModal'>Descripcion:</p>
               <span> {showCurrentEditEvent?.extendedProps.description}</span>
               <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
-              <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '')}</span>
+              <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
               <p className='redersTextListModal'> Fecha y Hora Final:</p>
-              <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '')}</span>
+              <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
               <p className='redersTextListModal'>Etiquetas:</p>
               <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
               <div>

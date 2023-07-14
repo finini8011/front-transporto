@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
 import Modal from '@mui/material/Modal';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -7,6 +8,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import { createEventId } from '../../utils/event-utils';
+import { selectCurrentUser } from '../../api/features/auth/authSlice';
 import {
   useLazyGetDataCalendarQuery,
   useSaveCalendarQuestionMutation
@@ -19,6 +21,8 @@ import "./Calendar.css";
 
 const Calendar = ({ calendarSmall }) => {
 
+
+  const user = useSelector(selectCurrentUser);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
@@ -44,6 +48,8 @@ const Calendar = ({ calendarSmall }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => { setOpen(false); setIsEdit(false) };
+
+
 
   // create
   const handleDateSelect = (selectInfo) => {
@@ -148,7 +154,7 @@ const Calendar = ({ calendarSmall }) => {
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
           id: eventData.id || index,
-          title: eventData.titulo || "Sin Nombre",
+          title: eventData.titulo || "Sin Titulo",
           description: eventData.descripcion,
           tag: eventData.etiqueta,
           start: eventData.fecha_inicial || eventData.hora_inicial,
@@ -203,7 +209,10 @@ const Calendar = ({ calendarSmall }) => {
             <div className='bg-modal edit-event'>
               <h1 className='text-xl text-blue-500 mb-2'>Evento Agendado</h1>
               <p className='redersTextListModal'>Usuario:</p>
-              <span>{showCurrentEditEvent?.extendedProps.owner}</span>
+              {showCurrentEditEvent?.extendedProps.owner  ?  (
+                 <span>{showCurrentEditEvent?.extendedProps.owner}</span>
+                 ) : ( 
+                 <span>{user.name}</span>)}
               <p className='redersTextListModal'>Titulo:</p>
               <span>{showCurrentEditEvent?.title}</span>
               <p className='redersTextListModal'>Descripcion:</p>

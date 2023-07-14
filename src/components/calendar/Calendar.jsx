@@ -16,6 +16,7 @@ import { ListTags } from '../../constants/ListTags';
 import "./Calendar.css";
 
 
+
 const Calendar = ({ calendarSmall }) => {
 
   const [currentEvents, setCurrentEvents] = useState([]);
@@ -47,11 +48,8 @@ const Calendar = ({ calendarSmall }) => {
   // create
   const handleDateSelect = (selectInfo) => {
     setSelectInfoTemp(selectInfo)
-
     const endDateTime = moment(selectInfo.end);
-    const endDateTemp = endDateTime.format('YYYY-MM-DD');
     const endHourTemp = endDateTime.format('HH:mm');
-
 
     const initDateTime = moment(selectInfo.start);
     const initDateTemp = initDateTime.format('YYYY-MM-DD');
@@ -84,8 +82,6 @@ const Calendar = ({ calendarSmall }) => {
     )
   }
   //funtion tags
-
-
   const handleClickTags = (subStep) => {
     setTags((prevArray) => [...prevArray, subStep]);
   }
@@ -130,8 +126,6 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd("");
     setInputDateInit("");
     setInputHourInit("");
-    setTags("");
-
     // seteo en el calendario
     calendarApi.addEvent(newEvent);
   }
@@ -165,11 +159,13 @@ const Calendar = ({ calendarSmall }) => {
       });
       setCurrentEvents(allCurrentEventsTemp);
     }
-    if (currentEvents.length === 0) {
+    getDataCalendar();
+/*     if (currentEvents.length === 0) {
       getDataCalendar();
-    }
+    } */
 
   }, [])
+
 
   return (
 
@@ -213,11 +209,11 @@ const Calendar = ({ calendarSmall }) => {
               <p className='redersTextListModal'>Descripcion:</p>
               <span> {showCurrentEditEvent?.extendedProps.description}</span>
               <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
-              <span>{showCurrentEditEvent?._instance.range.start.toLocaleString()}</span>
+              <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '')}</span>
               <p className='redersTextListModal'> Fecha y Hora Final:</p>
-              <span>{showCurrentEditEvent?._instance.range.end.toLocaleString()}</span>
+              <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '')}</span>
               <p className='redersTextListModal'>Etiquetas:</p>
-              <span>{showCurrentEditEvent?.extendedProps.tag}</span>
+              <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
               <div>
                 <button className='buttonfooter mt-5' onClick={() => { handleClose() }} >Cerrar</button>
               </div>
@@ -279,7 +275,6 @@ const Calendar = ({ calendarSmall }) => {
                   placeholder='descripción'
                   className='w-full rounded-md border-zinc-800'
                   value={inputDescription}
-                  maxlength="50"
                   rows="2"
                   onChange={(e) => { setInputDescription(e.target.value) }}
                 />

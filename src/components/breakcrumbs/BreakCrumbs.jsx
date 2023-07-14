@@ -135,6 +135,12 @@ const BreakCrumbs = ({ handleNavigate }) => {
       nextLink = "/list-verification"
       prevButton = `paso ${parseInt(pieceCrumbs[2])-1}`
       nextButton= "lista de chequeo"  
+    }
+    else if (path === "/calendar"){
+      prevLink = `/home`
+      nextLink = "/guide"
+      prevButton = "Inicio"
+      nextButton= "Guía rápida" 
     } 
 
     return (

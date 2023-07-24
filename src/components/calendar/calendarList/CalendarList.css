@@ -31,7 +31,7 @@ width: 209px !important;
 }
 
 .CalendarList .fc-list-event-time{
-  font-size: 0.6em;
+  font-size: 0.7em ;
 }
 
 .CalendarList .fc-list-event-title{
@@ -57,5 +57,5 @@ width: 209px !important;
 }
 
 .redersTextList{
-font-size:0.9em;
+font-size:1em;
 }

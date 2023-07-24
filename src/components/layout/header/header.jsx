@@ -39,7 +39,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
           <h3 className="text-xl">
             {user.compania?.razon_social
               ? user.compania.razon_social
-              : "Texto por definir"}
+              : "Empresa sin registrar" }{" "}
             - {user.name}{" "}
           </h3>
           <p className="text-sm color-fifth">{date} </p>

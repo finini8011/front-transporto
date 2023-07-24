@@ -74,6 +74,7 @@ const CalendarList = () => {
       });
       setCurrentEvents(allCurrentEventsTemp);
     }
+    getDataCalendar();
 /*     if (currentEvents.length === 0) {
       getDataCalendar();
     } */

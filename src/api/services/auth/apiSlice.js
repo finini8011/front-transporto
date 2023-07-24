@@ -7,9 +7,12 @@ export const apiSlice = createApi({
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.authState.token; //posiblemente se tenga que cambiar donde se encuentre el token
       // If we have a token set in state, let's assume that we should be passing it.
+      console.log(token,"primero");
+
       if (token) {
         headers.set("authorization", `${token}`);
       }
+      console.log(token,"afuera")
 
       return headers;
     },

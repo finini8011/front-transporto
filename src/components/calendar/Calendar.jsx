@@ -75,7 +75,7 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd(endHourTemp);
     setInputHourInit(initHourTemp);
     setInputDateInit(initDateTemp);
-
+  
     if (selectInfo.startStr >= formattedDate) {
       handleOpen();
     }
@@ -85,6 +85,12 @@ const Calendar = ({ calendarSmall }) => {
     handleOpen();
     setIsEdit(true);
     setShowCurrentEditEvent(info.event);
+    setInputTitle(info.event?.title);
+    setInputDescription(info.event?.extendedProps.description);
+    setInputDateInit(info.event?._instance.range.start.toISOString().replace(/T.*$/, ''));
+    setInputHourInit(info.event?._instance.range.start.toISOString().split("T")[1].replace(/.000Z*$/, ''));
+    setInputHourEnd(info.event?._instance.range.end.toISOString().split("T")[1].replace(/.000Z*$/, ''));
+    setTags(info.event?.extendedProps.tag);
   };
 
   // event change detector
@@ -109,11 +115,15 @@ const Calendar = ({ calendarSmall }) => {
     setTags((prevArray) => prevArray.filter((item) => item !== subStep));
   }
 
+  const EditSaveEvent = () =>{
+    console.log("editando")
+  }
+
   // save event 
   const saveEvent = async () => {
     //prepara calendario
-    let calendarApi = selectInfoTemp.view.calendar
-    calendarApi.unselect() // clear date selection
+    let calendarApi = selectInfoTemp?.view.calendar 
+    calendarApi?.unselect() // clear date selection
     // composicion del objeto evento
     const newEvent = {
       id: createEventId(),
@@ -157,11 +167,10 @@ const Calendar = ({ calendarSmall }) => {
       const allEventsNew = Object.values(data);
       const allEventsKeys = Object.keys(data);
       const allEventsNewArray = allEventsNew.map((arreglo, index) => {
-        const newArray =
-          arreglo.map((eventData) => {
-            const eventDataTemp = { ...eventData, owner: allEventsKeys[index] };
-            return eventDataTemp;
-          })
+        const newArray = arreglo.map((eventData) => {
+          const eventDataTemp = { ...eventData, owner: allEventsKeys[index] };
+          return eventDataTemp;
+        })
         return newArray;
       })
       const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
@@ -179,7 +188,8 @@ const Calendar = ({ calendarSmall }) => {
       });
       setCurrentEvents(allCurrentEventsTemp);
     }
-    /*     getDataCalendar();
+    getDataCalendar();
+    /* 
          if (currentEvents.length === 0) {
           getDataCalendar();
         }  */
@@ -302,7 +312,7 @@ const Calendar = ({ calendarSmall }) => {
                   ))}
                 </div>
                 <div className='buttonfooter-container'>
-                  <button className='buttonfooter' onClick={() => { saveEvent(); handleClose(); setIsEditEvent(false) }} >Guardar</button>
+                  <button className='buttonfooter' onClick={() => { EditSaveEvent(); handleClose(); setIsEditEvent(false) }} >Guardar</button>
                   <button className='buttonfooter' onClick={() => { setTags([]); setIsEditEvent(false) }} >Cancelar</button>
                 </div>
               </div>
@@ -310,7 +320,7 @@ const Calendar = ({ calendarSmall }) => {
               <div className='bg-modal edit-event'>
                 {!calendarSmall &&
                   <button
-                    className='border-2 border-blue-200 w-6 h-6 '
+                    className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
                     key={"edit"}
                     onClick={() => setIsEditEvent(true)}>
                     <FontAwesomeIcon icon={faPencil} className=" w-3 h-3 block  m-auto " />

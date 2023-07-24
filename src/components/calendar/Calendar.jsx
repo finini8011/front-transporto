@@ -22,6 +22,14 @@ import "./Calendar.css";
 const Calendar = ({ calendarSmall }) => {
 
 
+  //date current day
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+
   const user = useSelector(selectCurrentUser);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
@@ -64,7 +72,10 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd(endHourTemp);
     setInputHourInit(initHourTemp);
     setInputDateInit(initDateTemp);
-    handleOpen();
+
+    if(selectInfo.startStr >= formattedDate){
+      handleOpen();
+    }
   }
   // edit and view
   const handleEventClick = (info) => {
@@ -165,12 +176,13 @@ const Calendar = ({ calendarSmall }) => {
       });
       setCurrentEvents(allCurrentEventsTemp);
     }
-    getDataCalendar();
-/*     if (currentEvents.length === 0) {
+/*     getDataCalendar();
+     if (currentEvents.length === 0) {
       getDataCalendar();
-    } */
+    }  */
 
   }, [])
+
 
 
   return (

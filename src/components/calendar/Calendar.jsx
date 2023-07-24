@@ -16,10 +16,20 @@ import {
 import moment from 'moment';
 import { ListTags } from '../../constants/ListTags';
 import "./Calendar.css";
+import { faPenToSquare, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
 const Calendar = ({ calendarSmall }) => {
+
+
+  //date current day
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
 
 
   const user = useSelector(selectCurrentUser);
@@ -38,6 +48,7 @@ const Calendar = ({ calendarSmall }) => {
 
   //edit states
   const [isEdit, setIsEdit] = useState(false);
+  const [isEditEvent, setIsEditEvent] = useState(false);
   const [showCurrentEditEvent, setShowCurrentEditEvent] = useState({});
 
   //get y post data
@@ -64,7 +75,10 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd(endHourTemp);
     setInputHourInit(initHourTemp);
     setInputDateInit(initDateTemp);
-    handleOpen();
+
+    if (selectInfo.startStr >= formattedDate) {
+      handleOpen();
+    }
   }
   // edit and view
   const handleEventClick = (info) => {
@@ -165,12 +179,13 @@ const Calendar = ({ calendarSmall }) => {
       });
       setCurrentEvents(allCurrentEventsTemp);
     }
-    getDataCalendar();
-/*     if (currentEvents.length === 0) {
-      getDataCalendar();
-    } */
+    /*     getDataCalendar();
+         if (currentEvents.length === 0) {
+          getDataCalendar();
+        }  */
 
   }, [])
+
 
 
   return (
@@ -181,7 +196,7 @@ const Calendar = ({ calendarSmall }) => {
           locale={esLocale}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
-            left: 'prev,next',
+            left: calendarSmall ? '' : 'prev,next,today',
             center: 'title',
             right: calendarSmall ? 'today' : 'dayGridMonth,timeGridWeek,timeGridDay',
           }}
@@ -206,27 +221,121 @@ const Calendar = ({ calendarSmall }) => {
       >
         {isEdit ?
           (
-            <div className='bg-modal edit-event'>
-              <h1 className='text-xl text-blue-500 mb-2'>Evento Agendado</h1>
-              <p className='redersTextListModal'>Usuario:</p>
-              {showCurrentEditEvent?.extendedProps.owner  ?  (
-                 <span>{showCurrentEditEvent?.extendedProps.owner}</span>
-                 ) : ( 
-                 <span>{user.name}</span>)}
-              <p className='redersTextListModal'>Titulo:</p>
-              <span>{showCurrentEditEvent?.title}</span>
-              <p className='redersTextListModal'>Descripcion:</p>
-              <span> {showCurrentEditEvent?.extendedProps.description}</span>
-              <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
-              <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
-              <p className='redersTextListModal'> Fecha y Hora Final:</p>
-              <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
-              <p className='redersTextListModal'>Etiquetas:</p>
-              <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
-              <div>
-                <button className='buttonfooter mt-5' onClick={() => { handleClose() }} >Cerrar</button>
+            isEditEvent ? (
+              <div className='bg-modal edit-event'>
+                <p className='text-xl text-blue-500 mb-2'>Editando evento</p>
+                <div className='modal-colum'>
+                  <div className='w-2/4'>
+                    <p className='textModal'>Titulo</p>
+                    <input
+                      type='text'
+                      name="titulo"
+                      className='w-11/12 rounded-md border-zinc-800'
+                      placeholder='titulo'
+                      value={inputTitle}
+                      onChange={(e) => { setInputTitle(e.target.value) }}
+                      required
+                    />
+                  </div>
+                  <div className='w-2/4'>
+                    <div>
+                      <p className='textModal'>Fecha</p>
+                      <input
+                        type='date'
+                        className='w-11/12 rounded-md border-zinc-800'
+                        placeholder='fecha'
+                        value={inputDateInit}
+                        onChange={(e) => { setInputDateInit(e.target.value) }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className='modal-colum'>
+                  <div className='w-2/4'>
+                    <p className='textModal'>Hora inicial</p>
+                    <input
+                      type='time'
+                      className='w-11/12 rounded-md border-zinc-800'
+                      placeholder='hora Inicial'
+                      value={inputHourInit}
+                      onChange={(e) => { setInputHourInit(e.target.value) }}
+                    />
+                  </div>
+                  <div className='w-2/4'>
+                    <p className='textModal'>Hora final</p>
+                    <input
+                      type='time'
+                      className='w-11/12 rounded-md border-zinc-800'
+                      placeholder='hora final'
+                      value={inputHourEnd}
+                      onChange={(e) => { setInputHourEnd(e.target.value) }}
+                    />
+                  </div>
+                </div>
+                <div className='w-full'>
+                  <p className='textModal'>Descripción</p>
+                  <textarea
+                    placeholder='descripción'
+                    className='w-full rounded-md border-zinc-800'
+                    value={inputDescription}
+                    rows="2"
+                    onChange={(e) => { setInputDescription(e.target.value) }}
+                  />
+                </div>
+                <p className='textModal'>Etiquetas</p>
+                <div className='tags shadow-2xl'>
+                  {ListTags.map((item, index) => (
+                    item.SubStep.map((subStep, subIndex) => (
+                      <button
+                        className='buttonTags mb-2'
+                        key={subIndex}
+                        onClick={() => handleClickTags(subStep)}>{subStep}</button>
+                    ))
+                  ))}
+                </div>
+                <div className='mt-3'>
+                  {tags.map((subStep, subIndex) => (
+                    <button
+                      className='buttonTags'
+                      key={subIndex}
+                      onClick={() => handleClickTagsDelet(subStep)}>{subStep} X</button>
+                  ))}
+                </div>
+                <div className='buttonfooter-container'>
+                  <button className='buttonfooter' onClick={() => { saveEvent(); handleClose(); setIsEditEvent(false) }} >Guardar</button>
+                  <button className='buttonfooter' onClick={() => { setTags([]); setIsEditEvent(false) }} >Cancelar</button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className='bg-modal edit-event'>
+                {!calendarSmall &&
+                  <button
+                    className='border-2 border-blue-200 w-6 h-6 '
+                    key={"edit"}
+                    onClick={() => setIsEditEvent(true)}>
+                    <FontAwesomeIcon icon={faPencil} className=" w-3 h-3 block  m-auto " />
+                  </button>}
+                <h1 className='text-xl text-blue-500 mb-1'>Evento Agendado</h1>
+                <p className='redersTextListModal'>Usuario:</p>
+                {showCurrentEditEvent?.extendedProps.owner ? (
+                  <span>{showCurrentEditEvent?.extendedProps.owner}</span>
+                ) : (
+                  <span>{user.name}</span>)}
+                <p className='redersTextListModal'>Titulo:</p>
+                <span>{showCurrentEditEvent?.title}</span>
+                <p className='redersTextListModal'>Descripcion:</p>
+                <span> {showCurrentEditEvent?.extendedProps.description}</span>
+                <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
+                <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
+                <p className='redersTextListModal'> Fecha y Hora Final:</p>
+                <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
+                <p className='redersTextListModal'>Etiquetas:</p>
+                <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
+                <div>
+                  <button className='buttonfooter mt-5' onClick={() => { handleClose() }} >Cerrar</button>
+                </div>
+              </div>
+            )
           ) : (
             <div className='bg-modal create-event'>
               <p className='text-xl text-blue-500 mb-2'>Creando evento</p>

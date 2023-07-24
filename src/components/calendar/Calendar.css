@@ -21,7 +21,7 @@
 }
 
 .CalendarSmall .fc-daygrid-day-number {
-  font-size: 0.5em !important;
+  font-size: 0.6em !important;
 }
 
 .CalendarSmall .fc-day-today {
@@ -38,6 +38,7 @@
   display: inline-block !important;
   height: 0px !important;
   width: 0px !important;
+  margin-top: -1px !important;
 }
 
 .CalendarSmall .fc-direction-ltr .fc-daygrid-event.fc-event-end {

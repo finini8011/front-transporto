@@ -10,6 +10,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import { createEventId } from '../../utils/event-utils';
 import { selectCurrentUser } from '../../api/features/auth/authSlice';
 import {
+  useEditCalendarQuestionMutation,
   useLazyGetDataCalendarQuery,
   useSaveCalendarQuestionMutation
 } from '../../api/services/calendar/calendarApiSlice';
@@ -45,15 +46,18 @@ const Calendar = ({ calendarSmall }) => {
   const [inputHourEnd, setInputHourEnd] = useState();
   const [inputDateInit, setInputDateInit] = useState();
   const [inputHourInit, setInputHourInit] = useState();
+  const [inputIdEvent, setInputIdEvent] = useState();
 
   //edit states
   const [isEdit, setIsEdit] = useState(false);
   const [isEditEvent, setIsEditEvent] = useState(false);
   const [showCurrentEditEvent, setShowCurrentEditEvent] = useState({});
 
-  //get y post data
+  //services calendar
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
+  const [editCalendar] = useEditCalendarQuestionMutation();
+
 
   //modals funtions and states
   const [open, setOpen] = useState(false);
@@ -85,6 +89,7 @@ const Calendar = ({ calendarSmall }) => {
     handleOpen();
     setIsEdit(true);
     setShowCurrentEditEvent(info.event);
+    setInputIdEvent(info.event?.id);
     setInputTitle(info.event?.title);
     setInputDescription(info.event?.extendedProps.description);
     setInputDateInit(info.event?._instance.range.start.toISOString().replace(/T.*$/, ''));
@@ -115,8 +120,47 @@ const Calendar = ({ calendarSmall }) => {
     setTags((prevArray) => prevArray.filter((item) => item !== subStep));
   }
 
-  const EditSaveEvent = () => {
-    console.log("editando")
+  // edit event
+  const EditSaveEvent = async () => {
+    //prepara calendario
+    let calendarApi = selectInfoTemp?.view.calendar
+    calendarApi?.unselect() // clear date selection
+    // composicion del objeto evento
+    const newEvent = {
+      id: inputIdEvent,
+      title: inputTitle,
+      description: inputDescription,
+      tag: tags,
+      start: `${inputDateInit}T${inputHourInit}`,
+      end: `${inputDateInit}T${inputHourEnd}`,
+      allDay: (inputHourInit && inputHourEnd) ? false : true,
+    };
+    // post del evento
+    try {
+      const payload = {
+        id: inputIdEvent,
+        titulo: newEvent.title,
+        etiqueta: newEvent.tag,
+        fecha_final: newEvent.end,
+        descripcion: newEvent.description,
+        fecha_inicial: newEvent.start,
+        dia_entero: newEvent.allDay,
+      };
+      await editCalendar({ payload })
+      toast.success("Evento editado correctamente");
+    } catch (e) {
+      return toast.error("Hubo un error, vuelve a intentarlo");
+    }
+    // seteo del estado
+    setCurrentEvents([...currentEvents, newEvent]);
+    setInputDescription("");
+    setInputTitle("");
+    setInputHourEnd("");
+    setInputDateInit("");
+    setInputHourInit("");
+    setInputIdEvent();
+    // seteo en el calendario
+    calendarApi.addEvent(newEvent);
   }
 
   // save event 
@@ -175,7 +219,7 @@ const Calendar = ({ calendarSmall }) => {
       const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
-          id: eventData.id || index,
+          id: eventData.id,
           title: eventData.titulo || "Sin Titulo",
           description: eventData.descripcion,
           tag: eventData.etiqueta,
@@ -311,8 +355,26 @@ const Calendar = ({ calendarSmall }) => {
                   ))}
                 </div>
                 <div className='buttonfooter-container'>
-                  <button className='buttonfooter' onClick={() => { EditSaveEvent(); handleClose(); setIsEditEvent(false) }} >Guardar</button>
-                  <button className='buttonfooter' onClick={() => { setTags([]); setIsEditEvent(false) }} >Cancelar</button>
+                  <button className='buttonfooter' onClick={() => {
+                    EditSaveEvent();
+                    setIsEditEvent(false);
+                    setTimeout(() => {
+                      handleClose();
+                    }, 500);
+                  }} >Guardar</button>
+                  <button className='buttonfooter'
+                    onClick={() => {
+                      setInputIdEvent();
+                      setInputTitle();
+                      setInputDescription();
+                      setInputDateInit();
+                      setInputHourInit();
+                      setInputHourEnd;
+                      setTags([]);
+                      setIsEditEvent(false);
+                    }}>
+                    Cancelar
+                  </button>
                 </div>
               </div>
             ) : (
@@ -440,8 +502,26 @@ const Calendar = ({ calendarSmall }) => {
                 ))}
               </div>
               <div className='buttonfooter-container'>
-                <button className='buttonfooter' onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
-                <button className='buttonfooter' onClick={() => { handleClose(); setTags([]) }} >Cancelar</button>
+                <button className='buttonfooter' onClick={() => {
+                  saveEvent();
+                  setTimeout(() => {
+                    handleClose();
+                  }, 500);
+                }} >Guardar</button>
+                <button className='buttonfooter'
+                  onClick={() => {
+                    handleClose();
+                    setInputIdEvent();
+                    setInputTitle();
+                    setInputDescription();
+                    setInputDateInit();
+                    setInputHourInit();
+                    setInputHourEnd;
+                    setTags([]);
+                    setIsEditEvent(false);
+                  }}>
+                  Cancelar
+                </button>
               </div>
             </div>
           )}

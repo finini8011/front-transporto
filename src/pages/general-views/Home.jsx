@@ -19,7 +19,6 @@ const Home = () => {
   const {handleNavigate} = useOutletContext()
 
 
-  console.log(dataState)
   let resultCumple = 0;
   let parcialmente = 0;
   let arrayPesv = [];

@@ -136,7 +136,7 @@ const BreakCrumbs = ({ handleNavigate }) => {
       prevButton = `paso ${parseInt(pieceCrumbs[2])-1}`
       nextButton= "lista de chequeo"  
     }
-    else if (path === "/calendar"){
+    else if (path === "/calendar" || path === "/users"){
       prevLink = `/home`
       nextLink = "/guide"
       prevButton = "Inicio"

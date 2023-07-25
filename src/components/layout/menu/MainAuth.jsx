@@ -35,6 +35,7 @@ import {
   faArrowUpRightFromSquare,
   faPenToSquare,
   faVoteYea,
+  faUser
 } from "@fortawesome/free-solid-svg-icons";
 import "./MainAuth.css";
 import BreakCrumbs from "../../breakcrumbs/BreakCrumbs";
@@ -178,6 +179,11 @@ const MainAuth = () => {
       setVerifiedStepPageImprove(false);
     }
   }, [currentPage]);
+
+  useEffect(() => {
+    console.log(user)
+  }, [])
+  
 
   return (
     <div className="min-h-screen flex w-full relative">
@@ -510,6 +516,25 @@ const MainAuth = () => {
                 />
               )}
             </ListItemButton>
+            <ListItemButton
+              onClick={() => handleNavigate("/users")}
+              className={`flex gap-2 ${currentPage === "/users" && "active"
+                }`}
+              sx={{ justifyContent: "center" }}
+            >
+              <FontAwesomeIcon icon={faUser} className="w-5 h-5" />
+              {openMenu && (
+                <ListItemText
+                  primary="Usuarios"
+                  primaryTypographyProps={{
+                    component: "span",
+                    sx: {
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                />
+              )}
+            </ListItemButton>
           </List>
           <div className={`${openMenu ? "px-4" : "px-2"} text-white pb-4`}>
             <div
@@ -533,7 +558,7 @@ const MainAuth = () => {
         <div className="flex bg-white   ">
           <div className="p-6 min-w-[80%] flex-1">
             {
-              (currentPage !== "/guide" && currentPage !== "/register-company") && <BreakCrumbs handleNavigate={handleNavigate} />
+              (currentPage !== "/guide" && currentPage !== "/register-company" ) && <BreakCrumbs handleNavigate={handleNavigate} />
             }
 
             <Outlet context={{ handleNavigate }} />

@@ -86,7 +86,7 @@ const Users = () => {
         </div>
         {/* Esto debe ser una arreglo donde se hace un map y solo usas un input ya que asi seria escalable
         sugiero la const  dataCard donde la prop title es el numero del paso  */}
-        <div className="grid grid-cols-4 gap-5 max-h-52 overflow-y-auto overflow-x-hidden mb-3 mt-3">
+        <div className="grid grid-cols-4  max-h-52 overflow-y-auto overflow-x-hidden mb-3 mt-3">
           <div className="container-steps-checkbox">
             <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
                Paso 1 

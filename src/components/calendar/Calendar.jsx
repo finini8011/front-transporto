@@ -166,6 +166,7 @@ const Calendar = ({ calendarSmall }) => {
     setInputDateInit("");
     setInputHourInit("");
     setTags([]);
+    
     // seteo en el calendario
     calendarApi.addEvent(newEvent);
   }
@@ -267,12 +268,16 @@ const Calendar = ({ calendarSmall }) => {
       const allEventsNew = Object.values(data);
       const allEventsKeys = Object.keys(data);
       const allEventsNewArray = allEventsNew.map((arreglo, index) => {
-        const newArray = arreglo.map((eventData) => {
-          const eventDataTemp = { ...eventData, owner: allEventsKeys[index] };
-          return eventDataTemp;
-        })
-        return newArray;
-      })
+        if (Array.isArray(arreglo)) {
+          const newArray = arreglo.map((eventData) => {
+            const eventDataTemp = { ...eventData, owner: allEventsKeys[index] };
+            return eventDataTemp;
+          });
+          return newArray;
+        } else {
+          return [];
+        }
+      });
       const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null).filter(elemento => elemento.activo !== false);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {

@@ -249,7 +249,6 @@ const Calendar = ({ calendarSmall }) => {
     calendarApi.addEvent(newEvent);
   }
 
-
   //function clean States 
   const cleanStates = () => {
     setInputIdEvent();
@@ -334,6 +333,9 @@ const Calendar = ({ calendarSmall }) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        BackdropProps={{
+          onClick: () => {} // Función vacía para bloquear el clic fuera del modal
+        }}
       >
         <div className='bg-modal'>
           {isDeletEvent ? (

@@ -24,6 +24,7 @@ import Mejora from "./pages/general-views/Fases/Mejora";
 import Planificacion from "./pages/general-views/Fases/Planificacion";
 import Seguimiento from "./pages/general-views/Fases/Seguimiento";
 import CalendarPage from "./pages/general-views/CalendarPage";
+import Users from "./pages/general-views/Users";
 
 const persistor = persistStore(store);
 
@@ -48,6 +49,7 @@ function App() {
               <Route path="/informes" element={<Informes/>}/>
               <Route path="/calendar" element={<CalendarPage/>}/>
               <Route path="/guide" element={<Guide/>}/>
+              <Route path="/users" element={<Users/>}/>
 
               <Route path="/planificacion" element={<Planificacion/>}/>
               <Route path="/mejora" element={<Mejora/>}/>

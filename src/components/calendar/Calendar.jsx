@@ -417,7 +417,18 @@ const Calendar = ({ calendarSmall }) => {
                   </>
                 )}
                 <div>
-                  <button className='buttonfooter mt-5' onClick={() => { handleClose() }} >Cerrar</button>
+                  <button className='buttonfooter mt-5'
+                    onClick={() => {
+                      handleClose();
+                      setInputIdEvent();
+                      setInputTitle();
+                      setInputDescription();
+                      setInputDateInit();
+                      setInputHourInit();
+                      setInputHourEnd;
+                      setTags([]);
+                      setIsEditEvent(false);
+                    }} >Cerrar</button>
                 </div>
               </div>
             )

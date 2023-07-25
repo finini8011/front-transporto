@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from '@mui/material/Modal';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
-import { selectCurrentUser } from '../../api/features/auth/authSlice';
+import { ListTags } from '../../constants/ListTags';
 import {
   useDeleteCalendarQuestionMutation,
   useEditCalendarQuestionMutation,
   useLazyGetDataCalendarQuery,
   useSaveCalendarQuestionMutation
 } from '../../api/services/calendar/calendarApiSlice';
+import { selectCurrentUser } from '../../api/features/auth/authSlice';
 import moment from 'moment';
-import { ListTags } from '../../constants/ListTags';
 import "./Calendar.css";
-import { faPenToSquare, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
 const Calendar = ({ calendarSmall }) => {
 
+  const user = useSelector(selectCurrentUser);
 
   //date current day
   const currentDate = new Date();
@@ -32,12 +33,10 @@ const Calendar = ({ calendarSmall }) => {
   const day = String(currentDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
 
-
-  const user = useSelector(selectCurrentUser);
+  //states the funtions origin fullcalendar
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [selectInfoTemp, setSelectInfoTemp] = useState(null);
-
 
   //states inputs
   const [inputTitle, setInputTitle] = useState();
@@ -57,20 +56,16 @@ const Calendar = ({ calendarSmall }) => {
   //delet event
   const [isDeletEvent, setIsDeletEvent] = useState(false);
 
-
   //services calendar
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
   const [editCalendar] = useEditCalendarQuestionMutation();
   const [deleteEvent] = useDeleteCalendarQuestionMutation();
 
-
   //modals funtions and states
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => { setOpen(false); setIsEdit(false) };
-
-
 
   // create
   const handleDateSelect = (selectInfo) => {
@@ -90,6 +85,7 @@ const Calendar = ({ calendarSmall }) => {
       handleOpen();
     }
   }
+
   // view event
   const handleEventClick = (info) => {
     handleOpen();
@@ -119,10 +115,12 @@ const Calendar = ({ calendarSmall }) => {
       </>
     )
   }
+
   //funtion tags
   const handleClickTags = (subStep) => {
     setTags((prevArray) => [...prevArray, subStep]);
   }
+  //funtion delet tag the list
   const handleClickTagsDelet = (subStep) => {
     setTags((prevArray) => prevArray.filter((item) => item !== subStep));
   }

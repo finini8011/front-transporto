@@ -48,6 +48,17 @@ export const calendarApiSlice = createApi({
       providesTags: ["Calendar"],
       invalidatesTags: ["Calendar"],
     }),
+    deleteCalendarQuestion: builder.mutation({
+      query: ({ payload }) => {
+        return {
+          url: `steps/delete_events`,
+          method: "POST",
+          body: {payload},
+        };
+      },
+      providesTags: ["Calendar"],
+      invalidatesTags: ["Calendar"],
+    }),
   }),
 });
 export const {
@@ -56,4 +67,5 @@ export const {
   useSaveCalendarQuestionMutation,
   useLazyGetDataCalendarQuery,
   useEditCalendarQuestionMutation,
+  useDeleteCalendarQuestionMutation
 } = calendarApiSlice;

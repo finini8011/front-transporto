@@ -66,7 +66,7 @@ const Users = () => {
             {...register("nit")}
           />
           <InputRHF
-            type="password"
+            type="text"
             label="Email"
             placeholder="Ingresar Email"
             {...register("nit")}
@@ -83,9 +83,275 @@ const Users = () => {
             placeholder="Confirmar Contraseña"
             {...register("nit")}
           />
+        </div>
+        <div className="grid grid-cols-4 gap-5">
           <div className="">
             <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
-              ¿Este usuario será administrador?
+               Paso 1 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 2 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 3 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 4 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 5 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 6 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 7 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 8 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 9 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 10 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 11 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 12 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+              Paso 13
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 14 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 15 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 16 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 17 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 18 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 19 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 21 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 22 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 23 
+              <input
+                type="checkbox"
+                value={false}
+                name="check"
+                //   {...register("misionalidad")}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+              />
+            </label>
+          </div>
+          <div className="">
+            <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 flex items-center">
+               Paso 24 
               <input
                 type="checkbox"
                 value={false}

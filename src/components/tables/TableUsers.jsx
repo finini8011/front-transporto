@@ -1,22 +1,18 @@
 import React from "react";
+import { faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TableUsers = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left text-gray-500 ">
+      <table className="w-full text-sm text-center text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
           <tr>
             <th scope="col" className="px-6 py-3">
               Nombre
             </th>
             <th scope="col" className="px-6 py-3">
-              DNI
-            </th>
-            <th scope="col" className="px-6 py-3">
               Email
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Nivel de Empresa
             </th>
             <th scope="col" className="px-6 py-3">
               Acciones
@@ -31,22 +27,17 @@ const TableUsers = () => {
             >
               Usuario
             </th>
-            <td className="px-6 py-4">99999999</td>
             <td className="px-6 py-4">user@correo.com</td>
-            <td className="px-6 py-4">Básico</td>
-            <td className="px-6 py-4 flex items-center gap-4">
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Modificar
-              </a>
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Eliminar
-              </a>
+            <td className="px-6 py-4 flex justify-center gap-4">
+              <FontAwesomeIcon
+                icon={faPencil}
+                className="w-5 h-5 cursor-pointer"
+              />
+
+              <FontAwesomeIcon
+                icon={faTrash}
+                className="w-5 h-5 cursor-pointer"
+              />
             </td>
           </tr>
           <tr className="bg-white border-b  hover:bg-gray-50 ">
@@ -56,22 +47,17 @@ const TableUsers = () => {
             >
               Usuario
             </th>
-            <td className="px-6 py-4">99999999</td>
             <td className="px-6 py-4">user@correo.com</td>
-            <td className="px-6 py-4">Básico</td>
-            <td className="px-6 py-4 flex items-center gap-4">
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Modificar
-              </a>
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Eliminar
-              </a>
+            <td className="px-6 py-4 flex justify-center gap-4">
+              <FontAwesomeIcon
+                icon={faPencil}
+                className="w-5 h-5 cursor-pointer"
+              />
+
+              <FontAwesomeIcon
+                icon={faTrash}
+                className="w-5 h-5 cursor-pointer"
+              />
             </td>
           </tr>
           <tr className="bg-white border-b  hover:bg-gray-50 ">
@@ -81,22 +67,17 @@ const TableUsers = () => {
             >
               Usuario
             </th>
-            <td className="px-6 py-4">99999999</td>
             <td className="px-6 py-4">user@correo.com</td>
-            <td className="px-6 py-4">Básico</td>
-            <td className="px-6 py-4 flex items-center gap-4">
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Modificar
-              </a>
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Eliminar
-              </a>
+            <td className="px-6 py-4 flex justify-center gap-4">
+              <FontAwesomeIcon
+                icon={faPencil}
+                className="w-5 h-5 cursor-pointer"
+              />
+
+              <FontAwesomeIcon
+                icon={faTrash}
+                className="w-5 h-5 cursor-pointer"
+              />
             </td>
           </tr>
         </tbody>

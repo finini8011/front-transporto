@@ -10,6 +10,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import { createEventId } from '../../utils/event-utils';
 import { selectCurrentUser } from '../../api/features/auth/authSlice';
 import {
+  useEditCalendarQuestionMutation,
   useLazyGetDataCalendarQuery,
   useSaveCalendarQuestionMutation
 } from '../../api/services/calendar/calendarApiSlice';
@@ -45,15 +46,18 @@ const Calendar = ({ calendarSmall }) => {
   const [inputHourEnd, setInputHourEnd] = useState();
   const [inputDateInit, setInputDateInit] = useState();
   const [inputHourInit, setInputHourInit] = useState();
+  const [inputIdEvent, setInputIdEvent] = useState();
 
   //edit states
   const [isEdit, setIsEdit] = useState(false);
   const [isEditEvent, setIsEditEvent] = useState(false);
   const [showCurrentEditEvent, setShowCurrentEditEvent] = useState({});
 
-  //get y post data
+  //services calendar
   const [getCalendar] = useLazyGetDataCalendarQuery();
   const [saveCalendar] = useSaveCalendarQuestionMutation();
+  const [editCalendar] = useEditCalendarQuestionMutation();
+
 
   //modals funtions and states
   const [open, setOpen] = useState(false);
@@ -75,7 +79,7 @@ const Calendar = ({ calendarSmall }) => {
     setInputHourEnd(endHourTemp);
     setInputHourInit(initHourTemp);
     setInputDateInit(initDateTemp);
-  
+
     if (selectInfo.startStr >= formattedDate) {
       handleOpen();
     }
@@ -85,6 +89,7 @@ const Calendar = ({ calendarSmall }) => {
     handleOpen();
     setIsEdit(true);
     setShowCurrentEditEvent(info.event);
+    setInputIdEvent(info.event?.id);
     setInputTitle(info.event?.title);
     setInputDescription(info.event?.extendedProps.description);
     setInputDateInit(info.event?._instance.range.start.toISOString().replace(/T.*$/, ''));
@@ -115,18 +120,56 @@ const Calendar = ({ calendarSmall }) => {
     setTags((prevArray) => prevArray.filter((item) => item !== subStep));
   }
 
-  const EditSaveEvent = () =>{
-    console.log("editando")
+  // edit event
+  const EditSaveEvent = async () => {
+    //prepara calendario
+    let calendarApi = selectInfoTemp?.view.calendar
+    calendarApi?.unselect() // clear date selection
+    // composicion del objeto evento
+    const newEvent = {
+      id: inputIdEvent,
+      title: inputTitle,
+      description: inputDescription,
+      tag: tags,
+      start: `${inputDateInit}T${inputHourInit}`,
+      end: `${inputDateInit}T${inputHourEnd}`,
+      allDay: (inputHourInit && inputHourEnd) ? false : true,
+    };
+    // post del evento
+    try {
+      const payload = {
+        id: inputIdEvent,
+        titulo: newEvent.title,
+        etiqueta: newEvent.tag,
+        fecha_final: newEvent.end,
+        descripcion: newEvent.description,
+        fecha_inicial: newEvent.start,
+        dia_entero: newEvent.allDay,
+      };
+      await editCalendar({ payload })
+      toast.success("Evento editado correctamente");
+    } catch (e) {
+      return toast.error("Hubo un error, vuelve a intentarlo");
+    }
+    // seteo del estado
+    setCurrentEvents([...currentEvents, newEvent]);
+    setInputDescription("");
+    setInputTitle("");
+    setInputHourEnd("");
+    setInputDateInit("");
+    setInputHourInit("");
+    setInputIdEvent();
+    // seteo en el calendario
+    calendarApi.addEvent(newEvent);
   }
 
   // save event 
   const saveEvent = async () => {
     //prepara calendario
-    let calendarApi = selectInfoTemp?.view.calendar 
+    let calendarApi = selectInfoTemp?.view.calendar
     calendarApi?.unselect() // clear date selection
     // composicion del objeto evento
     const newEvent = {
-      id: createEventId(),
       title: inputTitle,
       description: inputDescription,
       tag: tags,
@@ -176,7 +219,7 @@ const Calendar = ({ calendarSmall }) => {
       const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
-          id: eventData.id || index,
+          id: eventData.id,
           title: eventData.titulo || "Sin Titulo",
           description: eventData.descripcion,
           tag: eventData.etiqueta,
@@ -312,35 +355,67 @@ const Calendar = ({ calendarSmall }) => {
                   ))}
                 </div>
                 <div className='buttonfooter-container'>
-                  <button className='buttonfooter' onClick={() => { EditSaveEvent(); handleClose(); setIsEditEvent(false) }} >Guardar</button>
-                  <button className='buttonfooter' onClick={() => { setTags([]); setIsEditEvent(false) }} >Cancelar</button>
+                  <button className='buttonfooter' onClick={() => {
+                    EditSaveEvent();
+                    setIsEditEvent(false);
+                    setTimeout(() => {
+                      handleClose();
+                    }, 500);
+                  }} >Guardar</button>
+                  <button className='buttonfooter'
+                    onClick={() => {
+                      setInputIdEvent();
+                      setInputTitle();
+                      setInputDescription();
+                      setInputDateInit();
+                      setInputHourInit();
+                      setInputHourEnd;
+                      setTags([]);
+                      setIsEditEvent(false);
+                    }}>
+                    Cancelar
+                  </button>
                 </div>
               </div>
             ) : (
               <div className='bg-modal edit-event'>
-                {!calendarSmall &&
-                  <button
-                    className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
-                    key={"edit"}
-                    onClick={() => setIsEditEvent(true)}>
-                    <FontAwesomeIcon icon={faPencil} className=" w-3 h-3 block  m-auto " />
-                  </button>}
-                <h1 className='text-xl text-blue-500 mb-1'>Evento Agendado</h1>
-                <p className='redersTextListModal'>Usuario:</p>
-                {showCurrentEditEvent?.extendedProps.owner ? (
-                  <span>{showCurrentEditEvent?.extendedProps.owner}</span>
+                {showCurrentEditEvent?.extendedProps.owner === "Festivos" ? (
+                  <>
+                    <p className='redersTextListModal'>Dia Festivo</p>
+                    <p className='redersTextListModal'>Titulo</p>
+                    <span>{showCurrentEditEvent?.title}</span>
+                    <p className='redersTextListModal'> Fecha</p>
+                    <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/T.*$/, '')}</span>
+                    <p className='redersTextListModal'>Hora</p>
+                    <span>Todo el dia</span>
+                  </>
                 ) : (
-                  <span>{user.name}</span>)}
-                <p className='redersTextListModal'>Titulo:</p>
-                <span>{showCurrentEditEvent?.title}</span>
-                <p className='redersTextListModal'>Descripcion:</p>
-                <span> {showCurrentEditEvent?.extendedProps.description}</span>
-                <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
-                <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
-                <p className='redersTextListModal'> Fecha y Hora Final:</p>
-                <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
-                <p className='redersTextListModal'>Etiquetas:</p>
-                <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
+                  <>
+                    {!calendarSmall &&
+                      <button
+                        className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
+                        key={"edit"}
+                        onClick={() => setIsEditEvent(true)}>
+                        <FontAwesomeIcon icon={faPencil} className=" w-3 h-3 block  m-auto " />
+                      </button>}
+                    <h1 className='text-xl text-blue-500 mb-1'>Evento Agendado</h1>
+                    <p className='redersTextListModal'>Usuario:</p>
+                    {showCurrentEditEvent?.extendedProps.owner ? (
+                      <span>{showCurrentEditEvent?.extendedProps.owner}</span>
+                    ) : (
+                      <span>{user.name}</span>)}
+                    <p className='redersTextListModal'>Titulo:</p>
+                    <span>{showCurrentEditEvent?.title}</span>
+                    <p className='redersTextListModal'>Descripcion:</p>
+                    <span> {showCurrentEditEvent?.extendedProps.description}</span>
+                    <p className='redersTextListModal'> Fecha y Hora Inicial:</p>
+                    <span>{showCurrentEditEvent?._instance.range.start.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
+                    <p className='redersTextListModal'> Fecha y Hora Final:</p>
+                    <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
+                    <p className='redersTextListModal'>Etiquetas:</p>
+                    <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
+                  </>
+                )}
                 <div>
                   <button className='buttonfooter mt-5' onClick={() => { handleClose() }} >Cerrar</button>
                 </div>
@@ -419,7 +494,7 @@ const Calendar = ({ calendarSmall }) => {
                 ))}
               </div>
               <div className='mt-3'>
-                {tags.map((subStep, subIndex) => (
+                {tags?.map((subStep, subIndex) => (
                   <button
                     className='buttonTags'
                     key={subIndex}
@@ -427,8 +502,26 @@ const Calendar = ({ calendarSmall }) => {
                 ))}
               </div>
               <div className='buttonfooter-container'>
-                <button className='buttonfooter' onClick={() => { saveEvent(); handleClose() }} >Guardar</button>
-                <button className='buttonfooter' onClick={() => { handleClose(); setTags([]) }} >Cancelar</button>
+                <button className='buttonfooter' onClick={() => {
+                  saveEvent();
+                  setTimeout(() => {
+                    handleClose();
+                  }, 500);
+                }} >Guardar</button>
+                <button className='buttonfooter'
+                  onClick={() => {
+                    handleClose();
+                    setInputIdEvent();
+                    setInputTitle();
+                    setInputDescription();
+                    setInputDateInit();
+                    setInputHourInit();
+                    setInputHourEnd;
+                    setTags([]);
+                    setIsEditEvent(false);
+                  }}>
+                  Cancelar
+                </button>
               </div>
             </div>
           )}

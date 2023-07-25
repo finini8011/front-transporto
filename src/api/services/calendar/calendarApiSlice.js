@@ -37,11 +37,23 @@ export const calendarApiSlice = createApi({
       providesTags: ["Calendar"],
       invalidatesTags: ["Calendar"],
     }),
+    editCalendarQuestion: builder.mutation({
+      query: ({ payload }) => {
+        return {
+          url: `steps/update_events`,
+          method: "POST",
+          body: {payload},
+        };
+      },
+      providesTags: ["Calendar"],
+      invalidatesTags: ["Calendar"],
+    }),
   }),
 });
 export const {
   useGetDataCalendar,
   useSaveCalendarQuestion,
   useSaveCalendarQuestionMutation,
-  useLazyGetDataCalendarQuery
+  useLazyGetDataCalendarQuery,
+  useEditCalendarQuestionMutation,
 } = calendarApiSlice;

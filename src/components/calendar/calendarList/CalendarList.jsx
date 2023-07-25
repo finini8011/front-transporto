@@ -52,14 +52,17 @@ const CalendarList = () => {
       const allEventsNew = Object.values(data);
       const allEventsKeys = Object.keys(data);
       const allEventsNewArray = allEventsNew.map((arreglo, index) => {
-        const newArray =
-        arreglo.map((eventData) => {
-          const eventDataTemp = {...eventData, owner:allEventsKeys[index]};
-          return eventDataTemp;
-        })
-        return  newArray;
-      })
-      const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null);
+        if (Array.isArray(arreglo)) {
+          const newArray = arreglo.map((eventData) => {
+            const eventDataTemp = { ...eventData, owner: allEventsKeys[index] };
+            return eventDataTemp;
+          });
+          return newArray;
+        } else {
+          return [];
+        }
+      });
+      const allEvents = allEventsNewArray.flat().filter(elemento => elemento !== null).filter(elemento => elemento.activo !== false);
       const allCurrentEventsTemp = allEvents.map((eventData, index) => {
         return {
           id: eventData.id || index,
@@ -69,6 +72,7 @@ const CalendarList = () => {
           start: eventData.fecha_inicial || eventData.hora_inicial,
           end: eventData.fecha_final || eventData.hora_final,
           allDay: eventData.dia_entero || false,
+          active: eventData.activo || true,
           owner: eventData.owner
         }
       });

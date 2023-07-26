@@ -31,10 +31,10 @@ function App() {
 
 
   const checkLogin = (instanceStore, element) => {
-    const {auth} = instanceStore.getState();
-    const {authState} = auth;
-    console.log(auth.authState.user?.id,"usuario")
-    return authState.user?.id ? element : <Login />; 
+    const { auth } = instanceStore.getState();
+    const { authState } = auth;
+    console.log(auth.authState.user?.id, "usuario")
+    return authState.user?.id ? element : <Login />;
     // Asumiendo que el id esta en null al hacer logauth
   }
 
@@ -44,26 +44,26 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route element={ checkLogin(store, <MainAuth />)}>
-              <Route path="/home" element={<Home/>} />
-              <Route path="/report" element={<Report />} />
-              <Route path="/report-list" element={<ListVerification />} />
-              <Route path="/step" element={<ComplianceCheck />} />
-              <Route path="/notfound" element={<NotFound />} />
-              <Route path="/step/:id" element={<Steps />} />
-              <Route path="/register-company" element={<RegisterCompany />} />
-              <Route path="/update-company" element={<UpdateCompany />} />
-              <Route path="/list-verification" element={<ListVerification />} />
-              <Route path="/informes" element={<Informes />} />
-              <Route path="/calendar" element={<CalendarPage />} />
-              <Route path="/guide" element={<Guide />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/planificacion" element={<Planificacion />} />
-              <Route path="/mejora" element={<Mejora />} />
-              <Route path="/implementacion" element={<Implementacion />} />
-              <Route path="/seguimiento" element={<Seguimiento />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route element={checkLogin(store, <MainAuth />)}>
+              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/report" element={<Report />} />
+              <Route exact path="/report-list" element={<ListVerification />} />
+              <Route exact path="/step" element={<ComplianceCheck />} />
+              <Route exact path="/step/:id" element={<Steps />} />
+              <Route exact path="/register-company" element={<RegisterCompany />} />
+              <Route exact path="/update-company" element={<UpdateCompany />} />
+              <Route exact path="/list-verification" element={<ListVerification />} />
+              <Route exact path="/informes" element={<Informes />} />
+              <Route exact path="/calendar" element={<CalendarPage />} />
+              <Route exact path="/guide" element={<Guide />} />
+              <Route exact path="/users" element={<Users />} />
+              <Route exact path="/planificacion" element={<Planificacion />} />
+              <Route exact path="/mejora" element={<Mejora />} />
+              <Route exact path="/implementacion" element={<Implementacion />} />
+              <Route exact path="/seguimiento" element={<Seguimiento />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>

@@ -16,7 +16,7 @@ const Home = () => {
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const { data: dataState } = useGetStatePESVQuery();
-  const {handleNavigate} = useOutletContext()
+  const { handleNavigate } = useOutletContext()
 
 
   let resultCumple = 0;
@@ -67,14 +67,18 @@ const Home = () => {
   }, [data]);
 
   const handleCardClick = (step, state) => {
+    if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
+      return handleNavigate(`/step/${step}`)
+    }
     if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
       return handleNavigate(`/step/${step}`)
     } else {
-      return handleNavigate(`/step/${step}`)
+      return handleNavigate(`/home`)
     }
+
   };
 
-  
+
 
   return (
     <div className="justify-center ">

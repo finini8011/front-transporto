@@ -4,7 +4,6 @@ import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import { store } from "./api/store";
 
-
 import Report from "./pages/Report";
 import Register from "./pages/authenticated/Register";
 import NotFound from "./pages/authenticated/Notfound";
@@ -29,6 +28,16 @@ import Users from "./pages/general-views/Users";
 const persistor = persistStore(store);
 
 function App() {
+
+
+  const checkLogin = (instanceStore, element) => {
+    const {auth} = instanceStore.getState();
+    const {authState} = auth;
+    console.log(auth.authState.user?.id,"usuario")
+    return authState.user?.id ? element : <Login />; 
+    // Asumiendo que el id esta en null al hacer logauth
+  }
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
@@ -36,26 +45,25 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/report" element={<Report />} />
-            <Route path="/report-list" element={<ListVerification />} />
-            <Route element={<MainAuth />}>
-              <Route path="/home" element={<Home />} />
+            <Route element={ checkLogin(store, <MainAuth />)}>
+              <Route path="/home" element={<Home/>} />
+              <Route path="/report" element={<Report />} />
+              <Route path="/report-list" element={<ListVerification />} />
               <Route path="/step" element={<ComplianceCheck />} />
               <Route path="/notfound" element={<NotFound />} />
               <Route path="/step/:id" element={<Steps />} />
-              <Route path="/register-company" element={<RegisterCompany/>}/>
-              <Route path="/update-company" element={<UpdateCompany/>}/>
-              <Route path="/list-verification" element={<ListVerification/>}/>
-              <Route path="/informes" element={<Informes/>}/>
-              <Route path="/calendar" element={<CalendarPage/>}/>
-              <Route path="/guide" element={<Guide/>}/>
-              <Route path="/users" element={<Users/>}/>
-
-              <Route path="/planificacion" element={<Planificacion/>}/>
-              <Route path="/mejora" element={<Mejora/>}/>
-              <Route path="/implementacion" element={<Implementacion/>}/>
-              <Route path="/seguimiento" element={<Seguimiento/>}/>
-            </Route>         
+              <Route path="/register-company" element={<RegisterCompany />} />
+              <Route path="/update-company" element={<UpdateCompany />} />
+              <Route path="/list-verification" element={<ListVerification />} />
+              <Route path="/informes" element={<Informes />} />
+              <Route path="/calendar" element={<CalendarPage />} />
+              <Route path="/guide" element={<Guide />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/planificacion" element={<Planificacion />} />
+              <Route path="/mejora" element={<Mejora />} />
+              <Route path="/implementacion" element={<Implementacion />} />
+              <Route path="/seguimiento" element={<Seguimiento />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </PersistGate>

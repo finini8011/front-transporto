@@ -70,7 +70,7 @@ const Home = () => {
     if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
       return handleNavigate(`/step/${step}`)
     }
-    if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
+    if (state !== "No aplica" && user?.compania?.nivel === "Básico") {
       return handleNavigate(`/step/${step}`)
     } else {
       return handleNavigate(`/home`)

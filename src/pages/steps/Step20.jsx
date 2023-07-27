@@ -1,5 +1,5 @@
 import React from "react";
-import pageConst from "../../../public/img/pageConst.jpg"
+import pageConst from "../../img/pageConst.jpg"
 
 const Step20 = () => {
 

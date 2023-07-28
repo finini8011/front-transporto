@@ -71,7 +71,7 @@ const Steps = () => {
     if (user.compania?.nivel === "Básico") {
         for (let key in components) {
             if (key === "2" || key === "11" || key === "13" || key === "18" || key === "19" || key === "21") {
-                components[key] = CardPermissions;
+                components[key] = (props) => <CardPermissions nivel {...props}  />
             }
         }
     }

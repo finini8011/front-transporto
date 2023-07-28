@@ -1,12 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../api/features/auth/authSlice";
+
 
 
 
 const CardPermissions = ({ nivel, permmisionsUser  }) => {
 
-  const user = useSelector(selectCurrentUser);
 
   return (
     <div className="bg-[#EEF2F6] p-4 text-[#0090FF] rounded-2xl font-medium text-center text-xl mt-16 w-2/5 m-auto">

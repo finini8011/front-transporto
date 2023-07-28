@@ -38,6 +38,12 @@ function App() {
     // Asumiendo que el id esta en null al hacer logauth
   }
 
+  const checkAdmin = (instanceStore, element) => {
+    const { auth } = instanceStore.getState();
+    const { authState } = auth;
+    return authState.user.permissions.length ===0 ? element : <Home />;
+  }
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
@@ -51,13 +57,13 @@ function App() {
               <Route exact path="/report-list" element={<ListVerification />} />
               <Route exact path="/step" element={<ComplianceCheck />} />
               <Route exact path="/step/:id" element={<Steps />} />
-              <Route exact path="/register-company" element={<RegisterCompany />} />
-              <Route exact path="/update-company" element={<UpdateCompany />} />
+              <Route exact path="/register-company" element={checkAdmin(store, <RegisterCompany />)} />
+              <Route exact path="/update-company" element={checkAdmin(store, <UpdateCompany />)} />
               <Route exact path="/list-verification" element={<ListVerification />} />
-              <Route exact path="/informes" element={<Informes />} />
+              <Route exact path="/informes" element={checkAdmin(store, <Informes />)} />
               <Route exact path="/calendar" element={<CalendarPage />} />
               <Route exact path="/guide" element={<Guide />} />
-              <Route exact path="/users" element={<Users />} />
+              <Route exact path="/users" element={checkAdmin(store, <Users />)} />
               <Route exact path="/planificacion" element={<Planificacion />} />
               <Route exact path="/mejora" element={<Mejora />} />
               <Route exact path="/implementacion" element={<Implementacion />} />

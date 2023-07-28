@@ -39,7 +39,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
           <h3 className="text-xl">
             {user.compania?.razon_social
               ? user.compania.razon_social
-              : "Empresa sin registrar" }{" "}
+              : "Empresa sin registrar"}{" "}
             - {user.name}{" "}
           </h3>
           <p className="text-sm color-fifth">{date} </p>
@@ -50,53 +50,51 @@ const Header = ({ currentPage, setCurrentPage }) => {
             <img className="" src={buscar} alt="Expandir" />
             <p>Buscar</p>
           </li>
-          <li
-            className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
-            onClick={() =>
-              handleNavigate(
-                user.compania ? "/update-company" : "/register-company"
-              )
-            }
-            role="button"
-          >
-            {/* <img className="m-auto" src={empresa} alt="Expandir" /> */}
-            <Empresa
-              color={`${
-                currentPage === "/register-company" ||
-                currentPage === "/update-company"
-                  ? "#0090FF"
-                  : "#c2c7d0"
-              }`}
-            />
-            <p
-              className={`${
-                currentPage === "/register-company" ||
-                currentPage === "/update-company"
-                  ? "color-fourth"
-                  : "color-fifth"
-              }`}
+          {user.permissions.length === 0 && (
+            <li
+              className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
+              onClick={() =>
+                handleNavigate(
+                  user.compania ? "/update-company" : "/register-company"
+                )
+              }
+              role="button"
             >
-              Empresa
-            </p>
-          </li>
+              <Empresa
+                color={`${
+                  currentPage === "/register-company" ||
+                  currentPage === "/update-company"
+                    ? "#0090FF"
+                    : "#c2c7d0"
+                }`}
+              />
+              <p
+                className={`${
+                  currentPage === "/register-company" ||
+                  currentPage === "/update-company"
+                    ? "color-fourth"
+                    : "color-fifth"
+                }`}
+              >
+                Empresa
+              </p>
+            </li>
+          )}
+
           <li
             className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
             onClick={() => handleNavigate("/guide")}
           >
-          <Guide
-              color={`${
-                currentPage === "/guide"
-                  ? "#0090FF"
-                  : "#c2c7d0"
-              }`}
+            <Guide
+              color={`${currentPage === "/guide" ? "#0090FF" : "#c2c7d0"}`}
             />
             <p
               className={`${
-                currentPage === "/guide"
-                  ? "color-fourth"
-                  : "color-fifth"
+                currentPage === "/guide" ? "color-fourth" : "color-fifth"
               }`}
-            >Guía Rápida</p>
+            >
+              Guía Rápida
+            </p>
             {/* <p className="leading-none"></p> */}
           </li>
           <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">

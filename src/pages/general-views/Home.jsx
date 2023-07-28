@@ -6,8 +6,12 @@ import ProgressBar from "../../components/commons/Progress/ProgressBar";
 import { dataCard } from "../../constants";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../api/features/auth/authSlice";
-import { useGetStateStepsQuery, useGetStatePESVQuery } from "../../api/services/steps/stepsApiSlice";
+import {
+  useGetStateStepsQuery,
+  useGetStatePESVQuery,
+} from "../../api/services/steps/stepsApiSlice";
 import { useOutletContext } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 // import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
 
 const Home = () => {
@@ -16,8 +20,7 @@ const Home = () => {
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const { data: dataState } = useGetStatePESVQuery();
-  const { handleNavigate } = useOutletContext()
-
+  const { handleNavigate } = useOutletContext();
 
   let resultCumple = 0;
   let parcialmente = 0;
@@ -67,21 +70,24 @@ const Home = () => {
   }, [data]);
 
   const handleCardClick = (step, state) => {
-    if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
-      return handleNavigate(`/step/${step}`)
+    const isIncluded = user.permissions.includes(step); //verificar que esté permitido de ver este paso
+    if (isIncluded) {
+      if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
+        return handleNavigate(`/step/${step}`)
+      }
+      if (state !== "No aplica" && user?.compania?.nivel === "Básico") {
+        return handleNavigate(`/step/${step}`)
+      } else {
+        return handleNavigate(`/home`)
+      }
+    }else{
+      toast.error("No tiene permiso para ingresar a este paso.");
     }
-    if (state !== "No aplica" && user?.compania?.nivel === "Básico") {
-      return handleNavigate(`/step/${step}`)
-    } else {
-      return handleNavigate(`/home`)
-    }
-
   };
-
-
 
   return (
     <div className="justify-center ">
+      <Toaster />
       <ProgressBar
         bgcolor="#0090ff"
         progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0}

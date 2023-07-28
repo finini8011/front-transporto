@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useLoginUserMutation } from "../../api/services/auth/apiSlice";
-import { setToken, setUser } from "../../api/features/auth/authSlice";
+import { setToken, setUser, logOut } from "../../api/features/auth/authSlice";
+import { useLocation } from 'react-router-dom';
 // import Image from "next/image";
 
 import InputLogin from "../../components/commons/input/text/InputLogin";
@@ -19,6 +20,9 @@ const Login = () => {
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const paramValue = params.get('logout');
 
   const {
     register,
@@ -50,6 +54,14 @@ const Login = () => {
       handleSubmit(onSubmit)()
     }
   }
+
+  useEffect(() => {
+   if(paramValue){
+    dispatch(logOut(null))
+    navigate("/")
+   }
+  }, [location])
+  
 
   return (
     <section className="bg-[#e8ecee] ">

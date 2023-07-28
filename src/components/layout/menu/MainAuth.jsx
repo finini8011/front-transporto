@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   selectCurrentUser,
@@ -8,6 +8,7 @@ import {
 } from "../../../api/features/auth/authSlice";
 import Header from "../header/header";
 import toast, { Toaster } from "react-hot-toast";
+
 
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -45,6 +46,7 @@ const MainAuth = () => {
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   const [openMenu, setOpenMenu] = useState();
   const [openList, setOpenList] = useState(true);
@@ -73,11 +75,11 @@ const MainAuth = () => {
     }; */
 
   const logoutSession = async () => {
+
     try {
       await logOutUser()
       toast.success("Sesion cerrada correctamente"); 
-      setTimeout(() => {
-        navigate("/");}, 500);
+      navigate("/?logout=true")
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
@@ -108,7 +110,7 @@ const MainAuth = () => {
       console.log(user);
       navigate("/");
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const step = currentPage.split("/");

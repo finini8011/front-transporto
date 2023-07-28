@@ -164,7 +164,7 @@ const Calendar = ({ calendarSmall }) => {
     setInputDateInit("");
     setInputHourInit("");
     setTags([]);
-    
+
     // seteo en el calendario
     calendarApi.addEvent(newEvent);
   }
@@ -332,7 +332,7 @@ const Calendar = ({ calendarSmall }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         BackdropProps={{
-          onClick: () => {} // Función vacía para bloquear el clic fuera del modal
+          onClick: () => { } // Función vacía para bloquear el clic fuera del modal
         }}
       >
         <div className='bg-modal'>
@@ -469,21 +469,25 @@ const Calendar = ({ calendarSmall }) => {
                         </>
                       ) : (
                         <>
-                          {!calendarSmall &&
-                            <>
-                              <button
-                                className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
-                                key={"edit"}
-                                onClick={() => setIsEditEvent(true)}>
-                                <FontAwesomeIcon icon={faPencil} className=" w-3 h-3 block  m-auto " />
-                              </button>
-                              <button
-                                className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
-                                key={"edit"}
-                                onClick={() => setIsDeletEvent(true)}>
-                                <FontAwesomeIcon icon={faTrash} className=" w-3 h-3 block  m-auto " />
-                              </button>
-                            </>
+
+                          {!calendarSmall ?
+                            (
+                              showCurrentEditEvent?.extendedProps.owner === user.name &&
+                              <>
+                                <button
+                                  className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
+                                  key={"edit"}
+                                  onClick={() => setIsEditEvent(true)}>
+                                  <FontAwesomeIcon icon={faPencil} className=" w-3 h-3 block  m-auto " />
+                                </button>
+                                <button
+                                  className='float-right border-2 border-blue-300 rounded-lg w-6 h-6 '
+                                  key={"deleted"}
+                                  onClick={() => setIsDeletEvent(true)}>
+                                  <FontAwesomeIcon icon={faTrash} className=" w-3 h-3 block  m-auto " />
+                                </button>
+                              </>
+                            ) : ("")
                           }
                           <h1 className='text-xl text-blue-500 mb-1'>Evento Agendado</h1>
                           <p className='redersTextListModal'>Usuario:</p>
@@ -501,6 +505,7 @@ const Calendar = ({ calendarSmall }) => {
                           <span>{showCurrentEditEvent?._instance.range.end.toISOString().replace(/.000Z*$/, '').split("T").join('/')}</span>
                           <p className='redersTextListModal'>Etiquetas:</p>
                           <span className='mr-3'>{showCurrentEditEvent?.extendedProps.tag}</span>
+
                         </>
                       )}
                       <div>

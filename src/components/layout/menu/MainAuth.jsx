@@ -105,7 +105,6 @@ const MainAuth = () => {
 
   useEffect(() => {
     if (!user) {
-      console.log(user);
       navigate("/");
     }
   }, []);
@@ -181,7 +180,6 @@ const MainAuth = () => {
   }, [currentPage]);
 
   useEffect(() => {
-    console.log(user)
   }, [])
   
 

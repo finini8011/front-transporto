@@ -98,7 +98,7 @@ const Step20 = () => {
       <div className="pb-10"></div>
       <FormFlex
         titleForm={"Documento: Reporte de autogestión anual PESV- Realizado por Líder del PESV"}
-        stage={"1"}
+        stage={"3"}
         step={"20.3"}
         nameStep={
           "¿La organización realizó el reporte de autogestión anual a la entidad verificadora que le corresponda de los resultados de la medición y análisis de los indicadores a los qué hace referencia la tabla 10 del capítulo 1 del presente anexo y la información lista en el Paso 20 con corte a 31 de diciembre de cada año, y teniendo en cuenta que el reporte se debe realizar a más tardar el 31 de enero de cada año?"

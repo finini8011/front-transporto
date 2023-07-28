@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../api/features/auth/authSlice";
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -22,8 +24,8 @@ import Step16 from "./Step16";
 import Step17 from "./Step17";
 import Step18 from "./Step18";
 import Step19 from "./Step19";
-
 import Step20 from "./Step20";
+
 import Step21 from "./Step21"
 import Step22 from "./Step22";
 import Step23 from "./Step23";
@@ -32,8 +34,11 @@ import Step24 from "./Step24";
 
 
 export default function Steps() {
-    const { id } = useParams()
 
+
+    const user = useSelector(selectCurrentUser);
+    
+    const { id } = useParams()
     let components = {
         1: Step1,
         2: Step2,
@@ -60,6 +65,7 @@ export default function Steps() {
         23: Step23,
         24: Step24,
     };
+
 
     const Step = components[id || 1] ?? null;
     return <Step step={id} />

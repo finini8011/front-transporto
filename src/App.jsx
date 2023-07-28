@@ -33,7 +33,7 @@ function App() {
   const checkLogin = (instanceStore, element) => {
     const { auth } = instanceStore.getState();
     const { authState } = auth;
-    console.log(auth.authState.user?.id, "usuario")
+    console.log(auth.authState.user, "usuario")
     return authState.user?.id ? element : <Login />;
     // Asumiendo que el id esta en null al hacer logauth
   }

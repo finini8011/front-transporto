@@ -1,4 +1,6 @@
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../api/features/auth/authSlice";
 
@@ -31,14 +33,12 @@ import Step22 from "./Step22";
 import Step23 from "./Step23";
 import Step24 from "./Step24";
 
+import CardPermissions from "../../components/commons/Cards/CardPermissions";
 
 
-export default function Steps() {
 
+const Steps = () => {
 
-    const user = useSelector(selectCurrentUser);
-    
-    const { id } = useParams()
     let components = {
         1: Step1,
         2: Step2,
@@ -65,8 +65,22 @@ export default function Steps() {
         23: Step23,
         24: Step24,
     };
+    const user = useSelector(selectCurrentUser);
+    const { id } = useParams();
+
+    if (user.compania?.nivel === "Básico") {
+        for (let key in components) {
+            if (key === "2" || key === "11" || key === "13" || key === "18" || key === "19" || key === "21") {
+                components[key] = CardPermissions;
+            }
+        }
+    }
+
 
 
     const Step = components[id || 1] ?? null;
+
     return <Step step={id} />
-}
+};
+
+export default Steps;

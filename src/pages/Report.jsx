@@ -293,7 +293,7 @@ const Report = () => {
             <tr className="">
               <td className="border p-2">paso 8</td>
               <td className="border p-2">
-                Programas de gestión de riesgos criticos y factores de desempeño
+                Programas de gestión de riesgos críticos y factores de desempeño
               </td>
               <td className="border p-2 bg-red-300">{stepPercent(24, 31)}</td>
             </tr>
@@ -302,7 +302,7 @@ const Report = () => {
                 className="border p-2 text-xs font-bold uppercase bg-green-400"
                 rowSpan="11"
               >
-                FASE 2. IMPLEMENTACIÓN Y EJECUCION DEL PESV
+                FASE 2. IMPLEMENTACIÓN Y EJECUCIÓN DEL PESV
               </td>
               <td className="border p-2">paso 9</td>
               <td className="border p-2">Plan anual de trabajo</td>

@@ -13,7 +13,7 @@ const GraficLine = ({data}) => {
     },
 
     title: {
-      text: '% CUMPLIMIENTO FASE',
+      text: '% CUMPLIMIENTO POR FASE',
       x: -80
     },
 

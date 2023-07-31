@@ -83,7 +83,7 @@ const Login = () => {
                 <InputLogin
                   type="email"
                   label="Correo Electrónico"
-                  placeholder="name@company.com"
+                  placeholder="nombre@empresa.com"
                   {...register("email")}
                 />
                 <InputLogin

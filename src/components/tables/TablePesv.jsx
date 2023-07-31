@@ -413,7 +413,7 @@ const TablePesv = () => {
           <tr className="">
             <td className="border p-2">paso 8</td>
             <td className="border p-2">
-              Programas de gestión de riesgos criticos y factores de desempeño
+              Programas de gestión de riesgos críticos y factores de desempeño
             </td>
             <td className="border p-2 bg-red-300">0%</td>
           </tr>

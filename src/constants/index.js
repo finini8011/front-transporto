@@ -2,7 +2,7 @@ const dataCard = [
   {
     title: "Paso 1",
     step: 1,
-    content: "Lider de diseño e implementacion PESV",
+    content: "Líder de diseño e implementación PESV",
     stage: 1
 
   },
@@ -16,7 +16,7 @@ const dataCard = [
   {
     title: "Paso 3",
     step: 3,
-    content: "Politica de seguridad vial de la Organizacion",
+    content: "Política de seguridad vial de la Organización",
     stage: 1
 
   },
@@ -30,7 +30,7 @@ const dataCard = [
   {
     title: "Paso 5",
     step: 5,
-    content: "Diagnostico",
+    content: "Diagnóstico",
     stage: 1
 
   },
@@ -149,14 +149,14 @@ const dataCard = [
   {
     title: "Paso 22",
     step: 22,
-    content: "Auditoria Anual",
+    content: "Auditoría Anual",
     stage: 3
 
   },
   {
     title: "Paso 23",
     step: 23,
-    content: "Mejora Continua, acciones preventivas y correctivas",
+    content: "Mejora continua, acciones preventivas y correctivas",
     stage: 4
 
   },

@@ -14,7 +14,7 @@ const Step7 = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del líder PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "7.4" ? "7da" : id;

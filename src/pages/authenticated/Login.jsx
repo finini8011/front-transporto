@@ -82,12 +82,12 @@ const Login = () => {
               <form className="space-y-4 md:space-y-6" action="#">
                 <InputLogin
                   type="email"
-                  label="Email"
+                  label="Correo Electrónico"
                   placeholder="name@company.com"
                   {...register("email")}
                 />
                 <InputLogin
-                  label="Password"
+                  label="Contraseña"
                   type="password"
                   placeholder="°°°°°°°°°"
                   onKeyPress={handleEnter}

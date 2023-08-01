@@ -17,7 +17,7 @@ const Step1 = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const titleForm =
-    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia";
+    "DOCUMENTO: Designación de funciones y responsabilidades del líder del PESV - Competencia del líder PESV. Firmado por nivel directivo-gerencia";
 
   const handleFormSubmit = async (values, id) => {
     const stepUrl = id == "1.3" ? "1da" : id;
@@ -65,7 +65,7 @@ const Step1 = () => {
       <FormFlex
         titleForm={titleForm}
         stage={"1"}
-        mainTitle={"FASE 1: PLANIFICACIÓN - PASO 1. LIDER DE DISEÑO E IMPLEMENTACIÓN PESV"}
+        mainTitle={"FASE 1: PLANIFICACIÓN - PASO 1. LÍDER DE DISEÑO E IMPLEMENTACIÓN PESV"}
         step={"1.1"}
         nameStep={
           "¿Se tiene designada una persona con poder decisión en los temas relacionados con la gestión de la seguridad vial para que lidere el diseño e implementación del PESV y lo articule con el SG-SST?"

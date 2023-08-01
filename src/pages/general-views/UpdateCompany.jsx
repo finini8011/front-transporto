@@ -220,7 +220,7 @@ const UpdateCompany = () => {
       <Toaster />
       <div className="text-center border border-gray-300 rounded-xl py-3">
         <p className="color-fourth font-semibold text-xl">
-          EMPRESA REGISTRADA CON EXITO
+          EMPRESA REGISTRADA CON ÉXITO
         </p>
         <p>
           A su empresa le corresponde realizar un PESV en nivel{" "}

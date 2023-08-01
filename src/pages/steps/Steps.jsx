@@ -39,6 +39,7 @@ import CardPermissions from "../../components/commons/Cards/CardPermissions";
 
 const Steps = () => {
 
+    let filteredComponents = {};
     let components = {
         1: Step1,
         2: Step2,
@@ -65,32 +66,28 @@ const Steps = () => {
         23: Step23,
         24: Step24,
     };
-    let filteredComponents ={};
+
     const user = useSelector(selectCurrentUser);
     const { id } = useParams();
 
     if (user.compania?.nivel === "Básico") {
         for (let key in components) {
             if (key === "2" || key === "11" || key === "13" || key === "18" || key === "19" || key === "21") {
-                components[key] = (props) => <CardPermissions nivel {...props}  />
+                components[key] = (props) => <CardPermissions nivel {...props} />
             }
         }
     }
 
-/*     if (user?.permissions?.length != 0) {
-        user?.permissions?.map((key) => {
-            if (components.hasOwnProperty(key)) {
+    if (user?.permissions?.length > 0) {
+        for (let key in components) {
+            if (user.permissions.includes(Number(key))) {
                 filteredComponents[key] = components[key];
             } else {
                 filteredComponents[key] = (props) => <CardPermissions permmisionsUser {...props} />;
             }
-        });
+        }
         components = filteredComponents;
-        console.log(components, "componenetes")
-    } */
-
-
-
+    }
 
     const Step = components[id || 1] ?? null;
 

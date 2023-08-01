@@ -21,7 +21,7 @@ const FormDocumentPlus = ({ titleForm, step, nameStep, cols, onSubmit, isSaving 
 
 
   const columns = [
-    { field: 'descripcion', headerName: 'Descripcion', width: 250 },
+    { field: 'descripcion', headerName: 'Descripción', width: 250 },
     { field: 'documento', headerName: 'Documento', width: 230 },
     { field: 'crea', headerName: 'Crea', width: 230 },
     {

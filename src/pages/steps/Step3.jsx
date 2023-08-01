@@ -57,7 +57,7 @@ const Step3 = () => {
       <Toaster />
     
       <FormFlex
-        titleForm={"Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia"}
+        titleForm={"Designación de funciones y responsabilidades del líder del PESV - Competencia del líder PESV. Firmado por nivel directivo-gerencia"}
         mainTitle={"FASE 1: PLANIFICACIÓN - PASO 3. POLÍTICA DE SEGURIDAD VIAL DE LA ORGANIZACIÓN"}
         stage={"1"}
         step={"3.1"}
@@ -72,7 +72,7 @@ const Step3 = () => {
       <div className="pb-10"></div>
 
       <FormSelect
-        titleForm={"Designación de funciones y responsabilidades del líder del PESV - Competencia del lider PESV. Firmado por nivel directivo-gerencia"}
+        titleForm={"Designación de funciones y responsabilidades del líder del PESV - Competencia del líder PESV. Firmado por nivel directivo-gerencia"}
         step={"3.2"}
         nameStep={
           "¿La Política de Seguridad Vial documentada cumple con los requisitos definidos en el paso 3?"

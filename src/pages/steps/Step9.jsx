@@ -55,10 +55,10 @@ const Step9 = () => {
         step={"9.1"}
         stage={"2"}
         mainTitle={
-          "FASE 2. IMPLEMENTACIÓN Y EJECUCION DEL PESV - PASO 9. ANUAL DE TRABAJO"
+          "FASE 2. IMPLEMENTACIÓN Y EJECUCIÓN DEL PESV - PASO 9. ANUAL DE TRABAJO"
         }
         nameStep={
-          "¿El plan anual del PESV está documentado, contiene los objetivos, metas, responsabilidades, recursos y ronograma de actividades del año y está articulado con el plan anual de actividades de SG-SST y cumple con los requisitos definidos en el paso 9?"
+          "¿El plan anual del PESV está documentado, contiene los objetivos, metas, responsabilidades, recursos y cronograma de actividades del año y está articulado con el plan anual de actividades de SG-SST y cumple con los requisitos definidos en el paso 9?"
         }
         cols={5}
         onSubmit={handleFormSubmit}

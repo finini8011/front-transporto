@@ -102,6 +102,12 @@ const MainAuth = () => {
   };
 
   useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
+
+  useEffect(() => {
     const step = currentPage.split("/");
     setVerifiedStepPage(step[1]);
   }, [currentPage]);
@@ -166,6 +172,10 @@ const MainAuth = () => {
     }
   }, [currentPage]);
 
+  useEffect(() => {
+  }, [])
+  
+
   return (
     <div className="min-h-screen flex w-full relative">
       <Toaster />
@@ -212,7 +222,7 @@ const MainAuth = () => {
           </div>
         </div>
         <div className=" text-sm pt-6 relative">
-          <h3 className={`${openMenu ? "px-12" : "text-center"}`}>Menu</h3>
+          <h3 className={`${openMenu ? "px-12" : "text-center"}`}>Menú</h3>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}
             component="nav"

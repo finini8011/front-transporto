@@ -70,8 +70,8 @@ const Home = () => {
   }, [data]);
 
   const handleCardClick = (step, state) => {
-    const isIncluded = user.permissions.includes(step); //verificar que esté permitido de ver este paso
-    if (isIncluded || user.permissions.length===0) { //verifica si está permitido o si tiene permisos de admin
+    const isIncluded = user.permissions?.includes(step); //verificar que esté permitido de ver este paso
+    if (isIncluded || user.permissions?.length===0) { //verifica si está permitido o si tiene permisos de admin
       if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
         return handleNavigate(`/step/${step}`)
       }

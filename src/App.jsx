@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
@@ -33,14 +33,15 @@ function App() {
   const checkLogin = (instanceStore, element) => {
     const { auth } = instanceStore.getState();
     const { authState } = auth;
-    return authState.user?.id ? element : <Login />;
+    return authState.user?.id ? element :  <Navigate to="/" replace />;
     // Asumiendo que el id esta en null al hacer logauth
-  }
+  } 
+
 
   const checkAdmin = (instanceStore, element) => {
      const { auth } = instanceStore.getState();
     const { authState } = auth;
-    return authState.user?.permissions?.length === 0 ? element : <Home />; 
+    return authState.user?.permissions?.length === 0 ? element : <Navigate to="/home" replace />; 
   }
 
   return (

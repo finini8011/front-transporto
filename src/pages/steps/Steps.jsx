@@ -65,6 +65,7 @@ const Steps = () => {
         23: Step23,
         24: Step24,
     };
+    let filteredComponents ={};
     const user = useSelector(selectCurrentUser);
     const { id } = useParams();
 
@@ -75,6 +76,19 @@ const Steps = () => {
             }
         }
     }
+
+/*     if (user?.permissions?.length != 0) {
+        user?.permissions?.map((key) => {
+            if (components.hasOwnProperty(key)) {
+                filteredComponents[key] = components[key];
+            } else {
+                filteredComponents[key] = (props) => <CardPermissions permmisionsUser {...props} />;
+            }
+        });
+        components = filteredComponents;
+        console.log(components, "componenetes")
+    } */
+
 
 
 

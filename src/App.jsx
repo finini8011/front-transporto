@@ -41,7 +41,7 @@ function App() {
   const checkAdmin = (instanceStore, element) => {
     const { auth } = instanceStore.getState();
     const { authState } = auth;
-    return authState.user.permissions.length ===0 ? element : <Home />;
+    return authState.user?.permissions?.length ===0 ? element : <Home />;
   }
 
   return (

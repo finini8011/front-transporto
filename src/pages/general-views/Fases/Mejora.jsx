@@ -5,17 +5,20 @@ import Card from "../../../components/commons/Cards/Card";
 import ProgressBar from "../../../components/commons/Progress/ProgressBar";
 import { dataCard } from "../../../constants";
 import { selectCurrentUser } from "../../../api/features/auth/authSlice";
-import { useGetStateStepsQuery, useGetStatePESVQuery } from "../../../api/services/steps/stepsApiSlice";
+import {
+  useGetStateStepsQuery,
+  useGetStatePESVQuery,
+} from "../../../api/services/steps/stepsApiSlice";
 import { useOutletContext } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Mejora = () => {
-  
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
-  const {data:dataState} = useGetStatePESVQuery();
-  const {handleNavigate} = useOutletContext()
+  const { data: dataState } = useGetStatePESVQuery();
+  const { handleNavigate } = useOutletContext();
 
   let resultCumple = 0;
   let parcialmente = 0;
@@ -24,7 +27,7 @@ const Mejora = () => {
 
   if (dataState) {
     const { 4: fase4 } = dataState;
-     arrayDateStateFase4 = Object.values(fase4);
+    arrayDateStateFase4 = Object.values(fase4);
     arrayDateStateFase4.map((registro) => {
       if (registro === "Cumple") {
         resultCumple = resultCumple + 1;
@@ -35,49 +38,72 @@ const Mejora = () => {
       if (registro === "No aplica") {
         resultNoAplica = resultNoAplica + 1;
       }
-    })
+    });
   }
 
-
   let resultParcialmente = parcialmente * 0.25;
-  let resultPesv = (resultCumple + resultParcialmente  )/(arrayDateStateFase4.length - resultNoAplica )*100 ;
-  
+  let resultPesv =
+    ((resultCumple + resultParcialmente) /
+      (arrayDateStateFase4.length - resultNoAplica)) *
+    100;
+
   useEffect(() => {
-    if (data) {  
+    if (data) {
       const updatedData = dataCard.map((dataC, i) => {
         return {
           ...dataC,
-          state: data[i + 1][0]
+          state: data[i + 1][0],
         };
       });
-      console.log(updatedData)
+      console.log(updatedData);
 
-      setUpdatedDataCard(updatedData.filter(card => card.stage == 4));
+      setUpdatedDataCard(updatedData.filter((card) => card.stage == 4));
     }
-  }, [data]);  
+  }, [data]);
 
   const handleCardClick = (step, state) => {
-    if (state !== "No aplica" && user?.compania?.nivel == "Básico") {
-      return handleNavigate(`/step/${step}`)
+    const isIncluded = user.permissions.includes(step); //verificar que esté permitido de ver este paso
+    if (isIncluded) {
+      if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
+        return handleNavigate(`/step/${step}`);
+      }
+      if (state !== "No aplica" && user?.compania?.nivel === "Básico") {
+        return handleNavigate(`/step/${step}`);
+      } else {
+        return handleNavigate(`/home`);
+      }
     } else {
-      return handleNavigate(`/step/${step}`)
+      toast.error("No tiene permiso para ingresar a este paso.");
     }
   };
-  <ProgressBar bgcolor="#0090ff" progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0} height={12} width="100%" text="FASE#4 MEJORA" />
+
+  <ProgressBar
+    bgcolor="#0090ff"
+    progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0}
+    height={12}
+    width="100%"
+    text="FASE#4 MEJORA"
+  />;
 
   return (
     <div className="justify-center ">
-  <ProgressBar bgcolor="#0090ff" progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0} height={12} width="100%" text="FASE#4 MEJORA" />
+           <Toaster />
+      <ProgressBar
+        bgcolor="#0090ff"
+        progress={Math.round(resultPesv) ? Math.round(resultPesv) : 0}
+        height={12}
+        width="100%"
+        text="FASE#4 MEJORA"
+      />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        {
-          updatedDataCard.map((data, key) => (
-            <Card
-              key={key}
-              data={data}
-              numberCard={key}
-              onClick={handleCardClick}
-            />
-          ))}
+        {updatedDataCard.map((data, key) => (
+          <Card
+            key={key}
+            data={data}
+            numberCard={key}
+            onClick={handleCardClick}
+          />
+        ))}
       </div>
     </div>
   );

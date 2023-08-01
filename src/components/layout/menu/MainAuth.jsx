@@ -102,6 +102,12 @@ const MainAuth = () => {
   };
 
   useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
+
+  useEffect(() => {
     const step = currentPage.split("/");
     setVerifiedStepPage(step[1]);
   }, [currentPage]);
@@ -165,6 +171,10 @@ const MainAuth = () => {
       setVerifiedStepPageImprove(false);
     }
   }, [currentPage]);
+
+  useEffect(() => {
+  }, [])
+  
 
   return (
     <div className="min-h-screen flex w-full relative">

@@ -222,7 +222,7 @@ const MainAuth = () => {
           </div>
         </div>
         <div className=" text-sm pt-6 relative">
-          <h3 className={`${openMenu ? "px-12" : "text-center"}`}>Menu</h3>
+          <h3 className={`${openMenu ? "px-12" : "text-center"}`}>Menú</h3>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}
             component="nav"

@@ -16,7 +16,8 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "/img/logo.png";
+//import logo from "/img/logo.png";
+import logo from "../../../img/logo.jpg"
 import abc from "/img/abc.png";
 import transporto from "/img/transporto.png";
 import arrow from "/img/arrow.svg";
@@ -204,7 +205,7 @@ const MainAuth = () => {
             openMenu ? "py-2 px-4" : "p-2"
           }`}
         >
-          <img src={openMenu ? logo : transporto} alt="logo" />
+          <img src={openMenu ? logo: transporto} alt="logo" />
           {openMenu && (
             <p className="capitalize color-primary text-xs">
               plan estratégico de seguridad vial
@@ -233,14 +234,14 @@ const MainAuth = () => {
               className={`flex gap-2 ${currentPage === "/home" && "active"}`}
               sx={{ justifyContent: "center" }}
             >
-              <FontAwesomeIcon icon={faHouse} className="w-5 h-5" />
+              <FontAwesomeIcon icon={faHouse} className="w-4 h-4" />
               {openMenu && (
                 <ListItemText
                   primary="Inicio"
                   primaryTypographyProps={{
                     component: "span",
                     sx: {
-                      fontSize: "0.9rem",
+                      fontSize: "0.8rem",
                     },
                   }}
                 />
@@ -258,14 +259,14 @@ const MainAuth = () => {
               }`}
               sx={{ justifyContent: "center" }}
             >
-              <FontAwesomeIcon icon={faGrip} className="w-5 h-5" />
+              <FontAwesomeIcon icon={faGrip} className="w-4 h-4" />
               {openMenu && (
                 <ListItemText
                   primary="Fases PESV"
                   primaryTypographyProps={{
                     component: "span",
                     sx: {
-                      fontSize: "0.9rem",
+                      fontSize: "0.8rem",
                     },
                   }}
                 />
@@ -286,13 +287,13 @@ const MainAuth = () => {
                       "active"
                     }`}
                   >
-                    <FontAwesomeIcon icon={faVoteYea} className="w-5 h-5" />
+                    <FontAwesomeIcon icon={faVoteYea} className="w-4 h-4" />
                     <ListItemText
                       primary="Planificación"
                       primaryTypographyProps={{
                         component: "span",
                         sx: {
-                          fontSize: "0.9rem",
+                          fontSize: "0.8rem",
                         },
                       }}
                     />
@@ -315,7 +316,7 @@ const MainAuth = () => {
                               primaryTypographyProps={{
                                 component: "span",
                                 sx: {
-                                  fontSize: "0.9rem",
+                                  fontSize: "0.8rem",
                                 },
                               }}
                             />
@@ -333,13 +334,13 @@ const MainAuth = () => {
                       "active"
                     }`}
                   >
-                    <FontAwesomeIcon icon={faCogs} className="w-5 h-5" />
+                    <FontAwesomeIcon icon={faCogs} className="w-4 h-4" />
                     <ListItemText
                       primary="Implementación"
                       primaryTypographyProps={{
                         component: "span",
                         sx: {
-                          fontSize: "0.9rem",
+                          fontSize: "0.8rem",
                         },
                       }}
                     />
@@ -363,7 +364,7 @@ const MainAuth = () => {
                                 primaryTypographyProps={{
                                   component: "span",
                                   sx: {
-                                    fontSize: "0.9rem",
+                                    fontSize: "0.8rem",
                                   },
                                 }}
                               />
@@ -382,13 +383,13 @@ const MainAuth = () => {
                       "active"
                     }`}
                   >
-                    <FontAwesomeIcon icon={faEye} className="w-5 h-5" />
+                    <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
                     <ListItemText
                       primary="Seguimiento"
                       primaryTypographyProps={{
                         component: "span",
                         sx: {
-                          fontSize: "0.9rem",
+                          fontSize: "0.8rem",
                         },
                       }}
                     />
@@ -411,7 +412,7 @@ const MainAuth = () => {
                               primaryTypographyProps={{
                                 component: "span",
                                 sx: {
-                                  fontSize: "0.9rem",
+                                  fontSize: "0.8rem",
                                 },
                               }}
                             />
@@ -428,13 +429,13 @@ const MainAuth = () => {
                       "active"
                     }`}
                   >
-                    <FontAwesomeIcon icon={faCheckSquare} className="w-5 h-5" />
+                    <FontAwesomeIcon icon={faCheckSquare} className="w-4 h-4" />
                     <ListItemText
                       primary="Mejora"
                       primaryTypographyProps={{
                         component: "span",
                         sx: {
-                          fontSize: "0.9rem",
+                          fontSize: "0.8rem",
                         },
                       }}
                     />
@@ -456,7 +457,7 @@ const MainAuth = () => {
                               primaryTypographyProps={{
                                 component: "span",
                                 sx: {
-                                  fontSize: "0.9rem",
+                                  fontSize: "0.8rem",
                                 },
                               }}
                             />
@@ -475,14 +476,14 @@ const MainAuth = () => {
               sx={{ justifyContent: "center" }}
               onClick={() => handleNavigate("/list-verification")}
             >
-              <FontAwesomeIcon icon={faPenToSquare} className="w-5 h-5" />
+              <FontAwesomeIcon icon={faPenToSquare} className="w-4 h-4" />
               {openMenu && (
                 <ListItemText
                   primary="Lista de Chequeo"
                   primaryTypographyProps={{
                     component: "span",
                     sx: {
-                      fontSize: "0.9rem",
+                      fontSize: "0.8rem",
                     },
                   }}
                 />
@@ -496,14 +497,14 @@ const MainAuth = () => {
                 }`}
                 sx={{ justifyContent: "center" }}
               >
-                <FontAwesomeIcon icon={faFile} className="w-5 h-5" />
+                <FontAwesomeIcon icon={faFile} className="w-4 h-4" />
                 {openMenu && (
                   <ListItemText
                     primary="Informes"
                     primaryTypographyProps={{
                       component: "span",
                       sx: {
-                        fontSize: "0.9rem",
+                        fontSize: "0.8rem",
                       },
                     }}
                   />
@@ -518,14 +519,14 @@ const MainAuth = () => {
               }`}
               sx={{ justifyContent: "center" }}
             >
-              <FontAwesomeIcon icon={faCalendarDays} className="w-5 h-5" />
+              <FontAwesomeIcon icon={faCalendarDays} className="w-4 h-4" />
               {openMenu && (
                 <ListItemText
                   primary="Calendario"
                   primaryTypographyProps={{
                     component: "span",
                     sx: {
-                      fontSize: "0.9rem",
+                      fontSize: "0.8rem",
                     },
                   }}
                 />
@@ -537,14 +538,14 @@ const MainAuth = () => {
                 className={`flex gap-2 ${currentPage === "/users" && "active"}`}
                 sx={{ justifyContent: "center" }}
               >
-                <FontAwesomeIcon icon={faUser} className="w-5 h-5" />
+                <FontAwesomeIcon icon={faUser} className="w-4 h-4" />
                 {openMenu && (
                   <ListItemText
                     primary="Usuarios"
                     primaryTypographyProps={{
                       component: "span",
                       sx: {
-                        fontSize: "0.9rem",
+                        fontSize: "0.8rem",
                       },
                     }}
                   />
@@ -562,7 +563,7 @@ const MainAuth = () => {
             >
               <FontAwesomeIcon
                 icon={faArrowUpRightFromSquare}
-                className=" w-5 h-5"
+                className=" w-4 h-4"
               />
 
               {openMenu && <p>Cerrar Sesión</p>}
@@ -570,7 +571,7 @@ const MainAuth = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 h-screen bg-white flex flex-col overflow-auto">
+      <div className="flex-1 h-screen bg-white flex flex-col overflow-x-hidden">
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <div className="flex bg-white   ">
           <div className="p-6 min-w-[80%] flex-1">

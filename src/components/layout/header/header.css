@@ -72,8 +72,6 @@ nav a {
   transform: rotate(-90deg);
 }
 
-
-.img-header{
-  width: 18px;
-  height: 18px;
+.text-img {
+  font-size: 0.7rem;
 }

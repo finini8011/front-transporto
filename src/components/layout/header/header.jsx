@@ -44,11 +44,11 @@ const Header = ({ currentPage, setCurrentPage }) => {
           </h3>
           <p className="text-xs color-fifth">{date} </p>
         </div>
-        <div>
+        <>
           <ul className="flex flex-row gap-4 color-fifth items-center">
             <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-              <img className="" src={buscar} alt="Expandir" />
-              <p>Buscar</p>
+              <img className="w-4 h-4" src={buscar} alt="Expandir" />
+              <p className="text-img">Buscar</p>
             </li>
             {user.permissions.length === 0 && (
               <li
@@ -70,8 +70,8 @@ const Header = ({ currentPage, setCurrentPage }) => {
                 <p
                   className={`${currentPage === "/register-company" ||
                     currentPage === "/update-company"
-                    ? "color-fourth"
-                    : "color-fifth"
+                    ? "color-fourth text-img"
+                    : "color-fifth text-img"
                     }`}
                 >
                   Empresa
@@ -87,27 +87,28 @@ const Header = ({ currentPage, setCurrentPage }) => {
                 color={`${currentPage === "/guide" ? "#0090FF" : "#c2c7d0"}`}
               />
               <p
-                className={`${currentPage === "/guide" ? "color-fourth" : "color-fifth"
+                className={`${currentPage === "/guide" ? "color-fourth text-img" : "color-fifth text-img"
                   }`}
               >
                 Guía Rápida
+                
               </p>
               {/* <p className="leading-none"></p> */}
             </li>
             <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-              <img className="" src={modulo} alt="Expandir" />
-              <p>Módulos</p>
+              <img className="w-4 h-4" src={modulo} alt="Expandir" />
+              <p className="text-img">Módulos</p>
             </li>
             <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-              <img className="" src={herramientas} alt="Expandir" />
-              <p>Herramientas</p>
+              <img className="w-4 h-4" src={herramientas} alt="Expandir" />
+              <p className="text-img">Herramientas</p>
             </li>
             <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-              <img className="" src={expandir} alt="Expandir" />
-              <p>Expandir</p>
+              <img className="w-4 h-4" src={expandir} alt="Expandir" />
+              <p className="text-img">Expandir</p>
             </li>
           </ul>
-        </div>
+        </>
       </nav>
     </React.Fragment>
   );

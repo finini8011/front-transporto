@@ -181,7 +181,7 @@ const MainAuth = () => {
     <div className="min-h-screen flex w-full relative">
       <Toaster />
       <div
-        className={`shadow-md relative menu-container h-screen overflow-y-hidden overflow-x-hidden ${openMenu ? "menu-open" : "menu-close"
+        className={`shadow-md  menu-container h-screen overflow-y-hidden overflow-x-hidden ${openMenu ? "menu-open" : "menu-close"
           }`}
       >
         <div>
@@ -192,7 +192,7 @@ const MainAuth = () => {
             alt="notification"
           />
           <img
-            className={`absolute w-9 h-9 cursor-pointer top-[8.9rem] -right-4 z-10 ${openMenu ? "rotate-0" : "rotate-180 "
+            className={`fixed w-9 h-9 cursor-pointer top-[8.9rem] z-10 ${openMenu ? "rotate-0 left-48" : "rotate-180 left-16"
               } `}
             src={arrow}
             alt=""
@@ -565,7 +565,7 @@ const MainAuth = () => {
       <div className="flex-1 h-screen bg-white flex flex-col overflow-x-hidden">
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <div className="flex bg-white   ">
-          <div className="p-6 min-w-[80%] flex-1">
+          <div className="p-6 px-14 min-w-[80%] flex-1">
             {currentPage !== "/guide" &&
               currentPage !== "/register-company" && (
                 <BreakCrumbs handleNavigate={handleNavigate} />

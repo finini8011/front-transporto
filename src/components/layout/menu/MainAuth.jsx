@@ -184,21 +184,23 @@ const MainAuth = () => {
         className={`shadow-md relative menu-container h-screen overflow-y-auto overflow-x-hidden ${openMenu ? "menu-open" : "menu-close"
           }`}
       >
-        <img
-          className={`absolute right-16 top-44 cursor-pointer z-10 ${openMenu ? "block" : "hidden"
-            } `}
-          src={notification}
-          alt=""
-        />
-        <img
-          className={`absolute right-2  cursor-pointer z-20 ${openMenu ? "rotate-0 top-44 right-2" : "rotate-180 top-32 right-0"
-            } `}
-          src={arrow}
-          alt=""
-          onClick={handleOpenMenu}
-        />
+        <div>
+          <img
+            className={`absolute right-5 top-[6.8rem] w-8 h-8 cursor-pointer z-10 ${openMenu ? "block" : "hidden"
+              } `}
+            src={notification}
+            alt="notification"
+          />
+          <img
+            className={`absolute w-9 h-9 cursor-pointer top-[8.9rem] -right-4 z-10 ${openMenu ? "rotate-0" : "rotate-180 "
+              } `}
+            src={arrow}
+            alt=""
+            onClick={handleOpenMenu}
+          />
+        </div>
         <div
-          className={`flex items-center justify-center flex-col gap-1 bg-slate-50  border-third border-b ${openMenu ? "py-2 px-4" : "p-2"
+          className={`flex items-center justify-center flex-col gap-1 bg-slate-50  border-third border-b ${openMenu ? " px-4" : "p-2"
             }`}
         >
           <img className={openMenu ? "imgLogo" : "w-10 h-10"} src={openMenu ? logo : transporto} alt="logo" />
@@ -209,7 +211,7 @@ const MainAuth = () => {
           )}
         </div>
         <div
-          className={` border-third border-b ${openMenu ? "py-2 px-4" : "p-2"}`}
+          className={` border-third border-b ${openMenu ? "py-4 px-4" : "p-2"}`}
         >
           <div className="flex justify-center items-center gap-2">
             <img className="w-8" src={abc} alt="logo" />
@@ -250,10 +252,10 @@ const MainAuth = () => {
             <ListItemButton
               onClick={handleClick}
               className={`flex gap-2 ${(currentPage === "/planificacion" ||
-                  currentPage === "/implementacion" ||
-                  currentPage === "/seguimiento" ||
-                  currentPage === "/mejora" ||
-                  verifiedStepPage === "step") &&
+                currentPage === "/implementacion" ||
+                currentPage === "/seguimiento" ||
+                currentPage === "/mejora" ||
+                verifiedStepPage === "step") &&
                 "active"
                 }`}
               sx={{ justifyContent: "center" }}
@@ -281,7 +283,7 @@ const MainAuth = () => {
                       handleNavigate("/planificacion");
                     }}
                     className={`flex gap-2 ${(currentPage === "/planificacion" ||
-                        verifiedStepPagePlanification) &&
+                      verifiedStepPagePlanification) &&
                       "active"
                       }`}
                   >
@@ -326,7 +328,7 @@ const MainAuth = () => {
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/implementacion")}
                     className={`flex gap-2 ${(currentPage === "/implementacion" ||
-                        verifiedStepPageImplementation) &&
+                      verifiedStepPageImplementation) &&
                       "active"
                       }`}
                   >
@@ -373,7 +375,7 @@ const MainAuth = () => {
                     sx={{ pl: 4 }}
                     onClick={() => handleNavigate("/seguimiento")}
                     className={`flex gap-2 ${(currentPage === "/seguimiento" ||
-                        verifiedStepPageFollowup) &&
+                      verifiedStepPageFollowup) &&
                       "active"
                       }`}
                   >

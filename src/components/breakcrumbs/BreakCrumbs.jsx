@@ -216,7 +216,7 @@ const BreakCrumbs = ({ handleNavigate }) => {
     });
 
   return (
-    <div className=" flex mb-6 border border-fourth py-2 px-4 bg-white justify-between">
+    <div className=" flex mb-6 border border-fourth  px-4 bg-white justify-between">
       <div className="flex gap-2">
         -
         {location.pathname !== "/home" && (

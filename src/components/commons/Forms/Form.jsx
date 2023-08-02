@@ -51,6 +51,7 @@ const Form = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
     if (isValid) {
       setErrors([]);
       onSubmit(formValues, id);
+      formRef.current.reset(); 
     } else {
       setErrors(newErrors);
     }

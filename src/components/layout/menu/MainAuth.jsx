@@ -181,7 +181,7 @@ const MainAuth = () => {
     <div className="min-h-screen flex w-full relative">
       <Toaster />
       <div
-        className={`shadow-md relative menu-container h-screen overflow-y-auto overflow-x-hidden ${openMenu ? "menu-open" : "menu-close"
+        className={`shadow-md relative menu-container h-screen overflow-y-hidden overflow-x-hidden ${openMenu ? "menu-open" : "menu-close"
           }`}
       >
         <div>
@@ -275,80 +275,35 @@ const MainAuth = () => {
               {!openMenu ? "" : openList ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             {openMenu && (
-              <Collapse in={openList} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => {
-                      handleNavigate("/planificacion");
-                    }}
-                    className={`flex gap-2 ${(currentPage === "/planificacion" ||
-                      verifiedStepPagePlanification) &&
-                      "active"
-                      }`}
-                  >
-                    <FontAwesomeIcon icon={faVoteYea} className="w-4 h-4" />
-                    <ListItemText
-                      primary="Planificación"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.8rem",
-                        },
+              <div className={openList ? "container-listFasesPesv" : ""} >
+                <Collapse in={openList} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={() => {
+                        handleNavigate("/planificacion");
                       }}
-                    />
-                  </ListItemButton>
-                  {(currentPage === "/planificacion" ||
-                    verifiedStepPagePlanification) && (
-                      <Collapse in={true} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                            <ListItemButton
-                              sx={{ pl: 10 }}
-                              key={num}
-                              onClick={() => handleNavigate(`/step/${num}`)}
-                              className={`flex gap-2 ${currentPage === `/step/${num}` && "active"
-                                }`}
-                            >
-                              <ListItemText
-                                primary={`> Paso ${num}`}
-                                primaryTypographyProps={{
-                                  component: "span",
-                                  sx: {
-                                    fontSize: "0.8rem",
-                                  },
-                                }}
-                              />
-                            </ListItemButton>
-                          ))}
-                        </List>
-                      </Collapse>
-                    )}
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => handleNavigate("/implementacion")}
-                    className={`flex gap-2 ${(currentPage === "/implementacion" ||
-                      verifiedStepPageImplementation) &&
-                      "active"
-                      }`}
-                  >
-                    <FontAwesomeIcon icon={faCogs} className="w-4 h-4" />
-                    <ListItemText
-                      primary="Implementación"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.8rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                  {(currentPage === "/implementacion" ||
-                    verifiedStepPageImplementation) && (
-                      <Collapse in={true} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          {[9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19].map(
-                            (num) => (
+                      className={`flex gap-2 ${(currentPage === "/planificacion" ||
+                        verifiedStepPagePlanification) &&
+                        "active"
+                        }`}
+                    >
+                      <FontAwesomeIcon icon={faVoteYea} className="w-4 h-4" />
+                      <ListItemText
+                        primary="Planificación"
+                        primaryTypographyProps={{
+                          component: "span",
+                          sx: {
+                            fontSize: "0.8rem",
+                          },
+                        }}
+                      />
+                    </ListItemButton>
+                    {(currentPage === "/planificacion" ||
+                      verifiedStepPagePlanification) && (
+                        <Collapse in={true} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                               <ListItemButton
                                 sx={{ pl: 10 }}
                                 key={num}
@@ -366,35 +321,124 @@ const MainAuth = () => {
                                   }}
                                 />
                               </ListItemButton>
-                            )
-                          )}
-                        </List>
-                      </Collapse>
-                    )}
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => handleNavigate("/seguimiento")}
-                    className={`flex gap-2 ${(currentPage === "/seguimiento" ||
-                      verifiedStepPageFollowup) &&
-                      "active"
-                      }`}
-                  >
-                    <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
-                    <ListItemText
-                      primary="Seguimiento"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.8rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                  {(currentPage === "/seguimiento" ||
-                    verifiedStepPageFollowup) && (
+                            ))}
+                          </List>
+                        </Collapse>
+                      )}
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={() => handleNavigate("/implementacion")}
+                      className={`flex gap-2 ${(currentPage === "/implementacion" ||
+                        verifiedStepPageImplementation) &&
+                        "active"
+                        }`}
+                    >
+                      <FontAwesomeIcon icon={faCogs} className="w-4 h-4" />
+                      <ListItemText
+                        primary="Implementación"
+                        primaryTypographyProps={{
+                          component: "span",
+                          sx: {
+                            fontSize: "0.8rem",
+                          },
+                        }}
+                      />
+                    </ListItemButton>
+                    {(currentPage === "/implementacion" ||
+                      verifiedStepPageImplementation) && (
+                        <Collapse in={true} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            {[9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19].map(
+                              (num) => (
+                                <ListItemButton
+                                  sx={{ pl: 10 }}
+                                  key={num}
+                                  onClick={() => handleNavigate(`/step/${num}`)}
+                                  className={`flex gap-2 ${currentPage === `/step/${num}` && "active"
+                                    }`}
+                                >
+                                  <ListItemText
+                                    primary={`> Paso ${num}`}
+                                    primaryTypographyProps={{
+                                      component: "span",
+                                      sx: {
+                                        fontSize: "0.8rem",
+                                      },
+                                    }}
+                                  />
+                                </ListItemButton>
+                              )
+                            )}
+                          </List>
+                        </Collapse>
+                      )}
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={() => handleNavigate("/seguimiento")}
+                      className={`flex gap-2 ${(currentPage === "/seguimiento" ||
+                        verifiedStepPageFollowup) &&
+                        "active"
+                        }`}
+                    >
+                      <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
+                      <ListItemText
+                        primary="Seguimiento"
+                        primaryTypographyProps={{
+                          component: "span",
+                          sx: {
+                            fontSize: "0.8rem",
+                          },
+                        }}
+                      />
+                    </ListItemButton>
+                    {(currentPage === "/seguimiento" ||
+                      verifiedStepPageFollowup) && (
+                        <Collapse in={true} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            {[20, 21, 22].map((num) => (
+                              <ListItemButton
+                                sx={{ pl: 10 }}
+                                key={num}
+                                onClick={() => handleNavigate(`/step/${num}`)}
+                                className={`flex gap-2 ${currentPage === `/step/${num}` && "active"
+                                  }`}
+                              >
+                                <ListItemText
+                                  primary={`> Paso ${num}`}
+                                  primaryTypographyProps={{
+                                    component: "span",
+                                    sx: {
+                                      fontSize: "0.8rem",
+                                    },
+                                  }}
+                                />
+                              </ListItemButton>
+                            ))}
+                          </List>
+                        </Collapse>
+                      )}
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={() => handleNavigate("/mejora")}
+                      className={`flex gap-2 ${(currentPage === "/mejora" || verifiedStepPageImprove) &&
+                        "active"
+                        }`}
+                    >
+                      <FontAwesomeIcon icon={faCheckSquare} className="w-4 h-4" />
+                      <ListItemText
+                        primary="Mejora"
+                        primaryTypographyProps={{
+                          component: "span",
+                          sx: {
+                            fontSize: "0.8rem",
+                          },
+                        }}
+                      />
+                    </ListItemButton>
+                    {(currentPage === "/mejora" || verifiedStepPageImprove) && (
                       <Collapse in={true} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                          {[20, 21, 22].map((num) => (
+                          {[23, 24].map((num) => (
                             <ListItemButton
                               sx={{ pl: 10 }}
                               key={num}
@@ -416,51 +460,9 @@ const MainAuth = () => {
                         </List>
                       </Collapse>
                     )}
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => handleNavigate("/mejora")}
-                    className={`flex gap-2 ${(currentPage === "/mejora" || verifiedStepPageImprove) &&
-                      "active"
-                      }`}
-                  >
-                    <FontAwesomeIcon icon={faCheckSquare} className="w-4 h-4" />
-                    <ListItemText
-                      primary="Mejora"
-                      primaryTypographyProps={{
-                        component: "span",
-                        sx: {
-                          fontSize: "0.8rem",
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                  {(currentPage === "/mejora" || verifiedStepPageImprove) && (
-                    <Collapse in={true} timeout="auto" unmountOnExit>
-                      <List component="div" disablePadding>
-                        {[23, 24].map((num) => (
-                          <ListItemButton
-                            sx={{ pl: 10 }}
-                            key={num}
-                            onClick={() => handleNavigate(`/step/${num}`)}
-                            className={`flex gap-2 ${currentPage === `/step/${num}` && "active"
-                              }`}
-                          >
-                            <ListItemText
-                              primary={`> Paso ${num}`}
-                              primaryTypographyProps={{
-                                component: "span",
-                                sx: {
-                                  fontSize: "0.8rem",
-                                },
-                              }}
-                            />
-                          </ListItemButton>
-                        ))}
-                      </List>
-                    </Collapse>
-                  )}
-                </List>
-              </Collapse>
+                  </List>
+                </Collapse>
+              </div>
             )}
             <ListItemButton
               className={`flex gap-2 ${currentPage === "/list-verification" && "active"

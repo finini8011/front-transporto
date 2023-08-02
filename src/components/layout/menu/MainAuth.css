@@ -56,3 +56,9 @@
   text-align: center;
   margin-bottom: 0.3rem;
 }
+
+.container-listFasesPesv {
+  margin-right: 20px;
+  height: 100px;
+  overflow-y: auto;
+}

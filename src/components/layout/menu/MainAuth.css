@@ -12,12 +12,12 @@
   outline: none;
 }
 
-.menu-open{
-   width: 13rem;
+.menu-open {
+  width: 13rem;
 }
 
 
-.menu-close{
+.menu-close {
   width: 5rem;
   /* display: flex; */
   align-items: flex-end;
@@ -29,18 +29,29 @@
   bottom: 10px;
 }
 
-.text-transition{
+.text-transition {
   transition: 0.35s linear;
   outline: none;
   position: absolute;
 }
-.divider{
+
+.divider {
   width: 100%;
   height: 1px;
-  background:  #EAEAEA;
+  background: #EAEAEA;
 }
 
-.active{
-  color:#0090FF !important;
-  background-color: rgba(0,63,224,.05) !important; 
+.active {
+  color: #0090FF !important;
+  background-color: rgba(0, 63, 224, .05) !important;
+}
+
+.imgLogo {
+  max-width: 200px !important;
+  padding: 0px 10px 0px 10px;
+}
+
+.text-Logo {
+  font-size: 0.5rem;
+  text-align: center;
 }

@@ -27,7 +27,7 @@ const LateralRight = () => {
         }`}
     >
       <img
-        className={`absolute -left-5 top-[5.5rem] cursor-pointer z-10 ${openMenu ? "rotate-180" : "rotate-0"
+        className={`absolute w-9 h-9 -left-5 top-[4.0rem] cursor-pointer z-10 ${openMenu ? "rotate-180" : "rotate-0"
           } `}
         src={arrow}
         alt=""

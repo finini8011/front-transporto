@@ -34,82 +34,80 @@ const Header = ({ currentPage, setCurrentPage }) => {
 
   return (
     <React.Fragment>
-      <nav className="flex items-center justify-between flex-wrap bg-white py-3 shadow-md px-20 z-10">
-        <div className="flex flex-col gap-2">
-          <h3 className="text-xl">
+      <nav className="flex items-center justify-between flex-wrap bg-white  shadow-md px-9 py-2 z-10">
+        <div className="flex flex-col leading-4">
+          <h3 className="text-base uppercase">
             {user.compania?.razon_social
               ? user.compania.razon_social
               : "Empresa sin registrar"}{" "}
             - {user.name}{" "}
           </h3>
-          <p className="text-sm color-fifth">{date} </p>
+          <p className="text-xs color-fifth">{date} </p>
         </div>
-
-        <ul className="flex flex-row gap-4 color-fifth items-center">
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <img className="" src={buscar} alt="Expandir" />
-            <p>Buscar</p>
-          </li>
-          {user.permissions.length === 0 && (
-            <li
-              className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
-              onClick={() =>
-                handleNavigate(
-                  user.compania ? "/update-company" : "/register-company"
-                )
-              }
-              role="button"
-            >
-              <Empresa
-                color={`${
-                  currentPage === "/register-company" ||
-                  currentPage === "/update-company"
+        <div>
+          <ul className="flex flex-row gap-4 color-fifth items-center">
+            <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+              <img className="" src={buscar} alt="Expandir" />
+              <p>Buscar</p>
+            </li>
+            {user.permissions.length === 0 && (
+              <li
+                className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
+                onClick={() =>
+                  handleNavigate(
+                    user.compania ? "/update-company" : "/register-company"
+                  )
+                }
+                role="button"
+              >
+                <Empresa
+                  color={`${currentPage === "/register-company" ||
+                    currentPage === "/update-company"
                     ? "#0090FF"
                     : "#c2c7d0"
-                }`}
-              />
-              <p
-                className={`${
-                  currentPage === "/register-company" ||
-                  currentPage === "/update-company"
+                    }`}
+                />
+                <p
+                  className={`${currentPage === "/register-company" ||
+                    currentPage === "/update-company"
                     ? "color-fourth"
                     : "color-fifth"
-                }`}
-              >
-                Empresa
-              </p>
-            </li>
-          )}
+                    }`}
+                >
+                  Empresa
+                </p>
+              </li>
+            )}
 
-          <li
-            className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
-            onClick={() => handleNavigate("/guide")}
-          >
-            <Guide
-              color={`${currentPage === "/guide" ? "#0090FF" : "#c2c7d0"}`}
-            />
-            <p
-              className={`${
-                currentPage === "/guide" ? "color-fourth" : "color-fifth"
-              }`}
+            <li
+              className=" flex flex-col items-center text-xs gap-1 cursor-pointer"
+              onClick={() => handleNavigate("/guide")}
             >
-              Guía Rápida
-            </p>
-            {/* <p className="leading-none"></p> */}
-          </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <img className="" src={modulo} alt="Expandir" />
-            <p>Módulos</p>
-          </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <img className="" src={herramientas} alt="Expandir" />
-            <p>Herramientas</p>
-          </li>
-          <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
-            <img className="" src={expandir} alt="Expandir" />
-            <p>Expandir</p>
-          </li>
-        </ul>
+              <Guide
+                color={`${currentPage === "/guide" ? "#0090FF" : "#c2c7d0"}`}
+              />
+              <p
+                className={`${currentPage === "/guide" ? "color-fourth" : "color-fifth"
+                  }`}
+              >
+                Guía Rápida
+              </p>
+              {/* <p className="leading-none"></p> */}
+            </li>
+            <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+              <img className="" src={modulo} alt="Expandir" />
+              <p>Módulos</p>
+            </li>
+            <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+              <img className="" src={herramientas} alt="Expandir" />
+              <p>Herramientas</p>
+            </li>
+            <li className=" flex flex-col items-center text-xs gap-1 cursor-pointer">
+              <img className="" src={expandir} alt="Expandir" />
+              <p>Expandir</p>
+            </li>
+          </ul>
+        </div>
       </nav>
     </React.Fragment>
   );

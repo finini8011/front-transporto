@@ -23,8 +23,8 @@ export const stepsApiSlice = createApi({
           method: "GET",
         };
       },
-      providesTags: ["Steps"],
-      invalidatesTags: ["Steps"],
+        providesTags: ["Steps"],
+        invalidatesTags: ["Steps"],
     }),
     getDataStep: builder.query({
       query: (numStep) => {

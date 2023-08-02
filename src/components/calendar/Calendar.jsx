@@ -124,7 +124,6 @@ const Calendar = ({ calendarSmall }) => {
   const handleClickTagsDelet = (subStep) => {
     setTags((prevArray) => prevArray.filter((item) => item !== subStep));
   }
-
   // save event 
   const saveEvent = async () => {
     //prepara calendario

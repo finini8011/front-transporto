@@ -19,7 +19,9 @@ const Home = () => {
   const user = useSelector(selectCurrentUser);
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
-  const { data: dataState } = useGetStatePESVQuery();
+  const { data: dataState } = useGetStatePESVQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   const { handleNavigate } = useOutletContext();
 
   let resultCumple = 0;
@@ -71,16 +73,17 @@ const Home = () => {
 
   const handleCardClick = (step, state) => {
     const isIncluded = user.permissions?.includes(step); //verificar que esté permitido de ver este paso
-    if (isIncluded || user.permissions?.length===0) { //verifica si está permitido o si tiene permisos de admin
+    if (isIncluded || user.permissions?.length === 0) {
+      //verifica si está permitido o si tiene permisos de admin
       if (state !== "No aplica" && user?.compania?.nivel !== "Básico") {
-        return handleNavigate(`/step/${step}`)
+        return handleNavigate(`/step/${step}`);
       }
       if (state !== "No aplica" && user?.compania?.nivel === "Básico") {
-        return handleNavigate(`/step/${step}`)
+        return handleNavigate(`/step/${step}`);
       } else {
-        return handleNavigate(`/home`)
+        return handleNavigate(`/home`);
       }
-    }else{
+    } else {
       toast.error("No tiene permiso para ingresar a este paso.");
     }
   };
@@ -95,16 +98,20 @@ const Home = () => {
         width="100%"
         text="PESV"
       />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        {updatedDataCard.map((data, key) => (
-          <Card
-            key={key}
-            data={data}
-            numberCard={key}
-            onClick={handleCardClick}
-          />
-        ))}
-      </div>
+      {data ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          {updatedDataCard.map((data, key) => (
+            <Card
+              key={key}
+              data={data}
+              numberCard={key}
+              onClick={handleCardClick}
+            />
+          ))}
+        </div>
+      ) : (
+        <p>No se ha encontrado información, vuelva a intentarlo.</p>
+      )}
     </div>
   );
 };

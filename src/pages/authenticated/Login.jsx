@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useLoginUserMutation } from "../../api/services/auth/apiSlice";
 import { setToken, setUser, logOut } from "../../api/features/auth/authSlice";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 // import Image from "next/image";
 
 import InputLogin from "../../components/commons/input/text/InputLogin";
@@ -16,13 +16,12 @@ import Loading from "../../components/loading/Loading";
 import logo from "/logo.jpg";
 
 const Login = () => {
-  
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const paramValue = params.get('logout');
+  const paramValue = params.get("logout");
 
   const {
     register,
@@ -38,7 +37,9 @@ const Login = () => {
       const { user, token } = await loginUser(data).unwrap();
       dispatch(setToken({ accesstoken: token }));
       dispatch(setUser(user));
-      user.compania ? navigate("/home") : navigate("/register-company")
+
+        user.compania ? navigate("/home") : navigate("/register-company");
+
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       // return toast.error("Usuario no encontrado o no autorizado");
@@ -48,20 +49,18 @@ const Login = () => {
     }
   };
 
-  const handleEnter = (event)=> {
-   
+  const handleEnter = (event) => {
     if (event.key === "Enter") {
-      handleSubmit(onSubmit)()
+      handleSubmit(onSubmit)();
     }
-  }
+  };
 
   useEffect(() => {
-   if(paramValue){
-    dispatch(logOut(null))
-    navigate("/")
-   }
-  }, [location])
-  
+    if (paramValue) {
+      dispatch(logOut(null));
+      navigate("/");
+    }
+  }, [location]);
 
   return (
     <section className="bg-[#e8ecee] ">

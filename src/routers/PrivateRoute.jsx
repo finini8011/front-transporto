@@ -8,7 +8,7 @@ import {
 export const PrivateRoute = ({ children }) => {
 
     const user = useSelector(selectCurrentUser)
-    
+    console.log(user)
     return user
         ? children
         : <Navigate to="/" />

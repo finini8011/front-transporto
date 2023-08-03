@@ -54,11 +54,15 @@ function App() {
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           <Routes>
-            <Route exact path="/"  element={
+            <Route
+              exact
+              path="/"
+              element={
                 <PublicRoute>
                   <Login />
                 </PublicRoute>
-              } />
+              }
+            />
             <Route exact path="/register" element={<Register />} />
             <Route
               element={

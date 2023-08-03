@@ -82,6 +82,15 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage,
       end: 7,
     },
     {
+      label: "USUARIO",
+      type: "span",
+      placeholder: "",
+      name: "usuario",
+      nameApi: "users_name",
+      start: 7,
+      end: 7,
+    },
+    {
       type: "hr",
       start: 1,
       end: 8,
@@ -178,6 +187,7 @@ const FormFlex = ({ titleForm, step, nameStep, cols, onSubmit, mainTitle, stage,
     if (!isSaving) {
       const getData = async () => {
         const { data, isLoading: loading } = await getDataStep(step);
+       
         let payload = [];
         let dataGetPayload = {};
         if (!!data) {

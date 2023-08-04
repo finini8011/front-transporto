@@ -71,6 +71,8 @@ const MainAuth = () => {
       }, 500);
     }; */
 
+    console.log(user)
+
   const logoutSession = async () => {
     try {
       await logOutUser();

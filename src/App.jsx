@@ -27,27 +27,11 @@ import Users from "./pages/general-views/Users";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { PublicRoute } from "./routers/PublicRoute";
+import { AdminRoute } from "./routers/AdminRoute";
 
 const persistor = persistStore(store);
 
-function App() {
-  const checkLogin = (instanceStore, element) => {
-    const { auth } = instanceStore.getState();
-    const { authState } = auth;
-    console.log(authState);
-    return authState.user ? element : <Navigate to="/" replace />;
-    // Asumiendo que el id esta en null al hacer logauth
-  };
-
-  const checkAdmin = (instanceStore, element) => {
-    const { auth } = instanceStore.getState();
-    const { authState } = auth;
-    return authState.user?.permissions?.length === 0 ? (
-      element
-    ) : (
-      <Navigate to="/home" replace />
-    );
-  };
+function App() {          
 
   return (
     <Provider store={store}>
@@ -79,12 +63,20 @@ function App() {
               <Route
                 exact
                 path="/register-company"
-                element={checkAdmin(store, <RegisterCompany />)}
+                element={
+                  <AdminRoute>
+                    <RegisterCompany />
+                  </AdminRoute>
+                }
               />
               <Route
                 exact
                 path="/update-company"
-                element={checkAdmin(store, <UpdateCompany />)}
+                element={
+                  <AdminRoute>
+                    <UpdateCompany />
+                  </AdminRoute>
+                }
               />
               <Route
                 exact
@@ -94,14 +86,22 @@ function App() {
               <Route
                 exact
                 path="/informes"
-                element={checkAdmin(store, <Informes />)}
+                element={
+                  <AdminRoute>
+                    <Informes />
+                  </AdminRoute>
+                }
               />
               <Route exact path="/calendar" element={<CalendarPage />} />
               <Route exact path="/guide" element={<Guide />} />
               <Route
                 exact
                 path="/users"
-                element={checkAdmin(store, <Users />)}
+                element={
+                  <AdminRoute>
+                    <Users />
+                  </AdminRoute>
+                }
               />
               <Route exact path="/planificacion" element={<Planificacion />} />
               <Route exact path="/mejora" element={<Mejora />} />

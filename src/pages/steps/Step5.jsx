@@ -1,16 +1,27 @@
 import React from "react";
-import pageConst from "../../img/pageConst.jpg"
+import CardSubSteps from "../../components/commons/Cards/CardSubSteps";
+import SubStep511 from "./substeps/subSteps5/SubStep511";
+import SubStep512 from "./substeps/subSteps5/SubStep512";
+
+
+
 const Step5 = () => {
 
+  const subSteps = [
+    {
+      title: 'Lista de colaboradores de la organización',
+      component: <SubStep511/>,
+    },
+    {
+      title: 'Lista de contratistas',
+      component: <SubStep512 />,
+    },
+    // Agrega más subSteps si es necesario
+  ];
 
   return (
     <div>
-      <img
-        src={pageConst}
-        width={900}
-        alt="icon"
-        className="m-auto"
-      />
+      <CardSubSteps subSteps={subSteps} />
     </div>
   );
 };

@@ -22,7 +22,7 @@ const CardSubSteps = ({ subSteps, title }) => {
               className=" w-2 h-2 mr-2 "
             />
             <button onClick={() => handleClick(index)}>
-              {step.step}
+              <span className='mr-2'>{step.step}</span>
               {step.title}
             </button>
             {activeStep === index && step.component}

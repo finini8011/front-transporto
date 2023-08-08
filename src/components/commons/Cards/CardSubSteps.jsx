@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CardSubSteps = ({ subSteps }) => {
+const CardSubSteps = ({ subSteps}) => {
   const [activeStep, setActiveStep] = useState(null);
 
   const handleClick = (index) => {
@@ -11,7 +11,9 @@ const CardSubSteps = ({ subSteps }) => {
     <div>
       {subSteps.map((step, index) => (
         <div key={index}>
-          <button onClick={() => handleClick(index)}>{step.title}</button>
+          <button onClick={() => handleClick(index)}>
+            {step.step}
+            {step.title}</button>
           {activeStep === index && step.component}
         </div>
       ))}

@@ -5,10 +5,13 @@ import {
   } from "../api/features/auth/authSlice";
 
 
-export const PrivateRoute = ({ children }) => {
+export const AdminRoute = ({ children }) => {
+
+
 
     const user = useSelector(selectCurrentUser)
-    return user
+    
+    return user?.permissions?.length === 0
         ? children
-        : <Navigate to="/" />
+        : <Navigate to="/home" />
 }

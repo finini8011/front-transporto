@@ -23,6 +23,10 @@ const Step5 = () => {
 
   return (
     <div>
+      <h1 className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
+      FASE 1: PLANIFICACIÓN - PASO 5. DIAGNÓSTICO
+      </h1>
+      <p className="text-xs pb-3">subtitulo</p>
       <CardSubSteps title={"SUB ElEMENTOS PASO 5:DIAGNOSTICO"} subSteps={subSteps} />
     </div>
   );

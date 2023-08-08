@@ -23,7 +23,7 @@ const Step5 = () => {
 
   return (
     <div>
-      <CardSubSteps subSteps={subSteps} />
+      <CardSubSteps title={"SUB ElEMENTOS PASO 5:DIAGNOSTICO"} subSteps={subSteps} />
     </div>
   );
 };

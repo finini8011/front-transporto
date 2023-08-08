@@ -20,7 +20,9 @@ const ProgressBar = ({ bgcolor, progress, height, width, text }) => {
 
   const progresstext = {
     color: '#0090ff',
-    fontWeight: 400
+    fontWeight: 500,
+    fontSize:"0.7rem"
+
   }
 
   return (

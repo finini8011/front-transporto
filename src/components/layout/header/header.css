@@ -71,3 +71,7 @@ nav a {
 .modal-close:hover .close-icon {
   transform: rotate(-90deg);
 }
+
+.text-img {
+  font-size: 0.7rem;
+}

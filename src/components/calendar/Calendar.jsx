@@ -311,7 +311,7 @@ const Calendar = ({ calendarSmall }) => {
           headerToolbar={{
             left: calendarSmall ? '' : 'prev,next,today',
             center: 'title',
-            right: calendarSmall ? 'today' : 'dayGridMonth,timeGridWeek,timeGridDay',
+            right: calendarSmall ? '' : 'dayGridMonth,timeGridWeek,timeGridDay',
           }}
           initialView='dayGridMonth'
           editable={true}

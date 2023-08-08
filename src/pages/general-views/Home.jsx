@@ -12,12 +12,16 @@ import {
 } from "../../api/services/steps/stepsApiSlice";
 import { useOutletContext } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { CircularProgress } from "@mui/material";
+import ProgressCircular from "../../components/commons/Progress/ProgressCircular";
 // import { useGetStatePESVQuery } from "../../api/services/states/statesApiSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [updatedDataCard, setUpdatedDataCard] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [textNoData, setTextNoData] = useState(false);
   const { data } = useGetStateStepsQuery(user.compania?.nivel);
   const { data: dataState } = useGetStatePESVQuery(undefined, {
     refetchOnMountOrArgChange: true,
@@ -88,6 +92,26 @@ const Home = () => {
     }
   };
 
+ 
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+    }, 500);
+  
+    const tiempo = 10000; 
+  
+    setTimeout(() => {
+      clearInterval(timer);
+      setTextNoData(true);
+      setProgress(0);
+    }, tiempo);
+  
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <div className="justify-center ">
       <Toaster />
@@ -110,7 +134,11 @@ const Home = () => {
           ))}
         </div>
       ) : (
-        <p>No se ha encontrado información, vuelva a intentarlo.</p>
+        <div className="p-4 text-[#0090FF] rounded-2xl font-medium text-center text-xl mt-16 w-2/5 m-auto">
+          <ProgressCircular progress={progress} />
+          {textNoData &&
+            <p className="mb-4 text-center">No se encontraron datos...</p>}
+        </div>
       )}
     </div>
   );

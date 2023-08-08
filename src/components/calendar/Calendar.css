@@ -4,6 +4,7 @@
 
 .CalendarSmall .fc-scrollgrid-sync-table {
   width: 209px !important;
+
 }
 
 .CalendarSmall .fc-scroller {
@@ -24,9 +25,9 @@
   font-size: 0.6em !important;
 }
 
-.CalendarSmall .fc-day-today {
+/* .CalendarSmall .fc-day-today {
   background-color: #0089ff47 !important;
-}
+} */
 
 .CalendarSmall .fc-col-header-cell-cushion {
   font-size: 0.6em !important;
@@ -66,6 +67,12 @@
   height: 173px !important;
 }
 
+.CalendarSmall .fc-h-event .fc-event-main {
+  color: black; 
+}
+.CalendarSmall .fc .fc-daygrid-day.fc-day-today {
+  background-color: #82bdee2d !important;
+}
 
 .redersText {
   font-size: 0.7em;
@@ -78,6 +85,21 @@
   border: 1px solid var(--fc-event-border-color);
   color: white;
   font-size: 0.7em;
+}
+
+.CalendarBig .fc .fc-daygrid-day.fc-day-today {
+  background-color: #82bdee2d !important;
+}
+ .CalendarBig .fc-daygrid-body    {
+  width: 100% !important;
+} 
+
+.CalendarBig .fc-scrollgrid-sync-table {
+  width: 100% !important;
+}
+
+.CalendarBig  .fc-col-header {
+  width: 100% !important;
 }
 
 /************************************CSS MODAL*****************************************************/

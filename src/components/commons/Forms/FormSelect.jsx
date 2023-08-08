@@ -54,6 +54,15 @@ const FormSelect = ({ titleForm, step, nameStep, cols, onSubmit, isSaving,setIsS
       end: 3,
       value: "",
     },
+    {
+      label: "USUARIO",
+      type: "span",
+      placeholder: "",
+      name: "usuario",
+      nameApi: "users_name",
+      start: 3,
+      end: 5,
+    },
   ];
   const buttons = [
     {

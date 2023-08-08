@@ -124,7 +124,6 @@ const Calendar = ({ calendarSmall }) => {
   const handleClickTagsDelet = (subStep) => {
     setTags((prevArray) => prevArray.filter((item) => item !== subStep));
   }
-
   // save event 
   const saveEvent = async () => {
     //prepara calendario
@@ -303,8 +302,8 @@ const Calendar = ({ calendarSmall }) => {
 
   return (
 
-    <div className={calendarSmall ? 'CalendarSmall' : 'w-full CalendarBig'}>
-      <div className={calendarSmall ? 'CalendarSmall' : 'w-full CalendarBig'}>
+    <div className={calendarSmall ? 'CalendarSmall' : 'CalendarBig'}>
+      <div className={calendarSmall ? 'CalendarSmall' : 'CalendarBig'}>
         <FullCalendar
           locale={esLocale}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

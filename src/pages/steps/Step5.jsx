@@ -9,10 +9,12 @@ const Step5 = () => {
 
   const subSteps = [
     {
+      step: '5.1.1',
       title: 'Lista de colaboradores de la organización',
       component: <SubStep511/>,
     },
     {
+      step: '5.1.2',
       title: 'Lista de contratistas',
       component: <SubStep512 />,
     },

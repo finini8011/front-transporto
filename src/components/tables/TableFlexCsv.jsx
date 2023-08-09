@@ -1,5 +1,5 @@
 import React from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, esES } from '@mui/x-data-grid';
 
 const TableFlexCsv = ({ datos }) => {
   const MAX_COLUMNS = 5; // Define el número máximo de columnas a mostrar
@@ -38,8 +38,18 @@ const TableFlexCsv = ({ datos }) => {
   };
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid columns={columns} rows={datos} />
+    <div style={{ height: 380, width: '100%' }}>
+      <DataGrid
+        columns={columns}
+        rows={datos}
+        localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5]}
+      />
     </div>
   );
 };

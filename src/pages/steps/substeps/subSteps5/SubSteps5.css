@@ -1,0 +1,10 @@
+.button-save {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+}

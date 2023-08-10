@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import FileInput from '../../../../components/commons/input/file/FileInput';
+import TableFlexCsv from '../../../../components/tables/TableFlexCsv';
+import "./SubSteps5.css";
 
 const SubStep515 = () => {
 
+  const [listData, setListData]= useState([]);
+
 
   return (
-    <div className='text-black'>
-      <p>SubStep515</p>
+    <div className='p-5'>
+      <section className='pb-10'>
+        <FileInput />
+        <button className='button-save'>
+          Guardar
+        </button>
+      </section>
+      <TableFlexCsv datos={listData} />
     </div>
   );
 };

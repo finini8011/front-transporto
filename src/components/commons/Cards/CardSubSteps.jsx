@@ -14,16 +14,16 @@ const CardSubSteps = ({ subSteps, title }) => {
       <section className='bg-[#EEF2F6] p-4 text-[#0090FF] rounded-t-2xl font-medium w-full'>
         {title}
       </section>
-      <section className='border-2 text-sm text-[#0090FF] p-4 rounded-b-xl'>
+      <section className='border-2 text-sm  p-4 rounded-b-xl'>
         {subSteps.map((step, index) => (
-          <div className='' key={index}>
+          <div className='pb-2 align-center' key={index}>
             <FontAwesomeIcon
               icon={faCircle}
-              className=" w-2 h-2 mr-2 "
+              className=" w-2 h-2 mr-2 text-[#0090FF]"
             />
             <button onClick={() => handleClick(index)}>
-              <span className='mr-2'>{step.step}</span>
-              {step.title}
+              <span className='mr-2 text-[#0090FF]'>{step.step}</span>
+              <span className='mr-2 text-[#0090FF]'>{step.title}</span>
             </button>
             {activeStep === index && step.component}
           </div>

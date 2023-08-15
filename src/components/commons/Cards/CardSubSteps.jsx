@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faCircle } from "@fortawesome/free-solid-svg-icons";
 
 const CardSubSteps = ({ subSteps, title }) => {
   const [activeStep, setActiveStep] = useState(null);
@@ -17,15 +17,37 @@ const CardSubSteps = ({ subSteps, title }) => {
       <section className='border-2 text-sm  p-4 rounded-b-xl'>
         {subSteps.map((step, index) => (
           <div className='pb-2 align-center' key={index}>
-            <FontAwesomeIcon
-              icon={faCircle}
-              className=" w-2 h-2 mr-2 text-[#0090FF]"
-            />
-            <button onClick={() => handleClick(index)}>
-              <span className='mr-2 text-[#0090FF]'>{step.step}</span>
-              <span className='mr-2 text-[#0090FF]'>{step.title}</span>
-            </button>
-            {activeStep === index && step.component}
+            {activeStep === index && (
+              <>
+                <FontAwesomeIcon
+                  icon={faCircle}
+                  className={`w-2 h-2 mr-2 text-[#0090FF] ${activeStep === index ? 'opacity-100' : 'opacity-50'}`}
+                />
+                <button onClick={() => handleClick(index)}>
+                  <span className={`mr-2 text-[#0090FF] ${activeStep === index ? 'font-bold' : ''}`}>{step.step}</span>
+                  <span className={`mr-2 text-[#0090FF] ${activeStep === index ? 'font-bold' : ''}`}>{step.title}</span>
+                </button>
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  className={`w-2 h-2 mr-2 text-[#0090FF] ${activeStep === index ? 'opacity-100' : 'opacity-50'}`}
+                />
+                {step.component}
+              </>
+            )}
+            {activeStep === null && (
+              <button onClick={() => handleClick(index)}>
+                <FontAwesomeIcon
+                  icon={faCircle}
+                  className={`w-2 h-2 mr-2 text-[#0090FF] ${activeStep === index ? 'opacity-100' : 'opacity-50'}`}
+                />
+                <span className={`mr-2 text-[#0090FF] ${activeStep === index ? 'font-bold' : ''}`}>{step.step}</span>
+                <span className={`mr-2 text-[#0090FF] ${activeStep === index ? 'font-bold' : ''}`}>{step.title}</span>
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  className={`w-2 h-2 mr-2 text-[#0090FF] ${activeStep === index ? 'opacity-100' : 'opacity-50'}`}
+                />
+              </button>
+            )}
           </div>
         ))}
       </section>

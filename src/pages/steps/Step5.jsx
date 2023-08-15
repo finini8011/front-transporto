@@ -56,7 +56,9 @@ const Step5 = () => {
       <h1 className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
         FASE 1: PLANIFICACIÓN - PASO 5. DIAGNÓSTICO
       </h1>
-      <p className="text-xs pb-3">subtitulo</p>
+      <p className="text-xs pb-3">
+        Use el siguiente formulario para crear el acta de asignación de líderes del PESV. Si lo requiere emplee el archivo de descarga como guía para la elaboración.
+      </p>
       <CardSubSteps title={"SUB ELEMENTOS PASO 5: DIAGNÓSTICO"} subSteps={subSteps} />
     </div>
   );

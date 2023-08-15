@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import FileInput from '../../../../components/commons/input/file/FileInput';
 import TableFlexCsv from '../../../../components/tables/TableFlexCsv';
+import { useLazyGetDataStep5Query } from '../../../../api/services/steps/stepsApiSlice';
+
 import "./SubSteps5.css";
 
 const SubStep515 = () => {
 
-  const [listData, setListData]= useState([]);
+  const [listData, setListData] = useState([]);
+  const [getDataStep5] = useLazyGetDataStep5Query('5.1.5');
+
+  useEffect(() => {
+
+    const getData = async () => {
+      const { data, isLoading: loading } = await getDataStep5('5.1.5');
+      console.log(data, "datos")
+      setListData(data);
+    };
+    getData();
+  }, [])
 
 
   return (

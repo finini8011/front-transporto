@@ -5,6 +5,8 @@ import SubStep512 from "./substeps/subSteps5/SubStep512";
 import SubStep513 from "./substeps/subSteps5/SubStep513";
 import SubStep514 from "./substeps/subSteps5/SubStep514";
 import SubStep515 from "./substeps/subSteps5/SubStep515";
+import SubStep521 from "./substeps/subSteps5/SubStep521";
+import SubStep52 from "./substeps/subSteps5/SubStep522";
 
 
 
@@ -35,6 +37,16 @@ const Step5 = () => {
       step: '5.1.5',
       title: 'Lista de colaboradores de la organización',
       component: <SubStep515 />,
+    },
+    {
+      step: '5.2.1',
+      title: 'Lista de colaboradores de la organización',
+      component: <SubStep521 />,
+    },
+    {
+      step: '5.2.2',
+      title: 'Lista de colaboradores de la organización',
+      component: <SubStep52 />,
     },
     // Agrega más subSteps si es necesario
   ];

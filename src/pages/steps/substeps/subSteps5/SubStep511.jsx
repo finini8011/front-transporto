@@ -12,7 +12,7 @@ const SubStep511 = () => {
     <div className='p-5'>
       <section className='pb-10'>
         <FileInput />
-        <button className='button-save'>
+        <button className='button-save' onClick={()=> console.log("si")}>
           Guardar
         </button>
       </section>

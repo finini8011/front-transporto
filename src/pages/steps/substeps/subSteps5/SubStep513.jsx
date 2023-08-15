@@ -25,10 +25,16 @@ const SubStep513 = () => {
   return (
     <div className='p-5'>
       <section className='pb-10'>
+      <p className='pb-4 text-[#0090FF]'>
+          ¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?
+        </p>
         <FileInput />
-        <button className='button-save'>
-          Guardar
-        </button>
+        <div className='flex'>
+          <FileInput />
+          <button className='button-save' onClick={() => console.log("si")}>
+            Guardar
+          </button>
+        </div>
       </section>
       <TableFlexCsv datos={listData} />
     </div>

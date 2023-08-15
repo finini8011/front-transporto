@@ -96,6 +96,18 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       invalidatesTags: ["Steps"],
     }),
+
+    getDataStep5: builder.query({
+      query: (numStep) => {
+        // retorna true si el nit existe
+        return {
+          url: `steps/${numStep}/get_inventory`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Steps"],
+      providesTags: ["Steps"],
+    }),
   }),
 });
 export const {
@@ -105,5 +117,6 @@ export const {
   useGetStateStepsQuery,
   useGetStatePESVQuery,
   useGetStateListQuery,
-  useLazyGetDataStepQuery
+  useLazyGetDataStepQuery,
+  useLazyGetDataStep5Query,
 } = stepsApiSlice;

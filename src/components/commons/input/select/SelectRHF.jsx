@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const SelectRHF = forwardRef((props, ref) => {
-  const { id, label, data, dataApi, labelWeight, selection, start, end,error, ...inputProps } = props;
+  const { id, label, data, dataApi, selection, error, ...inputProps } = props;
 
   const renderSelect = (info) => (
     <option key={info} value={info} className="text-black">

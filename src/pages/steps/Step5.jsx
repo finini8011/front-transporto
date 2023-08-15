@@ -25,27 +25,27 @@ const Step5 = () => {
     },
     {
       step: '5.1.3',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Lista de rutas frecuentes de desplazamientos laborales',
       component: <SubStep513 />,
     },
     {
       step: '5.1.4',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Cantidad de sedes - Servicios que presta la organización',
       component: <SubStep514 />,
     },
     {
       step: '5.1.5',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Lista de vehículos automotores o no automotores',
       component: <SubStep515 />,
     },
     {
       step: '5.2.1',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Línea base para identificar los problemas de seguridad vial.',
       component: <SubStep521 />,
     },
     {
       step: '5.2.2',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Diagnóstico de Seguridad vial - Encuestas de actores viales -Evaluación inicial del PESV - Actualizado cada año',
       component: <SubStep52 />,
     },
     // Agrega más subSteps si es necesario

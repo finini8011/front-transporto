@@ -7,6 +7,7 @@ import SubStep514 from "./substeps/subSteps5/SubStep514";
 import SubStep515 from "./substeps/subSteps5/SubStep515";
 import SubStep521 from "./substeps/subSteps5/SubStep521";
 import SubStep52 from "./substeps/subSteps5/SubStep522";
+import SubStep523 from "./substeps/subSteps5/SubStep523";
 
 
 
@@ -47,6 +48,11 @@ const Step5 = () => {
       step: '5.2.2',
       title: 'Diagnóstico de Seguridad vial - Encuestas de actores viales -Evaluación inicial del PESV - Actualizado cada año',
       component: <SubStep52 />,
+    },
+    {
+      step: '5.2.3',
+      title: '¿En caso de que aplique, el diagnóstico del PESV se actualiza al menos una vez al año?',
+      component: <SubStep523 />,
     },
     // Agrega más subSteps si es necesario
   ];

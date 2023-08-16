@@ -5,8 +5,6 @@ import TableFlexCsv from '../../../../components/tables/TableFlexCsv';
 import { useLazyGetDataStep5Query, useSaveStep5Mutation } from '../../../../api/services/steps/stepsApiSlice';
 import "./SubSteps5.css";
 
-import "./SubSteps5.css";
-
 const SubStep512 = () => {
 
   const step = '5.1.2';

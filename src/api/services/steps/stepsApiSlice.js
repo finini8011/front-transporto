@@ -108,6 +108,19 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       providesTags: ["Steps"],
     }),
+    saveStep5: builder.mutation({
+      query: ({ numStep, file }) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        return {
+          url: `/steps/${numStep}/process_data`,
+          method: "POST",
+          body: formData,
+        };
+      },
+      providesTags: ["Steps"],
+      invalidatesTags: ["Steps"],
+    }),
   }),
 });
 export const {
@@ -119,4 +132,5 @@ export const {
   useGetStateListQuery,
   useLazyGetDataStepQuery,
   useLazyGetDataStep5Query,
+  useSaveStep5Mutation,
 } = stepsApiSlice;

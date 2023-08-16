@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FileInput = () => {
+const FileInput = ({ onFileChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -9,6 +9,7 @@ const FileInput = () => {
 
     if (file && allowedTypes.includes(file.type)) {
       setSelectedFile(file);
+      onFileChange(file); // Llama a la función de callback con el archivo seleccionado
     } else {
       setSelectedFile(null);
       alert('Por favor, selecciona un archivo CSV.');

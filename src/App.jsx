@@ -48,6 +48,7 @@ function App() {
               }
             />
             <Route exact path="/register" element={<Register />} />
+            <Route exact path="/report-list" element={ <PrivateRoute><ListVerification /> </PrivateRoute>} /> 
             <Route
               element={
                 <PrivateRoute>
@@ -57,7 +58,6 @@ function App() {
             >
               <Route exact path="/home" element={<Home />} />
               <Route exact path="/report" element={<Report />} />
-              <Route exact path="/report-list" element={<ListVerification />} />
               <Route exact path="/step" element={<ComplianceCheck />} />
               <Route exact path="/step/:id" element={<Steps />} />
               <Route

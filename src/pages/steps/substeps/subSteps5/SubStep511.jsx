@@ -46,7 +46,7 @@ const SubStep511 = () => {
         </p>
         <div className='flex'>
           <FileInput onFileChange={handleFileChange} /> {/* Pasa la función handleFileChange como prop */}
-          <button className='button-save' onClick={() => handleFormSubmit(selectedFile)}>
+          <button className='button-save ml-6' onClick={() => handleFormSubmit(selectedFile)}>
             Guardar
           </button>
         </div>

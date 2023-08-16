@@ -1,14 +1,20 @@
 import React from "react";
 import CardSubSteps from "../../components/commons/Cards/CardSubSteps";
 import SubStep61 from "../steps/substeps/subSteps6/SubStep61";
+import SubStep62 from "./substeps/subSteps6/SubStep62";
 
 const Step6 = () => {
 
   const subSteps = [
     {
       step: '6.1',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Informe de encuestas de movilidad',
       component: <SubStep61 />,
+    },
+    {
+      step: '6.2',
+      title: 'Lista de colaboradores de la organización',
+      component: <SubStep62 />,
     },
     // Agrega más subSteps si es necesario
   ];

@@ -7,7 +7,7 @@ const Step6 = () => {
   const subSteps = [
     {
       step: '6.1',
-      title: 'Lista de colaboradores de la organización',
+      title: 'Informe de encuestas de movilidad',
       component: <SubStep61 />,
     },
     // Agrega más subSteps si es necesario

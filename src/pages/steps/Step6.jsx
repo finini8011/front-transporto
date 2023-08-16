@@ -17,7 +17,7 @@ const Step6 = () => {
   return (
     <div>
       <h1 className="text-[#0090FF] text-2xl font-medium tracking-tight	mb-3 flex">
-        FASE 1: PLANIFICACIÓN - PASO 6. DIAGNÓSTICO
+        FASE 1: PLANIFICACIÓN - PASO 6. CARACTERIZACION , EVALUACIÓN Y CONTROL DE RIESGOS 
       </h1>
       <p className="text-xs pb-3">
         Use el siguiente formulario para crear el acta de asignación de líderes del PESV. Si lo requiere emplee el archivo de descarga como guía para la elaboración.

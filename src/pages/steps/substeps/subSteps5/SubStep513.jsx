@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import FileInput from '../../../../components/commons/input/file/FileInput';
 import TableFlexCsv from '../../../../components/tables/TableFlexCsv';
 import { useLazyGetDataStep5Query } from '../../../../api/services/steps/stepsApiSlice';
@@ -25,10 +25,9 @@ const SubStep513 = () => {
   return (
     <div className='p-5'>
       <section className='pb-10'>
-      <p className='pb-4 text-[#0090FF]'>
+        <p className='pb-4 text-[#0090FF]'>
           ¿El diagnóstico del PESV al menos contiene los requisitos definidos en el paso 5 de la Metodología del PESV?
         </p>
-        <FileInput />
         <div className='flex'>
           <FileInput />
           <button className='button-save' onClick={() => console.log("si")}>

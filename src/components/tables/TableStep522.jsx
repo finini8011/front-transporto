@@ -148,7 +148,7 @@ const dataApi = [
     ],
   },
   {
-    label: "EXIGE LE USO DEL CINTURÓN DE SEGURIDAD A LOS PASAJEROS (Califique de 1: Nunca, 2: Casi Nunca, 3: Algunas veces, 4: Casi siempre y 5: Siempre)",
+    label: "EXIGE EL USO DEL CINTURÓN DE SEGURIDAD A LOS PASAJEROS (Califique de 1: Nunca, 2: Casi Nunca, 3: Algunas veces, 4: Casi siempre y 5: Siempre)",
     selects: [
       [
         {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DataGrid, esES } from '@mui/x-data-grid';
 
-const TableStatic = ({ columns }) => {
+const TableStatic = ({ columns, matriz }) => {
   if (!columns || columns.length === 0) {
     return <div>No se han proporcionado columnas.</div>;
   }
@@ -87,9 +87,11 @@ const TableStatic = ({ columns }) => {
           />
         );
       }
-      return
+      return null; // Agregué un valor de retorno nulo para evitar errores
     },
   }));
+
+
 
   return (
     <div style={{ height: 400, width: '100%' }}>
@@ -105,7 +107,8 @@ const TableStatic = ({ columns }) => {
         pageSizeOptions={[5, 10]}
         onCellEditCommit={handleCellEditCommit}
       />
-      <button onClick={handleAddRow}>Agregar Fila</button>
+      {matriz ? <button onClick={handleAddRow}>Agregar Fila</button> : ""}
+
     </div>
   );
 };

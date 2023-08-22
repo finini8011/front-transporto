@@ -23,7 +23,7 @@ const SubStep62 = () => {
   ];
   const optionsResponsable = [
     "seleccionar",
-    "H&H",  
+    "H&H",
     "OPERA",
     "H&H",
     "MANTTO",
@@ -54,10 +54,21 @@ const SubStep62 = () => {
     { id: 4, name: 'Impacto', label: 'Impacto', type: 'span', value: "Impacto", width: 230 },
     { id: 5, name: 'Estrategia de gestion', label: 'Estrategia de gestion', type: 'select', options: optionsEstrategia, value: "" },
     { id: 6, name: 'Accion de respuesta', label: 'Accion de respuesta', type: 'text', value: "", width: 230 },
-    { id: 5, name: 'Responsable', label: 'Responsable', type: 'select', options: optionsEstrategia, value: "" },
+    { id: 5, name: 'Responsable', label: 'Responsable', type: 'select', options: optionsResponsable, value: "" },
     { id: 6, name: 'Evidencia', label: 'Evidencia', type: 'text', value: "", width: 230 },
 
   ]);
+
+  const [data, setData] = useState([
+    {
+      id: 1, Causa: "hh", Evento: "hh", Impacto: "hhh"
+    },
+    {
+      id: 2, Causa: "pp", Evento: "pp", Impacto: "pp"
+    }
+  ]);
+
+
 
 
   return (
@@ -69,12 +80,16 @@ const SubStep62 = () => {
         <button className='button-save ml-6' onClick={() => setMatrizView(false)}>
           Respuesta
         </button>
+        <button className='button-save ml-6' onClick={() => console.log("1")}>
+          Guardar
+        </button>
       </div>
       {matrizView ?
-        <TableStatic columns={columnsMatriz} />
+        <TableStatic columns={columnsMatriz} rowsData={data} matriz />
         :
         <TableStatic columns={columnsRespuesta} />
       }
+
     </div>
   );
 };

@@ -121,6 +121,34 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       invalidatesTags: ["Steps"],
     }),
+    getDataStep521: builder.query({
+      query: () => {
+        // retorna true si el nit existe
+        return {
+          url: `steps/get_baseline`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Steps"],
+      providesTags: ["Steps"],
+    }),
+    saveStep521Question: builder.mutation({
+      query: ({ payload }) => {
+        const payload2 = {
+          payload: [
+            payload
+          ]
+        }
+        return {
+          // Returns url with multiple args
+          url: `/steps/save_baseline`,
+          method: "POST",
+          body: payload2,
+        };
+      },
+      providesTags: ["Steps"],
+      invalidatesTags: ["Steps"],
+    }),
   }),
 });
 export const {
@@ -133,4 +161,6 @@ export const {
   useLazyGetDataStepQuery,
   useLazyGetDataStep5Query,
   useSaveStep5Mutation,
+  useLazyGetDataStep521Query,
+  useSaveStep521QuestionMutation
 } = stepsApiSlice;

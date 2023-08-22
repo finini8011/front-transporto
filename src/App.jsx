@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
@@ -31,7 +32,40 @@ import { AdminRoute } from "./routers/AdminRoute";
 
 const persistor = persistStore(store);
 
-function App() {          
+function App() {     
+
+
+  //funcion para controlar la inactividad del usuario.
+/*   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  useEffect(() => {
+    let timeoutId;
+
+    const resetTimeout = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleLogout, 3000); // 5 minutos de inactividad antes de cerrar sesión (300000 milisegundos)
+    };
+
+    const handleLogout = () => {
+      setIsLoggedIn(false);
+      alert("Tu sesión ha expirado debido a la inactividad.");
+    };
+
+    const handleUserActivity = () => {
+      resetTimeout();
+    };
+
+    window.addEventListener("mousemove", handleUserActivity);
+    window.addEventListener("keydown", handleUserActivity);
+
+    resetTimeout();
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("mousemove", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
+    };
+  }, []);  */    
 
   return (
     <Provider store={store}>

@@ -78,6 +78,14 @@ const Steps = () => {
         }
     }
 
+    if (user.compania?.nivel === "Intermedio") {
+        for (let key in components) {
+            if ( key === "11" || key === "21") {
+                components[key] = (props) => <CardPermissions nivel {...props} />
+            }
+        }
+    }
+
     if (user?.permissions?.length > 0) {
         for (let key in components) {
             if (user.permissions.includes(Number(key))) {

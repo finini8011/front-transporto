@@ -32,6 +32,7 @@ const CardSubSteps = ({ subSteps, title }) => {
                   className={`w-2 h-2 mr-2 text-[#0090FF] ${activeStep === index ? 'opacity-100' : 'opacity-50'}`}
                 />
                 {step.component}
+                {/* {React.createElement(step.component)} */}
               </>
             )}
             {activeStep === null && (

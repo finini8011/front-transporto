@@ -1,5 +1,7 @@
 import React from "react";
 import { DataGrid, esES } from '@mui/x-data-grid';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const TableFlexCsv = ({ datos }) => {
 
@@ -22,8 +24,12 @@ const TableFlexCsv = ({ datos }) => {
       flex: 1,
       renderCell: (params) => (
         <div>
-          <button onClick={() => handleEdit(params)}>Editar</button>
-          <button onClick={() => handleView(params)}>Ver</button>
+          <button onClick={() => handleEdit(params)}>
+            <FontAwesomeIcon icon={faPencil} className="w-4 h-4 mr-2" />
+          </button>
+          <button onClick={() => handleView(params)}>
+            <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
+          </button>
         </div>
       ),
     };

@@ -11,7 +11,7 @@ import NotFound from "./pages/authenticated/Notfound";
 import ComplianceCheck from "./pages/admin/ComplianceCheck";
 import MainAuth from "./components/layout/menu/MainAuth";
 import Login from "./pages/authenticated/Login";
-import Steps from "./pages/steps/Steps";
+import StepsList from "./pages/steps/StepsList";
 import Home from "./pages/general-views/Home";
 import RegisterCompany from "./pages/general-views/RegisterCompany";
 import UpdateCompany from "./pages/general-views/UpdateCompany";
@@ -81,6 +81,7 @@ function App() {
                 </PublicRoute>
               }
             />
+            <Route exact path="/not-found" element={<NotFound/>} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/report-list" element={ <PrivateRoute><ListVerification /> </PrivateRoute>} /> 
             <Route
@@ -93,7 +94,7 @@ function App() {
               <Route exact path="/home" element={<Home />} />
               <Route exact path="/report" element={<Report />} />
               <Route exact path="/step" element={<ComplianceCheck />} />
-              <Route exact path="/step/:id" element={<Steps />} />
+              <Route exact path="/step/:id" element={<StepsList />} />
               <Route
                 exact
                 path="/register-company"

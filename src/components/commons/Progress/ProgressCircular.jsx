@@ -8,7 +8,8 @@ const ProgressCircular = ({ height, width, progress, bgcolor, text }) => {
     borderRadius: '50%',
     marginBottom: 40,
     position: 'relative',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    margin: 'auto'
   }
   
   const Childdiv = {

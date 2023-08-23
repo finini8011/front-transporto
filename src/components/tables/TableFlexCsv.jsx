@@ -1,9 +1,9 @@
 import React from "react";
 import { DataGrid, esES } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const TableFlexCsv = ({ datos, handleEdit, handleView }) => {
+const TableFlexCsv = ({ datos, handleEdit, handleView, handleTrash, editRow, trashRow }) => {
 
   const MAX_COLUMNS = 5; // Define el número máximo de columnas a mostrar
 
@@ -32,12 +32,19 @@ const TableFlexCsv = ({ datos, handleEdit, handleView }) => {
       flex: 1,
       renderCell: (params) => (
         <div>
-          <button onClick={() => handleEdit(params)}>
-            <FontAwesomeIcon icon={faPencil} className="w-4 h-4 mr-2" />
-          </button>
-          <button onClick={() => handleView(params)}>
-            <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
-          </button>
+            <button onClick={() => handleView(params)}>
+              <FontAwesomeIcon icon={faEye} className="w-4 h-4 mr-2" />
+            </button>
+          {editRow &&
+            <button onClick={() => handleEdit(params)}>
+              <FontAwesomeIcon icon={faPencil} className="w-4 h-4 mr-2" />
+            </button>
+          }
+          {trashRow &&
+            <button onClick={() => handleTrash(params)}>
+              <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
+            </button>
+          }
         </div>
       ),
     };

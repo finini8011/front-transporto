@@ -15,7 +15,6 @@ const SubStep511 = () => {
   useEffect(() => {
     const getData = async () => {
       const { data, isLoading: loading } = await getDataStep5('5.1.1');
-      console.log(data, "datos")
       setListData(data);
     };
     getData();
@@ -38,14 +37,19 @@ const SubStep511 = () => {
     setSelectedFile(file); // Actualiza el estado selectedFile con el archivo seleccionado
   };
 
+  const handleView = (params) => {
+    // Lógica para ver el registro
+    console.log("Ver registro:", params.row);
+  };
+
   const handleEdit = (params) => {
     // Lógica para editar el registro
     console.log("Editar registro:", params.row);
   };
 
-  const handleView = (params) => {
-    // Lógica para ver el registro
-    console.log("Ver registro:", params.row);
+  const handleTrash = (params) => {
+    // Lógica para eliminar el registro
+    console.log("Eliminar registro:", params.row);
   };
 
   return (
@@ -61,7 +65,14 @@ const SubStep511 = () => {
           </button>
         </div>
       </section>
-      <TableFlexCsv datos={listData}  handleEdit={handleEdit} handleView={handleView}/>
+      <TableFlexCsv
+        datos={listData}
+        editRow
+        trashRow
+        handleEdit={handleEdit}
+        handleView={handleView}
+        handleTrash={handleTrash}
+      />
     </div>
   );
 };

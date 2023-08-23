@@ -3,13 +3,21 @@ import { DataGrid, esES } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const TableFlexCsv = ({ datos }) => {
+const TableFlexCsv = ({ datos, handleEdit, handleView }) => {
 
   const MAX_COLUMNS = 5; // Define el número máximo de columnas a mostrar
 
   const columns = React.useMemo(() => {
     const dynamicColumns = datos[0] && Object.keys(datos[0])
-      .filter(columna => columna !== "id" && columna !== "users_id" && columna !== "activo" && columna !== "uploadDate") // Filtra las propiedades "id" y "user_id"
+      .filter(
+        columna => columna !== "id"
+          && columna !== "users_id"
+          && columna !== "activo"
+          && columna !== "uploadDate"
+          && columna !== "estado"
+          && columna !== "Fecha"
+          && columna !== "users_name"
+      ) // Filtra las propiedades "id" y "user_id"
       .slice(0, MAX_COLUMNS)
       .map((columna) => ({
         field: columna,
@@ -37,18 +45,8 @@ const TableFlexCsv = ({ datos }) => {
     return dynamicColumns ? [...dynamicColumns, actionColumn] : [];
   }, [datos]);
 
-  const handleEdit = (params) => {
-    // Lógica para editar el registro
-    console.log("Editar registro:", params.row);
-  };
-
-  const handleView = (params) => {
-    // Lógica para ver el registro
-    console.log("Ver registro:", params.row);
-  };
-
   return (
-    <div style={{ height: 380, width: '100%'}}>
+    <div style={{ height: 380, width: '100%' }}>
       <DataGrid
         columns={columns}
         rows={datos}

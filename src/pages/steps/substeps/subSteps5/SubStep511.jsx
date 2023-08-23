@@ -38,6 +38,16 @@ const SubStep511 = () => {
     setSelectedFile(file); // Actualiza el estado selectedFile con el archivo seleccionado
   };
 
+  const handleEdit = (params) => {
+    // Lógica para editar el registro
+    console.log("Editar registro:", params.row);
+  };
+
+  const handleView = (params) => {
+    // Lógica para ver el registro
+    console.log("Ver registro:", params.row);
+  };
+
   return (
     <div className='p-5'>
       <section className='pb-10'>
@@ -51,7 +61,7 @@ const SubStep511 = () => {
           </button>
         </div>
       </section>
-      <TableFlexCsv datos={listData} />
+      <TableFlexCsv datos={listData}  handleEdit={handleEdit} handleView={handleView}/>
     </div>
   );
 };

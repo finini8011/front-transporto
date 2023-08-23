@@ -14,6 +14,7 @@ import calendarReducer from "./features/calendar/calendar";
 import { apiSlice } from "./services/auth/apiSlice";
 import { listVerificationApiSlice } from "./services/listVerification/listVerificationApiSlice";
 import { stepsApiSlice } from "./services/steps/stepsApiSlice";
+import { subStepsApiSlice } from "./services/subSteps/subStepsApiSlice";
 import { companyApiSlice } from "./services/company/companyApiSlice";
 import { calendarApiSlice } from "./services/calendar/calendarApiSlice";
 
@@ -49,6 +50,7 @@ export const store = configureStore({
     [listVerificationApiSlice.reducerPath]: listVerificationApiSlice.reducer,
     [companyApiSlice.reducerPath]: companyApiSlice.reducer,
     [stepsApiSlice.reducerPath]: stepsApiSlice.reducer,
+    [subStepsApiSlice.reducerPath]: subStepsApiSlice.reducer,
     [calendarApiSlice.reducerPath]: calendarApiSlice.reducer,
 
 
@@ -65,7 +67,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false, })
       .concat(thunk, apiSlice.middleware)
-      // .concat(thunk, projectsApiSlice.middleware)
+      .concat(thunk, subStepsApiSlice.middleware)
       .concat(thunk, listVerificationApiSlice.middleware)
       .concat(thunk, companyApiSlice.middleware)
       .concat(thunk, stepsApiSlice.middleware)

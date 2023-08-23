@@ -7,6 +7,10 @@ import TableStep621B from "../../../../components/tables/TableStep621B";
 
 const SubStep61 = () => {
   return (
+
+    /* Respetar y tener en cuenta los titulos y enumerados que estan en el excel,
+       faltan titulos y enumerados tambien unos input textarea
+    */
     <div className="p-5">
       <div className="flex flex-col gap-4">
         <h2 className="text-center font-semibold">Introducción</h2>

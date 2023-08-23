@@ -1,63 +1,38 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import TableStatic from "../../../../components/tables/TableStatic";
+import DataTable from "../../../../components/commons/Table/Datatable";
+import TableFlexCsv from "../../../../components/tables/TableFlexCsv";
 
 const SubStep62 = () => {
 
   const [matrizView, setMatrizView] = useState(true);
-  const optionsChageState = [
-    "seleccionar",
-    "Si",
-    "No",
-  ];
-  const optionsChageStateNumber = [
-    "seleccionar",
-    1,
-    2,
-    3,
-  ]
-  const optionsEstrategia = [
-    "seleccionar",
-    "MITIGAR",
-    "EVITAR",
-  ];
-  const optionsResponsable = [
-    "seleccionar",
-    "H&H",  
-    "OPERA",
-    "H&H",
-    "MANTTO",
-    "RR HH",
-    "ADMIN",
+  const [rows, setRows] = useState([]);
+
+  const columnsMatriz = [
+    { field: 'Causa', headerName: 'Causa', width: 250 },
+    { field: 'Evento', headerName: 'Evento', width: 230 },
+    { field: 'Impacto', headerName: 'Impacto', width: 230 },
+    { field: 'Conductor', headerName: 'Conductor', width: 230, },
+    { field: 'Bici Usuario', headerName: 'Bici Usuario', width: 230, },
+    { field: 'Motorizado', headerName: 'Motorizado', width: 230, },
+    { field: 'Peaton', headerName: 'Peaton', width: 230, },
+    { field: 'Pasajero', headerName: 'Pasajero', width: 230, },
+    { field: 'Nivel de probabilidad', headerName: 'Nivel de probabilidad', width: 230, },
+    { field: 'Nivel de impacto', headerName: 'Nivel de impacto', width: 230, },
+    { field: 'Valoracion de riesgo', headerName: 'Valoracion de riesgo', width: 230, },
+    { field: 'Nivel de riesgo', headerName: 'Nivel de riesgo', width: 230, },
   ];
 
-  const [columnsMatriz, setColumnsMatriz] = useState([
-    { id: 1, name: 'Causa', label: 'Causa', type: 'text', value: "", width: 230 },
-    { id: 2, name: 'Evento', label: 'Evento', type: 'text', value: "" },
-    { id: 3, name: 'Impacto', label: 'Impacto', type: 'text', value: "" },
-    { id: 4, name: 'Conductor', label: 'Conductor', type: 'select', options: optionsChageState, value: "" },
-    { id: 5, name: 'Bici Usuario', label: 'Bici Usuario', type: 'select', options: optionsChageState, value: "" },
-    { id: 6, name: 'Motorizado', label: 'Motorizado', type: 'select', options: optionsChageState, value: "" },
-    { id: 7, name: 'Peaton', label: 'Peaton', type: 'select', options: optionsChageState, value: "" },
-    { id: 8, name: 'Pasajero', label: 'Pasajero', type: 'select', options: optionsChageState, value: "" },
-    { id: 9, name: 'Nivel de probabilidad', label: 'Nivel de probabilidad', type: 'select', options: optionsChageStateNumber, value: "" },
-    { id: 10, name: 'Nivel de impacto', label: 'Nivel de impacto', type: 'select', options: optionsChageStateNumber, value: "" },
-    { id: 11, name: 'Valoracion de riesgo', label: 'Valoracion de riesgo', type: 'span', value: "5" },
-    { id: 12, name: 'Nivel de riesgo', label: 'Nivel de riesgo', type: 'span', value: "ALTO" },
+  const columnsRespuesta = [
+  ];
 
-  ]);
 
-  const [columnsRespuesta, setColumnsRespuesta] = useState([
-    { id: 1, name: 'Nivel de riesgo', label: 'Nivel de riesgo', type: 'span', value: "ALTO" },
-    { id: 2, name: 'Causa', label: 'Causa', type: 'span', value: "Causa", width: 230 },
-    { id: 3, name: 'Evento', label: 'Evento', type: 'span', value: "Evento", width: 230 },
-    { id: 4, name: 'Impacto', label: 'Impacto', type: 'span', value: "Impacto", width: 230 },
-    { id: 5, name: 'Estrategia de gestion', label: 'Estrategia de gestion', type: 'select', options: optionsEstrategia, value: "" },
-    { id: 6, name: 'Accion de respuesta', label: 'Accion de respuesta', type: 'text', value: "", width: 230 },
-    { id: 5, name: 'Responsable', label: 'Responsable', type: 'select', options: optionsEstrategia, value: "" },
-    { id: 6, name: 'Evidencia', label: 'Evidencia', type: 'text', value: "", width: 230 },
 
-  ]);
+  const deleteDocs = (selectedItems) => {
+  }
+
+
+
+
 
 
   return (
@@ -71,10 +46,18 @@ const SubStep62 = () => {
         </button>
       </div>
       {matrizView ?
-        <TableStatic columns={columnsMatriz} />
+        <>
+          <DataTable title={"titulo"} columns={columnsMatriz} rows={rows}  />
+          <button className='button-save ml-6' onClick={() => setMatrizView(false)}>
+            Añadir fila
+          </button>
+         {/*  Abre el modal con todos los campos inputs de cada fila*/}
+        </>
+
         :
-        <TableStatic columns={columnsRespuesta} />
+        <TableFlexCsv datos={columnsRespuesta} />
       }
+
     </div>
   );
 };

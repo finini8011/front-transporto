@@ -82,6 +82,7 @@ const NewUser = ({ closeModal }) => {
       await saveUser(payload).unwrap();
       toast.success("Se ha registrado correctamente!");
       reset()
+      closeModal()
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");

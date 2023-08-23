@@ -38,10 +38,10 @@ const SubStep52 = () => {
           <TableStep522 id_collaborator={watch("id_collaborator")} />
         </div>
       );
-    else if (dataCollaborators.length === 0)
-      return <p>- No hay colaboradores por mostrar.</p>;
-    else return <p>- Primero debe completar el subpaso 5.1.1</p>;
-  else return <p>Cargando..</p>;
+    else if (dataCollaborators?.length === 0)
+      return <p className="text-[#0090FF] text-xl">- No hay colaboradores por mostrar.</p>;
+    else return <p className="text-[#0090FF] text-xl">- Primero debe completar el subpaso 5.1.1</p>;
+  else return <p className="text-[#0090FF]">Cargando..</p>;
 };
 
 export default SubStep52;

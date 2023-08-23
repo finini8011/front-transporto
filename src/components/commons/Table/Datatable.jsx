@@ -11,7 +11,7 @@ import { DataGrid, esES } from "@mui/x-data-grid";
     color: "#7A86A1"
   },
 }); */
-const DataTable = ({ title, columns, rows=[], onDeleteSelected }) => {
+const DataTable = ({ title, columns, rows=[], onDeleteSelected, checkbox }) => {
 /*   const classes = useStyles();
  */
   const [selectedIds, setSelectedIds] = useState([]);
@@ -64,7 +64,7 @@ const DataTable = ({ title, columns, rows=[], onDeleteSelected }) => {
           },
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
+        {...checkbox ?  checkboxSelection : ""}
         onRowSelectionModelChange={(newSelection) => {
           setSelectedIds(newSelection);
         }}

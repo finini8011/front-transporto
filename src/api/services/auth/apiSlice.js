@@ -15,21 +15,30 @@ export const apiSlice = createApi({
   }),
   tagTypes: ["Auth"],
   endpoints: (builder) => ({
-    // getUser: builder.query({
-    //   query: (userId) => ({
-    //     url: `${urlGetAuth}/test/users/${userId}`,
-    //     method: "GET",
-    //   }),
-    //   // providesTags: ["Auth"],
-    //   // transformResponse: (response) => response.sort((a, b) => b.id - a.id),
-    // }),
+    getUsers: builder.query({
+      query: () => ({
+        url: `/users/0/get_permission_users`,
+        method: "GET",
+      }),
+      providesTags: ["Auth"],
+      invalidatesTags: ["Auth"],
+    }),
+    getUser: builder.query({
+      query: (userId) => ({
+        url: `/users/${userId}/get_permission_users`,
+        method: "GET",
+      }),
+      providesTags: ["Auth"],
+      invalidatesTags: ["Auth"],
+    }),
     createUser: builder.mutation({
       query: (newUser) => ({
         url: `/signup`,
         method: "POST",
         body: newUser,
       }),
-      // invalidatesTags: ["Auth"],
+      providesTags: ["Auth"],
+      invalidatesTags: ["Auth"],
     }),
     loginUser: builder.mutation({
       query: (user) => ({
@@ -45,14 +54,24 @@ export const apiSlice = createApi({
         method: "POST",
       }),
     }),
-    // verifiedCredentials: builder.mutation({
-    //   query: (data) => ({
-    //     url: `${urlAuth}/test/userCredentials/isVerified`,
-    //     method: "PUT",
-    //     body: data,
-    //   }),
-    //   // invalidatesTags: ["Auth"],
-    // }),
+    newUser: builder.mutation({
+      query: (user) => ({
+        url: `/add_permissions_user`,
+        method: "POST",
+        body: user,
+      }),
+      providesTags: ["Auth"],
+      invalidatesTags: ["Auth"],
+    }),
+    editUser: builder.mutation({
+      query: (newUser) => ({
+        url: `/edit_permissions_user`,
+        method: "POST",
+        body: newUser,
+      }),
+      providesTags: ["Auth"],
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
@@ -60,5 +79,8 @@ export const {
   useLoginUserMutation,
   useCreateUserMutation,
   useLogOutUserMutation,
-  // useVerifiedCredentialsMutation,
+  useNewUserMutation,
+  useGetUsersQuery,
+  useGetUserQuery,
+  useEditUserMutation
 } = apiSlice;

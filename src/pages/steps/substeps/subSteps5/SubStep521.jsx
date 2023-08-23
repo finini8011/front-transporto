@@ -6,21 +6,28 @@ import {
   useSaveStep521QuestionMutation
 } from "../../../../api/services/steps/stepsApiSlice";
 import InputRHF from "../../../../components/commons/input/text/InputRHF";
-import TableStep521 from "../../../../components/tables/TableStep521";
+import DataTable from "../../../../components/commons/Table/Datatable";
 import Button from "../../../../components/commons/button/Button";
 
 const SubStep521 = () => {
 
   const { register, handleSubmit } = useForm();
   const [getDataStep521] = useLazyGetDataStep521Query();
-  const [saveStep521, isLoading] = useSaveStep521QuestionMutation();
+  const [saveStep521] = useSaveStep521QuestionMutation();
+  const [isLoading, setIsLoading] = useState(false);
   const [getdata, setGetData] = useState([]);
+
+  const columns = [
+    { field: 'Valor1', headerName: 'Valor1', width: 250 },
+    { field: 'Valor2', headerName: 'Valor2', width: 250 },
+    { field: 'Valor3', headerName: 'Valor3', width: 250 },
+  ];
 
   useEffect(() => {
     const getData = async () => {
-      const { data, isLoading: loading } = await getDataStep521();
-      console.log(data, "datos")
+      const { data } = await getDataStep521();
       setGetData(data);
+
     };
     getData();
   }, [])
@@ -29,6 +36,7 @@ const SubStep521 = () => {
     try {
       toast.success("Se ha registrado correctamente!");
       await saveStep521(data).unwrap();
+      setIsLoading(true);
     } catch (e) {
       return toast.error("Hubo un error, vuelve a intentarlo");
     }
@@ -36,9 +44,9 @@ const SubStep521 = () => {
 
   return (
     <div className="p-5">
-      {getdata?.length === 0 ? (
+      {getdata?.length === 1 ? (
         <>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-3 gap-5 pb-5">
             <InputRHF
               type="number"
               label="Valor1"
@@ -59,13 +67,14 @@ const SubStep521 = () => {
             />
           </div>
           <Button
+            blue
             text="Guardar"
             onClick={handleSubmit(onSubmit)}
             loading={isLoading}
           />
         </>
       ) : (
-        <TableStep521 data={getdata} />
+        <DataTable title={"titulo"} columns={columns} rows={getdata} />
       )}
     </div>
   );

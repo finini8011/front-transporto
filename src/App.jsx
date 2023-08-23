@@ -81,6 +81,7 @@ function App() {
                 </PublicRoute>
               }
             />
+            <Route exact path="/not-found" element={<NotFound/>} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/report-list" element={ <PrivateRoute><ListVerification /> </PrivateRoute>} /> 
             <Route

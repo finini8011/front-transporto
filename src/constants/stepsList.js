@@ -23,8 +23,6 @@ import Step22 from "../pages/steps/Step22";
 import Step23 from "../pages/steps/Step23";
 import Step24 from "../pages/steps/Step24";
 
-
-
 const componentsListStep = [
   { id: 1, name: 'Step1', component: Step1 },
   { id: 2, name: 'Step2', component: Step2 },

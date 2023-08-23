@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TableStatic from "../../../../components/tables/TableStatic";
 import DataTable from "../../../../components/commons/Table/Datatable";
 import TableFlexCsv from "../../../../components/tables/TableFlexCsv";
 

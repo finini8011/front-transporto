@@ -65,15 +65,6 @@ const MainAuth = () => {
     setOpenList(!openList);
   };
 
-  /*   const logoutSession = () => {
-      navigate("/");
-      setTimeout(() => {
-        // dispatch(logOut(null));
-      }, 500);
-    }; */
-
-    console.log(user)
-
   const logoutSession = async () => {
     try {
       await logOutUser();

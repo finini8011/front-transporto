@@ -1,13 +1,23 @@
 import React from "react";
 import { DataGrid, esES } from '@mui/x-data-grid';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const TableFlexCsv = ({ datos }) => {
+const TableFlexCsv = ({ datos, handleEdit, handleView, handleTrash, editRow, trashRow }) => {
 
   const MAX_COLUMNS = 5; // Define el número máximo de columnas a mostrar
 
   const columns = React.useMemo(() => {
     const dynamicColumns = datos[0] && Object.keys(datos[0])
-      .filter(columna => columna !== "id" && columna !== "users_id" && columna !== "activo" && columna !== "uploadDate") // Filtra las propiedades "id" y "user_id"
+      .filter(
+        columna => columna !== "id"
+          && columna !== "users_id"
+          && columna !== "activo"
+          && columna !== "uploadDate"
+          && columna !== "estado"
+          && columna !== "Fecha"
+          && columna !== "users_name"
+      ) // Filtra las propiedades "id" y "user_id"
       .slice(0, MAX_COLUMNS)
       .map((columna) => ({
         field: columna,
@@ -22,8 +32,19 @@ const TableFlexCsv = ({ datos }) => {
       flex: 1,
       renderCell: (params) => (
         <div>
-          <button onClick={() => handleEdit(params)}>Editar</button>
-          <button onClick={() => handleView(params)}>Ver</button>
+            <button onClick={() => handleView(params)}>
+              <FontAwesomeIcon icon={faEye} className="w-4 h-4 mr-2" />
+            </button>
+          {editRow &&
+            <button onClick={() => handleEdit(params)}>
+              <FontAwesomeIcon icon={faPencil} className="w-4 h-4 mr-2" />
+            </button>
+          }
+          {trashRow &&
+            <button onClick={() => handleTrash(params)}>
+              <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
+            </button>
+          }
         </div>
       ),
     };
@@ -31,18 +52,8 @@ const TableFlexCsv = ({ datos }) => {
     return dynamicColumns ? [...dynamicColumns, actionColumn] : [];
   }, [datos]);
 
-  const handleEdit = (params) => {
-    // Lógica para editar el registro
-    console.log("Editar registro:", params.row);
-  };
-
-  const handleView = (params) => {
-    // Lógica para ver el registro
-    console.log("Ver registro:", params.row);
-  };
-
   return (
-    <div style={{ height: 380, width: '100%'}}>
+    <div style={{ height: 380, width: '100%' }}>
       <DataGrid
         columns={columns}
         rows={datos}

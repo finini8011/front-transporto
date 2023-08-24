@@ -34,7 +34,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
 
   return (
     <React.Fragment>
-      <nav className="flex items-center justify-between flex-wrap bg-white  shadow-md px-9 py-2 z-10">
+      <nav className="flex items-center justify-between flex-wrap bg-white  shadow-md px-9 py-2 z-0">
         <div className="flex flex-col leading-4">
           <h3 className="text-base uppercase">
             {user.compania?.razon_social

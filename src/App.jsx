@@ -25,47 +25,16 @@ import Planificacion from "./pages/general-views/Fases/Planificacion";
 import Seguimiento from "./pages/general-views/Fases/Seguimiento";
 import CalendarPage from "./pages/general-views/CalendarPage";
 import Users from "./pages/general-views/Users";
+import ModalLogout from "./components/commons/Modals/ModalLogout";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { PublicRoute } from "./routers/PublicRoute";
 import { AdminRoute } from "./routers/AdminRoute";
 
+
 const persistor = persistStore(store);
 
 function App() {     
-
-
-  //funcion para controlar la inactividad del usuario.
-/*   const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  useEffect(() => {
-    let timeoutId;
-
-    const resetTimeout = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(handleLogout, 3000); // 5 minutos de inactividad antes de cerrar sesión (300000 milisegundos)
-    };
-
-    const handleLogout = () => {
-      setIsLoggedIn(false);
-      alert("Tu sesión ha expirado debido a la inactividad.");
-    };
-
-    const handleUserActivity = () => {
-      resetTimeout();
-    };
-
-    window.addEventListener("mousemove", handleUserActivity);
-    window.addEventListener("keydown", handleUserActivity);
-
-    resetTimeout();
-
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener("mousemove", handleUserActivity);
-      window.removeEventListener("keydown", handleUserActivity);
-    };
-  }, []);  */    
 
   return (
     <Provider store={store}>
@@ -88,6 +57,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <MainAuth />
+                  <ModalLogout />
                 </PrivateRoute>
               }
             >

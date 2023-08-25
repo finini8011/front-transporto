@@ -6,11 +6,35 @@ const Informes = () => {
 
   const subSteps = [
     {
-      step: '5.1.1',
-      title: 'Lista de colaboradores de la organización',
+      step: '1',
+      title: 'Informe de identificación de riesgos',
       component: <SubStep511 />, // reemplazar por el componente que corresponda
     },
-
+    {
+      step: '2',
+      title: 'Análisis de la accidentalidad',
+      component: <SubStep511 />, // reemplazar por el componente que corresponda
+    },
+    {
+      step: '3',
+      title: 'Informe trimestral de cumplimiento comité',
+      component: <SubStep511 />, // reemplazar por el componente que corresponda
+    },
+    {
+      step: '4',
+      title: 'Evaluación de contratistas',
+      component: <SubStep511 />, // reemplazar por el componente que corresponda
+    },
+    {
+      step: '5',
+      title: 'Autoreporte Anual',
+      component: <SubStep511 />, // reemplazar por el componente que corresponda
+    },
+    {
+      step: '6',
+      title: 'Informe de revisión por la alta gerencia',
+      component: <SubStep511 />, // reemplazar por el componente que corresponda
+    },
     // Agrega más subSteps si es necesario
   ];
 

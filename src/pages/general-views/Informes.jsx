@@ -1,5 +1,4 @@
 import React from "react";
-import pageConst from "../../img/pageConst.jpg"
 import SubStep511 from "../steps/substeps/subSteps5/SubStep511";
 import CardSubSteps from "../../components/commons/Cards/CardSubSteps";
 

@@ -18,6 +18,7 @@ const nivelMedium = [11, 21];
 const EditUser = ({ closeModal, userId }) => {
   const { data: dataUsers, isLoading: isLoadingUsers } =
     useGetUserQuery(userId);
+
   const { register, handleSubmit, watch, setValue, reset } = useForm({
     defaultValues: {
       name: "",
@@ -29,6 +30,7 @@ const EditUser = ({ closeModal, userId }) => {
   const [editUser, { isLoading, error }] = useEditUserMutation();
   const { compania } = useSelector(selectCurrentUser);
   const [stateRegex, setStateRegex] = useState(false);
+  const [stateChangePassword, setstateChangePassword] = useState(false);
 
   const statePassword = watch(["password"])[0];
 
@@ -47,7 +49,8 @@ const EditUser = ({ closeModal, userId }) => {
 
     const anyTrueStep = Object.values(filterForm).filter((key) => key === true);
 
-    if (password === "" || name === "") return toast.error("Llenar todos los campos");
+    if (password === "" || name === "")
+      return toast.error("Llenar todos los campos");
 
     if (anyTrueStep.length == 0)
       return toast.error("Tiene que colocar al menos un permiso.");
@@ -86,7 +89,7 @@ const EditUser = ({ closeModal, userId }) => {
     try {
       await editUser(payload).unwrap();
       toast.success("Se ha actualizado correctamente!");
-      closeModal()
+      closeModal();
     } catch (e) {
       // if (e.data.message === "User credentials not found or not authorized")
       return toast.error("Hubo un error, vuelve a intentarlo");
@@ -157,16 +160,30 @@ const EditUser = ({ closeModal, userId }) => {
             placeholder="Ingresar Email"
             {...register("email")}
           />
+        </div>
+        <div className="">
+          <label className="w-full py-4 text-sm font-medium text-gray-900 flex items-center">
+            Cambiar Contaseña
+            <input
+              type="checkbox"
+              {...register("ChangePassword")}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-2"
+            />
+          </label>
+        </div>
+        <div className="grid grid-cols-2 gap-5">
           <InputRHF
             type="password"
-            label="Contraseña"
-            placeholder="Ingrese Contraseña"
+            label="Nueva Contraseña"
+            disabled={watch('ChangePassword') ? false : true}
+            placeholder={watch('ChangePassword') ? "Ingrese nueva Contraseña" : ""}
             {...register("password")}
           />
           <InputRHF
             type="password"
             label="Confirmar Contraseña"
-            placeholder="Confirmar Contraseña"
+            disabled={watch('ChangePassword') ? false : true}
+            placeholder={watch('ChangePassword') ? "Confirmar Contraseña" : ""}
             {...register("password_confirmation")}
           />
         </div>

@@ -54,6 +54,7 @@ const DataTable = ({ title, columns, rows=[], onDeleteSelected, checkbox }) => {
             ...row,
            /*  headerClassName: classes.rowCell,  */
           }))}
+          getRowId={(row) => row.users_id}
         columns={columns.map((column) => ({
           ...column,
 /*           headerClassName: classes.headerCell, 

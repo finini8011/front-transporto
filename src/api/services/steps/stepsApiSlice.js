@@ -133,17 +133,12 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
     }),
     saveStep521Question: builder.mutation({
-      query: ({ payload }) => {
-        const payload2 = {
-          payload: [
-            payload
-          ]
-        }
+      query: (data) => {
         return {
           // Returns url with multiple args
           url: `/steps/save_baseline`,
           method: "POST",
-          body: payload2,
+          body: data
         };
       },
       providesTags: ["Steps"],
@@ -162,5 +157,6 @@ export const {
   useLazyGetDataStep5Query,
   useSaveStep5Mutation,
   useLazyGetDataStep521Query,
+  useGetDataStep521Query,
   useSaveStep521QuestionMutation
 } = stepsApiSlice;

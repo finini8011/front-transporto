@@ -2,27 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from "react-hot-toast";
 import FileInput from '../../../../components/commons/input/file/FileInput';
 import TableFlexCsv from '../../../../components/tables/TableFlexCsv';
-import { useLazyGetDataStep5Query, useSaveStep5Mutation } from '../../../../api/services/steps/stepsApiSlice';
+import { useGetDataStep5Query, useSaveStep5Mutation } from '../../../../api/services/steps/stepsApiSlice';
 import "./SubSteps5.css";
 
 
 const SubStep514 = () => {
 
   const step = '5.1.4';
-  const [listData, setListData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [getDataStep5] = useLazyGetDataStep5Query(step);
+  const { data: getDataStep5, isLoading: isLoadingDataStep5 } =
+  useGetDataStep5Query(step);
   const [saveStep5] = useSaveStep5Mutation();
-  
-
-  useEffect(() => {
-    const getData = async () => {
-      const { data, isLoading: loading } = await getDataStep5(step);
-      console.log(data, "datos")
-      setListData(data);
-    };
-    getData();
-  }, [])
 
   const handleFormSubmit = async (selectedFile) => {
     try {
@@ -70,7 +60,7 @@ const SubStep514 = () => {
         </div>
       </section>
       <TableFlexCsv
-        datos={listData}
+        datos={getDataStep5}
         editRow
         trashRow
         handleEdit={handleEdit}

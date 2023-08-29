@@ -22,7 +22,7 @@ const SubStep52 = () => {
 
   useEffect(() => {
     if (dataCollaborators) {
-      setValue("id_collaborator", dataCollaborators[0].id);
+      setValue("id_collaborator", dataCollaborators[0]?.id);
     }
   }, [dataCollaborators]);
 

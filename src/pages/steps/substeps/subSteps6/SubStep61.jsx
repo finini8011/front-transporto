@@ -36,38 +36,49 @@ const SubStep61 = () => {
           acciones de mejorar a la gestión de prevención vial de la
           organización.
         </p>
-        <h2 className="text-center font-semibold">Objetivo General</h2>
+        <h2 className="text-center font-semibold">1. Objetivo General</h2>
         <p>
           Procesar y analizar la información registrada por el personal a quien
           se le aplicó la encuesta de movilidad, para la actualización PESV.
         </p>
-        <h2 className="text-center font-semibold">Objetivos Específicos</h2>
+        <h2 className="text-center font-semibold">2. Objetivos Específicos</h2>
         <TextAreaRHF />
-        <h2 className="text-center font-semibold">Diagnóstico</h2>
+        <h2 className="text-center font-semibold">3.Diagnóstico</h2>
         <TextAreaRHF />
+        <h2 className="text-center font-semibold"> 3.1. Información General </h2>
         <div className="flex justify-center">
           <div className="relative w-[40rem] ">
             <GraficColumnsDynamic title="Distribución personal encuestado por Contrato" />
           </div>
         </div>
+        <TextAreaRHF />
         <div className="flex justify-center">
           <div className="relative w-[40rem] ">
             <GraficColumnsDynamic title="Edad promedio por Contrato" />
           </div>
         </div>
+        <TextAreaRHF />
         <div className="flex justify-center">
           <div className="relative w-[40rem] ">
             <GraficColumnsDynamic title="Tipología vehículos en misión" />
           </div>
         </div>
+        <TextAreaRHF />
         <h2 className="text-center font-semibold">
-          Antecedentes en materia de seguridad vial
+          3.2 Antecedentes en materia de seguridad vial
         </h2>
         <TableStep621A />
+        <TextAreaRHF />
         <h2 className="text-center font-semibold">
-          Hábitos de conducción y riesgos viales
+          3.3 Hábitos de conducción y riesgos viales
         </h2>
+        <TextAreaRHF />
         <TableStep621B />
+        <TextAreaRHF />
+        <h2 className="text-center font-semibold">
+          4. Recomendaciones
+        </h2>
+        <TextAreaRHF />
       </div>
       <button className="button-save mt-5 cursor-pointer">Guardar</button>
     </div>

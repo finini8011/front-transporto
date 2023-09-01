@@ -1,41 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-const data = [
-  {
-    value1: "HA TENIDO ACCIDENTES O INCIDENTES VIALES EN LOS ULTIMOS 2 AÑOS",
-    value2: "1",
-    value3: "2",
-    value4: "6% ha tenido antecedentes de accidentalidad",
-  },
-  {
-    value1: "CONOCE LA POLÍTICA Y OBJETIVOS",
-    value2: "1",
-    value3: "2",
-    value4: "",
-  },
-  {
-    value1:
-      "CONOCE LAS LECCIONES APRENDIDAS DE ACCIDENTES OCURRIDOS A OTROS COMPAÑEROS EN LA EMPRESA",
-    value2: "1",
-    value3: "2",
-    value4: "6% no conoce las lecciones aprendidas en materia de accidentalidad vial",
-  },
-  {
-    value1:
-      "CONOCE CÓMO ACTUAR ANTE CUALQUIER EMERGENCIA QUE SE PRESENTE DURANTE LA PRESTACIÓN DEL SERVICIO.",
-    value2: "1",
-    value3: "2",
-    value4: "",
-  },
-];
+const TableStep621A = ({ data, setValue }) => {
+  const { register, watch, setValue: setValor } = useForm();
 
-const TableStep621A = () => {
+  const arrData = [];
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      arrData.push({
+        data: data[key],
+      });
+    }
+  }
+
+  useEffect(() => {
+    arrData.map((data, key) => {
+      data.data.observacion
+        ? setValor(`observaciones_${key + 1}`, data.data.observacion)
+        : "";
+    });
+  }, []);
+
+  useEffect(() => {
+    setValue("table_1", watch());
+  }, [watch()]);
+
   return (
     <div className="mt-10 ">
       <table className="border text-center text-sm shadow-md bg-white mb-16 w-full">
         <thead className="">
           <tr>
-            {/* <th className="border p-2">#</th> */}
             <th className="border p-2">Pregunta</th>
             <th className="border p-2">Si</th>
             <th className="border p-2">No</th>
@@ -43,12 +37,23 @@ const TableStep621A = () => {
           </tr>
         </thead>
         <tbody className="font-normal">
-          {data.map((data, key) => (
+          {arrData.map((data, key) => (
             <tr className="text-start" key={key}>
-              <td className="border p-2">{data.value1} </td>
-              <td className="border p-2">{data.value2}</td>
-              <td className="border p-2">{data.value3}</td>
-              <td className="border p-2">{data.value4}</td>
+              <td className="border p-2">{data.data.texto} </td>
+              <td className="border p-2">
+                {data.data.data.SI ? data.data.data.SI : "0"}
+              </td>
+              <td className="border p-2">
+                {data.data.data.NO ? data.data.data.NO : "0"}
+              </td>
+              <td className="border p-2">
+                <textarea
+                  className="border resize-none p-1 border-black"
+                  cols="45"
+                  rows="5"
+                  {...register(`observaciones_${key + 1}`)}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

@@ -39,7 +39,6 @@ const SubStep521 = () => {
     }
   }
 
-  console.log(getDataStep521)
 
   if(!isLoadingDataStep521)
   return (

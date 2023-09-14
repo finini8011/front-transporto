@@ -3,14 +3,14 @@ import Highcharts from "highcharts/highstock";
 import HighchartsReact from 'highcharts-react-official';
 import"./GraficLine.css";
 
-const data= [
-  {name:'title1', y:70,    color:'#96AEF1'},
-  {name:'title2', y:10,    color:'#96AEF1'},
-  {name:'title3', y:50,    color:'#96AEF1'},
-]
+// const data= [
+//   {name:'title1', y:70,    color:'#96AEF1'},
+//   {name:'title2', y:10,    color:'#96AEF1'},
+//   {name:'title3', y:50,    color:'#96AEF1'},
+// ]
 
 
-const GraficColumnsDynamic = ({ title}) => {
+const GraficColumnsDynamic = ({ title, data}) => {
   const options = ({
     chart: {
       renderTo: 'GraficColumns',

@@ -85,7 +85,6 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       invalidatesTags: ["Steps"],
     }),
-
     getStateList: builder.query({
       query: (nivel) => {
         return {
@@ -96,7 +95,6 @@ export const stepsApiSlice = createApi({
       providesTags: ["Steps"],
       invalidatesTags: ["Steps"],
     }),
-
     getDataStep5: builder.query({
       query: (numStep) => {
         // retorna true si el nit existe

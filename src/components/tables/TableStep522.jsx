@@ -911,7 +911,6 @@ const TableStep522 = ({ id_collaborator }) => {
   };
   return (
     <div className="mt-10 ">
-      <Toaster />
       <table className="border text-center text-sm shadow-md bg-white mb-8 w-full">
         <tbody className="font-normal">
           {dataApi.map((data, key) => (

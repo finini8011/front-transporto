@@ -39,10 +39,34 @@ export const subStepsApiSlice = createApi({
       providesTags: ["SubSteps"],
       invalidatesTags: ["SubSteps"],
     }),
-
+    getReport61: builder.query({
+      query: () => {
+        // retorna true si el nit existe
+        return {
+          url: `/steps/get_survey_report`,
+          method: "GET",
+        };
+      },
+      providesTags: ["SubSteps"],
+      providesTags: ["SubSteps"],
+    }),
+    saveReport: builder.mutation({
+      query: (data) => {
+        return {
+          // Returns url with multiple args
+          url: `/steps/save_survey_report`,
+          method: "POST",
+          body: data,
+        };
+      },
+      providesTags: ["SubSteps"],
+      invalidatesTags: ["SubSteps"],
+    }),
   }),
 });
 export const {
   useSaveSurveyMutation,
   useGetCollaboratosSubStep522Query,
+  useGetReport61Query,
+  useSaveReportMutation
 } = subStepsApiSlice;

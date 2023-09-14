@@ -60,7 +60,7 @@ const SubStep513 = () => {
         </div>
       </section>
       <TableFlexCsv
-        datos={getDataStep5}
+       datos={getDataStep5 ? getDataStep5 : []}
         editRow
         trashRow
         handleEdit={handleEdit}

@@ -6,6 +6,8 @@ import TextAreaForm from "../input/TextArea/TextAreaForm"
 import ButtonIcon from "../button/ButtonIcon";
 import Date from "../input/text/Date";
 import { useState } from "react";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document }) => {
@@ -42,7 +44,7 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
 
       if (
         input.required &&
-        input.name === "cargaArchivo"  && 
+        input.name === "cargaArchivo" &&
         !formData.get(input.name).name
       ) {
         isValid = false;
@@ -71,7 +73,7 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
         {inputs.map((input, index) => {
           switch (input.type) {
             case "text":
-              return(
+              return (
                 <InputForm
                   key={index}
                   type={input.type}
@@ -151,7 +153,7 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
                   end={input.end}
                   error={errors[input.name]}
                   data={optionsChageState}
-                  /*      required={input.required} */
+                /*      required={input.required} */
                 />
               );
             case "date":
@@ -168,7 +170,7 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
                   value={input.value}
                   error={errors[input.name]}
 
-                  /*     required={input.required} */
+                /*     required={input.required} */
                 />
               );
             case "button":
@@ -183,9 +185,10 @@ const FormFlexGeneral = ({ title, inputs, cols, buttons, onSubmit, id, document 
                   className={`col-start-${input.start} col-end-${input.end} flex`}
                   key={index}
                 >
-                  
-                  <button type="button" className="flex-grow h-full border-2 border-[#0090FF] rounded-2xl overflow-hidden text-overflow-ellipsis whitespace-nowrap max-w-full">{input.text}</button>
-
+                  <button type="button" className=" p-2 flex-grow h-full border-2 border-[#0090FF] rounded-2xl overflow-hidden text-overflow-ellipsis whitespace-nowrap max-w-full">
+                    <FontAwesomeIcon  icon={input.icon ? input.icon : faDownload} className="mr-3"/>
+                    {input.text}
+                  </button>
                 </div>
               );
             case "span":

@@ -74,7 +74,7 @@ const SubStep521 = () => {
         </>
       ) : (
         
-        <DataTable title={"titulo"} columns={columns} rows={getDataStep521} />
+        <DataTable title={""} columns={columns} rows={getDataStep521} />
         
       )}
     </div>
